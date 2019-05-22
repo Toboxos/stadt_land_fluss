@@ -6,8 +6,8 @@ using namespace std;
 
 class CSpieler {
 public:
-	CSpieler(string n, int c) {};
-	~CSpieler() {};
+    CSpieler(string n, int c);
+    //~CSpieler();
 
 	int getPoints();
 	void setPoints(int i);
