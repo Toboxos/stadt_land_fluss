@@ -1,0 +1,27 @@
+#ifndef HAUPTSPIELFENSTER_H
+#define HAUPTSPIELFENSTER_H
+
+#include <QMainWindow>
+
+namespace Ui {
+class HauptSpielFenster;
+}
+
+class HauptSpielFenster : public QMainWindow
+{
+    Q_OBJECT
+
+public:
+    explicit HauptSpielFenster(QWidget *parent = nullptr);
+    ~HauptSpielFenster();
+
+private slots:
+    void on_buttonFertig_clicked();
+
+
+
+private:
+    Ui::HauptSpielFenster *ui;
+};
+
+#endif // HAUPTSPIELFENSTER_H
