@@ -33,7 +33,10 @@ SOURCES += \
         spieleinstellungen.cpp \
         spieler.cpp \
         spielerwarteraum.cpp \
-        spielstart.cpp
+        spielstart.cpp \
+        CSpieler.cpp \
+        CLogik.cpp \
+        timer.cpp
 
 HEADERS += \
         clientipeingabe.h \
@@ -44,7 +47,10 @@ HEADERS += \
         spieler.h \
         spielerliste.h \
         spielerwarteraum.h \
-        spielstart.h
+        spielstart.h \
+        CSpieler.h \
+        CLogik.h \
+        timer.h
 
 FORMS += \
         clientipeingabe.ui \
