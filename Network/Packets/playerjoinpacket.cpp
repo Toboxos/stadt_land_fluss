@@ -5,26 +5,20 @@ PlayerJoinPacket::PlayerJoinPacket(QString name) {
     m_name = name;
 }
 
-QTcpSocket& PlayerJoinPacket::operator<<(QTcpSocket& socket) {
-    socket.write(reinterpret_cast<char*>(&m_type), sizeof(m_type));
-
+void PlayerJoinPacket::writeData(QTcpSocket* socket) {
     QByteArray bytes = m_name.toUtf8();
     int size = bytes.size();
-    socket.write(reinterpret_cast<char*>(&size), sizeof(size));
-    socket.write(bytes.data(), size);
-
-    return socket;
+    socket->write(reinterpret_cast<char*>(&size), sizeof(size));
+    socket->write(bytes.data(), size);
 };
 
-QTcpSocket& PlayerJoinPacket::operator>>(QTcpSocket& socket) {
-    socket.write(reinterpret_cast<char*>(&m_type), sizeof(m_type));
-
+void PlayerJoinPacket::readData(QTcpSocket* socket) {
     int size = 0;
-    socket.read(reinterpret_cast<char*>(&size), sizeof(size));
+    socket->read(reinterpret_cast<char*>(&size), sizeof(size));
 
     char* bytes = nullptr;
     bytes = new char[size];
-    socket.read(bytes, size);
+    socket->read(bytes, size);
 
     m_name = bytes;
 }

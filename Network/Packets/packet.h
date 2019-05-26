@@ -25,28 +25,26 @@ class Packet {
         virtual ~Packet();
 
         /**
-         * @brief Unpack packet and write all data on QTcpSocket
-         *
-         * @param socket    QTcpSocket data should be written to
-         * @return Same QTcpSocket as given
-         */
-        virtual QTcpSocket& operator<<(QTcpSocket& socket);
-
-        /**
-         * @brief Read data from socket and fill the packet
-         *
-         * @param socket    QTcpSocket data should read from
-         * @return Same QTcpSocket as given
-         */
-        virtual QTcpSocket& operator>>(QTcpSocket& socket);
-
-        /**
          * @return Id of packettype
          */
         int getType();
 
+        /**
+         * @brief Read data from socket and fill the packet members
+         *
+         * @param socket    Pointer to socket data should be read from
+         */
+        virtual void readData(QTcpSocket* socket) = 0;
+
+        /**
+         * @brief Write data from members to socket
+         *
+         * @param socket    Pointer to socket data should be written to
+         */
+        virtual void writeData(QTcpSocket* socket) = 0;
+
     protected:
-        int m_type; /**< Id of packettype */
+        PACKET_TYPE m_type; /**< Id of packettype */
 };
 
 #endif // PACKET_H

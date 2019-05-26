@@ -38,7 +38,10 @@ SOURCES += \
         CSpieler.cpp \
         CLogik.cpp \
         timer.cpp \
-    Network/Packets/packet.h
+    Network/serversocket.cpp \
+    Network/clientsocket.cpp \
+    Network/Packets/packet.cpp \
+    Network/Packets/playerjoinpacket.cpp
 
 HEADERS += \
         clientipeingabe.h \
@@ -53,7 +56,10 @@ HEADERS += \
         CSpieler.h \
         CLogik.h \
         timer.h \
-    Network/Packets/packet.cpp
+    Network/serversocket.h \
+    Network/clientsocket.h
+    Network/Packets/packet.h
+    Network/Packets/playerjoinpacket.h
 
 FORMS += \
         clientipeingabe.ui \
