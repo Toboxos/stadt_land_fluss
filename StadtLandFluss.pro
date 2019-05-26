@@ -41,7 +41,8 @@ SOURCES += \
     Network/serversocket.cpp \
     Network/clientsocket.cpp \
     Network/Packets/packet.cpp \
-    Network/Packets/playerjoinpacket.cpp
+    Network/Packets/playerjoinpacket.cpp \
+    Examples/networkexample.cpp
 
 HEADERS += \
         clientipeingabe.h \
@@ -60,7 +61,7 @@ HEADERS += \
     Network/clientsocket.h \
     Network/Packets/packet.h \
     Network/Packets/playerjoinpacket.h \
-
+    Examples/networkexample.h
 FORMS += \
         clientipeingabe.ui \
         hauptspielfenster.ui \
