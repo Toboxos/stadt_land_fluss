@@ -57,9 +57,9 @@ HEADERS += \
         CLogik.h \
         timer.h \
     Network/serversocket.h \
-    Network/clientsocket.h
-    Network/Packets/packet.h
-    Network/Packets/playerjoinpacket.h
+    Network/clientsocket.h \
+    Network/Packets/packet.h \
+    Network/Packets/playerjoinpacket.h \
 
 FORMS += \
         clientipeingabe.ui \

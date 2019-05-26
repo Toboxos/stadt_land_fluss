@@ -10,16 +10,26 @@
 /**
  * @brief Server for handling connections and sending/receiving packets
  */
-class ServerSocket : QObject {
+class ServerSocket : public QObject {
     Q_OBJECT
 
     public:
+        ServerSocket();
+
         /**
-         * @brief Constructor starting server
+         * @brief Constructor with automatic listen
          *
          * @param port  Port which server listen to
          */
         ServerSocket(quint16 port);
+
+        /**
+         * @brief Listen to specific port for connections
+         *
+         * @param port  Port to listen
+         * @return
+         */
+        bool listen(quint16 port);
 
         /**
          * @brief Sends a packet to given player

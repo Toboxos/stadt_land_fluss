@@ -8,6 +8,6 @@ Packet::~Packet() {
 
 }
 
-int Packet::getType() {
+PACKET_TYPE Packet::getType() {
     return m_type;
 }

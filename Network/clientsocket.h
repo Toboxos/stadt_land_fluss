@@ -5,7 +5,7 @@
 
 #include <Network/Packets/packet.h>
 
-class ClientSocket : QObject {
+class ClientSocket : public QObject {
     Q_OBJECT
 
     public:

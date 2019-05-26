@@ -2,9 +2,20 @@
 
 #include "Network/Packets/playerjoinpacket.h"
 
+ServerSocket::ServerSocket() {
+
+}
+
 ServerSocket::ServerSocket(quint16 port) {
+    listen(port);
+}
+
+bool ServerSocket::listen(quint16 port) {
     if( m_server.listen(QHostAddress::Any, port) ) {
         connect(&m_server, SIGNAL(newConnection()), this, SLOT(newConnection()));
+        return true;
+    } else {
+        return false;
     }
 }
 
@@ -20,6 +31,7 @@ void ServerSocket::newConnection() {
 }
 
 void ServerSocket::read() {
+    qDebug("READ");
     QTcpSocket* socket = reinterpret_cast<QTcpSocket*>(sender());
 
     PACKET_TYPE type;
@@ -31,7 +43,7 @@ void ServerSocket::read() {
         case PLAYER_JOIN_PACKET: {
             PlayerJoinPacket p2("");
             p2.readData(socket);
-            qDebug() << "Player Join Packet erhalten";
+            qDebug() << "Player Join Packet erhalten:" << p2.getName();
             break;
         }
 

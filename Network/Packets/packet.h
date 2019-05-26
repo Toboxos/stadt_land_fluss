@@ -27,7 +27,7 @@ class Packet {
         /**
          * @return Id of packettype
          */
-        int getType();
+        PACKET_TYPE getType();
 
         /**
          * @brief Read data from socket and fill the packet members
