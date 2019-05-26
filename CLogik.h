@@ -2,14 +2,17 @@
 #include <stdint.h>
 #include <iostream>
 #include <vector>
+
+#include "CSpieler.h"
+
 using namespace std;
 
 class CLogik {
 public:
-	CLogik() {};
-	~CLogik() {};
+    CLogik();
+    ~CLogik();
 
-	void createPlayer();
+    void createPlayer(string n, int c);
 	void awardPoints();
 	string getWinner();
 	

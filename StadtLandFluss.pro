@@ -4,7 +4,8 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui \
+            network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -36,7 +37,11 @@ SOURCES += \
         spielstart.cpp \
         CSpieler.cpp \
         CLogik.cpp \
-        timer.cpp
+        timer.cpp \
+    Network/serversocket.cpp \
+    Network/clientsocket.cpp \
+    Network/Packets/packet.cpp \
+    Network/Packets/playerjoinpacket.cpp
 
 HEADERS += \
         clientipeingabe.h \
@@ -50,7 +55,11 @@ HEADERS += \
         spielstart.h \
         CSpieler.h \
         CLogik.h \
-        timer.h
+        timer.h \
+    Network/serversocket.h \
+    Network/clientsocket.h \
+    Network/Packets/packet.h \
+    Network/Packets/playerjoinpacket.h \
 
 FORMS += \
         clientipeingabe.ui \
