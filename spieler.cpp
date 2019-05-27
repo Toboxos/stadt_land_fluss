@@ -31,20 +31,27 @@ void Spieler::setPunkte(int punkte)
     _punkte = punkte;
 }
 
-std::string Spieler::getAnswer(int i){
-    //return Element der Liste an Stelle i
+unsigned int Spieler::Categories(){
+    unsigned int c = answers.size();
+    return c;
 }
 
-void Spieler::setAnswer(int i, std::string a){
-    //schreibt Antwort a an Stelle i
+std::string Spieler::getAnswer(unsigned int i){
+    std::string p = answers.at(i);
+    return p;
 }
 
-int Spieler::getCredit(int i){
-    //return Element der Liste an Stelle i
+void Spieler::setAnswer(unsigned int i, std::string a){
+    answers[i]=a;
 }
 
-void Spieler::setCredit(int i, int j){
-    //schreibt an Stelle i die Punktzahl j
+int Spieler::getCredit(unsigned int i){
+    int p = credits.at(i);
+    return p;
+}
+
+void Spieler::setCredit(unsigned int i, int j){
+    credits[i]=j;
 }
 
 

@@ -26,6 +26,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    antworten.cpp \
         clientipeingabe.cpp \
         hauptspielfenster.cpp \
         hostspieleinstellungen.cpp \
@@ -44,6 +45,7 @@ SOURCES += \
     Examples/networkexample.cpp
 
 HEADERS += \
+    antworten.h \
         clientipeingabe.h \
         hauptspielfenster.h \
         hostspieleinstellungen.h \

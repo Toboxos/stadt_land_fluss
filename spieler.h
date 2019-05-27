@@ -7,7 +7,7 @@ class Spieler{
 
 
 public:
-    Spieler(std::string);
+    Spieler(std::string,int);
 
     std::string getName();
     int getId();
@@ -15,18 +15,20 @@ public:
     int getPunkte();
     void setPunkte(int);
 
-    std::string getAnswer(int);
-    void setAnswer(int,std::string);
+    unsigned int Categories();
+    std::string getAnswer(unsigned int);
+    void setAnswer(unsigned int,std::string);
 
-    int getCredit(int);
-    void setCredit(int,int);
+    int getCredit(unsigned int);
+    void setCredit(unsigned int,int);
 
     static int _nextId;
+    std::vector<std::string> answers;
 private:
     std::string _name;
     int _punkte = 0;
     int _id=0;
-    std::vector<std::string> answers;
+
     std::vector<int> credits;
 };
 
