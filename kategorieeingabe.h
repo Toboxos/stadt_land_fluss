@@ -22,7 +22,7 @@ private slots:
 
     void on_buttonHinzufuegen_clicked();
 
-    void on_einlesenKategorie_textEdited(const QString &arg1);
+    void on_inputCategorie_textEdited(const QString &arg1);
 
 
 

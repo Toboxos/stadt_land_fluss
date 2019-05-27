@@ -9,13 +9,11 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    NetworkExample e;
+    //NetworkExample e;
 
     SpielStart w;
 
     w.exec();
-
-
 
     return a.exec();
 }

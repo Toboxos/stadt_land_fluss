@@ -8,6 +8,7 @@
 #include <QStandardItem>
 #include <QString>
 
+
 Kategorieeingabe::Kategorieeingabe(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Kategorieeingabe)
@@ -41,8 +42,6 @@ void Kategorieeingabe::on_buttonZurueck_clicked()
 
 void Kategorieeingabe::on_buttonHinzufuegen_clicked()
 {
-
-
     QString kategorie = ui->einlesenKategorie->text();
     _einstellung->setKategorienlListe(kategorie.toStdString());
 
@@ -56,11 +55,9 @@ void Kategorieeingabe::on_buttonHinzufuegen_clicked()
     ui->buttonWeiter->setEnabled(true);
     ui->einlesenKategorie->clear();
     kategorieZaehler++;
-
-
 }
 
-void Kategorieeingabe::on_einlesenKategorie_textEdited(const QString &arg1)
+void Kategorieeingabe::on_inputCategorie_textEdited(const QString &arg1)
 {
     ui->buttonHinzufuegen->setEnabled(true);
 }
