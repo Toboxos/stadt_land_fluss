@@ -2,6 +2,7 @@
 #define SPIELER_H
 #include <string>
 #include <vector>
+using namespace std;
 
 class Spieler{
 
@@ -19,7 +20,7 @@ public:
     std::string getAnswer(unsigned int);
     void setAnswer(unsigned int,std::string);
 
-    int getCredit(unsigned int);
+    vector<int> getCredit();
     void setCredit(unsigned int,int);
 
     static int _nextId;

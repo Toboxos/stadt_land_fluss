@@ -45,8 +45,8 @@ void Spieler::setAnswer(unsigned int i, std::string a){
     answers[i]=a;
 }
 
-int Spieler::getCredit(unsigned int i){
-    int p = credits.at(i);
+vector<int> Spieler::getCredit(){
+    vector<int> p = credits;
     return p;
 }
 

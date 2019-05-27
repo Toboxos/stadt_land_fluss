@@ -5,6 +5,7 @@
 
 #include "antworten.h"
 #include "spieler.h"
+#include "punkte.h"
 
 using namespace std;
 
@@ -17,10 +18,10 @@ public:
     vector<std::string> sortAnswers(unsigned int);
     vector<int> awardPoints(unsigned int);
     void Punktevergabe();
-	string getWinner();
+    vector<std::string> getWinner();
 	
 private:
     std::vector<Spieler> players;
     std::vector<antworten> answers;
-    std::vector<std::vector<int>> points;
+    std::vector<punkte> points;
 };
