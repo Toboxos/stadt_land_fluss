@@ -1,8 +1,7 @@
 #ifndef NETWORKEXAMPLE_H
 #define NETWORKEXAMPLE_H
 
-#include <QObject>
-
+#include <QtCore/QObject>
 #include "Network/serversocket.h"
 #include "Network/clientsocket.h"
 #include "Network/Packets/playerjoinpacket.h"
@@ -11,20 +10,11 @@ class NetworkExample : public QObject {
     Q_OBJECT
 
     public:
-        NetworkExample() {
-            m_server.listen(1234);
-
-            connect(&m_client, SIGNAL(connected()), this, SLOT(connected()));
-            m_client.connectTo("localhost", 1234);
-        }
+        NetworkExample();
 
     public slots:
 
-        void connected() {
-            qDebug("Connected");
-            PlayerJoinPacket p("IchBinEinLangerName");
-            m_client.send(p);
-        }
+        void connected();
 
     private:
         ServerSocket m_server;

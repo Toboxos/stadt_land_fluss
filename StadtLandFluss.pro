@@ -26,41 +26,44 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    antworten.cpp \
         clientipeingabe.cpp \
         hauptspielfenster.cpp \
         hostspieleinstellungen.cpp \
         kategorieeingabe.cpp \
         main.cpp \
+    punkte.cpp \
         spieleinstellungen.cpp \
         spieler.cpp \
         spielerwarteraum.cpp \
         spielstart.cpp \
-        CSpieler.cpp \
         CLogik.cpp \
         timer.cpp \
     Network/serversocket.cpp \
     Network/clientsocket.cpp \
     Network/Packets/packet.cpp \
-    Network/Packets/playerjoinpacket.cpp
+    Network/Packets/playerjoinpacket.cpp \
+    Examples/networkexample.cpp
 
 HEADERS += \
+    antworten.h \
         clientipeingabe.h \
         hauptspielfenster.h \
         hostspieleinstellungen.h \
         kategorieeingabe.h \
+    punkte.h \
         spieleinstellungen.h \
         spieler.h \
         spielerliste.h \
         spielerwarteraum.h \
         spielstart.h \
-        CSpieler.h \
         CLogik.h \
         timer.h \
     Network/serversocket.h \
     Network/clientsocket.h \
     Network/Packets/packet.h \
     Network/Packets/playerjoinpacket.h \
-
+    Examples/networkexample.h
 FORMS += \
         clientipeingabe.ui \
         hauptspielfenster.ui \

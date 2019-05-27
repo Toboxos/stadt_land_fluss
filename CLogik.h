@@ -3,7 +3,9 @@
 #include <iostream>
 #include <vector>
 
-#include "CSpieler.h"
+#include "antworten.h"
+#include "spieler.h"
+#include "punkte.h"
 
 using namespace std;
 
@@ -12,11 +14,14 @@ public:
     CLogik();
     ~CLogik();
 
-    void createPlayer(string n, int c);
-	void awardPoints();
-	string getWinner();
+    void createPlayer(std::string, int);
+    vector<std::string> sortAnswers(unsigned int);
+    vector<int> awardPoints(unsigned int);
+    void Punktevergabe();
+    vector<std::string> getWinner();
 	
 private:
-	vector<CSpieler> players;
+    std::vector<Spieler> players;
+    std::vector<antworten> answers;
+    std::vector<punkte> points;
 };
-//Kommentar :)
