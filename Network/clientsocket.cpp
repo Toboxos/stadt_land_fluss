@@ -18,7 +18,7 @@ void ClientSocket::send(Packet& packet) {
     PACKET_TYPE type = packet.getType();
 
     m_socket.write(reinterpret_cast<char*>(&type), sizeof(type));
-    packet.writeData(&m_socket);
+    packet.writeData(m_socket);
 }
 
 void ClientSocket::read() {
