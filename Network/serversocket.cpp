@@ -42,7 +42,7 @@ void ServerSocket::read() {
 
         case PLAYER_JOIN_PACKET: {
             PlayerJoinPacket p2("");
-            p2.readData(socket);
+            p2.readData(*socket);
             qDebug() << "Player Join Packet erhalten:" << p2.getName();
             break;
         }
@@ -60,6 +60,6 @@ bool ServerSocket::send(QString player, Packet& packet) {
         return false;
     }
 
-    packet.writeData(m_mapped.value(player));
+    packet.writeData(*m_mapped.value(player));
     return true;
 }
