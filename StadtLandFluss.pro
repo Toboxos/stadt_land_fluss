@@ -35,7 +35,6 @@ SOURCES += \
         spieler.cpp \
         spielerwarteraum.cpp \
         spielstart.cpp \
-        CSpieler.cpp \
         CLogik.cpp \
         timer.cpp \
     Network/serversocket.cpp \
@@ -54,7 +53,6 @@ HEADERS += \
         spielerliste.h \
         spielerwarteraum.h \
         spielstart.h \
-        CSpieler.h \
         CLogik.h \
         timer.h \
     Network/serversocket.h \
