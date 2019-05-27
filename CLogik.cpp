@@ -4,8 +4,8 @@
 #include "punkte.h"
 
 //erstellt einen Spieler
-void CLogik::createPlayer(string n, int c) {
-    Spieler spieler(n, c);
+void CLogik::createPlayer(string n) {
+    Spieler spieler(n);
 	//speichern in vector players
     players[spieler.getId()] = spieler;
 }

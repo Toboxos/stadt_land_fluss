@@ -14,7 +14,7 @@ public:
     CLogik();
     ~CLogik();
 
-    void createPlayer(std::string, int);
+    void createPlayer(std::string);
     vector<std::string> sortAnswers(unsigned int);
     vector<int> awardPoints(unsigned int);
     void Punktevergabe();
