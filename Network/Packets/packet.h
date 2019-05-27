@@ -32,19 +32,35 @@ class Packet {
         /**
          * @brief Read data from socket and fill the packet members
          *
-         * @param socket    Pointer to socket data should be read from
+         * @param socket    Socket data should be read from
          */
-        virtual void readData(QTcpSocket* socket) = 0;
+        virtual void readData(QTcpSocket& socket) = 0;
 
         /**
          * @brief Write data from members to socket
          *
-         * @param socket    Pointer to socket data should be written to
+         * @param socket    Socket data should be written to
          */
-        virtual void writeData(QTcpSocket* socket) = 0;
+        virtual void writeData(QTcpSocket& socket) = 0;
 
     protected:
         PACKET_TYPE m_type; /**< Id of packettype */
+
+        /**
+         * @brief Writes a QString to the socket
+         *
+         * @param socket    Socket data should written to
+         * @param string    QString reference which should be written
+         */
+        static void writeQString(QTcpSocket& socket, QString& string);
+
+        /**
+         * @brief Reads a QString from the socket
+         *
+         * @param socket    Socket data should read from
+         * @param string    QString reference which should be updated
+         */
+        static void readQString(QTcpSocket& socket, QString& string);
 };
 
 #endif // PACKET_H

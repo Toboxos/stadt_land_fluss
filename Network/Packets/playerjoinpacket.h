@@ -20,8 +20,8 @@ class PlayerJoinPacket : public Packet {
         QString getName();
 
 
-        void readData(QTcpSocket* socket);
-        void writeData(QTcpSocket* socket);
+        void readData(QTcpSocket& socket);
+        void writeData(QTcpSocket& socket);
 
     private:
         QString m_name; /**< Name of player */
