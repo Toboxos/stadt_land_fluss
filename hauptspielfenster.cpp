@@ -3,6 +3,7 @@
 #include "spielstart.h"
 #include "stadtlandfluss.h"
 #include "spieleinstellungen.h"
+#include <spielerliste.h>
 #include <string>
 
 
