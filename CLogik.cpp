@@ -3,11 +3,12 @@
 #include "antworten.h"
 #include "punkte.h"
 
-//erstellt einen Spieler
-void CLogik::createPlayer(string name) {
+//erstellt einen Spieler und gibt ID zurück
+int CLogik::createPlayer(string name) {
     Spieler spieler(name);
 	//speichern in vector players
     players[spieler.getId()] = spieler;
+    return spieler.getId();
 }
 
 //sortiert die Antworten in Kategorien nach Spieler
@@ -89,28 +90,42 @@ std::vector<int> CLogik::awardPoints(unsigned int category){
     return points;
 }
 
-//gibt den Spieler mit der höchsten Gesamtpunktzahl zurück
-//BESSER: gibt die Spieler nach Punktestand zurück
+
+//gibt die Spieler nach Gesamtpunktzahl geordnet zurück
 vector<std::string> CLogik::getWinner() {
     unsigned int anzahl = players.size();
-	int max;
     vector<std::string> names;
+    vector<int> allPoints;
 
-    for (unsigned int n = 0; n < anzahl; ++n){
-        names[n] = players[n].getName();
-
+    for (unsigned int var = 0; var < anzahl; ++var) {
+        allPoints[var] = players[var].getPunkte();
     }
 
-    /*
-    max = players[0].getPunkte();
-    name = players[0].getName();
+    bool sorted = false;
 
-    for(unsigned int i = 0; i < n; i++){
-        if (players[i].getPunkte() > max){
-            max = players[i].getPunkte();
-            name = players[i].getName();
+    while(!sorted){
+        sorted = true;
+
+        for (unsigned int i = 0;i < anzahl; ++i) {
+
+            if (allPoints[i]<allPoints[i+1]){
+                int temp = allPoints[i];
+                allPoints[i] = allPoints[i+1];
+                allPoints[i+1] = temp;
+            }
+
+            sorted = false;
         }
-    }*/
+    }
 
+    for (unsigned int n = 0; n < anzahl; ++n) {
+        for (unsigned int p = 0; p < anzahl; ++p){
+            if (allPoints[n] = players[p].getPunkte()){
+                names[n] = players[p].getName();
+            }
+        }
+
+
+    }
     return names;
 }

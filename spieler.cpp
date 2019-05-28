@@ -7,8 +7,6 @@ Spieler::Spieler(std::string name)
    static int _nextId;
    _id = _nextId;
    _nextId ++;
-   //answers.resize(c);
-   //credits.resize(c);
 }
 
 //gibt den Spielernamen zurück
