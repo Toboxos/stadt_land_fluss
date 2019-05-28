@@ -2,7 +2,7 @@
 
 ///<summary> adds a category to the game settings </summary>
 ///<parameters> category in string </parameters>
-<<<<<<< HEAD
+//<<<<<<< HEAD
 bool extern addCategory(std::string category){
   /*  std::vector<std::string> categories = _einstellung->getKategorienListe();
     int n = categories.size();
@@ -16,10 +16,10 @@ bool Categories::addCategory(string category){
         }
     }
 <<<<<<< HEAD
-    _einstellung->setKategorienlListe(category);*/
+    _einstellung->setKategorienlListe(category);
 =======
     CategoryList.push_back(category);
->>>>>>> 9874751bf14cd5d5f24f774d98ddbf835364158b
+>>>>>>> 9874751bf14cd5d5f24f774d98ddbf835364158b*/
     return true;
 }
 
@@ -30,7 +30,7 @@ void Categories::setCategories(vector<string> newCategories){
     CategoryList = newCategories;
 }
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
 
 ///<summary> adds a category to the game settings </summary>
 ///<parameters> category in string  and game settings as Spieleinstellungen </parameters>
@@ -44,8 +44,8 @@ bool extern addCategory(std::string category, Spieleinstellungen* _einstellungen
     }
     _einstellung->setKategorienlListe(category);*/
     return true;
-=======
+//=======
 int Categories::getAmount(){
     return CategoryList.size();
->>>>>>> 9874751bf14cd5d5f24f774d98ddbf835364158b
+//>>>>>>> 9874751bf14cd5d5f24f774d98ddbf835364158b
 }
