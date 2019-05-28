@@ -76,7 +76,7 @@
     <string>Zeit nach letzter Antwort:</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="eingabeRunden">
+  <widget class="QLineEdit" name="inputRoundNumber">
    <property name="geometry">
     <rect>
      <x>300</x>
@@ -95,7 +95,7 @@
     <string>7</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="eingabeZeitlimit">
+  <widget class="QLineEdit" name="inputRoundTimeLimit">
    <property name="geometry">
     <rect>
      <x>300</x>
@@ -114,7 +114,7 @@
     <string>2</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="EingabeZeitNachAntwort">
+  <widget class="QLineEdit" name="inputCountdown">
    <property name="geometry">
     <rect>
      <x>300</x>
@@ -211,7 +211,7 @@
     <string>Zurück</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="buttonWeiter">
+  <widget class="QPushButton" name="buttonNext">
    <property name="enabled">
     <bool>false</bool>
    </property>
@@ -253,7 +253,7 @@
     <string>Spielname:</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="eingegebenerSpielname">
+  <widget class="QLineEdit" name="inputGameName">
    <property name="geometry">
     <rect>
      <x>300</x>
