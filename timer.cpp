@@ -21,7 +21,7 @@ timer::~timer()
 ///<summary> is called on Round end, when a Player completed his words </summary>
 ///<parameters> </parameters>
 void timer::endRound(){
-    InternalTimer->singleShot(_einstellung->getCountdown()*1000, this, SLOT(roundEnd()));
+   // InternalTimer->singleShot(_einstellung->getCountdown()*1000, this, SLOT(roundEnd()));
 }
 ///<summary> slot that executes when timer runs out</summary>
 /// <parameters> </parameters>

@@ -1,5 +1,9 @@
 #include "playerjoinpacket.h"
 
+PlayerJoinPacket::PlayerJoinPacket() {
+
+}
+
 PlayerJoinPacket::PlayerJoinPacket(QString name) {
     m_type = PLAYER_JOIN_PACKET;
     m_name = name;

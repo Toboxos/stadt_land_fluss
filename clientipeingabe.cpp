@@ -1,14 +1,18 @@
 #include "clientipeingabe.h"
 #include "ui_clientipeingabe.h"
 #include "spielstart.h"
+#include "spielerliste.h"
 #include "hauptspielfenster.h"
 #include "Network/clientsocket.h"
+#include "Network/Packets/playerjoinpacket.h"
 
 
-ClientIpEingabe::ClientIpEingabe(QWidget *parent) :
+
+ClientIpEingabe::ClientIpEingabe(QWidget *parent,ClientLogic *clientLogic) :
     QDialog(parent),
     ui(new Ui::ClientIpEingabe)
 {
+    _clientLogic = clientLogic;
     ui->setupUi(this);
     ui->eingabeIp->setInputMask("000.000.000.000");
 }
@@ -25,22 +29,25 @@ void ClientIpEingabe::on_eingabeIp_textEdited(const QString &arg1)
 
 void ClientIpEingabe::on_buttonZurueck_clicked()
 {
-    close();
-    SpielStart start;
-    start.exec();
+
 }
-//...................................................................................
-// todo überlegen wie das umzusetzen ist.
-/*void ClientIpEingabe::on_buttonWeiter_clicked()
-{
-    close();
-    HauptSpielFenster hauptspielFenster;
-    hauptspielFenster.show();
-}
-*/
 
 void ClientIpEingabe::on_buttonWeiter_clicked()
 {
-   ClientSocket clientSocket;
-   clientSocket.connectTo(ui->eingabeIp->text(),5);
+
+    _clientLogic->connect("Hilfegard",ui->eingabeIp->text(),PORT);
+
+   /*_clientSocket.connectTo(ui->eingabeIp->text(),PORT);
+   PlayerJoinPacket playerJoinPacket("hildegart");
+   _clientSocket.send(playerJoinPacket);
+*/
+
+
+
+}
+void ClientIpEingabe::connected()
+{
+    close();
+    SpielStart start;
+    start.exec();
 }

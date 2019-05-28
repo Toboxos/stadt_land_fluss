@@ -29,6 +29,8 @@ CONFIG += c++11
 SOURCES += \
     antworten.cpp \
         clientipeingabe.cpp \
+    clientlogic.cpp \
+    einwand.cpp \
         hauptspielfenster.cpp \
         hostspieleinstellungen.cpp \
         kategorieeingabe.cpp \
@@ -50,6 +52,8 @@ SOURCES += \
 HEADERS += \
     antworten.h \
         clientipeingabe.h \
+    clientlogic.h \
+    einwand.h \
         hauptspielfenster.h \
         hostspieleinstellungen.h \
         kategorieeingabe.h \
@@ -68,6 +72,7 @@ HEADERS += \
     Examples/networkexample.h
 FORMS += \
         clientipeingabe.ui \
+        einwand.ui \
         hauptspielfenster.ui \
         hostspieleinstellungen.ui \
         kategorieeingabe.ui \

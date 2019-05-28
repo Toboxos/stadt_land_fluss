@@ -2,7 +2,7 @@
 #define HAUPTSPIELFENSTER_H
 
 #include <QMainWindow>
-
+#include "clientlogic.h"
 namespace Ui {
 class HauptSpielFenster;
 }
@@ -12,7 +12,7 @@ class HauptSpielFenster : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit HauptSpielFenster(QWidget *parent = nullptr);
+    explicit HauptSpielFenster(QWidget *parent = nullptr,ClientLogic *clientLogic= nullptr);
     ~HauptSpielFenster();
 
 private slots:
@@ -22,6 +22,8 @@ private slots:
 
 private:
     Ui::HauptSpielFenster *ui;
+    ClientLogic *_clientLogic;
+    void ready();
 };
 
 #endif // HAUPTSPIELFENSTER_H

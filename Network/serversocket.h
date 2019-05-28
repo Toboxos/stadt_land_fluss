@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "Network/Packets/packet.h"
+#include "Network/Packets/playerjoinpacket.h"
 
 /**
  * @brief Server for handling connections and sending/receiving packets
@@ -32,15 +33,18 @@ class ServerSocket : public QObject {
         bool listen(quint16 port);
 
         /**
-         * @brief Sends a packet to given player
+         * @brief Sends a packet to a client
          *
-         * @param player    Player name where packet should send to
+         * @param id        Id referencing the client
          * @param packet    Refrence to network packet to send
          * @return true if success, false if something went wrong
          */
-        bool send(QString player, Packet& packet);
+        bool send(unsigned int id, Packet& packet);
 
-    public slots:
+    signals:
+        void playerJoined(PlayerJoinPacket packet, unsigned int id);
+
+    private slots:
 
         /**
          * @brief Slot gets called when socket is ready for read data
@@ -54,9 +58,10 @@ class ServerSocket : public QObject {
 
     private:
 
-        QTcpServer m_server;                    /**< QT server instance */
-        QVector<QTcpSocket*> m_sockets;         /**< Socket connections for all clients */
-        QMap<QString, QTcpSocket*> m_mapped;    /**< Mapped players to socket */
+        QTcpServer m_server;                        /**< QT server instance */
+        QMap<unsigned int, QTcpSocket*> m_sockets;  /**< Sockets assigned to IDs */
+
+        static unsigned int idCounter;
 };
 
 #endif // SERVERSOCKET_H

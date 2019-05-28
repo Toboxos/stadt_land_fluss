@@ -8,11 +8,12 @@
 
 
 
-HauptSpielFenster::HauptSpielFenster(QWidget *parent) :
+HauptSpielFenster::HauptSpielFenster(QWidget *parent,ClientLogic *clientLogic) :
     QMainWindow(parent),
     ui(new Ui::HauptSpielFenster)
 {
 //...................................... todo Punkte und Buchstabenriehe enablen.....................................................................................................................................................
+   _clientLogic = clientLogic;
     ui->setupUi(this);
     ui->tableSpiel->resizeColumnsToContents();
     int zeilenZaehler =2;
@@ -20,7 +21,7 @@ HauptSpielFenster::HauptSpielFenster(QWidget *parent) :
 
     //ui->tableSpiel->resizeColumnsToContents();
     //ui->tableSpiel->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
-    std::vector<std::string> kategorienVector=std::move( _einstellung->getKategorienListe());
+    std::vector<std::string> kategorienVector=std::move( _clientLogic->getSpieleinstellungen()->getKategorienListe());
     ui->tableSpiel->setColumnCount(1);
     ui->tableSpiel->setHorizontalHeaderItem(0,new QTableWidgetItem("Buchstabe"));
     for (std::vector<std::string>::iterator iter = kategorienVector.begin() ;iter!=kategorienVector.end();iter++,zeilenZaehler++)
@@ -35,8 +36,19 @@ HauptSpielFenster::HauptSpielFenster(QWidget *parent) :
     ui->tableSpiel->setRowCount(2);
 }
 
+///
+/// \brief HauptSpielFenster::ready
+///
+///
+void HauptSpielFenster::ready()
+{
+   std::vector<QString> answerVector ;
+    for (int columCount = 0; columCount < ui->tableSpiel->columnCount(); ++columCount) {
 
+        answerVector.push_back(ui->tableSpiel->item(0,columCount)->text());
 
+    }
+}
 HauptSpielFenster::~HauptSpielFenster()
 {
     delete ui;

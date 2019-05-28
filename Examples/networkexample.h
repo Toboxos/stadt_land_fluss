@@ -15,6 +15,8 @@ class NetworkExample : public QObject {
     public slots:
 
         void connected();
+        void error();
+        void timeout();
 
     private:
         ServerSocket m_server;
