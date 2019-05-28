@@ -26,20 +26,32 @@ void ClientSocket::send(Packet& packet) {
 }
 
 void ClientSocket::read() {
-    PACKET_TYPE type;
-    m_socket.read(reinterpret_cast<char*>(&type), sizeof(type));
+    while( m_socket.bytesAvailable() > 0 ) {
+        PACKET_TYPE type;
+        m_socket.read(reinterpret_cast<char*>(&type), sizeof(type));
 
-    switch( type ) {
-        case PLAYER_JOIN_PACKET: {
-            PlayerJoinPacket p;
-            emit playerJoined(p);
-            break;
-        }
+        switch( type ) {
+            case PLAYER_JOIN_PACKET: {
+                PlayerJoinPacket p;
+                p.readData(m_socket);
+                emit playerJoined(p);
+                break;
+            }
 
-        default: {
+            case PLAYER_LIST_PACKET: {
+                PlayerListPacket p;
+                p.readData(m_socket);
+                emit receivedPlayerList(p);
+                break;
+            }
 
+            default: {
+
+            }
         }
     }
+
+
 }
 
 void ClientSocket::handleConnection() {
@@ -50,8 +62,6 @@ void ClientSocket::handleConnection() {
 
 void ClientSocket::handleTimeout() {
     if( m_status == CONNECTING ) {
-        qDebug("handleTimeout");
-        qDebug() << m_status;
         emit timeout();
     }
 }

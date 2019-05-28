@@ -5,6 +5,7 @@
 
 #include <Network/Packets/packet.h>
 #include <Network/Packets/playerjoinpacket.h>
+#include <Network/Packets/playerlistpacket.h>
 
 class ClientSocket : public QObject {
     Q_OBJECT
@@ -60,6 +61,13 @@ class ClientSocket : public QObject {
          * @param packet    Packet with information
          */
         void playerJoined(PlayerJoinPacket packet);
+
+        /**
+         * @brief Emitted when new player list is received from server
+         *
+         * @param packet    Packet with information
+         */
+        void receivedPlayerList(PlayerListPacket packet);
 
     public slots:
 
