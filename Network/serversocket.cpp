@@ -2,6 +2,8 @@
 
 #include "Network/Packets/playerjoinpacket.h"
 
+unsigned int ServerSocket::idCounter = 0;
+
 ServerSocket::ServerSocket() {
 
 }
@@ -27,39 +29,47 @@ void ServerSocket::newConnection() {
 
     connect(socket, SIGNAL(readyRead()), this, SLOT(read()));
 
-    m_sockets.push_back(socket);
+    m_sockets.insert(idCounter++, socket);
 }
 
 void ServerSocket::read() {
-    qDebug("READ");
     QTcpSocket* socket = reinterpret_cast<QTcpSocket*>(sender());
 
-    PACKET_TYPE type;
-    socket->read(reinterpret_cast<char*>(&type), sizeof(type));
+    // Get the mapped id for socket
+    unsigned int id = m_sockets.key(socket);
 
-    /* Check wich Packet type have to be loaded */
-    switch( type ) {
+    while( socket->bytesAvailable() > 0 ) {
+        PACKET_TYPE type;
+        socket->read(reinterpret_cast<char*>(&type), sizeof(type));
 
-        case PLAYER_JOIN_PACKET: {
-            PlayerJoinPacket p2("");
-            p2.readData(*socket);
-            qDebug() << "Player Join Packet erhalten:" << p2.getName();
-            break;
-        }
+        /* Check wich Packet type have to be loaded */
+        switch( type ) {
 
-        default: {
+            case PLAYER_JOIN_PACKET: {
+                PlayerJoinPacket p;
+                p.readData(*socket);
+                emit playerJoined(p, id);
+                break;
+            }
 
+            default: {
+
+            }
         }
     }
 }
 
-bool ServerSocket::send(QString player, Packet& packet) {
+bool ServerSocket::send(unsigned int id, Packet& packet) {
 
     /* Check if player is mapped */
-    if( !m_mapped.contains(player) ) {
+    if( !m_sockets.contains(id) ) {
         return false;
     }
+    QTcpSocket* socket = m_sockets.value(id);
 
-    packet.writeData(*m_mapped.value(player));
+    PACKET_TYPE type = packet.getType();
+    socket->write(reinterpret_cast<char*>(&type), sizeof(type));
+
+    packet.writeData(*socket);
     return true;
 }

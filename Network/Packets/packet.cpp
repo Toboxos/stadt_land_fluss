@@ -42,3 +42,11 @@ void Packet::readQString(QTcpSocket& socket, QString& string) {
     // Free
     delete[] data;
 }
+
+void Packet::writeInteger(QTcpSocket& socket, int& integer) {
+    socket.write(reinterpret_cast<char*>(&integer), sizeof(integer));
+}
+
+void Packet::readInteger(QTcpSocket& socket, int& integer) {
+    socket.read(reinterpret_cast<char*>(&integer), sizeof(integer));
+}

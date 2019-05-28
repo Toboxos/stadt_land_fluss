@@ -8,7 +8,8 @@
  */
 enum PACKET_TYPE {
     BASE_PACKET,
-    PLAYER_JOIN_PACKET
+    PLAYER_JOIN_PACKET,
+    PLAYER_LIST_PACKET
 };
 
 /**
@@ -61,6 +62,22 @@ class Packet {
          * @param string    QString reference which should be updated
          */
         static void readQString(QTcpSocket& socket, QString& string);
+
+        /**
+         * @brief Writes an Integer to the socket
+         *
+         * @param socket    Socket data should written to
+         * @param integer   Integer reference which should be written
+         */
+        static void writeInteger(QTcpSocket& socket, int& integer);
+
+        /**
+         * @brief Read an Integer from the socket
+         *
+         * @param socket    Socket data should read from
+         * @param integer   Integer reference which should be updated
+         */
+        static void readInteger(QTcpSocket& socket, int& integer);
 };
 
 #endif // PACKET_H
