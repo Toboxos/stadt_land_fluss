@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "Network/Packets/packet.h"
+#include "Network/Packets/playerjoinpacket.h"
 
 /**
  * @brief Server for handling connections and sending/receiving packets
@@ -39,6 +40,9 @@ class ServerSocket : public QObject {
          * @return true if success, false if something went wrong
          */
         bool send(unsigned int id, Packet& packet);
+
+    signals:
+        void playerJoined(PlayerJoinPacket packet, unsigned int id);
 
     private slots:
 

@@ -33,8 +33,10 @@ void ServerSocket::newConnection() {
 }
 
 void ServerSocket::read() {
-    qDebug("READ");
     QTcpSocket* socket = reinterpret_cast<QTcpSocket*>(sender());
+
+    // Get the mapped id for socket
+    unsigned int id = m_sockets.key(socket);
 
     PACKET_TYPE type;
     socket->read(reinterpret_cast<char*>(&type), sizeof(type));
@@ -43,9 +45,8 @@ void ServerSocket::read() {
     switch( type ) {
 
         case PLAYER_JOIN_PACKET: {
-            PlayerJoinPacket p2("");
-            p2.readData(*socket);
-            qDebug() << "Player Join Packet erhalten:" << p2.getName();
+            PlayerJoinPacket p;
+            emit playerJoined(p, id);
             break;
         }
 
