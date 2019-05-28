@@ -43,7 +43,7 @@ void Kategorieeingabe::on_buttonZurueck_clicked()
 void Kategorieeingabe::on_buttonHinzufuegen_clicked()
 {
     QString kategorie = ui->einlesenKategorie->text();
-    _einstellung->setKategorienlListe(kategorie.toStdString());
+    _einstellung->addKategorie(kategorie.toStdString());
 
     ui->tableKategorie->setColumnCount(kategorieZaehler);
 

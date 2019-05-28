@@ -12,6 +12,7 @@ SpielerWarteRaum::SpielerWarteRaum(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SpielerWarteRaum)
 {
+
     ui->setupUi(this);
     ui->labelSpielname->setText(QString::fromStdString(_einstellung->getSpielname()));
     int reihenNummer=1;

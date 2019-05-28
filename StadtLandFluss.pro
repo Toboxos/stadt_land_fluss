@@ -52,6 +52,7 @@ HEADERS += \
         hauptspielfenster.h \
         hostspieleinstellungen.h \
         kategorieeingabe.h \
+    kategorienserver.h \
     punkte.h \
         spieleinstellungen.h \
         spieler.h \

@@ -2,7 +2,7 @@
 #define SPIELEINSTELLUNGEN_H
 #include <string>
 #include <vector>
-
+#include <kategorienserver.h>
 class Spieleinstellungen
 {
 public:
@@ -19,14 +19,14 @@ public:
     void setRoundNumber(int);
     void setRoundTimeLimit(int);
     void setCountdown(int);
-    void setKategorienlListe(std::string);
+    void addKategorie(std::string);
 
 private:
     std::string _spielname="";
     int _rundenanzahl =0;
     int _rundendauer =0;
     int _countdown =0;
-    std::vector<std::string> _kategorienListe;
+    Categories category;
 
 
 };
