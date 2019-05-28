@@ -1,4 +1,4 @@
-#include "Hostspieleinstellungen.h"
+#include "hostspieleinstellungen.h"
 #include "ui_hostspieleinstellungen.h"
 #include "kategorieeingabe.h"
 #include "spielstart.h"
