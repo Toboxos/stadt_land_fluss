@@ -5,82 +5,135 @@
 #include "spieleinstellungen.h"
 #include <QMessageBox>
 
-// todo Felder überprüfen dass nicht kleiner als 0 oder Sonderzeichen eingegeben werden..............................
-//..............................................................................................................
-//
+/*###################################################################################
+    Methode                 :
+    Funktion der Methode    :
+    Ersteller               : Alexandra Eberle
+ ###################################################################################*/
 HostSpielEinstellungen::HostSpielEinstellungen(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::HostSpielEinstellungen)
 {
 
    ui->setupUi(this);
-   ui->buttonWeiter->setFocus();
-   ui->eingegebenerSpielname->setFocus();
-   //ui->buttonWeiter->setFocus();
-//   ui->eingegebenerSpielname-> curser auf erstes Kästchen.
+   ui->buttonNext->setFocus();
+   ui->inputGamename->setFocus();
 }
 
 HostSpielEinstellungen::~HostSpielEinstellungen()
 {
     delete ui;
 }
-///
-/// \brief HostSpielEinstellungen::on_buttonWeiter_clicked
-/// Die eingetragenen Werte der Labels werden in die Variablen geschrieben sobald auf weiter geklickt wurde.
-///
+/*###################################################################################
+    Methode                 : on_buttonWeiter_clicked()
+    Funktion der Methode    :   Sobald auf den ButtonWeiter geklickt wird, werden die
+                            Werte übernommen und in Vaiablen geschrieben.
+                            Außerdem wird überprüft, dass keine Buchstaben und Werte
+                            kleiner als Null eingegeben wurden.
+    Ersteller               : Alexandra Eberle
+ ###################################################################################*/
 void HostSpielEinstellungen::on_buttonWeiter_clicked()
 {
+    bool correctUserEntry = true;
     QMessageBox box;
-    ui->label->setText(QString::number(ui->eingabeRunden->text().toInt()));
-    // abfrage sodass rundendauer nur eine Zahl größer als 0 sein kann.
-    /*   if(ui->eingabeZeitlimit->text() == "0")
+     // Abfrage dass bei den Runden kein Bullshit eingegeben wurde.
+    if(ui->inputRoundNumber->text().toInt() == 0)
     {
-            box.setText("if");
-            box.exec();
+        box.setText("Bitte keine Buchstaben eingeben");
+        correctUserEntry = false;
+        box.exec();
 
     }
-        else if(ui->eingabeZeitlimit->text().toInt() == 0)
-        {
-                box.setText("else if");
-                box.exec();
-        }
-            else
-            {
-            box.setText("else");
-            box.exec();
-                _einstellung->setRundendauer(ui->eingabeZeitlimit->text().toInt());
-            }*/
-
-    _einstellung->setCountdown(ui->EingabeZeitNachAntwort->text().toInt());
-    _einstellung->setSpielname(ui->eingegebenerSpielname->text().toStdString());
-
-    if (checkBoxChecked)
+    else if(ui->inputRoundNumber->text().toInt() >= 0)
     {
-        _einstellung->setRundenanzahl(99);  //Wert 99 steht für unendlich
+        _einstellung->setRoundNumber(ui->inputRoundNumber->text().toInt());
+
     }
     else
     {
-        _einstellung->setRundenanzahl(ui->eingabeRunden->text().toInt());
+        box.setText("Bitte einen Wert größer als Null eingeben");
+        correctUserEntry = false;
+        box.exec();
+
     }
+
+    // Abfrage, dass bei kein Bullshit steht.
+    if(ui->inputRoundTimeLimit->text().toInt() == 0)
+    {
+        box.setText("Bitte keine Buchstaben eingeben");
+        correctUserEntry = false;
+        box.exec();
+
+    }
+    else if(ui->inputRoundTimeLimit->text().toInt() >= 0)
+    {
+        _einstellung->setRoundTimeLimit(ui->inputRoundTimeLimit->text().toInt());
+
+    }
+    else
+    {
+        box.setText("Bitte einen Wert größer als Null eingeben");
+        correctUserEntry = false;
+        box.exec();
+
+    }
+
+
+    if(ui->inputCountdown->text().toInt() == 0)
+    {
+        box.setText("Bitte keine Buchstaben eingeben");
+        correctUserEntry = false;
+        box.exec();
+
+    }
+    else if(ui->inputCountdown->text().toInt() >= 0)
+    {
+        _einstellung->setCountdown(ui->inputCountdown->text().toInt());
+
+    }
+    else
+    {
+        box.setText("Bitte einen Wert größer als Null eingeben");
+        correctUserEntry = false;
+        box.exec();
+
+    }
+
+    _einstellung->setPlayName(ui->inputGamename->text().toStdString());
+
+    if (checkBoxChecked)
+    {
+        _einstellung->setRoundNumber(99);  //Wert 99 steht für unendlich
+    }
+    else
+    {
+        _einstellung->setRoundNumber(ui->inputRoundNumber->text().toInt());
+    }
+
+    if(correctUserEntry == true)
+    {
     close();
-    Kategorieeingabe eingabe;
-    eingabe.exec();
-
-
-
-
+        Kategorieeingabe eingabe;
+        eingabe.exec();
+    }
+    else {
+        //do nothing
+    }
 }
-///
-/// \brief HostSpielEinstellungen::on_buttonZurueck_clicked
-///sobald zurück geklickt wird werden die Variablen auf Null gesetzt.
-///
+/*###################################################################################
+    Methode                 : on_buttonZurueck_click
+    Funktion der Methode    : Die Variablen werden wieder resetet. Und auf das Fenster
+                              "Spielstart" gewechslet.
+    Ersteller               : Alexandra Eberle
+ ###################################################################################*/
+
 void HostSpielEinstellungen::on_buttonZurueck_clicked()
 {
 
-    _einstellung->setRundendauer(0);
+    _einstellung->setRoundTimeLimit(0);
     _einstellung->setCountdown(0);
-    _einstellung->setSpielname("");
-    _einstellung->setRundenanzahl(0);
+    _einstellung->setPlayName("");
+    _einstellung->setRoundNumber(0);
     close();
     SpielStart start;
     start.exec();
@@ -90,8 +143,8 @@ void HostSpielEinstellungen::on_checkBoxUnendlich_stateChanged(int arg1)
 {
 
     ui->label->setText(QString::number(arg1));
-     ui->buttonWeiter->setFocus();
-    ui->eingabeRunden->clear();
+    ui->buttonNext->setFocus();
+    ui->inputRoundNumber->clear();
     if(arg1 !=0)
     {
         checkBoxChecked = true; //unendlich
@@ -104,7 +157,7 @@ void HostSpielEinstellungen::on_checkBoxUnendlich_stateChanged(int arg1)
 
 void HostSpielEinstellungen::on_eingegebenerSpielname_textEdited(const QString &arg1)
 {
-    ui->buttonWeiter->setEnabled(true);
+    ui->buttonNext->setEnabled(true);
     //ui->buttonWeiter->setFocus();
 }
 void HostSpielEinstellungen::on_eingabeRunden_textEdited(const QString &arg1)

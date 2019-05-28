@@ -15,9 +15,9 @@ public:
     int getKategorieSize();
 
 
-    void setSpielname(std::string);
-    void setRundenanzahl(int);
-    void setRundendauer(int);
+    void setPlayName(std::string);
+    void setRoundNumber(int);
+    void setRoundTimeLimit(int);
     void setCountdown(int);
     void setKategorienlListe(std::string);
 
