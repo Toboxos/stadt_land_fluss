@@ -2,6 +2,8 @@
 
 #include "Network/Packets/playerjoinpacket.h"
 
+unsigned int ServerSocket::idCounter = 0;
+
 ServerSocket::ServerSocket() {
 
 }
@@ -27,7 +29,7 @@ void ServerSocket::newConnection() {
 
     connect(socket, SIGNAL(readyRead()), this, SLOT(read()));
 
-    m_sockets.push_back(socket);
+    m_sockets.insert(idCounter++, socket);
 }
 
 void ServerSocket::read() {
@@ -53,13 +55,13 @@ void ServerSocket::read() {
     }
 }
 
-bool ServerSocket::send(QString player, Packet& packet) {
+bool ServerSocket::send(unsigned int id, Packet& packet) {
 
     /* Check if player is mapped */
-    if( !m_mapped.contains(player) ) {
+    if( !m_sockets.contains(id) ) {
         return false;
     }
 
-    packet.writeData(*m_mapped.value(player));
+    packet.writeData(*m_sockets.value(id));
     return true;
 }
