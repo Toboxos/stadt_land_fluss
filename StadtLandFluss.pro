@@ -27,6 +27,7 @@ DEFINES += PORT=1234
 CONFIG += c++11
 
 SOURCES += \
+    Network/Packets/playerlistpacket.cpp \
     antworten.cpp \
         clientipeingabe.cpp \
         hauptspielfenster.cpp \
@@ -48,6 +49,7 @@ SOURCES += \
     Examples/networkexample.cpp
 
 HEADERS += \
+    Network/Packets/playerlistpacket.h \
     antworten.h \
         clientipeingabe.h \
         hauptspielfenster.h \
