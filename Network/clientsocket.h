@@ -35,7 +35,21 @@ class ClientSocket : public QObject {
         void send(Packet& packet);
 
     signals:
+
+        /**
+         * @brief Connected singal emitted on succesfull connection
+         */
         void connected();
+
+        /**
+         * @brief Error signal emitted when any error occured
+         */
+        void error();
+
+        /**
+         * @brief Timeout signal emitted after timeout specified at connectTo()
+         */
+        void timeout();
 
     public slots:
         void read();
