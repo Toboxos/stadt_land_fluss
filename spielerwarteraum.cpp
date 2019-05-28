@@ -12,6 +12,7 @@ SpielerWarteRaum::SpielerWarteRaum(QWidget *parent,ClientLogic *clientLogic) :
     QDialog(parent),
     ui(new Ui::SpielerWarteRaum)
 {
+
     ui->setupUi(this);
     _clientLogic = clientLogic;
 

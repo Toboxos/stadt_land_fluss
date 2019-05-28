@@ -43,7 +43,11 @@ void Kategorieeingabe::on_buttonZurueck_clicked()
 void Kategorieeingabe::on_buttonHinzufuegen_clicked()
 {
     QString kategorie = ui->einlesenKategorie->text();
+<<<<<<< HEAD
     _clientLogic->getSpieleinstellungen()->setKategorienlListe(kategorie.toStdString());
+=======
+    _einstellung->addKategorie(kategorie.toStdString());
+>>>>>>> 9874751bf14cd5d5f24f774d98ddbf835364158b
 
     ui->tableKategorie->setColumnCount(kategorieZaehler);
 

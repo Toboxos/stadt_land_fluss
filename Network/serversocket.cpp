@@ -38,20 +38,23 @@ void ServerSocket::read() {
     // Get the mapped id for socket
     unsigned int id = m_sockets.key(socket);
 
-    PACKET_TYPE type;
-    socket->read(reinterpret_cast<char*>(&type), sizeof(type));
+    while( socket->bytesAvailable() > 0 ) {
+        PACKET_TYPE type;
+        socket->read(reinterpret_cast<char*>(&type), sizeof(type));
 
-    /* Check wich Packet type have to be loaded */
-    switch( type ) {
+        /* Check wich Packet type have to be loaded */
+        switch( type ) {
 
-        case PLAYER_JOIN_PACKET: {
-            PlayerJoinPacket p;
-            emit playerJoined(p, id);
-            break;
-        }
+            case PLAYER_JOIN_PACKET: {
+                PlayerJoinPacket p;
+                p.readData(*socket);
+                emit playerJoined(p, id);
+                break;
+            }
 
-        default: {
+            default: {
 
+            }
         }
     }
 }
@@ -62,7 +65,11 @@ bool ServerSocket::send(unsigned int id, Packet& packet) {
     if( !m_sockets.contains(id) ) {
         return false;
     }
+    QTcpSocket* socket = m_sockets.value(id);
 
-    packet.writeData(*m_sockets.value(id));
+    PACKET_TYPE type = packet.getType();
+    socket->write(reinterpret_cast<char*>(&type), sizeof(type));
+
+    packet.writeData(*socket);
     return true;
 }
