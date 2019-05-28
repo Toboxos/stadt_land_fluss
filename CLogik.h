@@ -5,17 +5,20 @@
 #include <stdlib.h>
 #include <QObject>
 
+#include "Network/serversocket.h"
 #include "antworten.h"
 #include "spieler.h"
 #include "punkte.h"
+
 #include "Network/Packets/playerjoinpacket.h"
 #include "Network/serversocket.h"
+#include "spieleinstellungen.h"
+
 
 using namespace std;
 
 class CLogik : public QObject {
     Q_OBJECT
-
 public:
     CLogik();
 
@@ -29,6 +32,7 @@ public:
 public slots:
     void spieler_beitritt(PlayerJoinPacket packet, unsigned int id);
 	
+
 private:
     std::vector<Spieler> players;
     std::vector<antworten> answers;

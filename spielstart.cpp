@@ -2,10 +2,11 @@
 #include "spielerliste.h"
 #include "clientipeingabe.h"
 
-SpielStart::SpielStart(QWidget *parent) :
+SpielStart::SpielStart(QWidget *parent, ClientLogic *clientLogic) :
     QDialog(parent),
     ui(new Ui::SpielStart)
 {
+    _clientLogic = clientLogic;
     ui->setupUi(this);
 }
 
@@ -18,9 +19,9 @@ void SpielStart::on_buttonHost_clicked()
 {
     std::string name = "HOST_" + ui->NameEingabe->text().toStdString(); //Spieler wird Name zugewiesen
     Spieler hostSpieler(name); // 0 muss ersetzt werden mit der Anzahl der Kategorien!!!
-    _spielerListe.push_back(hostSpieler); //pushback das neusete Element wird ans ende der Liste geschubst.
+    _clientLogic->getSpielerListe()->push_back(hostSpieler); //pushback das neusete Element wird ans ende der Liste geschubst.
     close();
-    HostSpielEinstellungen einstellungen;
+    HostSpielEinstellungen einstellungen(nullptr, _clientLogic);
     einstellungen.exec();
 
 }
@@ -34,12 +35,16 @@ void SpielStart::on_NameEingabe_textEdited(const QString &arg1)
 
 void SpielStart::on_NameEingabe_returnPressed()
 {
-    on_buttonHost_clicked();
+    on_buttonBeitreten_clicked();
 }
 
 void SpielStart::on_buttonBeitreten_clicked()
 {
+
+   /* std::string name =  ui->NameEingabe->text().toStdString(); //Spieler wird Name zugewiesen
+    Spieler hostSpieler(name, 0); // 0 muss ersetzt werden mit der Anzahl der Kategorien!!!
+    _spielerListe.push_back(hostSpieler);*/
     close();
-    ClientIpEingabe ClientStart;
+    ClientIpEingabe ClientStart(nullptr, _clientLogic);
     ClientStart.exec();
 }

@@ -1,21 +1,30 @@
 #include <QApplication>
 #include "spielstart.h"
+#include "einwand.h"
+#include "clientlogic.h"
+#include "spielstart.h"
 
 #include "Examples/networkexample.h"
 #include "CLogik.h"
 
-std::vector<Spieler> _spielerListe;
-Spieleinstellungen  *_einstellung = new Spieleinstellungen();
+
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
     CLogik serverLogik;
+    ClientLogic clientLogic;
+
     NetworkExample e;
 
-    SpielStart w;
+    //Einwand r;
+    //r.exec();
 
-    w.exec();
+    //SpielStart w;
+
+
+    // w.exec();
 
     return a.exec();
 }

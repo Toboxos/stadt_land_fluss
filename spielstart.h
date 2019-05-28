@@ -3,6 +3,7 @@
 #include "ui_spielstart.h"
 #include "hostspieleinstellungen.h"
 #include "spieler.h"
+#include "clientlogic.h"
 #include <string>
 #include <QDialog>
 
@@ -15,11 +16,12 @@ class SpielStart : public QDialog
     Q_OBJECT
 
 public:
-    explicit SpielStart(QWidget *parent = nullptr);
+    explicit SpielStart(QWidget *parent = nullptr, ClientLogic *clientLogic= nullptr);
     ~SpielStart();
 
 private slots:
     void on_buttonHost_clicked();
+
 
     void on_NameEingabe_textEdited(const QString &arg1);
 
@@ -29,6 +31,7 @@ private slots:
 
 private:
     Ui::SpielStart *ui;
+    ClientLogic *_clientLogic;
 };
 
 #endif // SPIELSTART_H

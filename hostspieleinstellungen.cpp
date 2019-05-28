@@ -3,6 +3,7 @@
 #include "kategorieeingabe.h"
 #include "spielstart.h"
 #include "spieleinstellungen.h"
+#include "CLogik.h"
 #include <QMessageBox>
 
 /*###################################################################################
@@ -10,12 +11,17 @@
     Funktion der Methode    :
     Ersteller               : Alexandra Eberle
  ###################################################################################*/
-HostSpielEinstellungen::HostSpielEinstellungen(QWidget *parent) :
+HostSpielEinstellungen::HostSpielEinstellungen(QWidget *parent,ClientLogic *clientLogic) :
     QDialog(parent),
     ui(new Ui::HostSpielEinstellungen)
 {
 
    ui->setupUi(this);
+
+   CLogik *_cLogic  = new CLogik;
+
+
+   _clientLogic = clientLogic;
    ui->buttonNext->setFocus();
    ui->inputGameName->setFocus();
 }
@@ -32,7 +38,7 @@ HostSpielEinstellungen::~HostSpielEinstellungen()
                             kleiner als Null eingegeben wurden.
     Ersteller               : Alexandra Eberle
  ###################################################################################*/
-void HostSpielEinstellungen::on_buttonWeiter_clicked()
+void HostSpielEinstellungen::on_buttonNext_clicked()
 {
     bool correctUserEntry = true;
     QMessageBox box;
@@ -46,7 +52,8 @@ void HostSpielEinstellungen::on_buttonWeiter_clicked()
     }
     else if(ui->inputRoundNumber->text().toInt() >= 0)
     {
-        _einstellung->setRoundNumber(ui->inputRoundNumber->text().toInt());
+        _clientLogic->getSpieleinstellungen()->setRoundNumber(ui->inputRoundNumber->text().toInt());
+
 
     }
     else
@@ -67,7 +74,7 @@ void HostSpielEinstellungen::on_buttonWeiter_clicked()
     }
     else if(ui->inputRoundTimeLimit->text().toInt() >= 0)
     {
-        _einstellung->setRoundTimeLimit(ui->inputRoundTimeLimit->text().toInt());
+        _clientLogic->getSpieleinstellungen()->setRoundTimeLimit(ui->inputRoundTimeLimit->text().toInt());
 
     }
     else
@@ -88,7 +95,7 @@ void HostSpielEinstellungen::on_buttonWeiter_clicked()
     }
     else if(ui->inputCountdown->text().toInt() >= 0)
     {
-        _einstellung->setCountdown(ui->inputCountdown->text().toInt());
+        _clientLogic->getSpieleinstellungen()->setCountdown(ui->inputCountdown->text().toInt());
 
     }
     else
@@ -99,21 +106,21 @@ void HostSpielEinstellungen::on_buttonWeiter_clicked()
 
     }
 
-    _einstellung->setPlayName(ui->inputGameName->text().toStdString());
+    _clientLogic->getSpieleinstellungen()->setPlayName(ui->inputGameName->text().toStdString());
 
     if (checkBoxChecked)
     {
-        _einstellung->setRoundNumber(99);  //Wert 99 steht für unendlich
+        _clientLogic->getSpieleinstellungen()->setRoundNumber(99);  //Wert 99 steht für unendlich
     }
     else
     {
-        _einstellung->setRoundNumber(ui->inputRoundNumber->text().toInt());
+      _clientLogic->getSpieleinstellungen()->setRoundNumber(ui->inputRoundNumber->text().toInt());
     }
 
     if(correctUserEntry == true)
     {
     close();
-        Kategorieeingabe eingabe;
+        Kategorieeingabe eingabe(nullptr, _clientLogic);
         eingabe.exec();
     }
     else {
@@ -130,12 +137,12 @@ void HostSpielEinstellungen::on_buttonWeiter_clicked()
 void HostSpielEinstellungen::on_buttonZurueck_clicked()
 {
 
-    _einstellung->setRoundTimeLimit(0);
-    _einstellung->setCountdown(0);
-    _einstellung->setPlayName("");
-    _einstellung->setRoundNumber(0);
+    _clientLogic->getSpieleinstellungen()->setRoundTimeLimit(0);
+    _clientLogic->getSpieleinstellungen()->setCountdown(0);
+    _clientLogic->getSpieleinstellungen()->setPlayName("");
+   _clientLogic->getSpieleinstellungen()->setRoundNumber(0);
     close();
-    SpielStart start;
+    SpielStart start(nullptr, _clientLogic);
     start.exec();
 }
 
@@ -155,22 +162,10 @@ void HostSpielEinstellungen::on_checkBoxUnendlich_stateChanged(int arg1)
     }
 }
 
-void HostSpielEinstellungen::on_eingegebenerSpielname_textEdited(const QString &arg1)
+
+
+
+void HostSpielEinstellungen::on_inputGameName_textEdited(const QString &arg1)
 {
     ui->buttonNext->setEnabled(true);
-    //ui->buttonWeiter->setFocus();
-}
-void HostSpielEinstellungen::on_eingabeRunden_textEdited(const QString &arg1)
-{
-    // ui->buttonWeiter->setFocus();
-}
-
-void HostSpielEinstellungen::on_eingabeZeitlimit_textEdited(const QString &arg1)
-{
-  //   ui->buttonWeiter->setFocus();
-}
-
-void HostSpielEinstellungen::on_EingabeZeitNachAntwort_textEdited(const QString &arg1)
-{
-    // ui->buttonWeiter->setFocus();
 }

@@ -38,6 +38,10 @@ void Packet::readQString(QTcpSocket& socket, QString& string) {
         socket.read(data, size);
         string = data;
     }
+    else
+    {
+        //do nothing
+    }
 
     // Free
     delete[] data;
