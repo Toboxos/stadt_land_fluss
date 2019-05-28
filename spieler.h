@@ -8,7 +8,7 @@ class Spieler{
 
 
 public:
-    Spieler(std::string,int);
+    Spieler(std::string);
 
     std::string getName();
     int getId();
