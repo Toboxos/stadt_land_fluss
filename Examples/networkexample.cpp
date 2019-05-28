@@ -2,10 +2,10 @@
 
 
 NetworkExample::NetworkExample() {
-    m_server.listen(1234);
+    m_server.listen(PORT);
 
     connect(&m_client, SIGNAL(connected()), this, SLOT(connected()));
-    m_client.connectTo("localhost", 1234);
+    m_client.connectTo("localhost", PORT);
 }
 
 void NetworkExample::connected() {
