@@ -18,6 +18,11 @@ class NetworkExample : public QObject {
         void error();
         void timeout();
 
+        void server_playerJoined(PlayerJoinPacket p, unsigned int id);
+        void client_playerJoined(PlayerJoinPacket p);
+
+        void client_receivedPlayerList(PlayerListPacket p);
+
     private:
         ServerSocket m_server;
         ClientSocket m_client;
