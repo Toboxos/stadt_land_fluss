@@ -13,6 +13,9 @@ public:
     std::string getName();
     int getId();
 
+    void setConnectionId(unsigned int);
+    unsigned int getConnectionId();
+
     int getPunkte();
     void setPunkte(int);
 
@@ -29,6 +32,7 @@ private:
     std::string _name;
     int _punkte = 0;
     int _id=0;
+    unsigned int connectionId;
 
     std::vector<int> credits;
 };

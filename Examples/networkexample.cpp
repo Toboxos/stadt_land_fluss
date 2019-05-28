@@ -2,9 +2,9 @@
 
 
 NetworkExample::NetworkExample() {
-    connect(&m_server, SIGNAL(playerJoined(PlayerJoinPacket, unsigned int)), this, SLOT(server_playerJoined(PlayerJoinPacket, unsigned int)));
+    //connect(&m_server, SIGNAL(playerJoined(PlayerJoinPacket, unsigned int)), this, SLOT(server_playerJoined(PlayerJoinPacket, unsigned int)));
 
-    m_server.listen(PORT);
+    //m_server.listen(PORT);
 
     connect(&m_client, SIGNAL(connected()), this, SLOT(connected()));
     connect(&m_client, SIGNAL(timeout()), this, SLOT(timeout()));
@@ -20,7 +20,10 @@ void NetworkExample::connected() {
     qDebug("Connected");
 
     PlayerJoinPacket p("IchBinEinLangerName");
+    PlayerJoinPacket p2("Spielr2");
+
     m_client.send(p);
+    m_client.send(p2);
 }
 
 void NetworkExample::error() {
