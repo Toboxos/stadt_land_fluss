@@ -26,7 +26,20 @@ void ClientSocket::send(Packet& packet) {
 }
 
 void ClientSocket::read() {
+    PACKET_TYPE type;
+    m_socket.read(reinterpret_cast<char*>(&type), sizeof(type));
 
+    switch( type ) {
+        case PLAYER_JOIN_PACKET: {
+            PlayerJoinPacket p;
+            emit playerJoined(p);
+            break;
+        }
+
+        default: {
+
+        }
+    }
 }
 
 void ClientSocket::handleConnection() {

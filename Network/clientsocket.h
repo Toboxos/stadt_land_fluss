@@ -4,6 +4,7 @@
 #include <QtNetwork>
 
 #include <Network/Packets/packet.h>
+#include <Network/Packets/playerjoinpacket.h>
 
 class ClientSocket : public QObject {
     Q_OBJECT
@@ -51,6 +52,14 @@ class ClientSocket : public QObject {
          * @brief Timeout signal emitted after timeout specified at connectTo()
          */
         void timeout();
+
+
+        /**
+         * @brief Emitted when a player joins the server
+         *
+         * @param packet    Packet with information
+         */
+        void playerJoined(PlayerJoinPacket packet);
 
     public slots:
 
