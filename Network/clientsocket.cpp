@@ -13,8 +13,8 @@ void ClientSocket::connectTo(QString host, quint16 port, int timeout) {
     m_status = CONNECTING;
     QTimer::singleShot(timeout, this, SLOT(handleTimeout()));
 
-    connect(&m_socket, SIGNAL(connected()), this, SIGNAL(hanndleConnection()));
-    connect(&m_socket, SIGNAL(error()), this, SLOT(handleError()));
+    connect(&m_socket, SIGNAL(connected()), this, SLOT(handleConnection()));
+    connect(&m_socket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(handleError()));
     connect(&m_socket, SIGNAL(readyRead()), this, SLOT(read()));
 }
 
@@ -37,6 +37,8 @@ void ClientSocket::handleConnection() {
 
 void ClientSocket::handleTimeout() {
     if( m_status == CONNECTING ) {
+        qDebug("handleTimeout");
+        qDebug() << m_status;
         emit timeout();
     }
 }
