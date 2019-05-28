@@ -31,6 +31,7 @@ SOURCES += \
         hauptspielfenster.cpp \
         hostspieleinstellungen.cpp \
         kategorieeingabe.cpp \
+    kategorienserver.cpp \
         main.cpp \
     punkte.cpp \
         spieleinstellungen.cpp \

@@ -5,6 +5,10 @@ punkte::punkte(vector<int> p)
     points = p;
 }
 
+punkte::~punkte() {
+
+}
+
 vector<int> punkte::getPunkte(){
     return points;
 }

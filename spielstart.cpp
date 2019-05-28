@@ -17,7 +17,7 @@ SpielStart::~SpielStart()
 void SpielStart::on_buttonHost_clicked()
 {
     std::string name = "HOST_" + ui->NameEingabe->text().toStdString(); //Spieler wird Name zugewiesen
-    Spieler hostSpieler(name,0);
+    Spieler hostSpieler(name, 0); // 0 muss ersetzt werden mit der Anzahl der Kategorien!!!
     _spielerListe.push_back(hostSpieler); //pushback das neusete Element wird ans ende der Liste geschubst.
     close();
     HostSpielEinstellungen einstellungen;

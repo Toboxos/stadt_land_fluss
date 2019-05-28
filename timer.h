@@ -10,12 +10,13 @@ class timer : public QObject
 
 public:
     timer();
-
+    ~timer();
+    void endRound();
 private:
     QTimer *InternalTimer;
 
 public slots:
-    void slot();
+    void roundEndSlot();
 };
 
 #endif // TIMER_H
