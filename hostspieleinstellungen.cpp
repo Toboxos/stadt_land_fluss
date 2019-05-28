@@ -17,7 +17,7 @@ HostSpielEinstellungen::HostSpielEinstellungen(QWidget *parent) :
 
    ui->setupUi(this);
    ui->buttonNext->setFocus();
-   ui->inputGamename->setFocus();
+   ui->inputGameName->setFocus();
 }
 
 HostSpielEinstellungen::~HostSpielEinstellungen()
@@ -99,7 +99,7 @@ void HostSpielEinstellungen::on_buttonWeiter_clicked()
 
     }
 
-    _einstellung->setPlayName(ui->inputGamename->text().toStdString());
+    _einstellung->setPlayName(ui->inputGameName->text().toStdString());
 
     if (checkBoxChecked)
     {

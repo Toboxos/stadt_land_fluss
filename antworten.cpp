@@ -4,6 +4,10 @@ antworten::antworten(vector<std::string> a){
     answers = a;
 }
 
+antworten::~antworten() {
+
+}
+
 vector<std::string> antworten::getAntworten(){
     return answers;
 }
