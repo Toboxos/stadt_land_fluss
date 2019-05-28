@@ -7,10 +7,14 @@ ClientSocket::ClientSocket(QString host, quint16 port) {
     connectTo(host, port);
 }
 
-void ClientSocket::connectTo(QString host, quint16 port) {
+void ClientSocket::connectTo(QString host, quint16 port, int timeout) {
     m_socket.connectToHost(host, port);
 
-    connect(&m_socket, SIGNAL(connected()), this, SIGNAL(connected()));
+    m_status = CONNECTING;
+    QTimer::singleShot(timeout, this, SLOT(handleTimeout()));
+
+    connect(&m_socket, SIGNAL(connected()), this, SIGNAL(hanndleConnection()));
+    connect(&m_socket, SIGNAL(error()), this, SLOT(handleError()));
     connect(&m_socket, SIGNAL(readyRead()), this, SLOT(read()));
 }
 
@@ -23,4 +27,22 @@ void ClientSocket::send(Packet& packet) {
 
 void ClientSocket::read() {
 
+}
+
+void ClientSocket::handleConnection() {
+    m_status = CONNECTED;
+
+    emit connected();
+}
+
+void ClientSocket::handleTimeout() {
+    if( m_status == CONNECTING ) {
+        emit timeout();
+    }
+}
+
+void ClientSocket::handleError() {
+    m_status = ERROR;
+
+    emit error();
 }

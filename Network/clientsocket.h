@@ -24,8 +24,9 @@ class ClientSocket : public QObject {
          *
          * @param host      Hostname or IP
          * @param port      Port for connection
+         * @param timeout   Time in milliseconds when timeout signal should emmited when no connection occured
          */
-        void connectTo(QString host, quint16 port);
+        void connectTo(QString host, quint16 port, int timeout=5000);
 
         /**
          * @brief Send packet to server
@@ -52,8 +53,26 @@ class ClientSocket : public QObject {
         void timeout();
 
     public slots:
+
+        /**
+         * @brief Reads data
+         */
         void read();
 
+        /**
+         * @brief Handle timeout internally and emit timeout() signal
+         */
+        void handleTimeout();
+
+        /**
+         * @brief Handle connection internally and emit connect() signal
+         */
+        void handleConnection();
+
+        /**
+         * @brief Handle error internally and emit error() signal
+         */
+        void handleError();
 
     private:
         enum STATUS {
