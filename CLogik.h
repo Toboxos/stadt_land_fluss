@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <iostream>
 #include <vector>
+#include <stdlib.h>
 
 #include "antworten.h"
 #include "spieler.h"
@@ -19,9 +20,12 @@ public:
     vector<int> awardPoints(unsigned int);
     void Punktevergabe();
     vector<std::string> getWinner();
+    char getLetter();
 	
 private:
     std::vector<Spieler> players;
     std::vector<antworten> answers;
     std::vector<punkte> points;
+    char letters[26] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+    char usedLetters[26];
 };

@@ -129,3 +129,29 @@ vector<std::string> CLogik::getWinner() {
     }
     return names;
 }
+
+char CLogik::getLetter(){
+    if (usedLetters[25] != 0x00){
+        for (int var = 0; var < 26; ++var) {
+            usedLetters[var] = 0x00;
+        }
+    }
+
+    char letter;
+    bool success = false;
+
+    while(!success){
+    int choose = rand() % 26;
+    success = true;
+    letter = letters[choose];
+
+    for (int var = 0; var < 26; ++var) {
+        if (usedLetters[var] = letter){
+            success = false;
+        }
+    }
+
+    }
+
+    return letter;
+}
