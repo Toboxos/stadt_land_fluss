@@ -2,12 +2,15 @@
 #include "ui_clientipeingabe.h"
 #include "spielstart.h"
 #include "hauptspielfenster.h"
+#include "Network/clientsocket.h"
+
 
 ClientIpEingabe::ClientIpEingabe(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ClientIpEingabe)
 {
     ui->setupUi(this);
+    ui->eingabeIp->setInputMask("000.000.000.000");
 }
 
 ClientIpEingabe::~ClientIpEingabe()
@@ -35,3 +38,9 @@ void ClientIpEingabe::on_buttonZurueck_clicked()
     hauptspielFenster.show();
 }
 */
+
+void ClientIpEingabe::on_buttonWeiter_clicked()
+{
+   ClientSocket clientSocket;
+   clientSocket.connectTo(ui->eingabeIp->text(),5);
+}

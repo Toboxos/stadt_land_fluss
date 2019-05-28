@@ -27,6 +27,8 @@ private slots:
 
    // void on_buttonWeiter_clicked();
 
+    void on_buttonWeiter_clicked();
+
 private:
     Ui::ClientIpEingabe *ui;
 };
