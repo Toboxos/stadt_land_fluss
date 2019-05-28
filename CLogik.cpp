@@ -3,7 +3,16 @@
 #include "antworten.h"
 #include "punkte.h"
 
+CLogik::CLogik()
+{
+    connect(&_serverSocket, SIGNAL(playerJoined(PlayerJoinPacket, unsigned int)), this, SLOT(playerJoined(PlayerJoinPacket, unsigned int)));
 
+    _serverSocket.listen(PORT);
+}
+void CLogik::playerJoined(PlayerJoinPacket player , unsigned int id)
+{
+    //keine Ahnung wie das gehen soll. zu müde. zu viele denkfehler.
+}
 //erstellt einen Spieler und gibt ID zurück
 int CLogik::createPlayer(string name) {
     Spieler spieler(name);

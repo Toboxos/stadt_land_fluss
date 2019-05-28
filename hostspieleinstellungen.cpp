@@ -3,6 +3,7 @@
 #include "kategorieeingabe.h"
 #include "spielstart.h"
 #include "spieleinstellungen.h"
+#include "CLogik.h"
 #include <QMessageBox>
 
 /*###################################################################################
@@ -16,6 +17,10 @@ HostSpielEinstellungen::HostSpielEinstellungen(QWidget *parent,ClientLogic *clie
 {
 
    ui->setupUi(this);
+
+   CLogik *_cLogic  = new CLogik;
+
+
    _clientLogic = clientLogic;
    ui->buttonNext->setFocus();
    ui->inputGameName->setFocus();
