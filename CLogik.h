@@ -20,15 +20,49 @@ using namespace std;
 class CLogik : public QObject {
     Q_OBJECT
 public:
+    /**
+     * @brief CLogik erstellt ein CLogik-Objekt
+     */
     CLogik();
     int createPlayer(std::string);
-    vector<std::string> sortAnswers(unsigned int);
-    vector<int> awardPoints(unsigned int);
+
+    /**
+     * @brief sortAnswers sortiert Antworten nach Kategorien
+     * @param category Anzahl Kategorien
+     * @return vector<string> mit Antworten für Kategorie
+     */
+    vector<std::string> sortAnswers(unsigned int category);
+
+    /**
+     * @brief vergibt die Punkte für eine Kategorie
+     * @param category Anzahl Kategorien
+     * @return vector mit Punkten für Kategorie
+     */
+    vector<int> awardPoints(unsigned int category);
+
+    /**
+     * @brief regelt die Punktevergabe für eine Runde
+     */
     void Punktevergabe();
+
+    /**
+     * @brief ordnet die Spieler nach Gesamtpunktzahl
+     * @return vector mit Spielernamen nach Platzierung geordnet
+     */
     vector<std::string> getWinner();
+
+    /**
+     * @brief zufälliger Buchstabe für Runde, wiederholt sich alle 26 Runden
+     * @return Anfangsbuchstabe für Runde
+     */
     char getLetter();
 
 public slots:
+    /**
+     * @brief nimmt Signal mit Packet entgegen, erstellt neues Spielerobjekt und speichert die VerbindungsID ab
+     * @param packet
+     * @param id
+     */
     void spieler_beitritt(PlayerJoinPacket packet, unsigned int id);
 	
 

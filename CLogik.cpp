@@ -9,32 +9,36 @@ CLogik::CLogik(){
 }
 
 void CLogik::spieler_beitritt(PlayerJoinPacket packet, unsigned int id){
+
+    // Jedem aktuell gespeichert Spieler mitteilen, dass ein neuer Spieler beigetreten ist:
+    // Einmal den Spieler Vektor durchgehen
+    for( unsigned int i = 0; i < players.size(); ++i ) {
+
+        // Client braucht ein PlayerJoinPacket mit dem Name des Spielers
+        // Das Paket, das der Server bekommt enthält den Namen des Spielers, wir können es direkt weiterleiten
+        serverSocket.send(players[i].getConnectionId(), packet);
+    }
+
     Spieler spieler(packet.getName().toStdString());
     players.push_back(spieler);
 
     spieler.setConnectionId(id);
 
-    qDebug() << "Spieler beigetreten";
+    /*qDebug() << "Spieler beigetreten";
 
     for (unsigned int var = 0; var < players.size(); ++var) {
         std::cout << players[var].getName() << std::endl;
-    }
+    }*/
 
 }
 
-/// erhält den Spielernamen als string
-/// erstellt einen Spielerobjekt und speichert es im vector players ab
-/// gibt Spieler ID zurück
 int CLogik::createPlayer(string name) {
     Spieler spieler(name);
-	//speichern in vector players
+
     players[spieler.getId()] = spieler;
     return spieler.getId();
 }
 
-///speichert die Antworten aller Spieler geordnet in einen vector für eine Kategorie
-///int anzahl = Anzahl der Spieler
-///Rückgabe: vector<string> antwortenKategorie
 vector<std::string> CLogik::sortAnswers(unsigned int category) {
     unsigned int anzahl = players.size();
     vector<std::string> antwortenKategorie;
@@ -47,57 +51,44 @@ vector<std::string> CLogik::sortAnswers(unsigned int category) {
 }
 
 void CLogik::Punktevergabe(){
-    /// unsigned int categories = Anzahl Kategorien
     unsigned int categories = players[0].Categories();
 
-    /// sortiert Antworten nach Kategorie für alle Kategorien
-    /// speichert vector<string> in ein Objekt "answers" für eine Kategorie
     for (unsigned int var = 0;var < categories; ++var) {
         answers[var]= sortAnswers(var);
     }
 
-    /// gibt Punkte für Kategorie für alle Kategorien
-    /// speichert vector<int> mit Punkten von einer Kategorie in ein Objekt "points"
     for (unsigned int n = 0; n < categories; ++n){
         points[n] = awardPoints(n);
     }
 
-    /// unsigned int anzahl = Spieleranzahl
     unsigned int anzahl = players.size();
 
     for (unsigned int m = 0; m < anzahl; ++m){
-        /// für jedes Spielerobjekt
         Spieler player = players[m];
 
-        /// int speicher = Zwischenspeicher für Gesamtpunktzahl
         int speicher = 0;
 
-        /// speichert die Punkte für einen Spieler in der aktuellen Runde im jew. Spielerobjekt
         for (unsigned int l = 0; l < categories; ++l){
-            ///vector<int> punkte = Zwischenspeicher für
             vector<int> punkte = points[l].getPunkte();
             player.setCredit(l, punkte[l]);
             speicher = speicher + punkte[l];
         }
 
-        /// int jetzt = aktueller Gesamtpunktestand
-        /// fügt dem Gesamtpunktestand des jew. Spielerobjekts die zwischengespeicherten Punkte der aktuellen Runde hinzu
         int jetzt = player.getPunkte();
         player.setPunkte(jetzt + speicher);
     }
 
 }
 
-//gibt die Punkte für eine Kategorie
+
 std::vector<int> CLogik::awardPoints(unsigned int category){
-    ///
     vector<std::string> antworten = answers[category].getAntworten();
     unsigned int anzahl = antworten.size();
     vector<int> points;
     int sum = 0;
 
     for (unsigned int var = 0; var < anzahl; ++var) {
-        if (antworten[var] == "empty"){
+        if (antworten[var] == ""){
             points[var] = 0;
         }
         else {
@@ -125,7 +116,6 @@ std::vector<int> CLogik::awardPoints(unsigned int category){
 }
 
 
-//gibt die Spieler nach Gesamtpunktzahl geordnet zurück
 vector<std::string> CLogik::getWinner() {
     unsigned int anzahl = players.size();
     vector<std::string> names;
