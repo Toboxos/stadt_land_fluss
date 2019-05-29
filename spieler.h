@@ -2,15 +2,16 @@
 #define SPIELER_H
 #include <string>
 #include <vector>
+#include <QString>
 using namespace std;
 
 class Spieler{
 
 
 public:
-    Spieler(std::string);
+    Spieler(QString);
 
-    std::string getName();
+    QString getName();
     int getId();
 
     void setConnectionId(unsigned int);
@@ -20,16 +21,16 @@ public:
     void setPunkte(int);
 
     unsigned int Categories();
-    std::string getAnswer(unsigned int);
-    void setAnswer(unsigned int,std::string);
+    QString getAnswer(unsigned int);
+    void setAnswer(unsigned int,QString);
 
     vector<int> getCredit();
     void setCredit(unsigned int,int);
 
     static int _nextId;
-    std::vector<std::string> answers;
+    std::vector<QString> answers;
 private:
-    std::string _name;
+    QString _name;
     int _punkte = 0;
     int _id=0;
     unsigned int connectionId;
