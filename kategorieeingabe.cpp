@@ -9,7 +9,7 @@
 #include <QString>
 #include <QMessageBox>
 
-Kategorieeingabe::Kategorieeingabe(QWidget *parent,ClientLogic *clientLogic) :
+Kategorieeingabe::Kategorieeingabe(QWidget *parent,ClientLogic *clientLogic, CLogik *serverlogic) :
     QDialog(parent),
     ui(new Ui::Kategorieeingabe)
 {

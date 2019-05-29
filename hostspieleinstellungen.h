@@ -5,6 +5,7 @@
 #include "spieler.h"
 #include "clientlogic.h"
 #include <QDialog>
+#include"CLogik.h"
 
 namespace Ui {
 class HostSpielEinstellungen;
@@ -28,6 +29,7 @@ private slots:
     void on_inputGameName_textEdited(const QString &arg1);
 
 private:
+    CLogik *_cLogik;
     bool checkBoxChecked= false;
     ClientLogic *_clientLogic;
     Ui::HostSpielEinstellungen *ui;

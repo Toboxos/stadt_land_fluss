@@ -18,7 +18,7 @@ HostSpielEinstellungen::HostSpielEinstellungen(QWidget *parent,ClientLogic *clie
 
    ui->setupUi(this);
 
-   CLogik *_cLogic  = new CLogik;
+   _cLogik  = new CLogik;
 
 
    _clientLogic = clientLogic;
@@ -120,7 +120,7 @@ void HostSpielEinstellungen::on_buttonNext_clicked()
     if(correctUserEntry == true)
     {
     close();
-        Kategorieeingabe eingabe(nullptr, _clientLogic);
+        Kategorieeingabe eingabe(nullptr, _clientLogic, _cLogik);
         eingabe.exec();
     }
     else {
