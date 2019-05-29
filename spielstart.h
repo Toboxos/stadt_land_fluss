@@ -6,7 +6,7 @@
 #include "clientlogic.h"
 #include <QString>
 #include <QDialog>
-
+#include <QString>
 namespace Ui {
 class SpielStart;
 }
