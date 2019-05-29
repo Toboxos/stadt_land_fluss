@@ -29,7 +29,9 @@ void ClientIpEingabe::on_eingabeIp_textEdited(const QString &arg1)
 
 void ClientIpEingabe::on_buttonZurueck_clicked()
 {
-
+    close();
+    SpielStart start;
+    start.exec();
 }
 
 void ClientIpEingabe::on_buttonWeiter_clicked()
@@ -48,6 +50,7 @@ void ClientIpEingabe::on_buttonWeiter_clicked()
 void ClientIpEingabe::connected()
 {
     close();
-    SpielStart start;
-    start.exec();
+    HauptSpielFenster hauptSpielFenster(nullptr, _clientLogic);
+    hauptSpielFenster.show();
+
 }
