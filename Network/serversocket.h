@@ -20,7 +20,7 @@ class ServerSocket : public QObject {
         /**
          * @brief Constructor with automatic listen
          *
-         * @param port  Port which server listen to
+         * @param port  Port which server listens to
          */
         ServerSocket(quint16 port);
 
