@@ -35,7 +35,6 @@ SOURCES += \
         hauptspielfenster.cpp \
         hostspieleinstellungen.cpp \
         kategorieeingabe.cpp \
-    kategorienserver.cpp \
         main.cpp \
     punkte.cpp \
         spieleinstellungen.cpp \
@@ -59,7 +58,6 @@ HEADERS += \
         hauptspielfenster.h \
         hostspieleinstellungen.h \
         kategorieeingabe.h \
-    kategorienserver.h \
     punkte.h \
         spieleinstellungen.h \
         spieler.h \

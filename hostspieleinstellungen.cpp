@@ -18,7 +18,14 @@ HostSpielEinstellungen::HostSpielEinstellungen(QWidget *parent,CLogik *serverLog
 
    ui->setupUi(this);
 
+<<<<<<< HEAD
    _serverLogic = serverLogic;
+=======
+   _cLogik  = new CLogik;
+
+
+   _clientLogic = clientLogic;
+>>>>>>> 19ff8b37ba9f9396c37e81a4829ef1b1c1faa500
    ui->buttonNext->setFocus();
    ui->inputGameName->setFocus();
 }
@@ -117,8 +124,13 @@ void HostSpielEinstellungen::on_buttonNext_clicked()
     if(correctUserEntry == true)
     {
     close();
+<<<<<<< HEAD
     _serverLogic->openKategorieEingabe();
 
+=======
+        Kategorieeingabe eingabe(nullptr, _clientLogic, _cLogik);
+        eingabe.exec();
+>>>>>>> 19ff8b37ba9f9396c37e81a4829ef1b1c1faa500
     }
     else {
         //do nothing

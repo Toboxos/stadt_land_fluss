@@ -7,9 +7,11 @@
 #include <QTableView>
 #include <QStandardItem>
 #include <QString>
+#include <QMessageBox>
 
 
 Kategorieeingabe::Kategorieeingabe(QWidget *parent,CLogik *serverLogic) :
+
     QDialog(parent),
     ui(new Ui::Kategorieeingabe)
 {
@@ -42,7 +44,9 @@ void Kategorieeingabe::on_buttonHinzufuegen_clicked()
 {
     QString kategorie = ui->einlesenKategorie->text();
 
-    _serverLogic->getSpieleinstellungen()->addKategorie(kategorie.toStdString());
+
+    if(_serverLogic->getSpieleinstellungen()->addKategorie(kategorie.toStdString())){
+
 
 
     ui->tableKategorie->setColumnCount(kategorieZaehler);
@@ -55,6 +59,11 @@ void Kategorieeingabe::on_buttonHinzufuegen_clicked()
     ui->buttonWeiter->setEnabled(true);
     ui->einlesenKategorie->clear();
     kategorieZaehler++;
+    }else {
+    QMessageBox box;
+    box.setText("Diese Kategorie hast du bereits eingegeben");
+    box.exec();
+}
 }
 
 void Kategorieeingabe::on_einlesenKategorie_textEdited(const QString &arg1)
