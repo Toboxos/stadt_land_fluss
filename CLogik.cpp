@@ -9,6 +9,16 @@ CLogik::CLogik(){
 }
 
 void CLogik::spieler_beitritt(PlayerJoinPacket packet, unsigned int id){
+
+    // Jedem aktuell gespeichert Spieler mitteilen, dass ein neuer Spieler beigetreten ist:
+    // Einmal den Spieler Vektor durchgehen
+    for( unsigned int i = 0; i < players.size(); ++i ) {
+
+        // Client braucht ein PlayerJoinPacket mit dem Name des Spielers
+        // Das Paket, das der Server bekommt enthält den Namen des Spielers, wir können es direkt weiterleiten
+        serverSocket.send(players[i].getConnectionId(), packet);
+    }
+
     Spieler spieler(packet.getName().toStdString());
     players.push_back(spieler);
 
