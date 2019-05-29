@@ -21,7 +21,6 @@ class CLogik : public QObject {
     Q_OBJECT
 public:
     CLogik();
-
     int createPlayer(std::string);
     vector<std::string> sortAnswers(unsigned int);
     vector<int> awardPoints(unsigned int);
