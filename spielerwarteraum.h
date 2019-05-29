@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include "CLogik.h"
-
+#include "spieler.h"
 namespace Ui {
 class SpielerWarteRaum;
 }
@@ -18,10 +18,12 @@ public:
 
 private slots:
     void on_buttonWeiter_clicked();
+    void onPlayerJoined(Spieler newPlayer);
 
 private:
     Ui::SpielerWarteRaum *ui;
     CLogik *_serverLogic;
+    void createTable();
 };
 
 #endif // SPIELERWARTERAUM_H

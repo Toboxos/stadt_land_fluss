@@ -71,6 +71,9 @@ public slots:
      */
     void spieler_beitritt(PlayerJoinPacket packet, unsigned int id);
 	
+signals:
+
+    void showPlayer(Spieler newPlayer);
 
 private:
     std::vector<Spieler> players;

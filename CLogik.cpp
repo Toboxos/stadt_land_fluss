@@ -29,7 +29,7 @@ void CLogik::spieler_beitritt(PlayerJoinPacket packet, unsigned int id){
     players.push_back(spieler);
 
     spieler.setConnectionId(id);
-
+    emit showPlayer(spieler);
     /*qDebug() << "Spieler beigetreten";
 
     for (unsigned int var = 0; var < players.size(); ++var) {
@@ -37,6 +37,7 @@ void CLogik::spieler_beitritt(PlayerJoinPacket packet, unsigned int id){
     }*/
 
 }
+
 
 int CLogik::createPlayer(string name) {
     Spieler spieler(name);
