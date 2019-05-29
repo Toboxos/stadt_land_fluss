@@ -2,8 +2,14 @@
 #include "spieler.h"
 #include "antworten.h"
 #include "punkte.h"
-
+#include "hostspieleinstellungen.h"
+#include "spielerwarteraum.h"
+#include "kategorieeingabe.h"
 CLogik::CLogik(){
+
+    HostSpielEinstellungen einstellungen(nullptr, this);
+    einstellungen.exec();
+
     connect(&serverSocket, SIGNAL(playerJoined(PlayerJoinPacket, unsigned int)), this, SLOT(spieler_beitritt(PlayerJoinPacket, unsigned int)));
     serverSocket.listen(PORT);
 }
@@ -189,3 +195,28 @@ char CLogik::getLetter(){
 
     return letter;
 }
+Spieleinstellungen* CLogik::getSpieleinstellungen()
+{
+    return &_einstellung;
+}
+
+std::vector<Spieler>* CLogik::getSpielerListe()
+{
+    return &_spielerListe;
+}
+
+void CLogik::openHostSpielEinstellungen()
+{
+    HostSpielEinstellungen einstellungen(nullptr, this);
+    einstellungen.exec();
+}
+ void CLogik::openKategorieEingabe()
+ {
+     Kategorieeingabe eingabe(nullptr, this);
+     eingabe.exec();
+ }
+ void CLogik::openSpielerWarteRaum()
+ {
+     SpielerWarteRaum warteRaum(nullptr,this);
+     warteRaum.exec();
+ }

@@ -11,17 +11,14 @@
     Funktion der Methode    :
     Ersteller               : Alexandra Eberle
  ###################################################################################*/
-HostSpielEinstellungen::HostSpielEinstellungen(QWidget *parent,ClientLogic *clientLogic) :
+HostSpielEinstellungen::HostSpielEinstellungen(QWidget *parent,CLogik *serverLogic) :
     QDialog(parent),
     ui(new Ui::HostSpielEinstellungen)
 {
 
    ui->setupUi(this);
 
-   CLogik *_cLogic  = new CLogik;
-
-
-   _clientLogic = clientLogic;
+   _serverLogic = serverLogic;
    ui->buttonNext->setFocus();
    ui->inputGameName->setFocus();
 }
@@ -52,7 +49,7 @@ void HostSpielEinstellungen::on_buttonNext_clicked()
     }
     else if(ui->inputRoundNumber->text().toInt() >= 0)
     {
-        _clientLogic->getSpieleinstellungen()->setRoundNumber(ui->inputRoundNumber->text().toInt());
+        _serverLogic->getSpieleinstellungen()->setRoundNumber(ui->inputRoundNumber->text().toInt());
 
 
     }
@@ -74,7 +71,7 @@ void HostSpielEinstellungen::on_buttonNext_clicked()
     }
     else if(ui->inputRoundTimeLimit->text().toInt() >= 0)
     {
-        _clientLogic->getSpieleinstellungen()->setRoundTimeLimit(ui->inputRoundTimeLimit->text().toInt());
+        _serverLogic->getSpieleinstellungen()->setRoundTimeLimit(ui->inputRoundTimeLimit->text().toInt());
 
     }
     else
@@ -95,7 +92,7 @@ void HostSpielEinstellungen::on_buttonNext_clicked()
     }
     else if(ui->inputCountdown->text().toInt() >= 0)
     {
-        _clientLogic->getSpieleinstellungen()->setCountdown(ui->inputCountdown->text().toInt());
+        _serverLogic->getSpieleinstellungen()->setCountdown(ui->inputCountdown->text().toInt());
 
     }
     else
@@ -106,22 +103,22 @@ void HostSpielEinstellungen::on_buttonNext_clicked()
 
     }
 
-    _clientLogic->getSpieleinstellungen()->setPlayName(ui->inputGameName->text().toStdString());
+    _serverLogic->getSpieleinstellungen()->setPlayName(ui->inputGameName->text().toStdString());
 
     if (checkBoxChecked)
     {
-        _clientLogic->getSpieleinstellungen()->setRoundNumber(99);  //Wert 99 steht für unendlich
+        _serverLogic->getSpieleinstellungen()->setRoundNumber(99);  //Wert 99 steht für unendlich
     }
     else
     {
-      _clientLogic->getSpieleinstellungen()->setRoundNumber(ui->inputRoundNumber->text().toInt());
+      _serverLogic->getSpieleinstellungen()->setRoundNumber(ui->inputRoundNumber->text().toInt());
     }
 
     if(correctUserEntry == true)
     {
     close();
-        Kategorieeingabe eingabe(nullptr, _clientLogic);
-        eingabe.exec();
+    _serverLogic->openKategorieEingabe();
+
     }
     else {
         //do nothing
@@ -134,17 +131,7 @@ void HostSpielEinstellungen::on_buttonNext_clicked()
     Ersteller               : Alexandra Eberle
  ###################################################################################*/
 
-void HostSpielEinstellungen::on_buttonZurueck_clicked()
-{
 
-    _clientLogic->getSpieleinstellungen()->setRoundTimeLimit(0);
-    _clientLogic->getSpieleinstellungen()->setCountdown(0);
-    _clientLogic->getSpieleinstellungen()->setPlayName("");
-   _clientLogic->getSpieleinstellungen()->setRoundNumber(0);
-    close();
-    SpielStart start(nullptr, _clientLogic);
-    start.exec();
-}
 
 void HostSpielEinstellungen::on_checkBoxUnendlich_stateChanged(int arg1)
 {

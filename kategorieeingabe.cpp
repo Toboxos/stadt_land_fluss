@@ -9,11 +9,11 @@
 #include <QString>
 
 
-Kategorieeingabe::Kategorieeingabe(QWidget *parent,ClientLogic *clientLogic) :
+Kategorieeingabe::Kategorieeingabe(QWidget *parent,CLogik *serverLogic) :
     QDialog(parent),
     ui(new Ui::Kategorieeingabe)
 {
-     _clientLogic = clientLogic;
+     _serverLogic = serverLogic;
     ui->setupUi(this);
     ui->tableKategorie->setColumnCount(1);
     ui->tableKategorie->setHorizontalHeaderItem(0,new QTableWidgetItem("Buchstabe"));
@@ -28,15 +28,13 @@ Kategorieeingabe::~Kategorieeingabe()
 void Kategorieeingabe::on_buttonWeiter_clicked()
 {
     close();
-    SpielerWarteRaum warteRaum(nullptr, _clientLogic);
-    warteRaum.exec();
+    _serverLogic->openSpielerWarteRaum();
 }
 
 void Kategorieeingabe::on_buttonZurueck_clicked()
 {
     close();
-    HostSpielEinstellungen einstellungen(nullptr, _clientLogic);
-    einstellungen.exec();
+    _serverLogic->openHostSpielEinstellungen();
 
 }
 
@@ -44,7 +42,7 @@ void Kategorieeingabe::on_buttonHinzufuegen_clicked()
 {
     QString kategorie = ui->einlesenKategorie->text();
 
-    _clientLogic->getSpieleinstellungen()->addKategorie(kategorie.toStdString());
+    _serverLogic->getSpieleinstellungen()->addKategorie(kategorie.toStdString());
 
 
     ui->tableKategorie->setColumnCount(kategorieZaehler);

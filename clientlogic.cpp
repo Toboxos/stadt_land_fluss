@@ -1,5 +1,6 @@
 #include "clientlogic.h"
 #include "spielstart.h"
+#include "CLogik.h"
 ClientLogic::ClientLogic()
 {
 
@@ -13,11 +14,10 @@ void ClientLogic::connect(QString name, QString ip, quint16 port)
    PlayerJoinPacket playerJoinPacket(name);
    _clientSocket.send(playerJoinPacket);
 }
-Spieleinstellungen* ClientLogic::getSpieleinstellungen()
+
+
+
+void ClientLogic::openCLogik()
 {
-    return &_einstellung;
-}
-std::vector<Spieler>* ClientLogic::getSpielerListe()
-{
-    return &_spielerListe;
+    CLogik *_cLogic  = new CLogik();
 }
