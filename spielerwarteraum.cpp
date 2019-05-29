@@ -8,17 +8,17 @@
 #include "spielerliste.h"
 #include "spieleinstellungen.h"
 
-SpielerWarteRaum::SpielerWarteRaum(QWidget *parent,ClientLogic *clientLogic) :
+SpielerWarteRaum::SpielerWarteRaum(QWidget *parent, CLogik *serverLogic) :
     QDialog(parent),
     ui(new Ui::SpielerWarteRaum)
 {
 
     ui->setupUi(this);
-    _clientLogic = clientLogic;
+    _serverLogic = serverLogic;
 
-    ui->labelSpielname->setText(QString::fromStdString(_clientLogic->getSpieleinstellungen()->getSpielname()));
+    ui->labelSpielname->setText(QString::fromStdString(_serverLogic->getSpieleinstellungen()->getSpielname()));
     int reihenNummer=1;
-    for(std::vector<Spieler>::iterator it = _clientLogic->getSpielerListe()->begin(); it != _clientLogic->getSpielerListe()->end(); it++,reihenNummer++ )
+    for(std::vector<Spieler>::iterator it = _serverLogic->getSpielerListe()->begin(); it != _serverLogic->getSpielerListe()->end(); it++,reihenNummer++ )
     {
         ui->tableSpieleruebersicht->setRowCount(reihenNummer);
         QTableWidgetItem tableItem;
@@ -39,8 +39,10 @@ void SpielerWarteRaum::on_buttonWeiter_clicked()
 {
 
     close();
-    HauptSpielFenster *spielFenster = new HauptSpielFenster(nullptr, _clientLogic);
-       spielFenster->show();
+    //############################################ Hier wird ein Paket versendet mit den gameeinstellungen
+
+ //   HauptSpielFenster *spielFenster = new HauptSpielFenster(nullptr, _clientLogic);
+   //    spielFenster->show();
 
 }
 
