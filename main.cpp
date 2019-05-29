@@ -5,6 +5,7 @@
 #include "spielstart.h"
 
 #include "Examples/networkexample.h"
+#include "CLogik.h"
 
 
 
@@ -12,6 +13,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
+    CLogik serverLogik;
     ClientLogic clientLogic;
 
     NetworkExample e;

@@ -21,6 +21,14 @@ int Spieler::getId()
     return _id;
 }
 
+void Spieler::setConnectionId(unsigned int id){
+    connectionId = id;
+}
+
+unsigned int Spieler::getConnectionId(){
+    return connectionId;
+}
+
 //gibt die Gesamtpunktzahl des Spielers zurück
 int Spieler::getPunkte()
 {

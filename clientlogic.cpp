@@ -2,6 +2,7 @@
 #include "spielstart.h"
 ClientLogic::ClientLogic()
 {
+
     SpielStart spielstart(nullptr, this);
      spielstart.exec();
 }
