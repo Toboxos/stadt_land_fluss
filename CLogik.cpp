@@ -60,9 +60,9 @@ int CLogik::createPlayer(QString name) {
     return spieler.getId();
 }
 
-vector<QString> CLogik::sortAnswers(unsigned int category) {
+QVector<QString> CLogik::sortAnswers(unsigned int category) {
     unsigned int anzahl = players.size();
-    vector<QString> antwortenKategorie;
+    QVector<QString> antwortenKategorie;
 
     for (unsigned int var = 0; var < anzahl; ++var) {
         antwortenKategorie[var] = players[var].getAnswer(category);
@@ -90,7 +90,7 @@ void CLogik::Punktevergabe(){
         int speicher = 0;
 
         for (unsigned int l = 0; l < categories; ++l){
-            vector<int> punkte = points[l].getPunkte();
+            QVector<int> punkte = points[l].getPunkte();
             player.setCredit(l, punkte[l]);
             speicher = speicher + punkte[l];
         }
@@ -102,10 +102,10 @@ void CLogik::Punktevergabe(){
 }
 
 
-vector<int> CLogik::awardPoints(unsigned int category){
-    vector<QString> antworten = answers[category].getAntworten();
+QVector<int> CLogik::awardPoints(unsigned int category){
+    QVector<QString> antworten = answers[category].getAntworten();
     unsigned int anzahl = antworten.size();
-    vector<int> points;
+    QVector<int> points;
     int sum = 0;
 
     for (unsigned int var = 0; var < anzahl; ++var) {
@@ -137,10 +137,10 @@ vector<int> CLogik::awardPoints(unsigned int category){
 }
 
 
-vector<QString> CLogik::getWinner() {
+QVector<QString> CLogik::getWinner() {
     unsigned int anzahl = players.size();
-    vector<QString> names;
-    vector<int> allPoints;
+    QVector<QString> names;
+    QVector<int> allPoints;
 
     for (unsigned int var = 0; var < anzahl; ++var) {
         allPoints[var] = players[var].getPunkte();
@@ -205,7 +205,7 @@ Spieleinstellungen* CLogik::getSpieleinstellungen()
     return &_einstellung;
 }
 
-std::vector<Spieler>* CLogik::getSpielerListe()
+QVector<Spieler>* CLogik::getSpielerListe()
 {
     return &_spielerListe;
 }

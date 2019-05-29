@@ -1,7 +1,7 @@
 #ifndef SPIELER_H
 #define SPIELER_H
-#include <string>
-#include <vector>
+#include <QString>
+#include <QVector>
 #include <QString>
 using namespace std;
 
@@ -9,6 +9,7 @@ class Spieler{
 
 
 public:
+    Spieler();
     Spieler(QString);
 
     QString getName();
@@ -24,18 +25,18 @@ public:
     QString getAnswer(unsigned int);
     void setAnswer(unsigned int,QString);
 
-    vector<int> getCredit();
+    QVector<int> getCredit();
     void setCredit(unsigned int,int);
 
     static int _nextId;
-    std::vector<QString> answers;
+    QVector<QString> answers;
 private:
     QString _name;
     int _punkte = 0;
     int _id=0;
     unsigned int connectionId;
 
-    std::vector<int> credits;
+    QVector<int> credits;
 };
 
 

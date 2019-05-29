@@ -1,5 +1,8 @@
 #include "spieler.h"
 
+Spieler::Spieler() {
+
+}
 
 Spieler::Spieler(QString name)
 {
@@ -60,8 +63,8 @@ void Spieler::setAnswer(unsigned int i, QString a){
 }
 
 //gibt die Punkte des Spielers in der Runde zurück
-vector<int> Spieler::getCredit(){
-    vector<int> p = credits;
+QVector<int> Spieler::getCredit(){
+    QVector<int> p = credits;
     return p;
 }
 

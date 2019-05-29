@@ -12,12 +12,16 @@ public:
     ClientLogic();
     void connect(QString name, QString ip, quint16 port);
     void openCLogik();
+    void openClientIpEingabe();
+    void setSpieler(Spieler *spieler);
+    Spieler getSpieler();
 
 
 private:
     ClientSocket _clientSocket;
 
-    std::vector<Spieler> _spielerListe;
+    QVector<Spieler> _spielerListe;
+    Spieler *clientSpieler;
     Spieleinstellungen  _einstellung ;
 public slots:
     void playerJoinedSlot(PlayerJoinPacket Packet);

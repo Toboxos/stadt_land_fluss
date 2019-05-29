@@ -1,7 +1,7 @@
 #pragma once
 #include <stdint.h>
 #include <iostream>
-#include <vector>
+#include <QVector>
 #include <stdlib.h>
 #include <QObject>
 #include <QString>
@@ -34,16 +34,16 @@ public:
     /**
      * @brief sortAnswers sortiert Antworten nach Kategorien
      * @param category Anzahl Kategorien
-     * @return vector<string> mit Antworten für Kategorie
+     * @return QVector<QString> mit Antworten für Kategorie
      */
-    vector<QString> sortAnswers(unsigned int category);
+    QVector<QString> sortAnswers(unsigned int category);
 
     /**
      * @brief vergibt die Punkte für eine Kategorie
      * @param category Anzahl Kategorien
-     * @return vector mit Punkten für Kategorie
+     * @return QVector mit Punkten für Kategorie
      */
-    vector<int> awardPoints(unsigned int category);
+    QVector<int> awardPoints(unsigned int category);
 
     /**
      * @brief regelt die Punktevergabe für eine Runde
@@ -52,9 +52,9 @@ public:
 
     /**
      * @brief ordnet die Spieler nach Gesamtpunktzahl
-     * @return vector mit Spielernamen nach Platzierung geordnet
+     * @return QVector mit Spielernamen nach Platzierung geordnet
      */
-    vector<QString> getWinner();
+    QVector<QString> getWinner();
 
     /**
      * @brief zufälliger Buchstabe für Runde, wiederholt sich alle 26 Runden
@@ -63,7 +63,7 @@ public:
     char getLetter();
 
     Spieleinstellungen* getSpieleinstellungen();
-    std::vector<Spieler>* getSpielerListe();
+    QVector<Spieler>* getSpielerListe();
     void openHostSpielEinstellungen();
     void openKategorieEingabe();
     void openSpielerWarteRaum();
@@ -81,14 +81,14 @@ signals:
     void showPlayer(Spieler newPlayer);
 
 private:
-    std::vector<Spieler> players;
-    std::vector<antworten> answers;
-    std::vector<punkte> points;
+    QVector<Spieler> players;
+    QVector<antworten> answers;
+    QVector<punkte> points;
     char letters[26] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
     char usedLetters[26];
     ServerSocket serverSocket;
 
-    std::vector<Spieler> _spielerListe;
+    QVector<Spieler> _spielerListe;
     Spieleinstellungen  _einstellung ;
 
 

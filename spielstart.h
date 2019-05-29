@@ -4,9 +4,9 @@
 #include "hostspieleinstellungen.h"
 #include "spieler.h"
 #include "clientlogic.h"
-#include <string>
+#include <QString>
 #include <QDialog>
-
+#include <QString>
 namespace Ui {
 class SpielStart;
 }

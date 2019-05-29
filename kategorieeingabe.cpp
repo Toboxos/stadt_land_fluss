@@ -45,7 +45,7 @@ void Kategorieeingabe::on_buttonHinzufuegen_clicked()
     QString kategorie = ui->einlesenKategorie->text();
 
 
-    if(_serverLogic->getSpieleinstellungen()->addKategorie(kategorie.toStdString())){
+    if(_serverLogic->getSpieleinstellungen()->addKategorie(kategorie)){
 
 
 

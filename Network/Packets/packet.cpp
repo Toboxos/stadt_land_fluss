@@ -12,17 +12,17 @@ PACKET_TYPE Packet::getType() {
     return m_type;
 }
 
-void Packet::writeQString(QTcpSocket& socket, QString& string) {
-    QByteArray bytes = string.toUtf8();
+void Packet::writeQString(QTcpSocket& socket, QString& QString) {
+    QByteArray bytes = QString.toUtf8();
     int size = bytes.size();
 
     socket.write(reinterpret_cast<char*>(&size), sizeof(size));
     socket.write(bytes.data(), size);
 }
 
-void Packet::readQString(QTcpSocket& socket, QString& string) {
+void Packet::readQString(QTcpSocket& socket, QString& QString) {
 
-    // Read size of incoming string from socket. Check if size is less than 0 (cant allocate negative amount of memory)
+    // Read size of incoming QString from socket. Check if size is less than 0 (cant allocate negative amount of memory)
     int size = 0;
     socket.read(reinterpret_cast<char*>(&size), sizeof(size));
     if( size < 0 ) size = 0;
@@ -36,7 +36,7 @@ void Packet::readQString(QTcpSocket& socket, QString& string) {
         data[size] = 0;
 
         socket.read(data, size);
-        string = data;
+        QString = data;
     }
     else
     {

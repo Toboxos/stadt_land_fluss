@@ -17,6 +17,7 @@ SpielerWarteRaum::SpielerWarteRaum(QWidget *parent, CLogik *serverLogic) :
     _serverLogic = serverLogic;
     QObject::connect(serverLogic, SIGNAL(showPlayer(Spieler)), this, SLOT(onPlayerJoined(Spieler)));
 
+
     createTable();
 
 }
@@ -31,14 +32,16 @@ void SpielerWarteRaum::onPlayerJoined(Spieler newPlayer){
 }
 void SpielerWarteRaum::createTable()
 {
-    ui->labelSpielname->setText(QString::fromStdString(_serverLogic->getSpieleinstellungen()->getSpielname()));
+
+    ui->labelSpielname->setText(_serverLogic->getSpieleinstellungen()->getSpielname());
+
     int reihenNummer=1;
-    for(std::vector<Spieler>::iterator it = _serverLogic->getSpielerListe()->begin(); it != _serverLogic->getSpielerListe()->end(); it++,reihenNummer++ )
+    for(QVector<Spieler>::iterator it = _serverLogic->getSpielerListe()->begin(); it != _serverLogic->getSpielerListe()->end(); it++,reihenNummer++ )
     {
         ui->tableSpieleruebersicht->setRowCount(reihenNummer);
         QTableWidgetItem tableItem;
 
-        ui->tableSpieleruebersicht->setItem(reihenNummer-1,1,new QTableWidgetItem(QString::fromStdString(it->getName())));
+        ui->tableSpieleruebersicht->setItem(reihenNummer-1,1,new QTableWidgetItem(it->getName()));
 
       //  ui->tableSpieleruebersicht->setItem(reihenNummer-1,0,new QTableWidgetItem(QString::number(it->getId())));
 
