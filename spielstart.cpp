@@ -46,7 +46,7 @@ void SpielStart::on_NameEingabe_returnPressed()
 
 void SpielStart::on_buttonBeitreten_clicked()
 {   
-    _clientLogic->setSpieler(new Spieler(ui->NameEingabe->text().toStdString()));
+    _clientLogic->setSpieler(new Spieler(ui->NameEingabe->text()));
     close();
     _clientLogic->openClientIpEingabe();
 }
