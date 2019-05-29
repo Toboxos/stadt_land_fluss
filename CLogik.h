@@ -27,7 +27,9 @@ public:
      */
     CLogik();
 
+
     int createPlayer(QString);
+
 
     /**
      * @brief sortAnswers sortiert Antworten nach Kategorien
@@ -60,6 +62,12 @@ public:
      */
     char getLetter();
 
+    Spieleinstellungen* getSpieleinstellungen();
+    std::vector<Spieler>* getSpielerListe();
+    void openHostSpielEinstellungen();
+    void openKategorieEingabe();
+    void openSpielerWarteRaum();
+
 public slots:
     /**
      * @brief nimmt Signal mit Packet entgegen, erstellt neues Spielerobjekt und speichert die VerbindungsID ab
@@ -76,4 +84,9 @@ private:
     char letters[26] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
     char usedLetters[26];
     ServerSocket serverSocket;
+
+    std::vector<Spieler> _spielerListe;
+    Spieleinstellungen  _einstellung ;
+
+
 };

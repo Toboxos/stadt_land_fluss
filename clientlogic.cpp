@@ -1,5 +1,6 @@
 #include "clientlogic.h"
 #include "spielstart.h"
+#include "CLogik.h"
 ClientLogic::ClientLogic()
 {
 
@@ -18,16 +19,15 @@ void ClientLogic::connect(QString name, QString ip, quint16 port)
    QObject::connect(&_clientSocket, SIGNAL(connected()), this, SLOT(connectedSlot()));
    QObject::connect(&_clientSocket, SIGNAL(error()), this, SLOT(errorSlot()));
 }
-Spieleinstellungen* ClientLogic::getSpieleinstellungen()
+
+
+
+void ClientLogic::openCLogik()
 {
-    return &_einstellung;
-}
-std::vector<Spieler>* ClientLogic::getSpielerListe()
-{
-    return &_spielerListe;
+    CLogik *_cLogic  = new CLogik();
 }
 void ClientLogic::playerJoinedSlot(PlayerJoinPacket Packet){
-    this->getSpielerListe()->push_back(Packet.getName().toStdString());
+//    this->getSpielerListe()->push_back(Packet.getName().toStdString());
 }
 void ClientLogic::receivedPlayerListSlot(PlayerListPacket Packet){
 //    this->getSpielerListe() = Packet.getPlayers(); QVector zu vector Problem

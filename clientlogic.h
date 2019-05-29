@@ -11,11 +11,12 @@ class ClientLogic : public QObject
 public:
     ClientLogic();
     void connect(QString name, QString ip, quint16 port);
-    Spieleinstellungen* getSpieleinstellungen();
-    std::vector<Spieler>* getSpielerListe();
+    void openCLogik();
+
 
 private:
     ClientSocket _clientSocket;
+
     std::vector<Spieler> _spielerListe;
     Spieleinstellungen  _einstellung ;
 public slots:
@@ -24,6 +25,7 @@ public slots:
     void timeoutSlot();
     void errorSlot();
     void connectedSlot();
+
 
 
 };

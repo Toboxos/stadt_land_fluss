@@ -1,6 +1,8 @@
 #ifndef KATEGORIEEINGABE_H
 #define KATEGORIEEINGABE_H
-#include "clientlogic.h"
+
+#include "CLogik.h"
+
 
 #include <QDialog>
 
@@ -13,7 +15,9 @@ class Kategorieeingabe : public QDialog
     Q_OBJECT
 
 public:
-    explicit Kategorieeingabe(QWidget *parent = nullptr,ClientLogic *clientLogic= nullptr);
+
+    explicit Kategorieeingabe(QWidget *parent = nullptr, CLogik *serverlogic= nullptr);
+
     ~Kategorieeingabe();
 
 private slots:
@@ -27,7 +31,7 @@ private slots:
 
 private:
     Ui::Kategorieeingabe *ui;
-    ClientLogic *_clientLogic;
+    CLogik *_serverLogic;
     int kategorieZaehler =2;
 };
 
