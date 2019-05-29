@@ -1,7 +1,7 @@
 #include "spieler.h"
 
 
-Spieler::Spieler(std::string name)
+Spieler::Spieler(QString name)
 {
    _name = name;
    static int _nextId;
@@ -10,7 +10,7 @@ Spieler::Spieler(std::string name)
 }
 
 //gibt den Spielernamen zurück
-std::string Spieler::getName()
+QString Spieler::getName()
 {
     return _name;
 }
@@ -49,13 +49,13 @@ unsigned int Spieler::Categories(){
 
 
 //gibt die Antworten des Spielers in der Runde zurück
-std::string Spieler::getAnswer(unsigned int i){
-    std::string p = answers.at(i);
+QString Spieler::getAnswer(unsigned int i){
+    QString p = answers.at(i);
     return p;
 }
 
 //setzt die Antwort in der Runde für Kategorie Nr i
-void Spieler::setAnswer(unsigned int i, std::string a){
+void Spieler::setAnswer(unsigned int i, QString a){
     answers[i]=a;
 }
 

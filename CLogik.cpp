@@ -19,7 +19,20 @@ void CLogik::spieler_beitritt(PlayerJoinPacket packet, unsigned int id){
         serverSocket.send(players[i].getConnectionId(), packet);
     }
 
-    Spieler spieler(packet.getName().toStdString());
+    Spieler spieler(packet.getName());
+
+    PlayerListPacket playerListPacket;
+    QVector <QString> vorherigeSpieler(players.size());
+
+    //evtl aktuelle Spielerliste an neuen Spieler leiten
+    for (unsigned int var = 0; var < players.size(); ++var) {
+       vorherigeSpieler[var] = players[var].getName();
+    }
+
+    playerListPacket.setPlayers(vorherigeSpieler);
+
+    serverSocket.send(id, playerListPacket);
+
     players.push_back(spieler);
 
     spieler.setConnectionId(id);
@@ -32,16 +45,16 @@ void CLogik::spieler_beitritt(PlayerJoinPacket packet, unsigned int id){
 
 }
 
-int CLogik::createPlayer(string name) {
+int CLogik::createPlayer(QString name) {
     Spieler spieler(name);
 
     players[spieler.getId()] = spieler;
     return spieler.getId();
 }
 
-vector<std::string> CLogik::sortAnswers(unsigned int category) {
+vector<QString> CLogik::sortAnswers(unsigned int category) {
     unsigned int anzahl = players.size();
-    vector<std::string> antwortenKategorie;
+    vector<QString> antwortenKategorie;
 
     for (unsigned int var = 0; var < anzahl; ++var) {
         antwortenKategorie[var] = players[var].getAnswer(category);
@@ -81,8 +94,8 @@ void CLogik::Punktevergabe(){
 }
 
 
-std::vector<int> CLogik::awardPoints(unsigned int category){
-    vector<std::string> antworten = answers[category].getAntworten();
+vector<int> CLogik::awardPoints(unsigned int category){
+    vector<QString> antworten = answers[category].getAntworten();
     unsigned int anzahl = antworten.size();
     vector<int> points;
     int sum = 0;
@@ -116,9 +129,9 @@ std::vector<int> CLogik::awardPoints(unsigned int category){
 }
 
 
-vector<std::string> CLogik::getWinner() {
+vector<QString> CLogik::getWinner() {
     unsigned int anzahl = players.size();
-    vector<std::string> names;
+    vector<QString> names;
     vector<int> allPoints;
 
     for (unsigned int var = 0; var < anzahl; ++var) {

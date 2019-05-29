@@ -2,19 +2,20 @@
 #define ANTWORTEN_H
 #include <stdint.h>
 #include<vector>
+#include <QString>
 #include "spieler.h"
 using namespace std;
 
 class antworten{
    public:
-    antworten(vector<std::string>);
+    antworten(vector<QString>);
     ~antworten();
 
-    vector<std::string> getAntworten();
-    void setAntworten(std::string,int);
+    vector<QString> getAntworten();
+    void setAntworten(QString,int);
 
     private:
-    std::vector<std::string> answers;
+    vector<QString> answers;
 };
 
 #endif // ANTWORTEN_H
