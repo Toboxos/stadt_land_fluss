@@ -5,8 +5,9 @@
 #include "spieler.h"
 
 
-class ClientLogic
+class ClientLogic : public QObject
 {
+    Q_OBJECT
 public:
     ClientLogic();
     void connect(QString name, QString ip, quint16 port);
@@ -17,6 +18,13 @@ private:
     ClientSocket _clientSocket;
     std::vector<Spieler> _spielerListe;
     Spieleinstellungen  _einstellung ;
+public slots:
+    void playerJoinedSlot(PlayerJoinPacket Packet);
+    void receivedPlayerListSlot(PlayerListPacket Packet);
+    void timeoutSlot();
+    void errorSlot();
+    void connectedSlot();
+
 
 };
 
