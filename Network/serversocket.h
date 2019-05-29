@@ -3,7 +3,7 @@
 
 #include <QtNetwork/QTcpServer>
 #include <QtNetwork/QTcpSocket>
-#include <vector>
+#include <QVector>
 
 #include "Network/Packets/packet.h"
 #include "Network/Packets/playerjoinpacket.h"

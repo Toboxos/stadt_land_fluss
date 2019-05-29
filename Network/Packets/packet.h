@@ -51,17 +51,17 @@ class Packet {
          * @brief Writes a QString to the socket
          *
          * @param socket    Socket data should written to
-         * @param string    QString reference which should be written
+         * @param QString    QString reference which should be written
          */
-        static void writeQString(QTcpSocket& socket, QString& string);
+        static void writeQString(QTcpSocket& socket, QString& QString);
 
         /**
          * @brief Reads a QString from the socket
          *
          * @param socket    Socket data should read from
-         * @param string    QString reference which should be updated
+         * @param QString    QString reference which should be updated
          */
-        static void readQString(QTcpSocket& socket, QString& string);
+        static void readQString(QTcpSocket& socket, QString& QString);
 
         /**
          * @brief Writes an Integer to the socket

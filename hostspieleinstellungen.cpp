@@ -104,7 +104,7 @@ void HostSpielEinstellungen::on_buttonNext_clicked()
 
     }
 
-    _serverLogic->getSpieleinstellungen()->setPlayName(ui->inputGameName->text().toStdString());
+    _serverLogic->getSpieleinstellungen()->setPlayName(ui->inputGameName->text());
 
     if (checkBoxChecked)
     {

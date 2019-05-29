@@ -4,7 +4,7 @@
 #include "stadtlandfluss.h"
 #include "spieleinstellungen.h"
 #include <spielerliste.h>
-#include <string>
+#include <QString>
 
 
 
@@ -22,10 +22,10 @@ HauptSpielFenster::HauptSpielFenster(QWidget *parent,ClientLogic *clientLogic) :
     //ui->tableSpiel->resizeColumnsToContents();
     //ui->tableSpiel->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
    /*
-    *  std::vector<std::string> kategorienVector=std::move( _clientLogic->getSpieleinstellungen()->getKategorienListe());
+    *  QVector<QString> kategorienVector=std::move( _clientLogic->getSpieleinstellungen()->getKategorienListe());
     ui->tableSpiel->setColumnCount(1);
     ui->tableSpiel->setHorizontalHeaderItem(0,new QTableWidgetItem("Buchstabe"));
-    for (std::vector<std::string>::iterator iter = kategorienVector.begin() ;iter!=kategorienVector.end();iter++,zeilenZaehler++)
+    for (QVector<QString>::iterator iter = kategorienVector.begin() ;iter!=kategorienVector.end();iter++,zeilenZaehler++)
     {
         ui->tableSpiel->setColumnCount(zeilenZaehler);
         QTableWidgetItem* qtwi = new QTableWidgetItem(QString::fromStdString(*iter),QTableWidgetItem::Type);
@@ -44,7 +44,7 @@ HauptSpielFenster::HauptSpielFenster(QWidget *parent,ClientLogic *clientLogic) :
 ///
 void HauptSpielFenster::ready()
 {
-   std::vector<QString> answerVector ;
+   QVector<QString> answerVector ;
     for (int columCount = 0; columCount < ui->tableSpiel->columnCount(); ++columCount) {
 
         answerVector.push_back(ui->tableSpiel->item(0,columCount)->text());

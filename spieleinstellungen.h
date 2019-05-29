@@ -1,7 +1,7 @@
 #ifndef SPIELEINSTELLUNGEN_H
 #define SPIELEINSTELLUNGEN_H
-#include <string>
-#include <vector>
+#include <QString>
+#include <QVector>
 class Spieleinstellungen
 {
 public:
@@ -9,23 +9,23 @@ public:
     int getRundenanzahl();
     int getRundendauer();
     int getCountdown();
-    std::string getSpielname();
-    std::vector<std::string> getKategorienListe();
+    QString getSpielname();
+    QVector<QString> getKategorienListe();
     int getKategorieSize();
 
 
-    void setPlayName(std::string);
+    void setPlayName(QString);
     void setRoundNumber(int);
     void setRoundTimeLimit(int);
     void setCountdown(int);
-    bool addKategorie(std::string);
+    bool addKategorie(QString);
 
 private:
-    std::string _spielname="";
+    QString _spielname="";
     int _rundenanzahl =0;
     int _rundendauer =0;
     int _countdown =0;
-    std::vector<std::string> KategorienListe;
+    QVector<QString> KategorienListe;
 
 
 };

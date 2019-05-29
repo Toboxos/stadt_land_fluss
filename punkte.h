@@ -1,20 +1,21 @@
 #ifndef PUNKTE_H
 #define PUNKTE_H
-#include <vector>
+#include <QVector>
 
 using namespace std;
 
 class punkte
 {
 public:
-    punkte(vector<int>);
+    punkte();
+    punkte(QVector<int>);
     ~punkte();
 
-    vector<int> getPunkte();
+    QVector<int> getPunkte();
     void setPunkte(int,int);
 
     private:
-    std::vector<int> points;
+    QVector<int> points;
 };
 
 #endif // PUNKTE_H

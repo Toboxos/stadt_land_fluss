@@ -17,7 +17,7 @@ public:
 private:
     ClientSocket _clientSocket;
 
-    std::vector<Spieler> _spielerListe;
+    QVector<Spieler> _spielerListe;
     Spieleinstellungen  _einstellung ;
 public slots:
     void playerJoinedSlot(PlayerJoinPacket Packet);

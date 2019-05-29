@@ -30,7 +30,7 @@ void ClientLogic::playerJoinedSlot(PlayerJoinPacket Packet){
 //    this->getSpielerListe()->push_back(Packet.getName().toStdString());
 }
 void ClientLogic::receivedPlayerListSlot(PlayerListPacket Packet){
-//    this->getSpielerListe() = Packet.getPlayers(); QVector zu vector Problem
+//    this->getSpielerListe() = Packet.getPlayers(); QQVector zu QVector Problem
 }
 void ClientLogic::timeoutSlot(){
     //timeout

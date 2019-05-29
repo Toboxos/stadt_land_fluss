@@ -1,11 +1,11 @@
 #ifndef SPIELERLISTE_H
 #define SPIELERLISTE_H
 #include "spieler.h"
-#include <vector>
+#include <QVector>
 #include "spieleinstellungen.h"
 #include "Network/clientsocket.h"
 /*
-extern std::vector<Spieler> _spielerListe;
+extern QVector<Spieler> _spielerListe;
 extern Spieleinstellungen  *_einstellung ;
 */
 

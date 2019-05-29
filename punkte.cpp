@@ -1,6 +1,10 @@
 #include "punkte.h"
 
-punkte::punkte(vector<int> p)
+punkte::punkte() {
+
+}
+
+punkte::punkte(QVector<int> p)
 {
     points = p;
 }
@@ -9,7 +13,7 @@ punkte::~punkte() {
 
 }
 
-vector<int> punkte::getPunkte(){
+QVector<int> punkte::getPunkte(){
     return points;
 }
 

@@ -1,6 +1,10 @@
 #include "antworten.h"
 
-antworten::antworten(vector<QString> a){
+antworten::antworten() {
+
+}
+
+antworten::antworten(QVector<QString> a){
     answers = a;
 }
 
@@ -8,7 +12,7 @@ antworten::~antworten() {
 
 }
 
-vector<QString> antworten::getAntworten(){
+QVector<QString> antworten::getAntworten(){
     return answers;
 }
 

@@ -21,7 +21,7 @@ void SpielStart::on_buttonHost_clicked()
 
 // Spieler Join Paket senden
 
-    std::string name = "HOST_" + ui->NameEingabe->text().toStdString(); //Spieler wird Name zugewiesen
+    QString name = "HOST_" + ui->NameEingabe->text(); //Spieler wird Name zugewiesen
     Spieler hostSpieler(name); // 0 muss ersetzt werden mit der Anzahl der Kategorien!!!
 
     //_clientLogic->getSpielerListe()->push_back(hostSpieler); //pushback das neusete Element wird ans ende der Liste geschubst.
