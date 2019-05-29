@@ -4,6 +4,7 @@
 #include <vector>
 #include <stdlib.h>
 #include <QObject>
+#include <QString>
 
 #include "Network/serversocket.h"
 #include "antworten.h"
@@ -11,6 +12,7 @@
 #include "punkte.h"
 
 #include "Network/Packets/playerjoinpacket.h"
+#include "Network/Packets/playerlistpacket.h"
 #include "Network/serversocket.h"
 #include "spieleinstellungen.h"
 
@@ -24,14 +26,17 @@ public:
      * @brief CLogik erstellt ein CLogik-Objekt
      */
     CLogik();
-    int createPlayer(std::string);
+
+
+    int createPlayer(QString);
+
 
     /**
      * @brief sortAnswers sortiert Antworten nach Kategorien
      * @param category Anzahl Kategorien
      * @return vector<string> mit Antworten für Kategorie
      */
-    vector<std::string> sortAnswers(unsigned int category);
+    vector<QString> sortAnswers(unsigned int category);
 
     /**
      * @brief vergibt die Punkte für eine Kategorie
@@ -49,7 +54,7 @@ public:
      * @brief ordnet die Spieler nach Gesamtpunktzahl
      * @return vector mit Spielernamen nach Platzierung geordnet
      */
-    vector<std::string> getWinner();
+    vector<QString> getWinner();
 
     /**
      * @brief zufälliger Buchstabe für Runde, wiederholt sich alle 26 Runden
