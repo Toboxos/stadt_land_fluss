@@ -2,6 +2,7 @@
 #define KATEGORIEEINGABE_H
 
 #include "CLogik.h"
+
 #include <QDialog>
 
 namespace Ui {

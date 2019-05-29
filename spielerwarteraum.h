@@ -2,7 +2,7 @@
 #define SPIELERWARTERAUM_H
 
 #include <QDialog>
-#include "clientlogic.h"
+#include "CLogik.h"
 
 namespace Ui {
 class SpielerWarteRaum;
@@ -13,7 +13,7 @@ class SpielerWarteRaum : public QDialog
     Q_OBJECT
 
 public:
-    explicit SpielerWarteRaum(QWidget *parent = nullptr,ClientLogic *clientLogic= nullptr);
+   explicit SpielerWarteRaum(QWidget *parent = nullptr, CLogik *serverLogic= nullptr);
     ~SpielerWarteRaum();
 
 private slots:
@@ -21,7 +21,7 @@ private slots:
 
 private:
     Ui::SpielerWarteRaum *ui;
-    ClientLogic *_clientLogic;
+    CLogik *_serverLogic;
 };
 
 #endif // SPIELERWARTERAUM_H

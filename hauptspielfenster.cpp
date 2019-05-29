@@ -21,7 +21,8 @@ HauptSpielFenster::HauptSpielFenster(QWidget *parent,ClientLogic *clientLogic) :
 
     //ui->tableSpiel->resizeColumnsToContents();
     //ui->tableSpiel->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
-    std::vector<std::string> kategorienVector=std::move( _clientLogic->getSpieleinstellungen()->getKategorienListe());
+   /*
+    *  std::vector<std::string> kategorienVector=std::move( _clientLogic->getSpieleinstellungen()->getKategorienListe());
     ui->tableSpiel->setColumnCount(1);
     ui->tableSpiel->setHorizontalHeaderItem(0,new QTableWidgetItem("Buchstabe"));
     for (std::vector<std::string>::iterator iter = kategorienVector.begin() ;iter!=kategorienVector.end();iter++,zeilenZaehler++)
@@ -34,6 +35,7 @@ HauptSpielFenster::HauptSpielFenster(QWidget *parent,ClientLogic *clientLogic) :
     ui->tableSpiel->setHorizontalHeaderItem(zeilenZaehler-1,new QTableWidgetItem("Punkte"));
 
     ui->tableSpiel->setRowCount(2);
+    */
 }
 
 ///

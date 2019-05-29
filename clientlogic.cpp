@@ -27,7 +27,8 @@ void ClientLogic::openCLogik()
     CLogik *_cLogic  = new CLogik();
 }
 void ClientLogic::playerJoinedSlot(PlayerJoinPacket Packet){
-    this->_spielerListe.push_back(Packet.getName().toStdString());
+
+//    this->getSpielerListe()->push_back(Packet.getName().toStdString());
 }
 void ClientLogic::receivedPlayerListSlot(PlayerListPacket Packet){
 //    this->getSpielerListe() = Packet.getPlayers(); QVector zu vector Problem
