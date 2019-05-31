@@ -2,4 +2,4 @@ debug/
 *.pro.*
 Makefile*
 .qmake*
-.pro.user
+*.pro.user
