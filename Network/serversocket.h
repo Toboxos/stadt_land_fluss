@@ -42,6 +42,13 @@ class ServerSocket : public QObject {
         bool send(unsigned int id, Packet& packet);
 
     signals:
+        /**
+         * @brief Emits when new connection was accepted
+         *
+         * @param id    Identifier for connection
+         */
+        void connected(unsigned int id);
+
         void playerJoined(PlayerJoinPacket packet, unsigned int id);
 
     private slots:

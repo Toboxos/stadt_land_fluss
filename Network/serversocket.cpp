@@ -29,7 +29,10 @@ void ServerSocket::newConnection() {
 
     connect(socket, SIGNAL(readyRead()), this, SLOT(read()));
 
-    m_sockets.insert(idCounter++, socket);
+    unsigned int id = idCounter++;
+    m_sockets.insert(id, socket);
+
+    emit connected(id);
 }
 
 void ServerSocket::read() {
