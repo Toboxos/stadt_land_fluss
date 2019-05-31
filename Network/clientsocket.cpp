@@ -45,6 +45,13 @@ void ClientSocket::read() {
                 break;
             }
 
+            case GAME_SETTINGS_PACKET: {
+                GameSettingsPacket p;
+                p.readData(m_socket);
+                emit receivedGameSettings(p);
+                break;
+            }
+
             default: {
 
             }

@@ -3,9 +3,10 @@
 
 #include <QtNetwork>
 
-#include <Network/Packets/packet.h>
-#include <Network/Packets/playerjoinpacket.h>
-#include <Network/Packets/playerlistpacket.h>
+#include "Packets/packet.h"
+#include "Packets/playerjoinpacket.h"
+#include "Packets/playerlistpacket.h"
+#include "Packets/gamesettingspacket.h"
 
 class ClientSocket : public QObject {
     Q_OBJECT
@@ -68,6 +69,13 @@ class ClientSocket : public QObject {
          * @param packet    Packet with information
          */
         void receivedPlayerList(PlayerListPacket packet);
+
+        /**
+         * @brief Emitted when game settings are received
+         *
+         * @param packet    Packet with information
+         */
+        void receivedGameSettings(GameSettingsPacket packet);
 
     public slots:
 
