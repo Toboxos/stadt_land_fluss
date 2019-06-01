@@ -29,6 +29,7 @@ CONFIG += c++11
 SOURCES += \
     Network/Packets/gamesettingspacket.cpp \
     Network/Packets/playerlistpacket.cpp \
+    Network/Packets/roundstartpacket.cpp \
     antworten.cpp \
         clientipeingabe.cpp \
     clientlogic.cpp \
@@ -53,6 +54,7 @@ SOURCES += \
 HEADERS += \
     Network/Packets/gamesettingspacket.h \
     Network/Packets/playerlistpacket.h \
+    Network/Packets/roundstartpacket.h \
     antworten.h \
         clientipeingabe.h \
     clientlogic.h \

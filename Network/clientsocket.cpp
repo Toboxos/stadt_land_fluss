@@ -52,6 +52,13 @@ void ClientSocket::read() {
                 break;
             }
 
+            case ROUND_START_PACKET: {
+                RoundStartPacket p;
+                p.readData(m_socket);
+                emit roundStart(p);
+                break;
+            }
+
             default: {
 
             }

@@ -7,6 +7,7 @@
 #include "Packets/playerjoinpacket.h"
 #include "Packets/playerlistpacket.h"
 #include "Packets/gamesettingspacket.h"
+#include "Packets/roundstartpacket.h"
 
 class ClientSocket : public QObject {
     Q_OBJECT
@@ -76,6 +77,13 @@ class ClientSocket : public QObject {
          * @param packet    Packet with information
          */
         void receivedGameSettings(GameSettingsPacket packet);
+
+        /**
+         * @brief Emitthen when round start from sever is received
+         *
+         * @param packet    Packet with information
+         */
+        void roundStart(RoundStartPacket packet);
 
     public slots:
 
