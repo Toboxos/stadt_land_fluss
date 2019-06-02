@@ -31,13 +31,18 @@ void ClientLogic::openCLogik()
 {
     CLogik *_cLogic  = new CLogik();
 }
+
 void ClientLogic::playerJoinedSlot(PlayerJoinPacket Packet){
-    qDebug() << "playerJoinedSlot" << endl;
-//    this->getSpielerListe()->push_back(Packet.getName().toStdString());
+    this->_spielerListe.push_back(Packet.getName());
+    //Anzeige!
 }
+
 void ClientLogic::receivedPlayerListSlot(PlayerListPacket Packet){
-//    this->getSpielerListe() = Packet.getPlayers(); QQVector zu QVector Problem
+    for (unsigned int var = 0; var < Packet.getPlayers().size(); ++var) {
+        this->_spielerListe.push_back(*new Spieler(Packet.getPlayers()[var]));
+    }
     qDebug() << "receivedPlayerList" << endl;
+    //Anzeigen??
 }
 void ClientLogic::timeoutSlot(){
     //timeout

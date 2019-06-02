@@ -30,6 +30,7 @@ SOURCES += \
     Network/Packets/gamesettingspacket.cpp \
     Network/Packets/playerlistpacket.cpp \
     Network/Packets/roundstartpacket.cpp \
+    Network/Packets/sendanswerspacket.cpp \
     antworten.cpp \
         clientipeingabe.cpp \
     clientlogic.cpp \
@@ -55,6 +56,7 @@ HEADERS += \
     Network/Packets/gamesettingspacket.h \
     Network/Packets/playerlistpacket.h \
     Network/Packets/roundstartpacket.h \
+    Network/Packets/sendanswerspacket.h \
     antworten.h \
         clientipeingabe.h \
     clientlogic.h \
