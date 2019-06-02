@@ -10,7 +10,6 @@ class antworten{
    public:
     antworten();
     antworten(QVector<QString>);
-    ~antworten();
 
     QVector<QString> getAntworten();
     void setAntworten(QString,int);
