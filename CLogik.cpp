@@ -224,4 +224,4 @@ void CLogik::openHostSpielEinstellungen()
  {
      SpielerWarteRaum warteRaum(nullptr,this);
      warteRaum.exec();
- }
+     }

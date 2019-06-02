@@ -2,19 +2,20 @@
 #define TIMER_H
 
 #include <QtCore>
-
+#include "CLogik.h"
 class timer : public QObject
 {
 
     Q_OBJECT
 
 public:
-    timer();
+    timer(CLogik *cLogic);
     ~timer();
     void endRound();
+    void startRound();
 private:
     QTimer *InternalTimer;
-
+    CLogik *clogic;
 public slots:
     void roundEndSlot();
 };

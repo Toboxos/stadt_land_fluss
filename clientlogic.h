@@ -3,14 +3,13 @@
 #include "Network/clientsocket.h"
 #include "spieleinstellungen.h"
 #include "spieler.h"
-
-
+class ClientIpEingabe;
 class ClientLogic : public QObject
 {
     Q_OBJECT
 public:
     ClientLogic();
-    void connect(QString name, QString ip, quint16 port);
+    void connect(QString name, QString ip, quint16 port, ClientIpEingabe *window);
     void openCLogik();
     void openClientIpEingabe();
     void setSpieler(Spieler *spieler);
@@ -29,9 +28,6 @@ public slots:
     void timeoutSlot();
     void errorSlot();
     void connectedSlot();
-
-
-
 };
 
 

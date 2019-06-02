@@ -2,6 +2,7 @@
 #include "spielstart.h"
 #include "CLogik.h"
 #include "clientipeingabe.h"
+#include <QDebug>
 ClientLogic::ClientLogic()
 {
 
@@ -9,8 +10,9 @@ ClientLogic::ClientLogic()
      spielstart.exec();
 }
 
-void ClientLogic::connect(QString name, QString ip, quint16 port)
+void ClientLogic::connect(QString name, QString ip, quint16 port, ClientIpEingabe *window)
 {
+
     _clientSocket.connectTo(ip,port);
 
    QObject::connect(&_clientSocket, SIGNAL(playerJoined(PlayerJoinPacket)), this, SLOT(playerJoinedSlot(PlayerJoinPacket)));
@@ -18,8 +20,10 @@ void ClientLogic::connect(QString name, QString ip, quint16 port)
    QObject::connect(&_clientSocket, SIGNAL(timeout()), this, SLOT(timeoutSlot()));
    QObject::connect(&_clientSocket, SIGNAL(connected()), this, SLOT(connectedSlot()));
    QObject::connect(&_clientSocket, SIGNAL(error()), this, SLOT(errorSlot()));
+   QObject::connect(&_clientSocket, SIGNAL(connected()), window, SLOT(connected()));
+   PlayerJoinPacket playerJoinPacket(this->getSpieler().getName());
+   _clientSocket.send(playerJoinPacket);
 }
-
 
 
 void ClientLogic::openCLogik()
@@ -27,21 +31,26 @@ void ClientLogic::openCLogik()
     CLogik *_cLogic  = new CLogik();
 }
 void ClientLogic::playerJoinedSlot(PlayerJoinPacket Packet){
-
+    qDebug() << "playerJoinedSlot" << endl;
 //    this->getSpielerListe()->push_back(Packet.getName().toStdString());
 }
 void ClientLogic::receivedPlayerListSlot(PlayerListPacket Packet){
 //    this->getSpielerListe() = Packet.getPlayers(); QQVector zu QVector Problem
+    qDebug() << "receivedPlayerList" << endl;
 }
 void ClientLogic::timeoutSlot(){
     //timeout
+    qDebug() << "Timeout :((" << endl;
+
 }
 void ClientLogic::connectedSlot(){
-    PlayerJoinPacket playerJoinPacket("hilfegard");
+    PlayerJoinPacket playerJoinPacket(this->getSpieler().getName());
     _clientSocket.send(playerJoinPacket);
+    qDebug() << "connected :))" << endl;
 }
 void ClientLogic::errorSlot(){
     //error
+    qDebug() << "Error :(((" << endl;
 }
 void ClientLogic::openClientIpEingabe()
 {

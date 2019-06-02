@@ -37,12 +37,7 @@ void ClientIpEingabe::on_buttonZurueck_clicked()
 void ClientIpEingabe::on_buttonWeiter_clicked()
 {
 
-    _clientLogic->connect(_clientLogic->getSpieler().getName(),ui->eingabeIp->text(),PORT);
-
-   /*_clientSocket.connectTo(ui->eingabeIp->text(),PORT);
-   PlayerJoinPacket playerJoinPacket("hildegart");
-   _clientSocket.send(playerJoinPacket);
-*/
+    _clientLogic->connect(_clientLogic->getSpieler().getName(),ui->eingabeIp->text(),PORT, this);
 
 
 
