@@ -2,7 +2,7 @@
 #define PLAYERFINISHEDPACKET_H
 #include "packet.h"
 
-class PlayerFinishedPacket
+class PlayerFinishedPacket : public Packet
 {
 public:
     PlayerFinishedPacket();
