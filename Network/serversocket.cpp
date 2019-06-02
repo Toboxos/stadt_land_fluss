@@ -62,6 +62,20 @@ void ServerSocket::read() {
                 break;
             }
 
+            case SEND_POINTS_PACKET: {
+                SendPointsPacket p;
+                p.readData(*socket);
+                emit pointsSent(p, id);
+                break;
+            }
+
+            case END_GAME_PACKET: {
+                EndGamePacket p;
+                p.readData(*socket);
+                emit endGame(p, id);
+                break;
+            }
+
             default: {
 
             }

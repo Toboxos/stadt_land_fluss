@@ -9,6 +9,8 @@
 #include "Packets/gamesettingspacket.h"
 #include "Packets/roundstartpacket.h"
 #include "Packets/sendanswerspacket.h"
+#include "Packets/sendpointspacket.h"
+#include "Packets/endgamepacket.h"
 
 class ClientSocket : public QObject {
     Q_OBJECT
@@ -85,6 +87,12 @@ class ClientSocket : public QObject {
          * @param packet    Packet with information
          */
         void roundStart(RoundStartPacket packet);
+
+        void answersSent(SendAnswersPacket packet);
+
+        void pointsSent(SendPointsPacket packet);
+
+        void endGame(EndGamePacket packet);
 
     public slots:
 

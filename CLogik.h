@@ -67,6 +67,7 @@ public:
     void openSpielerWarteRaum();
     void sendeSpielStart();
     void sendeRundenStart();
+    void endGame();
 public slots:
     /**
      * @brief nimmt Signal mit Packet entgegen, erstellt neues Spielerobjekt und speichert die VerbindungsID ab

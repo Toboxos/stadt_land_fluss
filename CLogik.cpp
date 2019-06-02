@@ -64,6 +64,16 @@ void CLogik::spieler_beitritt(PlayerJoinPacket packet, unsigned int id){
 
 }
 
+void CLogik::endGame(){
+   EndGamePacket packet;
+
+   packet.setRanking(getWinner());
+
+   for (unsigned int var = 0; var < players.size(); ++var) {
+       serverSocket.send(players[var].getConnectionId(), packet);
+   }
+
+}
 
 int CLogik::createPlayer(QString name) {
 
@@ -99,6 +109,7 @@ void CLogik::Punktevergabe(){
 
     for (unsigned int m = 0; m < anzahl; ++m){
         Spieler player = players[m];
+        SendPointsPacket packet;
 
         int speicher = 0;
 
@@ -110,7 +121,13 @@ void CLogik::Punktevergabe(){
 
         int jetzt = player.getPunkte();
         player.setPunkte(jetzt + speicher);
+
+        packet.setPoints(player.getCredit());
+        packet.setTotalPoints(player.getPunkte());
+
+        serverSocket.send(player.getConnectionId(), packet);
     }
+
 
 }
 

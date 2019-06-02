@@ -2,7 +2,7 @@
 #define SENDPOINTSPACKET_H
 #include "packet.h"
 
-class SendPointsPacket
+class SendPointsPacket : public Packet
 {
 public:
     SendPointsPacket();
@@ -14,7 +14,12 @@ public:
     void setTotalPoints(int totalpoints);
     int getTotalPoints();
 
+    void writeData(QTcpSocket& socket);
+    void readData(QTcpSocket& socket);
 
+private:
+    QVector<int> m_points;
+    int m_totalpoints;
 };
 
 #endif // SENDPOINTSPACKET_H
