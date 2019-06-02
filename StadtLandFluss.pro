@@ -27,10 +27,12 @@ DEFINES += PORT=1234
 CONFIG += c++11
 
 SOURCES += \
+    Network/Packets/endgamepacket.cpp \
     Network/Packets/gamesettingspacket.cpp \
     Network/Packets/playerlistpacket.cpp \
     Network/Packets/roundstartpacket.cpp \
     Network/Packets/sendanswerspacket.cpp \
+    Network/Packets/sendpointspacket.cpp \
     antworten.cpp \
         clientipeingabe.cpp \
     clientlogic.cpp \
@@ -53,10 +55,12 @@ SOURCES += \
     Examples/networkexample.cpp
 
 HEADERS += \
+    Network/Packets/endgamepacket.h \
     Network/Packets/gamesettingspacket.h \
     Network/Packets/playerlistpacket.h \
     Network/Packets/roundstartpacket.h \
     Network/Packets/sendanswerspacket.h \
+    Network/Packets/sendpointspacket.h \
     antworten.h \
         clientipeingabe.h \
     clientlogic.h \
