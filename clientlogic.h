@@ -4,7 +4,6 @@
 #include "spieleinstellungen.h"
 #include "spieler.h"
 class ClientIpEingabe;
-class HauptSpielFenster;
 class ClientLogic : public QObject
 {
     Q_OBJECT

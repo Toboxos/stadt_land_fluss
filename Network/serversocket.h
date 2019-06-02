@@ -5,8 +5,9 @@
 #include <QtNetwork/QTcpSocket>
 #include <QVector>
 
-#include "Network/Packets/packet.h"
-#include "Network/Packets/playerjoinpacket.h"
+#include "Packets/packet.h"
+#include "Packets/playerjoinpacket.h"
+#include "Packets/sendanswerspacket.h"
 
 /**
  * @brief Server for handling connections and sending/receiving packets
@@ -51,6 +52,7 @@ class ServerSocket : public QObject {
 
         void playerJoined(PlayerJoinPacket packet, unsigned int id);
 
+        void answersSent(SendAnswersPacket packet, unsigned int id);
     private slots:
 
         /**

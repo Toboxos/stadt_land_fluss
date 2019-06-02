@@ -8,6 +8,7 @@
 #include "Packets/playerlistpacket.h"
 #include "Packets/gamesettingspacket.h"
 #include "Packets/roundstartpacket.h"
+#include "Packets/sendanswerspacket.h"
 
 class ClientSocket : public QObject {
     Q_OBJECT

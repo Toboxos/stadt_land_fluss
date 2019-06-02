@@ -59,6 +59,13 @@ void ClientSocket::read() {
                 break;
             }
 
+            case SEND_ANSWERS_PACKET: {
+                SendAnswersPacket p;
+                p.readData(m_socket);
+                emit answersSent(p);
+                break;
+            }
+
 
             default: {
 

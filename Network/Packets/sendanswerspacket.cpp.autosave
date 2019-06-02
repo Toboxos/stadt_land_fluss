@@ -1,6 +1,0 @@
-#include "sendanswerspacket.h"
-
-SendAnswersPacket::SendAnswersPacket(QVector<QString> answers)
-{
-
-}

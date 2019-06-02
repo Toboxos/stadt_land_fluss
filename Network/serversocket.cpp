@@ -55,6 +55,13 @@ void ServerSocket::read() {
                 break;
             }
 
+            case SEND_ANSWERS_PACKET: {
+                SendAnswersPacket p;
+                p.readData(*socket);
+                emit answersSent(p, id);
+                break;
+            }
+
             default: {
 
             }
