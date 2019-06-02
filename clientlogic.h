@@ -3,6 +3,7 @@
 #include "Network/clientsocket.h"
 #include "spieleinstellungen.h"
 #include "spieler.h"
+#include "Network/Packets/sendanswerspacket.h"
 class ClientIpEingabe;
 class ClientLogic : public QObject
 {
@@ -15,7 +16,7 @@ public:
     void openHauptSpielFenster();
     void setSpieler(Spieler *spieler);
     Spieler getSpieler();
-
+    void sendAnswers();
 
 private:
     ClientSocket _clientSocket;

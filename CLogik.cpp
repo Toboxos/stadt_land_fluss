@@ -16,6 +16,17 @@ CLogik::CLogik(){
     serverSocket.listen(PORT);
 }
 
+void CLogik::bekommt_antwort(SendAnswersPacket packet, unsigned int id){
+    for(unsigned int i = 0; i < players.size(); i++){
+
+        if(players[i].getConnectionId() == id){
+            players[i].setAnswers(packet.getAnswers());
+        }else{
+            serverSocket.send(players[i].getConnectionId(), packet);
+        }
+    }
+}
+
 void CLogik::spieler_beitritt(PlayerJoinPacket packet, unsigned int id){
 
     // Jedem aktuell gespeichert Spieler mitteilen, dass ein neuer Spieler beigetreten ist:

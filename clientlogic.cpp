@@ -32,6 +32,11 @@ void ClientLogic::openCLogik()
     CLogik *_cLogic  = new CLogik();
 }
 
+void ClientLogic::sendAnswers(){
+    SendAnswersPacket packet(this->clientSpieler->answers);
+    _clientSocket.send(packet);
+}
+
 void ClientLogic::playerJoinedSlot(PlayerJoinPacket Packet){
     this->_spielerListe.push_back(Packet.getName());
     //Anzeige!

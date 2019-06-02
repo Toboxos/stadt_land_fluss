@@ -24,6 +24,7 @@ public:
     unsigned int Categories();
     QString getAnswer(unsigned int);
     void setAnswer(unsigned int,QString);
+    void setAnswers(QVector<QString> antworten);
 
     QVector<int> getCredit();
     void setCredit(unsigned int,int);
