@@ -16,9 +16,7 @@
 #include "Network/serversocket.h"
 #include "spieleinstellungen.h"
 
-
 using namespace std;
-
 class CLogik : public QObject {
     Q_OBJECT
 public:
@@ -67,7 +65,8 @@ public:
     void openHostSpielEinstellungen();
     void openKategorieEingabe();
     void openSpielerWarteRaum();
-
+    void sendeSpielStart();
+    void sendeRundenStart();
 public slots:
     /**
      * @brief nimmt Signal mit Packet entgegen, erstellt neues Spielerobjekt und speichert die VerbindungsID ab

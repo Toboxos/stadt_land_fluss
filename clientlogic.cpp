@@ -2,6 +2,7 @@
 #include "spielstart.h"
 #include "CLogik.h"
 #include "clientipeingabe.h"
+#include "hauptspielfenster.h"
 #include <QDebug>
 ClientLogic::ClientLogic()
 {
@@ -14,7 +15,7 @@ void ClientLogic::connect(QString name, QString ip, quint16 port, ClientIpEingab
 {
 
     _clientSocket.connectTo(ip,port);
-
+   QObject::connect(&_clientSocket, SIGNAL(receivedGameSettings(GameSettingsPacket)), this, SLOT(starteSpiel(GameSettingsPacket)));
    QObject::connect(&_clientSocket, SIGNAL(playerJoined(PlayerJoinPacket)), this, SLOT(playerJoinedSlot(PlayerJoinPacket)));
    QObject::connect(&_clientSocket, SIGNAL(receivedPlayerList(PlayerListPacket)), this, SLOT(receivedPlayerListSlot(PlayerListPacket)));
    QObject::connect(&_clientSocket, SIGNAL(timeout()), this, SLOT(timeoutSlot()));
@@ -57,6 +58,12 @@ void ClientLogic::openClientIpEingabe()
     ClientIpEingabe ClientStart(nullptr,this);
     ClientStart.exec();
 }
+
+void ClientLogic::openHauptSpielFenster(){
+    HauptSpielFenster SpielStart(nullptr, this);
+    SpielStart.show();
+}
+
 Spieler ClientLogic::getSpieler(){
     return *clientSpieler;
 }
@@ -64,3 +71,11 @@ void ClientLogic::setSpieler(Spieler *spieler){
     clientSpieler = spieler;
 }
 
+void ClientLogic::starteSpiel(GameSettingsPacket Packet){
+    this->_einstellung.setCountdown(Packet.getCountown());
+    this->_einstellung.setPlayName(Packet.getGameName());
+    this->_einstellung.setRoundNumber(Packet.getRoundNumbers());
+    this->_einstellung.setRoundTimeLimit(Packet.getRoundDuration());
+    this->_einstellung.setKategories(Packet.getCategories());
+    this->openHauptSpielFenster();
+}

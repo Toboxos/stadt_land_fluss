@@ -15,7 +15,9 @@ void Spieleinstellungen::setPlayName(QString spielname){_spielname=spielname;}
 void Spieleinstellungen::setRoundNumber(int rundenanzahl){_rundenanzahl = rundenanzahl;}
 void Spieleinstellungen::setRoundTimeLimit(int rundendauer){_rundendauer = rundendauer;}
 void Spieleinstellungen::setCountdown(int countdown){_countdown=countdown;}
-
+void Spieleinstellungen::setKategories(QVector<QString> Kategorien){
+    KategorienListe = Kategorien;
+}
 bool Spieleinstellungen::addKategorie(QString newKategorie)
 {
     int n = KategorienListe.size();

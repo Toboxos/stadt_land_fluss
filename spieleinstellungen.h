@@ -19,7 +19,7 @@ public:
     void setRoundTimeLimit(int);
     void setCountdown(int);
     bool addKategorie(QString);
-
+    void setKategories(QVector<QString> Kategorien);
 private:
     QString _spielname="";
     int _rundenanzahl =0;

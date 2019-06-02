@@ -5,6 +5,8 @@
 #include "hostspieleinstellungen.h"
 #include "spielerwarteraum.h"
 #include "kategorieeingabe.h"
+#include "timer.h"
+
 CLogik::CLogik(){
 
     HostSpielEinstellungen einstellungen(nullptr, this);
@@ -225,3 +227,21 @@ void CLogik::openHostSpielEinstellungen()
      SpielerWarteRaum warteRaum(nullptr,this);
      warteRaum.exec();
      }
+ void CLogik::sendeSpielStart(){
+
+     GameSettingsPacket Packet(this->getSpieleinstellungen()->getSpielname(), this->getSpieleinstellungen()->getRundenanzahl(), this->getSpieleinstellungen()->getRundendauer(), this->getSpieleinstellungen()->getCountdown(), this->getSpieleinstellungen()->getKategorienListe());
+
+     for(unsigned int i = 0; i < players.size(); i++){
+
+         serverSocket.send(players[i].getConnectionId(), Packet);
+     }
+ }
+
+ void CLogik::sendeRundenStart(){
+     RoundStartPacket Packet(this->getLetter());
+     for(unsigned int i = 0; i < players.size(); i++){
+
+         serverSocket.send(players[i].getConnectionId(), Packet);
+
+     }
+ }

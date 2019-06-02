@@ -4,6 +4,7 @@
 #include "spieleinstellungen.h"
 #include "spieler.h"
 class ClientIpEingabe;
+class HauptSpielFenster;
 class ClientLogic : public QObject
 {
     Q_OBJECT
@@ -12,6 +13,7 @@ public:
     void connect(QString name, QString ip, quint16 port, ClientIpEingabe *window);
     void openCLogik();
     void openClientIpEingabe();
+    void openHauptSpielFenster();
     void setSpieler(Spieler *spieler);
     Spieler getSpieler();
 
@@ -28,6 +30,7 @@ public slots:
     void timeoutSlot();
     void errorSlot();
     void connectedSlot();
+    void starteSpiel(GameSettingsPacket Packet);
 };
 
 
