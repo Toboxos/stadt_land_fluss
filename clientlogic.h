@@ -17,7 +17,7 @@ public:
     void setSpieler(Spieler *spieler);
     Spieler getSpieler();
     void sendAnswers();
-
+    void done();
 private:
     ClientSocket _clientSocket;
 

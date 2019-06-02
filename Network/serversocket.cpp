@@ -76,6 +76,13 @@ void ServerSocket::read() {
                 break;
             }
 
+            case PLAYER_FINISHED_PACKET: {
+                PlayerFinishedPacket p;
+                p.readData(*socket);
+                emit playerFinished(p, id);
+                break;
+            }
+
             default: {
 
             }

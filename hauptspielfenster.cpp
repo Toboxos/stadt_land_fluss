@@ -50,6 +50,7 @@ void HauptSpielFenster::ready()
         answerVector.push_back(ui->tableSpiel->item(0,columCount)->text());
 
     }
+    _clientLogic->done();
 }
 HauptSpielFenster::~HauptSpielFenster()
 {

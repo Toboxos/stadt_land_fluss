@@ -11,6 +11,7 @@
 #include "Packets/sendanswerspacket.h"
 #include "Packets/sendpointspacket.h"
 #include "Packets/endgamepacket.h"
+#include "Packets/playerfinishedpacket.h"
 
 class ClientSocket : public QObject {
     Q_OBJECT
@@ -94,6 +95,7 @@ class ClientSocket : public QObject {
 
         void endGame(EndGamePacket packet);
 
+        void playerFinished(PlayerFinishedPacket packet);
     public slots:
 
         /**

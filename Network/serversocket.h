@@ -10,6 +10,7 @@
 #include "Packets/sendanswerspacket.h"
 #include "Packets/sendpointspacket.h"
 #include "Packets/endgamepacket.h"
+#include "Packets/playerfinishedpacket.h"
 
 /**
  * @brief Server for handling connections and sending/receiving packets
@@ -59,6 +60,9 @@ class ServerSocket : public QObject {
         void pointsSent(SendPointsPacket packet, unsigned int id);
 
         void endGame(EndGamePacket packet, unsigned int id);
+
+        void playerFinished(PlayerFinishedPacket packet, unsigned int id);
+
     private slots:
 
         /**

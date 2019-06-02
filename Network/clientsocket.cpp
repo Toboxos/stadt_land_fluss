@@ -79,6 +79,12 @@ void ClientSocket::read() {
                  emit endGame(p);
                  break;
             }
+            case PLAYER_FINISHED_PACKET:{
+                PlayerFinishedPacket p;
+                p.readData(m_socket);
+                emit playerFinished(p);
+                break;
+            }
 
 
             default: {

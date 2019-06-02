@@ -81,6 +81,12 @@ void ClientLogic::setSpieler(Spieler *spieler){
     clientSpieler = spieler;
 }
 
+void ClientLogic::done(){
+    sendAnswers();
+    PlayerFinishedPacket packet;
+    _clientSocket.send(packet);
+}
+
 void ClientLogic::starteSpiel(GameSettingsPacket Packet){
     this->_einstellung.setCountdown(Packet.getCountown());
     this->_einstellung.setPlayName(Packet.getGameName());
