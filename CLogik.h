@@ -62,6 +62,7 @@ public:
 
     Spieleinstellungen* getSpieleinstellungen();
     QVector<Spieler>* getSpielerListe();
+    void starteServerSocket();
     void openHostSpielEinstellungen();
     void openKategorieEingabe();
     void openSpielerWarteRaum();

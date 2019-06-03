@@ -11,7 +11,9 @@ CLogik::CLogik(){
 
     HostSpielEinstellungen einstellungen(nullptr, this);
     einstellungen.exec();
+}
 
+void CLogik::starteServerSocket() {
     connect(&serverSocket, SIGNAL(playerJoined(PlayerJoinPacket, unsigned int)), this, SLOT(spieler_beitritt(PlayerJoinPacket, unsigned int)));
     serverSocket.listen(PORT);
 }

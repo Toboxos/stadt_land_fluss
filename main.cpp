@@ -15,8 +15,6 @@ int main(int argc, char *argv[])
 
     ClientLogic clientLogic;
 
-    NetworkExample e;
-
     //Einwand r;
     //r.exec();
 

@@ -30,6 +30,7 @@ Kategorieeingabe::~Kategorieeingabe()
 void Kategorieeingabe::on_buttonWeiter_clicked()
 {
     close();
+    _serverLogic->starteServerSocket();
     _serverLogic->openSpielerWarteRaum();
 }
 
