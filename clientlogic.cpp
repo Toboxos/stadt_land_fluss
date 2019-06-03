@@ -22,8 +22,6 @@ void ClientLogic::connect(QString name, QString ip, quint16 port, ClientIpEingab
    QObject::connect(&_clientSocket, SIGNAL(connected()), this, SLOT(connectedSlot()));
    QObject::connect(&_clientSocket, SIGNAL(error()), this, SLOT(errorSlot()));
    QObject::connect(&_clientSocket, SIGNAL(connected()), window, SLOT(connected()));
-   PlayerJoinPacket playerJoinPacket(this->getSpieler().getName());
-   _clientSocket.send(playerJoinPacket);
 }
 
 
