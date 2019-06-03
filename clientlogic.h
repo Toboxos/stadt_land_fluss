@@ -4,25 +4,28 @@
 #include "spieleinstellungen.h"
 #include "spieler.h"
 #include "Network/Packets/sendanswerspacket.h"
+#include "CLogik.h"
 class ClientIpEingabe;
 class ClientLogic : public QObject
 {
     Q_OBJECT
 public:
     ClientLogic();
+    ~ClientLogic();
     void connect(QString name, QString ip, quint16 port, ClientIpEingabe *window);
     void openCLogik();
     void openClientIpEingabe();
     void openHauptSpielFenster();
-    void setSpieler(Spieler *spieler);
+    void setSpieler(Spieler spieler);
     Spieler getSpieler();
     void sendAnswers();
     void done();
 private:
     ClientSocket _clientSocket;
+    CLogik* _clogik;
 
     QVector<Spieler> _spielerListe;
-    Spieler *clientSpieler;
+    Spieler clientSpieler;
     Spieleinstellungen  _einstellung ;
 public slots:
     void playerJoinedSlot(PlayerJoinPacket Packet);
@@ -31,6 +34,7 @@ public slots:
     void errorSlot();
     void connectedSlot();
     void starteSpiel(GameSettingsPacket Packet);
+    void serverBereit();
 };
 
 

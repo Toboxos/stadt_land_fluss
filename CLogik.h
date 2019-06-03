@@ -27,6 +27,8 @@ public:
     CLogik();
     ~CLogik();
 
+    void run();
+
     int createPlayer(QString);
 
 
@@ -80,8 +82,9 @@ public slots:
     void spieler_beitritt(PlayerJoinPacket packet, unsigned int id);
 	
     void bekommt_antwort(SendAnswersPacket packet, unsigned int id);
-signals:
 
+signals:
+    void serverBereit();
 
 private:
     SpielerWarteRaum *warteRaum;

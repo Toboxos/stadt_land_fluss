@@ -27,6 +27,7 @@ void SpielStart::on_buttonHost_clicked()
     //_clientLogic->getSpielerListe()->push_back(hostSpieler); //pushback das neusete Element wird ans ende der Liste geschubst.
 
     close();
+   _clientLogic->setSpieler(hostSpieler);
    _clientLogic->openCLogik();
 
 
@@ -46,7 +47,8 @@ void SpielStart::on_NameEingabe_returnPressed()
 
 void SpielStart::on_buttonBeitreten_clicked()
 {   
-    _clientLogic->setSpieler(new Spieler(ui->NameEingabe->text()));
+    Spieler spieler(ui->NameEingabe->text());
+    _clientLogic->setSpieler(spieler);
     close();
     _clientLogic->openClientIpEingabe();
 }

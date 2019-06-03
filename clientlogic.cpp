@@ -4,11 +4,14 @@
 #include "clientipeingabe.h"
 #include "hauptspielfenster.h"
 #include <QDebug>
-ClientLogic::ClientLogic()
+ClientLogic::ClientLogic() : _clogik(nullptr)
 {
-
     SpielStart spielstart(nullptr, this);
      spielstart.exec();
+}
+
+ClientLogic::~ClientLogic() {
+    delete _clogik;
 }
 
 void ClientLogic::connect(QString name, QString ip, quint16 port, ClientIpEingabe *window)
@@ -21,17 +24,22 @@ void ClientLogic::connect(QString name, QString ip, quint16 port, ClientIpEingab
    QObject::connect(&_clientSocket, SIGNAL(timeout()), this, SLOT(timeoutSlot()));
    QObject::connect(&_clientSocket, SIGNAL(connected()), this, SLOT(connectedSlot()));
    QObject::connect(&_clientSocket, SIGNAL(error()), this, SLOT(errorSlot()));
-   QObject::connect(&_clientSocket, SIGNAL(connected()), window, SLOT(connected()));
+   if( window != nullptr ) QObject::connect(&_clientSocket, SIGNAL(connected()), window, SLOT(connected()));
 }
 
 
-void ClientLogic::openCLogik()
-{
-    CLogik *_cLogic  = new CLogik();
+void ClientLogic::openCLogik() {
+    _clogik  = new CLogik();
+    QObject::connect(_clogik, SIGNAL(serverBereit()), this, SLOT(serverBereit()));
+    _clogik->run();
+}
+
+void ClientLogic::serverBereit() {
+    connect(clientSpieler.getName(), "localhost", PORT, nullptr);
 }
 
 void ClientLogic::sendAnswers(){
-    SendAnswersPacket packet(this->clientSpieler->answers);
+    SendAnswersPacket packet(clientSpieler.answers);
     _clientSocket.send(packet);
 }
 
@@ -73,9 +81,9 @@ void ClientLogic::openHauptSpielFenster(){
 }
 
 Spieler ClientLogic::getSpieler(){
-    return *clientSpieler;
+    return clientSpieler;
 }
-void ClientLogic::setSpieler(Spieler *spieler){
+void ClientLogic::setSpieler(Spieler spieler){
     clientSpieler = spieler;
 }
 

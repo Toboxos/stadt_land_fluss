@@ -8,17 +8,21 @@
 #include "timer.h"
 
 CLogik::CLogik() : warteRaum(nullptr) {
-
-    HostSpielEinstellungen einstellungen(nullptr, this);
-    einstellungen.exec();
 }
 
 CLogik::~CLogik(){
     delete warteRaum;
 }
+
+void CLogik::run() {
+    HostSpielEinstellungen einstellungen(nullptr, this);
+    einstellungen.exec();
+}
+
 void CLogik::starteServerSocket() {
     connect(&serverSocket, SIGNAL(playerJoined(PlayerJoinPacket, unsigned int)), this, SLOT(spieler_beitritt(PlayerJoinPacket, unsigned int)));
     serverSocket.listen(PORT);
+    emit serverBereit();
 }
 
 void CLogik::bekommt_antwort(SendAnswersPacket packet, unsigned int id){
@@ -257,7 +261,7 @@ void CLogik::openHostSpielEinstellungen()
  }
  void CLogik::openSpielerWarteRaum()
  {
-
+    starteServerSocket();
      warteRaum = new SpielerWarteRaum(nullptr,this);
      warteRaum->exec();
      }
