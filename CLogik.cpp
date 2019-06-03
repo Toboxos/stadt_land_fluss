@@ -7,12 +7,15 @@
 #include "kategorieeingabe.h"
 #include "timer.h"
 
-CLogik::CLogik(){
+CLogik::CLogik() : warteRaum(nullptr) {
 
     HostSpielEinstellungen einstellungen(nullptr, this);
     einstellungen.exec();
 }
 
+CLogik::~CLogik(){
+    delete warteRaum;
+}
 void CLogik::starteServerSocket() {
     connect(&serverSocket, SIGNAL(playerJoined(PlayerJoinPacket, unsigned int)), this, SLOT(spieler_beitritt(PlayerJoinPacket, unsigned int)));
     serverSocket.listen(PORT);
@@ -53,11 +56,11 @@ void CLogik::spieler_beitritt(PlayerJoinPacket packet, unsigned int id){
     playerListPacket.setPlayers(vorherigeSpieler);
 
     serverSocket.send(id, playerListPacket);
-
-    players.push_back(spieler);
-
     spieler.setConnectionId(id);
-    emit showPlayer(spieler);
+    players.push_back(spieler);
+    qDebug() << spieler.getName() << " hat sich verbunden" << endl;
+
+    warteRaum->showPlayer();
     /*qDebug() << "Spieler beigetreten";
 
     for (unsigned int var = 0; var < players.size(); ++var) {
@@ -239,7 +242,7 @@ Spieleinstellungen* CLogik::getSpieleinstellungen()
 
 QVector<Spieler>* CLogik::getSpielerListe()
 {
-    return &_spielerListe;
+    return &players;
 }
 
 void CLogik::openHostSpielEinstellungen()
@@ -254,9 +257,11 @@ void CLogik::openHostSpielEinstellungen()
  }
  void CLogik::openSpielerWarteRaum()
  {
-     SpielerWarteRaum warteRaum(nullptr,this);
-     warteRaum.exec();
+
+     warteRaum = new SpielerWarteRaum(nullptr,this);
+     warteRaum->exec();
      }
+
  void CLogik::sendeSpielStart(){
 
      GameSettingsPacket Packet(this->getSpieleinstellungen()->getSpielname(), this->getSpieleinstellungen()->getRundenanzahl(), this->getSpieleinstellungen()->getRundendauer(), this->getSpieleinstellungen()->getCountdown(), this->getSpieleinstellungen()->getKategorienListe());

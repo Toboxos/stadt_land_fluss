@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CLOGIK_H
+#define CLOGIK_H
 #include <stdint.h>
 #include <iostream>
 #include <QVector>
@@ -15,7 +16,7 @@
 #include "Network/Packets/playerlistpacket.h"
 #include "Network/serversocket.h"
 #include "spieleinstellungen.h"
-
+#include "spielerwarteraum.h"
 using namespace std;
 class CLogik : public QObject {
     Q_OBJECT
@@ -24,7 +25,7 @@ public:
      * @brief CLogik erstellt ein CLogik-Objekt
      */
     CLogik();
-
+    ~CLogik();
 
     int createPlayer(QString);
 
@@ -68,7 +69,8 @@ public:
     void openSpielerWarteRaum();
     void sendeSpielStart();
     void sendeRundenStart();
-    void endGame();
+    void endGame();    
+
 public slots:
     /**
      * @brief nimmt Signal mit Packet entgegen, erstellt neues Spielerobjekt und speichert die VerbindungsID ab
@@ -80,18 +82,17 @@ public slots:
     void bekommt_antwort(SendAnswersPacket packet, unsigned int id);
 signals:
 
-    void showPlayer(Spieler newPlayer);
 
 private:
+    SpielerWarteRaum *warteRaum;
     QVector<Spieler> players;
     QVector<antworten> answers;
     QVector<punkte> points;
     char letters[26] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
     char usedLetters[26];
     ServerSocket serverSocket;
-
-    QVector<Spieler> _spielerListe;
     Spieleinstellungen  _einstellung ;
 
 
 };
+#endif
