@@ -17,7 +17,6 @@ void GameSettingsPacketTest::run() {
 }
 
 void GameSettingsPacketTest::server_connected(unsigned int id) {
-    qDebug() << "GameSettingsPacketTest: Server: Client connected";
 
     QVector<QString> categories;
     for( int i = 0; i < 5; ++i ) {
@@ -38,30 +37,31 @@ void GameSettingsPacketTest::server_connected(unsigned int id) {
 }
 
 void GameSettingsPacketTest::client_connected() {
-    qDebug() << "GameSettingsPacketTest: Client: connected";
 }
 
 void GameSettingsPacketTest::client_timeout() {
-    qDebug() << "GameSettingsPacketTest: Client: timeout";
+    emit failed("Timeout at client connection");
 }
 
 void GameSettingsPacketTest::client_error() {
-    qDebug() << "GameSettingsPacketTest: Client: error";
+    emit failed("Error at client connection");
 }
 
 void GameSettingsPacketTest::client_receivedGameSettings(GameSettingsPacket packet) {
-    qDebug() << "GameSettingsPacketTest: Client: received game settings";
-
-    qDebug() << "   " << packet.getGameName();
-    qDebug() << "   " << packet.getRoundNumbers();
-    qDebug() << "   " << packet.getRoundDuration();
-    qDebug() << "   " << packet.getCountown();
-    qDebug() << "   " << "Categories:";
+    QVERIFY(packet.getGameName() == "TestName");
+    QVERIFY(packet.getRoundNumbers() == 123);
+    QVERIFY(packet.getRoundDuration() == 456);
+    QVERIFY(packet.getCountown() == 789);
 
     QVector<QString> categories = packet.getCategories();
+    QVERIFY(categories.size() == 5);
 
-    auto end = categories.end();
-    for( auto it = categories.begin(); it != end; ++it ) {
-        qDebug() << "   " << " - " << *it;
+    for( int i = 0; i < 5; ++i ) {
+        QString s;
+        s = "Category ";
+        s += QString::number(i);
+        QVERIFY(categories[i] == s);
     }
+
+    emit finished();
 }

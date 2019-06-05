@@ -27,6 +27,10 @@ DEFINES += PORT=1234
 CONFIG += c++11
 
 SOURCES += \
+    Network/serversocket.cpp \
+    Network/clientsocket.cpp \
+    Network/Packets/packet.cpp \
+    Network/Packets/playerjoinpacket.cpp \
     Network/Packets/endgamepacket.cpp \
     Network/Packets/gamesettingspacket.cpp \
     Network/Packets/playerfinishedpacket.cpp \
@@ -49,13 +53,14 @@ SOURCES += \
         spielstart.cpp \
         CLogik.cpp \
         timer.cpp \
-    Network/serversocket.cpp \
-    Network/clientsocket.cpp \
-    Network/Packets/packet.cpp \
-    Network/Packets/playerjoinpacket.cpp \
     Examples/networkexample.cpp
 
+
 HEADERS += \
+    Network/serversocket.h \
+    Network/clientsocket.h \
+    Network/Packets/packet.h \
+    Network/Packets/playerjoinpacket.h \
     Network/Packets/endgamepacket.h \
     Network/Packets/gamesettingspacket.h \
     Network/Packets/playerfinishedpacket.h \
@@ -78,11 +83,8 @@ HEADERS += \
         spielstart.h \
         CLogik.h \
         timer.h \
-    Network/serversocket.h \
-    Network/clientsocket.h \
-    Network/Packets/packet.h \
-    Network/Packets/playerjoinpacket.h \
     Examples/networkexample.h
+
 FORMS += \
         clientipeingabe.ui \
         einwand.ui \
@@ -91,6 +93,18 @@ FORMS += \
         kategorieeingabe.ui \
         spielerwarteraum.ui \
         spielstart.ui
+
+PacketTests {
+    TARGET = PacketTest
+    QT += testlib
+    SOURCES -=  main.cpp
+    SOURCES +=  UnitTests/packettests.cpp \
+                UnitTests/Tests/gamesettingspackettest.cpp \
+                UnitTests/Tests/roundstartpackettest.cpp
+    HEADERS +=  UnitTests/Tests/test.h \
+                UnitTests/Tests/gamesettingspackettest.h \
+                UnitTests/Tests/roundstartpackettest.h \
+}
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

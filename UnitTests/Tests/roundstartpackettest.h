@@ -1,11 +1,14 @@
 #ifndef ROUNDSTARTPACKETTEST_H
 #define ROUNDSTARTPACKETTEST_H
 
-#include "../Network/serversocket.h"
-#include "../Network/clientsocket.h"
-#include "../Network/Packets/roundstartpacket.h"
+#include <QtTest/QTest>
 
-class RoundStartPacketTest : public QObject {
+#include "UnitTests/Tests/test.h"
+#include "Network/serversocket.h"
+#include "Network/clientsocket.h"
+#include "Network/Packets/roundstartpacket.h"
+
+class RoundStartPacketTest : public Test {
     Q_OBJECT
 
     public:

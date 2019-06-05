@@ -1,11 +1,14 @@
 #ifndef GAMESETTINGSPACKETTEST_H
 #define GAMESETTINGSPACKETTEST_H
 
-#include "../Network/serversocket.h"
-#include "../Network/clientsocket.h"
-#include "../Network/Packets/gamesettingspacket.h"
+#include <QtTest/QTest>
 
-class GameSettingsPacketTest : public QObject {
+#include "UnitTests/Tests/test.h"
+#include "Network/serversocket.h"
+#include "Network/clientsocket.h"
+#include "Network/Packets/gamesettingspacket.h"
+
+class GameSettingsPacketTest : public Test {
     Q_OBJECT
 
     public:
@@ -24,7 +27,6 @@ class GameSettingsPacketTest : public QObject {
     private:
         ServerSocket m_server;
         ClientSocket m_client;
-
 };
 
 #endif // GAMESETTINGSPACKETTEST_H

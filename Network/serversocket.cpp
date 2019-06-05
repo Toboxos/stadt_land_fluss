@@ -22,9 +22,6 @@ bool ServerSocket::listen(quint16 port) {
 }
 
 void ServerSocket::newConnection() {
-#ifdef QT_DEBUG
-    qDebug("New Client connection");
-#endif
     QTcpSocket* socket = m_server.nextPendingConnection();
 
     connect(socket, SIGNAL(readyRead()), this, SLOT(read()));

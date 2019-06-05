@@ -17,25 +17,23 @@ void RoundStartPacketTest::run() {
 }
 
 void RoundStartPacketTest::server_connected(unsigned int id) {
-    qDebug() << "RoundStartPacketTest: Server: Client connected";
-
     RoundStartPacket packet('x');
     m_server.send(id, packet);
 }
 
 void RoundStartPacketTest::client_connected() {
-    qDebug() << "RoundStartPacketTest: Client: connected";
 }
 
 void RoundStartPacketTest::client_timeout() {
-    qDebug() << "RoundStartPacketTest: Client: timeout";
+    emit failed("Client connection timeout");
 }
 
 void RoundStartPacketTest::client_error() {
-    qDebug() << "RoundStartPacketTest: Client: error";
+    emit failed("Client connection error");
 }
 
 void RoundStartPacketTest::client_roundStart(RoundStartPacket packet) {
-    qDebug() << "RoundStartPacketTest: Client: round start";
-    qDebug() << "   " << packet.getLetter();
+    QVERIFY(packet.getLetter() == 'x');
+
+    emit finished();
 }
