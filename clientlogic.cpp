@@ -4,7 +4,7 @@
 #include "clientipeingabe.h"
 #include "hauptspielfenster.h"
 #include <QDebug>
-ClientLogic::ClientLogic() : _clogik(nullptr)
+ClientLogic::ClientLogic() : _clogik(nullptr), _hautpSpielFenster(nullptr)
 {
     SpielStart spielstart(nullptr, this);
      spielstart.exec();
@@ -12,6 +12,7 @@ ClientLogic::ClientLogic() : _clogik(nullptr)
 
 ClientLogic::~ClientLogic() {
     delete _clogik;
+    delete _hautpSpielFenster;
 }
 
 void ClientLogic::connect(QString name, QString ip, quint16 port, ClientIpEingabe *window)
@@ -76,8 +77,8 @@ void ClientLogic::openClientIpEingabe()
 }
 
 void ClientLogic::openHauptSpielFenster(){
-    HauptSpielFenster SpielStart(nullptr, this);
-    SpielStart.show();
+    _hautpSpielFenster = new HauptSpielFenster(nullptr);
+    _hautpSpielFenster->show();
 }
 
 Spieler ClientLogic::getSpieler(){

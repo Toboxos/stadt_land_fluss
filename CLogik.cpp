@@ -230,7 +230,7 @@ char CLogik::getLetter(){
     letter = letters[choose];
 
     for (int var = 0; var < 26; ++var) {
-        if (usedLetters[var] = letter){
+        if (usedLetters[var] == letter){
             success = false;
         }
     }
@@ -271,7 +271,6 @@ void CLogik::openHostSpielEinstellungen()
      GameSettingsPacket Packet(this->getSpieleinstellungen()->getSpielname(), this->getSpieleinstellungen()->getRundenanzahl(), this->getSpieleinstellungen()->getRundendauer(), this->getSpieleinstellungen()->getCountdown(), this->getSpieleinstellungen()->getKategorienListe());
 
      for(unsigned int i = 0; i < players.size(); i++){
-
          serverSocket.send(players[i].getConnectionId(), Packet);
      }
  }

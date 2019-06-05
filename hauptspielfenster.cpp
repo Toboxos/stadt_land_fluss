@@ -8,12 +8,11 @@
 
 
 
-HauptSpielFenster::HauptSpielFenster(QWidget *parent,ClientLogic *clientLogic) :
+HauptSpielFenster::HauptSpielFenster(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::HauptSpielFenster)
 {
 //...................................... todo Punkte und Buchstabenriehe enablen.....................................................................................................................................................
-   _clientLogic = clientLogic;
     ui->setupUi(this);
     ui->tableSpiel->resizeColumnsToContents();
     int zeilenZaehler =2;
@@ -50,7 +49,6 @@ void HauptSpielFenster::ready()
         answerVector.push_back(ui->tableSpiel->item(0,columCount)->text());
 
     }
-    _clientLogic->done();
 }
 HauptSpielFenster::~HauptSpielFenster()
 {
