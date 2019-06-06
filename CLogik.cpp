@@ -266,9 +266,15 @@ void CLogik::openHostSpielEinstellungen()
      warteRaum->exec();
      }
 
+ void CLogik::sendToAll(Packet& p){
+     for(unsigned int i = 0; i < players.size(); i++){
+         serverSocket.send(players[i].getConnectionId(), p);
+     }
+ }
+
  void CLogik::sendeSpielStart(){
 
-     GameSettingsPacket Packet(this->getSpieleinstellungen()->getSpielname(), this->getSpieleinstellungen()->getRundenanzahl(), this->getSpieleinstellungen()->getRundendauer(), this->getSpieleinstellungen()->getCountdown(), this->getSpieleinstellungen()->getKategorienListe());
+     GameSettingsPacket packet(this->getSpieleinstellungen()->getSpielname(), this->getSpieleinstellungen()->getRundenanzahl(), this->getSpieleinstellungen()->getRundendauer(), this->getSpieleinstellungen()->getCountdown(), this->getSpieleinstellungen()->getKategorienListe());
      PlayerListPacket playerListPacket;
      QVector <QString> vorherigeSpieler(players.size());
 
@@ -279,23 +285,35 @@ void CLogik::openHostSpielEinstellungen()
 
      playerListPacket.setPlayers(vorherigeSpieler);
 
+    sendToAll(packet);
+    sendToAll(playerListPacket);
 
-     for(unsigned int i = 0; i < players.size(); i++){
-         serverSocket.send(players[i].getConnectionId(), Packet);
-         serverSocket.send(players[i].getConnectionId(), playerListPacket);
-     }
      roundTimer = new timer(this->getSpieleinstellungen()->getRundendauer(), 3, this->getSpieleinstellungen()->getCountdown());
+     setupTimer();
  }
 
  void CLogik::sendeRundenStart(){
-     RoundStartPacket packet(getLetter());
-     for(unsigned int i = 0; i < players.size(); i++){
-
-         serverSocket.send(players[i].getConnectionId(), packet);
-
-     }
-     this->roundTimer->startRound();
+    StartCountdownPacket packet;
+    sendToAll(packet);
+    roundTimer->startRound();
  }
  void CLogik::setupTimer(){
+    QObject::connect(roundTimer, SIGNAL(signalStartInput()), this, SLOT(startInput()));
+    QObject::connect(roundTimer, SIGNAL(signalPlayerFinished()), this, SLOT(playerFinished()()));
+    QObject::connect(roundTimer, SIGNAL(signalEndInput()), this, SLOT(endInput()));
+ }
 
+ void CLogik::startInput(){
+     RoundStartPacket packet(getLetter());
+     sendToAll(packet);
+ }
+
+ void CLogik::playerFinished(){
+    PlayerFinishedPacket packet;
+    sendToAll(packet);
+ }
+
+ void CLogik::endInput(){
+    EndRoundPacket packet;
+    sendToAll(packet);
  }

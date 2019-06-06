@@ -19,32 +19,31 @@ timer::~timer()
 ///<summary>is called when the round is supposed to start </summary>
 ///<parameters> </parameters>
 void timer::startRound(){
-    emit signalStartCountdown();
-    this->singleShot(countdowntime*1000, this, SLOT(startInput()));
+    singleShot(countdowntime*1000, this, SLOT(startInput()));
 }
 
 ///<summary> slot is called when Player input should be started</summary>
 ///<parameters> </parameters>
 void timer::startInput()
 {
-    this->stop();
+    stop();
     emit signalStartInput();
-    this->singleShot((roundduration-timeafterfinished)*1000, this, SLOT(receivedPlayerFinished()));
+    singleShot((roundduration-timeafterfinished)*1000, this, SLOT(receivedPlayerFinished()));
 }
 
 ///<summary> slot that executes when Player completed his caregories or time runs out</summary>
 /// <parameters> </parameters>
 void timer::receivedPlayerFinished()
 {
-    this->stop();
+    stop();
     emit signalPlayerFinished();
-    this->singleShot(timeafterfinished*1000, this, SLOT(endRound()));
+    singleShot(timeafterfinished*1000, this, SLOT(endRound()));
 }
 
 ///<summary> slot is called when Player input should be closed</summary>
 ///<parameters> </parameters>
 void timer::endRound()
 {
-    this->stop();
+    stop();
     emit signalRoundOver();
 }

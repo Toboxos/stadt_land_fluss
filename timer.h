@@ -17,7 +17,6 @@ private:
     unsigned int countdowntime;
     unsigned int timeafterfinished;
 signals:
-    void signalStartCountdown();
     void signalStartInput();
     void signalPlayerFinished();
     void signalRoundOver();

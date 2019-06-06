@@ -13,7 +13,9 @@
 #include "punkte.h"
 
 #include "Network/Packets/playerjoinpacket.h"
+#include "Network/Packets/startcountdownpacket.h"
 #include "Network/Packets/playerlistpacket.h"
+#include "Network/Packets/endroundpacket.h"
 #include "Network/serversocket.h"
 #include "spieleinstellungen.h"
 #include "spielerwarteraum.h"
@@ -74,7 +76,7 @@ public:
     void sendeSpielStart();
     void sendeRundenStart();
     void endGame();    
-
+    void sendToAll(Packet& p);
 public slots:
     /**
      * @brief nimmt Signal mit Packet entgegen, erstellt neues Spielerobjekt und speichert die VerbindungsID ab
@@ -85,6 +87,11 @@ public slots:
 	
     void bekommt_antwort(SendAnswersPacket packet, unsigned int id);
 
+    void startInput();
+
+    void playerFinished();
+
+    void endInput();
 
 signals:
     void serverBereit();
