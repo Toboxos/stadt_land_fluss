@@ -38,6 +38,7 @@ public slots:
     void connectedSlot();
     void starteSpiel(GameSettingsPacket Packet);
     void serverBereit();
+    void fensterFertig();
 };
 
 

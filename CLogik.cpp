@@ -269,18 +269,29 @@ void CLogik::openHostSpielEinstellungen()
  void CLogik::sendeSpielStart(){
 
      GameSettingsPacket Packet(this->getSpieleinstellungen()->getSpielname(), this->getSpieleinstellungen()->getRundenanzahl(), this->getSpieleinstellungen()->getRundendauer(), this->getSpieleinstellungen()->getCountdown(), this->getSpieleinstellungen()->getKategorienListe());
+     PlayerListPacket playerListPacket;
+     QVector <QString> vorherigeSpieler(players.size());
+
+     //evtl aktuelle Spielerliste an neuen Spieler leiten
+     for (unsigned int var = 0; var < players.size(); ++var) {
+        vorherigeSpieler[var] = players[var].getName();
+     }
+
+     playerListPacket.setPlayers(vorherigeSpieler);
+
 
      for(unsigned int i = 0; i < players.size(); i++){
          serverSocket.send(players[i].getConnectionId(), Packet);
+         serverSocket.send(players[i].getConnectionId(), playerListPacket);
      }
      roundTimer = new timer(this->getSpieleinstellungen()->getRundendauer(), 3, this->getSpieleinstellungen()->getCountdown());
  }
 
  void CLogik::sendeRundenStart(){
-     RoundStartPacket Packet(this->getLetter());
+     RoundStartPacket packet(getLetter());
      for(unsigned int i = 0; i < players.size(); i++){
 
-         serverSocket.send(players[i].getConnectionId(), Packet);
+         serverSocket.send(players[i].getConnectionId(), packet);
 
      }
      this->roundTimer->startRound();
