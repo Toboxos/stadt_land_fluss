@@ -327,3 +327,7 @@ void CLogik::openHostSpielEinstellungen()
     EndRoundPacket packet;
     sendToAll(packet);
  }
+
+ void CLogik::bekommt_playerFinished(PlayerFinishedPacket packet,unsigned int id){
+
+ }
