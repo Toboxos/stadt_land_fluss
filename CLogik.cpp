@@ -43,7 +43,7 @@ void CLogik::spieler_beitritt(PlayerJoinPacket packet, unsigned int id){
     for(int i = 0; i < players.size(); ++i ) {
 
         // Client braucht ein PlayerJoinPacket mit dem Name des Spielers
-        // Das Paket, das der Server bekommt enthält den Namen des Spielers, wir können es direkt weiterleiten
+        // Das Paket, das der Server bekommt enth?lt den Namen des Spielers, wir k?nnen es direkt weiterleiten
         serverSocket.send(players[i].getConnectionId(), packet);
     }
 
@@ -157,7 +157,7 @@ QVector<int> CLogik::awardPoints(unsigned int category){
         for (unsigned int n = 0; n < anzahl; ++n) {
             if (n != var && antworten[var] == antworten [n]){
                     points[var] = 5;
-                }                            
+                }
             else {
                 //do nothing - same player or different answers
             }
