@@ -19,6 +19,8 @@ Kategorieeingabe::Kategorieeingabe(QWidget *parent,CLogik *serverLogic) :
     ui->setupUi(this);
     ui->tableKategorie->setColumnCount(1);
     ui->tableKategorie->setHorizontalHeaderItem(0,new QTableWidgetItem("Buchstabe"));
+    _serverLogic->getSpieleinstellungen()->addKategorie("Buchstabe");
+
 
 }
 
@@ -29,6 +31,7 @@ Kategorieeingabe::~Kategorieeingabe()
 
 void Kategorieeingabe::on_buttonWeiter_clicked()
 {
+    _serverLogic->getSpieleinstellungen()->addKategorie("Punkte");
     close();
     _serverLogic->openSpielerWarteRaum();
 }
