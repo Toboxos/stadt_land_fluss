@@ -6,6 +6,7 @@
 #include "Network/Packets/sendanswerspacket.h"
 #include "CLogik.h"
 #include "hauptspielfenster.h"
+#include "Network/Packets/playerfinishedpacket.h"
 class ClientIpEingabe;
 class ClientLogic : public QObject
 {

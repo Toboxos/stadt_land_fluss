@@ -16,6 +16,7 @@
 #include "Network/Packets/startcountdownpacket.h"
 #include "Network/Packets/playerlistpacket.h"
 #include "Network/Packets/endroundpacket.h"
+#include "Network/Packets/playerfinishedpacket.h"
 #include "Network/serversocket.h"
 #include "spieleinstellungen.h"
 #include "spielerwarteraum.h"
@@ -92,6 +93,8 @@ public slots:
     void playerFinished();
 
     void endInput();
+
+    void bekommt_playerFinished(PlayerFinishedPacket packet, unsigned int id);
 
 signals:
     void serverBereit();

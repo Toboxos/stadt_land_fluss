@@ -110,5 +110,6 @@ void ClientLogic::starteSpiel(GameSettingsPacket Packet){
 }
 
 void ClientLogic::fensterFertig() {
-
+PlayerFinishedPacket packet(getSpieler().getName());
+_clientSocket.send(packet);
 }

@@ -74,7 +74,8 @@ HauptSpielFenster::~HauptSpielFenster()
 
 void HauptSpielFenster::on_buttonFertig_clicked()
 {
-// todo an server soll gemeldet werden dass ferttig, dann countdown runterzählen. bei end of countdown table enable und die einträge in array speichern.
+
+// bei end of countdown table enable und die einträge in array speichern.
 // reihe disabel
     emit fertig();
 }
