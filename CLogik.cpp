@@ -310,7 +310,8 @@ void CLogik::openHostSpielEinstellungen()
  void CLogik::setupTimer(){
     QObject::connect(roundTimer, SIGNAL(signalStartInput()), this, SLOT(startInput()));
     QObject::connect(roundTimer, SIGNAL(signalPlayerFinished()), this, SLOT(playerFinished()()));
-    QObject::connect(roundTimer, SIGNAL(signalEndInput()), this, SLOT(endInput()));
+    QObject::connect(roundTimer, SIGNAL(signalRoundOver()), this, SLOT(endInput()));
+    QObject::connect(this, SIGNAL(initRoundEnd()), roundTimer, SLOT(receivedPlayerFinished()));
  }
 
  void CLogik::startInput(){
@@ -329,5 +330,5 @@ void CLogik::openHostSpielEinstellungen()
  }
 
  void CLogik::bekommt_playerFinished(PlayerFinishedPacket packet,unsigned int id){
-
+    emit initRoundEnd();
  }

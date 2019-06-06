@@ -26,7 +26,6 @@ void timer::startRound(){
 ///<parameters> </parameters>
 void timer::startInput()
 {
-    stop();
     emit signalStartInput();
     singleShot((roundduration-timeafterfinished)*1000, this, SLOT(receivedPlayerFinished()));
 }

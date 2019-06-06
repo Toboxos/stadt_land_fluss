@@ -99,6 +99,8 @@ public slots:
 signals:
     void serverBereit();
 
+    void initRoundEnd();
+
 private:
     void setupTimer();
     SpielerWarteRaum *warteRaum;
