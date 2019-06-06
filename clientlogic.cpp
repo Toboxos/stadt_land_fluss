@@ -53,7 +53,10 @@ void ClientLogic::receivedPlayerListSlot(PlayerListPacket Packet){
     for (unsigned int var = 0; var < Packet.getPlayers().size(); ++var) {
         this->_spielerListe.push_back(*new Spieler(Packet.getPlayers()[var]));
     }
-    qDebug() << "receivedPlayerList" << endl;
+
+    if( _hautpSpielFenster != nullptr ) {
+        _hautpSpielFenster->setPlayers(Packet.getPlayers(), clientSpieler.getName());
+    }
     //Anzeigen??
 }
 void ClientLogic::timeoutSlot(){
@@ -101,4 +104,5 @@ void ClientLogic::starteSpiel(GameSettingsPacket Packet){
     this->_einstellung.setRoundTimeLimit(Packet.getRoundDuration());
     this->_einstellung.setKategories(Packet.getCategories());
     this->openHauptSpielFenster();
+    _hautpSpielFenster->setCategories(Packet.getCategories());
 }

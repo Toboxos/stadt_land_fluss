@@ -14,6 +14,10 @@ public:
     explicit HauptSpielFenster(QWidget *parent = nullptr);
     ~HauptSpielFenster();
 
+    void setCategories(QVector<QString> categories);
+    void setPlayers(QVector<QString> players, QString clientName);
+
+
 private slots:
     void on_buttonFertig_clicked();
 

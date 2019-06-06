@@ -15,9 +15,10 @@ HauptSpielFenster::HauptSpielFenster(QWidget *parent) :
 //...................................... todo Punkte und Buchstabenriehe enablen.....................................................................................................................................................
     ui->setupUi(this);
     ui->tableSpiel->resizeColumnsToContents();
-    int zeilenZaehler =2;
+    int zeilenZaehler = 0;
 
 
+    ui->tableSpiel->setRowCount(0);
     //ui->tableSpiel->resizeColumnsToContents();
     //ui->tableSpiel->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
    /*
@@ -35,6 +36,22 @@ HauptSpielFenster::HauptSpielFenster(QWidget *parent) :
 
     ui->tableSpiel->setRowCount(2);
     */
+}
+
+void HauptSpielFenster::setCategories(QVector<QString> categories) {
+    ui->tableSpiel->setColumnCount(categories.size());
+    ui->tableSpiel->setHorizontalHeaderLabels(QStringList::fromVector(categories));
+}
+
+void HauptSpielFenster::setPlayers(QVector<QString> players, QString clientName) {
+    ui->listSpieler->clear();
+
+    for( int i = 0; i < players.size(); ++i ) {
+        if( players[i] == clientName ) {
+            players[i] = "<" + players[i] + ">";
+        }
+        ui->listSpieler->addItem(players[i]);
+    }
 }
 
 ///
