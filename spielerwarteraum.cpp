@@ -50,10 +50,8 @@ void SpielerWarteRaum::on_buttonWeiter_clicked()
 {
 
     close();
-    //############################################ Hier wird ein Paket versendet mit den gameeinstellungen
-
- //   HauptSpielFenster *spielFenster = new HauptSpielFenster(nullptr, _clientLogic);
-   //    spielFenster->show();
+    _serverLogic->sendeSpielStart();
+    _serverLogic->sendeRundenStart();
 
 }
 

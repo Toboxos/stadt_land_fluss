@@ -45,7 +45,5 @@ void ClientIpEingabe::on_buttonWeiter_clicked()
 void ClientIpEingabe::connected()
 {
     close();
-    HauptSpielFenster hauptSpielFenster(nullptr, _clientLogic);
-    hauptSpielFenster.show();
 
 }

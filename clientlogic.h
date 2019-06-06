@@ -5,6 +5,7 @@
 #include "spieler.h"
 #include "Network/Packets/sendanswerspacket.h"
 #include "CLogik.h"
+#include "hauptspielfenster.h"
 class ClientIpEingabe;
 class ClientLogic : public QObject
 {
@@ -23,6 +24,8 @@ public:
 private:
     ClientSocket _clientSocket;
     CLogik* _clogik;
+
+    HauptSpielFenster* _hautpSpielFenster;
 
     QVector<Spieler> _spielerListe;
     Spieler clientSpieler;
