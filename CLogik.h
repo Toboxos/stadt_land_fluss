@@ -106,8 +106,7 @@ private:
     char usedLetters[26];
     ServerSocket serverSocket;
     Spieleinstellungen  _einstellung ;
+    char m_letter;
     timer *roundTimer = nullptr;
-
-
 };
 #endif

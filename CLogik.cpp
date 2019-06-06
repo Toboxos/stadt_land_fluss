@@ -26,7 +26,7 @@ void CLogik::starteServerSocket() {
 }
 
 void CLogik::bekommt_antwort(SendAnswersPacket packet, unsigned int id){
-    for(unsigned int i = 0; i < players.size(); i++){
+    for(int i = 0; i < players.size(); i++){
 
         if(players[i].getConnectionId() == id){
             players[i].setAnswers(packet.getAnswers());
@@ -40,7 +40,7 @@ void CLogik::spieler_beitritt(PlayerJoinPacket packet, unsigned int id){
 
     // Jedem aktuell gespeichert Spieler mitteilen, dass ein neuer Spieler beigetreten ist:
     // Einmal den Spieler Vektor durchgehen
-    for( unsigned int i = 0; i < players.size(); ++i ) {
+    for(int i = 0; i < players.size(); ++i ) {
 
         // Client braucht ein PlayerJoinPacket mit dem Name des Spielers
         // Das Paket, das der Server bekommt enthält den Namen des Spielers, wir können es direkt weiterleiten
@@ -148,17 +148,18 @@ QVector<int> CLogik::awardPoints(unsigned int category){
     int sum = 0;
 
     for (unsigned int var = 0; var < anzahl; ++var) {
-        if (antworten[var] == ""){
+        if (antworten[var] == "" || antworten[var][0] != m_letter){
             points[var] = 0;
         }
         else {
             points[var] = 10;
         }
         for (unsigned int n = 0; n < anzahl; ++n) {
-            if (n != var){
-                if (antworten[var] == antworten [n]){
+            if (n != var && antworten[var] == antworten [n]){
                     points[var] = 5;
-                }
+                }                            
+            else {
+                //do nothing - same player or different answers
             }
         }
     }
@@ -220,6 +221,9 @@ char CLogik::getLetter(){
             usedLetters[var] = 0x00;
         }
     }
+    else {
+        //do nothing
+    }
 
     char letter;
     bool success = false;
@@ -233,7 +237,13 @@ char CLogik::getLetter(){
         if (usedLetters[var] == letter){
             success = false;
         }
+        else if(usedLetters[var] == 0x00){
+            usedLetters[var] = letter;
+            break;
+        }
     }
+
+    m_letter = letter;
 
     }
 
