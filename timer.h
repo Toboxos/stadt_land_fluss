@@ -28,3 +28,21 @@ public slots:
 };
 
 #endif // TIMER_H
+666 hail satan 666
+ich bin eine böse hexe
+    /\
+___/__\___
+\
+ \
+  \
+   \  |
+    \ |
+     \|
+
+Alle blöden Programmierer sind gegen die Hexenverschwörung
+ermordet sie
+brennt sie ab
+landet nicht selber in den Flammen Schwestern der Hölle!
+wir werden siegriech sein
+hail samhain
+

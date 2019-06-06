@@ -11,6 +11,7 @@ CLogik::CLogik() : warteRaum(nullptr) {
 
 CLogik::~CLogik(){
     delete warteRaum;
+    delete roundTimer;
 }
 
 void CLogik::run() {
@@ -272,6 +273,7 @@ void CLogik::openHostSpielEinstellungen()
      for(unsigned int i = 0; i < players.size(); i++){
          serverSocket.send(players[i].getConnectionId(), Packet);
      }
+     roundTimer = new timer(this->getSpieleinstellungen()->getRundendauer(), 3, this->getSpieleinstellungen()->getCountdown());
  }
 
  void CLogik::sendeRundenStart(){
@@ -281,4 +283,8 @@ void CLogik::openHostSpielEinstellungen()
          serverSocket.send(players[i].getConnectionId(), Packet);
 
      }
+     this->roundTimer->startRound();
+ }
+ void CLogik::setupTimer(){
+
  }
