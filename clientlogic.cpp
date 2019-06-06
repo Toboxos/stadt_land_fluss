@@ -110,5 +110,6 @@ void ClientLogic::starteSpiel(GameSettingsPacket Packet){
 }
 
 void ClientLogic::fensterFertig() {
+// todo an server soll gemeldet werden dass ferttig, dann countdown runterzählen.
 
 }
