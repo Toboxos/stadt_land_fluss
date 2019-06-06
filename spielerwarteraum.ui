@@ -32,11 +32,6 @@
    </property>
    <column>
     <property name="text">
-     <string>Nummer</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
      <string>Spieler Name</string>
     </property>
    </column>
