@@ -2,22 +2,50 @@
 #define TIMER_H
 
 #include <QtCore>
-#include "CLogik.h"
-class timer : public QObject
+class timer : public QTimer
 {
 
     Q_OBJECT
 
 public:
-    timer(CLogik *cLogic);
+    timer(unsigned int Rundendauer, unsigned int Countdowndauer, unsigned int zeitNachFinished);
     ~timer();
-    void endRound();
     void startRound();
 private:
     QTimer *InternalTimer;
-    CLogik *clogic;
+    unsigned int roundduration;
+    unsigned int countdowntime;
+    unsigned int timeafterfinished;
+signals:
+    void signalStartCountdown();
+    void signalStartInput();
+    void signalPlayerFinished();
+    void signalRoundOver();
 public slots:
-    void roundEndSlot();
+    void startInput();
+    void receivedPlayerFinished();
+    void endRound();
 };
 
 #endif // TIMER_H
+/*
+From: Prof Hoff
+To: all
+666 hail satan 666
+ich bin eine böse hexe
+    /\
+___/__\___
+\
+ \
+  \
+   \  |
+    \ |
+     \|
+
+Alle blöden Programmierer sind gegen die Hexenverschwörung
+ermordet sie
+brennt sie ab
+landet nicht selber in den Flammen Schwestern der Hölle!
+wir werden siegriech sein
+hail samhain
+*/

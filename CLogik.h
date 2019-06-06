@@ -17,6 +17,8 @@
 #include "Network/serversocket.h"
 #include "spieleinstellungen.h"
 #include "spielerwarteraum.h"
+#include "timer.h"
+
 using namespace std;
 class CLogik : public QObject {
     Q_OBJECT
@@ -83,10 +85,12 @@ public slots:
 	
     void bekommt_antwort(SendAnswersPacket packet, unsigned int id);
 
+
 signals:
     void serverBereit();
 
 private:
+    void setupTimer();
     SpielerWarteRaum *warteRaum;
     QVector<Spieler> players;
     QVector<antworten> answers;
@@ -96,7 +100,6 @@ private:
     ServerSocket serverSocket;
     Spieleinstellungen  _einstellung ;
     char m_letter;
-
-
+    timer *roundTimer = nullptr;
 };
 #endif
