@@ -80,7 +80,17 @@ void ServerSocket::read() {
                 break;
             }
 
-            default: {
+            case START_COUNTDOWN_PACKET: {
+                StartCountdownPacket p;
+                p.readData(*socket);
+                emit startCountdown(p, id);
+            }
+            case END_ROUND_PACKET: {
+                EndRoundPacket p;
+                p.readData(*socket);
+                emit endRound(p,id);
+        }
+                default: {
 
             }
         }
