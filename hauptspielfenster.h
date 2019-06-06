@@ -17,6 +17,12 @@ public:
     void setCategories(QVector<QString> categories);
     void setPlayers(QVector<QString> players, QString clientName);
 
+    void newRow();
+
+    QVector<QString> getAnswers();
+
+signals:
+    void fertig();
 
 private slots:
     void on_buttonFertig_clicked();
@@ -26,6 +32,7 @@ private slots:
 private:
     Ui::HauptSpielFenster *ui;
     void ready();
+    int currentRow;
 };
 
 #endif // HAUPTSPIELFENSTER_H

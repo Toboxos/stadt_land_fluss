@@ -81,6 +81,8 @@ void ClientLogic::openClientIpEingabe()
 
 void ClientLogic::openHauptSpielFenster(){
     _hautpSpielFenster = new HauptSpielFenster(nullptr);
+    QObject::connect(_hautpSpielFenster, SIGNAL(fertig()), this, SLOT(fensterFertig()));
+
     _hautpSpielFenster->show();
 }
 
@@ -105,4 +107,8 @@ void ClientLogic::starteSpiel(GameSettingsPacket Packet){
     this->_einstellung.setKategories(Packet.getCategories());
     this->openHauptSpielFenster();
     _hautpSpielFenster->setCategories(Packet.getCategories());
+}
+
+void ClientLogic::fensterFertig() {
+
 }

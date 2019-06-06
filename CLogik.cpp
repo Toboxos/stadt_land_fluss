@@ -287,10 +287,10 @@ void CLogik::openHostSpielEinstellungen()
  }
 
  void CLogik::sendeRundenStart(){
-     RoundStartPacket Packet(this->getLetter());
+     RoundStartPacket packet(getLetter());
      for(unsigned int i = 0; i < players.size(); i++){
 
-         serverSocket.send(players[i].getConnectionId(), Packet);
+         serverSocket.send(players[i].getConnectionId(), packet);
 
      }
  }

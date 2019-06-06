@@ -15,7 +15,7 @@ HauptSpielFenster::HauptSpielFenster(QWidget *parent) :
 //...................................... todo Punkte und Buchstabenriehe enablen.....................................................................................................................................................
     ui->setupUi(this);
     ui->tableSpiel->resizeColumnsToContents();
-    int zeilenZaehler = 0;
+    currentRow = 0;
 
 
     ui->tableSpiel->setRowCount(0);
@@ -75,6 +75,14 @@ HauptSpielFenster::~HauptSpielFenster()
 void HauptSpielFenster::on_buttonFertig_clicked()
 {
 // todo an server soll gemeldet werden dass ferttig, dann countdown runterzählen. bei end of countdown table enable und die einträge in array speichern.
+// reihe disabel
+    emit fertig();
+}
+
+void HauptSpielFenster::newRow() {
+    ++currentRow;
+    ui->tableSpiel->setRowCount(currentRow);
+
 }
 
 
