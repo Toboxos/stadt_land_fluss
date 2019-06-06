@@ -29,6 +29,8 @@ public slots:
 
 #endif // TIMER_H
 /*
+From: Prof Hoff
+To: all
 666 hail satan 666
 ich bin eine böse hexe
     /\
