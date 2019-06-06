@@ -22,6 +22,9 @@ void ClientLogic::connect(QString name, QString ip, quint16 port, ClientIpEingab
    QObject::connect(&_clientSocket, SIGNAL(receivedGameSettings(GameSettingsPacket)), this, SLOT(starteSpiel(GameSettingsPacket)));
    QObject::connect(&_clientSocket, SIGNAL(playerJoined(PlayerJoinPacket)), this, SLOT(playerJoinedSlot(PlayerJoinPacket)));
    QObject::connect(&_clientSocket, SIGNAL(receivedPlayerList(PlayerListPacket)), this, SLOT(receivedPlayerListSlot(PlayerListPacket)));
+   QObject::connect(&_clientSocket, SIGNAL(startCountdown(StartCountdownPacket)), this, SLOT(receivedStartCountdown(StartCountdownPacket)));
+   QObject::connect(&_clientSocket, SIGNAL(roundStart(RoundStartPacket)), this, SLOT(receivedRoundStart(RoundStartPacket)));
+   QObject::connect(&_clientSocket, SIGNAL(endRound(EndRoundPacket)), this, SLOT(receivedRoundEnd(EndRoundPacket)));
    QObject::connect(&_clientSocket, SIGNAL(timeout()), this, SLOT(timeoutSlot()));
    QObject::connect(&_clientSocket, SIGNAL(connected()), this, SLOT(connectedSlot()));
    QObject::connect(&_clientSocket, SIGNAL(error()), this, SLOT(errorSlot()));
@@ -59,6 +62,15 @@ void ClientLogic::receivedPlayerListSlot(PlayerListPacket Packet){
     }
     //Anzeigen??
 }
+
+void ClientLogic::receivedStartCountdown(StartCountdownPacket packet){
+    qDebug() << "Runde startet in 3 Sekunden";
+}
+
+void ClientLogic::receivedRoundEnd(EndRoundPacket Packet){
+    qDebug() << "Runde ist beendet";
+}
+
 void ClientLogic::timeoutSlot(){
     //timeout
     qDebug() << "Timeout :((" << endl;

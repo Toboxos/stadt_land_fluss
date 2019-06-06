@@ -7,6 +7,9 @@
 #include "CLogik.h"
 #include "hauptspielfenster.h"
 #include "Network/Packets/playerfinishedpacket.h"
+#include "Network/Packets/endroundpacket.h"
+#include "Network/Packets/startcountdownpacket.h"
+
 class ClientIpEingabe;
 class ClientLogic : public QObject
 {
@@ -40,6 +43,9 @@ public slots:
     void starteSpiel(GameSettingsPacket Packet);
     void serverBereit();
     void fensterFertig();
+    void receivedStartCountdown(StartCountdownPacket Packet);
+    void receivedRoundStart(RoundStartPacket Packet);
+    void receivedRoundEnd(EndRoundPacket Packet);
 };
 
 
