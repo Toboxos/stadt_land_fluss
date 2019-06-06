@@ -1,13 +1,12 @@
 #include "timer.h"
-#include <QtCore>
-#include <QtDebug>
-#include <spielerliste.h>
 
 ///<summary> constructor of timer class </summary>
 /// <parameters> </parameters>
-timer::timer(CLogik *cLogic)
+timer::timer(unsigned int Rundendauer, unsigned int Countdowndauer, unsigned int zeitNachFinished)
 {
-    clogic = cLogic;
+    roundduration = Rundendauer;
+    countdowntime = Countdowndauer;
+    timeafterfinished = zeitNachFinished;
     InternalTimer = new QTimer(this);
 }
 ///<summary> destructor of timer class</summary>
@@ -17,20 +16,35 @@ timer::~timer()
     delete InternalTimer;
 }
 
-void timer::startRound(){
-    QTimer::singleShot((clogic->getSpieleinstellungen()->getRundendauer()-10)*1000, this, SLOT(endRound()));
-}
-
-///<summary> is called on Round end, when a Player completed his words </summary>
+///<summary>is called when the round is supposed to start </summary>
 ///<parameters> </parameters>
-void timer::endRound(){
-    QTimer::singleShot(clogic->getSpieleinstellungen()->getCountdown()*1000, this, SLOT(roundEnd()));
+void timer::startRound(){
+    emit signalStartCountdown();
+    this->singleShot(countdowntime*1000, this, SLOT(startInput()));
 }
 
-///<summary> slot that executes when timer runs out</summary>
-/// <parameters> </parameters>
-void timer::roundEndSlot()
+///<summary> slot is called when Player input should be started</summary>
+///<parameters> </parameters>
+void timer::startInput()
 {
-    qDebug() << "Timer executed";
+    this->stop();
+    emit signalStartInput();
+    this->singleShot((roundduration-10)*1000, this, SLOT(receivedPlayerFinished()));
 }
 
+///<summary> slot that executes when Player completed his caregories or time runs out</summary>
+/// <parameters> </parameters>
+void timer::receivedPlayerFinished()
+{
+    this->stop();
+    emit signalPlayerFinished();
+    this->singleShot(timeafterfinished*1000, this, SLOT(endRound()));
+}
+
+///<summary> slot is called when Player input should be closed</summary>
+///<parameters> </parameters>
+void timer::endRound()
+{
+    this->stop();
+    emit signalRoundOver();
+}

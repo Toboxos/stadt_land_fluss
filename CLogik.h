@@ -17,6 +17,7 @@
 #include "Network/serversocket.h"
 #include "spieleinstellungen.h"
 #include "spielerwarteraum.h"
+#include "timer.h"
 using namespace std;
 class CLogik : public QObject {
     Q_OBJECT
@@ -95,6 +96,7 @@ private:
     char usedLetters[26];
     ServerSocket serverSocket;
     Spieleinstellungen  _einstellung ;
+    timer roundTimer;
 
 
 };
