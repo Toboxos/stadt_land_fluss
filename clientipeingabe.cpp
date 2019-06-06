@@ -27,12 +27,7 @@ void ClientIpEingabe::on_eingabeIp_textEdited(const QString &arg1)
     ui->buttonWeiter->setEnabled(true);
 }
 
-void ClientIpEingabe::on_buttonZurueck_clicked()
-{
-    close();
-    SpielStart start;
-    start.exec();
-}
+
 
 void ClientIpEingabe::on_buttonWeiter_clicked()
 {
