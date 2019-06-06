@@ -2,7 +2,6 @@
 #define TIMER_H
 
 #include <QtCore>
-#include "CLogik.h"
 class timer : public QTimer
 {
 

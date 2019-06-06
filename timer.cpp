@@ -1,7 +1,4 @@
 #include "timer.h"
-#include <QtCore>
-#include <QtDebug>
-#include <spielerliste.h>
 
 ///<summary> constructor of timer class </summary>
 /// <parameters> </parameters>

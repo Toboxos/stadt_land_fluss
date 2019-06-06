@@ -5,7 +5,6 @@
 #include "hostspieleinstellungen.h"
 #include "spielerwarteraum.h"
 #include "kategorieeingabe.h"
-#include "timer.h"
 
 CLogik::CLogik() : warteRaum(nullptr) {
 }
