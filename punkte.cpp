@@ -9,10 +9,6 @@ punkte::punkte(QVector<int> p)
     points = p;
 }
 
-punkte::~punkte() {
-
-}
-
 QVector<int> punkte::getPunkte(){
     return points;
 }

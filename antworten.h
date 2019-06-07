@@ -9,10 +9,25 @@ using namespace std;
 class antworten{
    public:
     antworten();
-    antworten(QVector<QString>);
 
+    ///
+    /// \brief creates an object of type antworten and saves the received answers for one round in vector answers
+    /// \param received answers for one round
+    ///
+    antworten(QVector<QString> a);
+
+    ///
+    /// \brief gets the answers for one round
+    /// \return answers
+    ///
     QVector<QString> getAntworten();
-    void setAntworten(QString,int);
+
+    ///
+    /// \brief saves the answer for category i
+    /// \param answer for category
+    /// \param category number
+    ///
+    void setAntworten(QString a,int i);
 
     private:
     QVector<QString> answers;
