@@ -2,7 +2,8 @@
 #define HAUPTSPIELFENSTER_H
 
 #include <QMainWindow>
-
+#include "QMessageBox"
+#include "QTableWidgetItem"
 namespace Ui {
 class HauptSpielFenster;
 }
@@ -32,12 +33,14 @@ private slots:
 
 
 private:
+    QMessageBox box;
     void setLetter(char letter);
      void fillAnswerVector();
     QVector<QString> answerVector ;
     Ui::HauptSpielFenster *ui;
     void ready();
     int currentRow;
+    QTableWidgetItem* item = nullptr;
 };
 
 #endif // HAUPTSPIELFENSTER_H

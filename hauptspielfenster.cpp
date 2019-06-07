@@ -56,15 +56,34 @@ QVector<QString> HauptSpielFenster::getAnserVector()
 HauptSpielFenster::~HauptSpielFenster()
 {
     delete ui;
+    delete item;
 }
 void HauptSpielFenster::startCountdown(){
-
+    box.setText("Die Runde startet in 3 Sekunden");
+    box.open();
     //Zeige an, dass das Spiel in 3 Sekunden Startet
 
 }
 void HauptSpielFenster::enableUserinput(char letter){
+    box.close();
     setLetter(letter);
+    qDebug() << "Box sollte zu sein";
     //erlaube benutzerinput also gebe die Runde frei
+}
+void HauptSpielFenster::setLetter(char letter){
+    QString letterString(letter);
+    if(ui->tableSpiel->item(0,0)==nullptr){
+
+        item = new QTableWidgetItem(letterString, 0);
+        item->setText(letterString);
+        ui->tableSpiel->setItem(0,0,item);
+
+    }else{
+
+        ui->tableSpiel->item(0,0)->setText(letterString);
+
+    }
+    ui->tableSpiel->update();
 }
 void HauptSpielFenster::on_buttonFertig_clicked()
 {
