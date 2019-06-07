@@ -4,6 +4,7 @@
 #include<QVector>
 #include <QString>
 #include "spieler.h"
+#include <QDebug>
 using namespace std;
 
 class antworten{
