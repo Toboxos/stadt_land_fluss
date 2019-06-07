@@ -29,15 +29,17 @@ void CLogik::starteServerSocket() {
 }
 
 void CLogik::bekommt_antwort(SendAnswersPacket packet, unsigned int id){
+
     for(int i = 0; i < players.size(); i++){
 
-        if(players[i].getConnectionId() == id){
+        if(players[i].getConnectionId() == id)
             players[i].setAnswers(packet.getAnswers());
-        }else{
-            serverSocket.send(players[i].getConnectionId(), packet);
-        }
+
     }
     qDebug() << "Ich hab die Antworten bekommen";
+    answersReceived++;
+    if(answersReceived == players.size())
+        Punktevergabe();
 }
 
 void CLogik::spieler_beitritt(PlayerJoinPacket packet, unsigned int id){
@@ -109,7 +111,7 @@ QVector<QString> CLogik::sortAnswers(unsigned int category) {
 
 void CLogik::Punktevergabe(){
     unsigned int categories = players[0].Categories();
-
+    qDebug() << "Heim? cool, schön wünsch ich dir viel Spaß";
     for (unsigned int var = 0;var < categories; ++var) {
         answers[var]= sortAnswers(var);
     }
@@ -140,8 +142,7 @@ void CLogik::Punktevergabe(){
 
         serverSocket.send(player.getConnectionId(), packet);
     }
-
-    sendeRundenStart();
+    roundTimer->rundenPausenTimer();
 }
 
 
@@ -154,6 +155,7 @@ QVector<int> CLogik::awardPoints(unsigned int category){
     for (unsigned int var = 0; var < anzahl; ++var) {
         if (antworten[var] == "" || antworten[var][0] != m_letter){
             points[var] = 0;
+            qDebug() << "0 Punkte";
         }
         else {
             points[var] = 10;
@@ -315,11 +317,17 @@ void CLogik::sendeRundenStart(){
         qDebug() << "Spiel fertig";
 }
  }
+
+void CLogik::nextRound(){
+    sendeRundenStart();
+}
+
  void CLogik::setupTimer(){
     QObject::connect(roundTimer, SIGNAL(signalStartInput()), this, SLOT(startInput()));
     QObject::connect(roundTimer, SIGNAL(signalPlayerFinished()), this, SLOT(playerFinished()));
     QObject::connect(roundTimer, SIGNAL(signalRoundOver()), this, SLOT(endInput()));
     QObject::connect(this, SIGNAL(initRoundEnd()), roundTimer, SLOT(receivedPlayerFinished()));
+    QObject::connect(roundTimer, SIGNAL(pausenTimer()), this, SLOT(nextRound()));
  }
 
  void CLogik::startInput(){

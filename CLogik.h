@@ -103,12 +103,15 @@ public slots:
 
     void bekommt_playerFinished(PlayerFinishedPacket packet, unsigned int id);
 
+    void nextRound();
+
 signals:
     void serverBereit();
 
     void initRoundEnd();
 
 private:
+    int answersReceived = 0;
     int currentRound = 0;
     void setupTimer();
     SpielerWarteRaum *warteRaum;

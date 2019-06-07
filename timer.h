@@ -12,6 +12,7 @@ public:
     timer(unsigned int Rundendauer, unsigned int Countdowndauer, unsigned int zeitNachFinished);
     ~timer();
     void startRound();
+    void rundenPausenTimer();
 private:
     QTimer *InternalTimer;
     unsigned int roundduration;
@@ -21,6 +22,7 @@ signals:
     void signalStartInput();
     void signalPlayerFinished();
     void signalRoundOver();
+    void pausenTimer();
 public slots:
     void startInput();
     void receivedPlayerFinished();
