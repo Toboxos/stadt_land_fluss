@@ -26,9 +26,7 @@ using namespace std;
 class CLogik : public QObject {
     Q_OBJECT
 public:
-    /**
-     * @brief CLogik erstellt ein CLogik-Objekt
-     */
+
     CLogik();
     ~CLogik();
 
@@ -38,37 +36,46 @@ public:
 
 
     /**
-     * @brief sortAnswers sortiert Antworten nach Kategorien
-     * @param category Anzahl Kategorien
-     * @return QVector<QString> mit Antworten für Kategorie
+     * @brief sorts answers by category
+     * @param number of category
+     * @return answers by category
      */
     QVector<QString> sortAnswers(unsigned int category);
 
     /**
-     * @brief vergibt die Punkte für eine Kategorie
-     * @param category Anzahl Kategorien
-     * @return QVector mit Punkten für Kategorie
+     * @brief awards points for category
+     * @param number of category
+     * @return points for category
      */
     QVector<int> awardPoints(unsigned int category);
 
     /**
-     * @brief regelt die Punktevergabe für eine Runde
+     * @brief organizes the awarding of points, returning the points to the players, saving the total credits
      */
     void Punktevergabe();
 
     /**
-     * @brief ordnet die Spieler nach Gesamtpunktzahl
-     * @return QVector mit Spielernamen nach Platzierung geordnet
+     * @brief sorts players by total credit
+     * @return players organized by rank
      */
     QVector<QString> getWinner();
 
     /**
-     * @brief zufälliger Buchstabe für Runde, wiederholt sich alle 26 Runden
-     * @return Anfangsbuchstabe für Runde
+     * @brief random letter for round, repeated letters only when every letter in the english alphabet has been used
+     * @return letter for round
      */
     char getLetter();
 
+    ///
+    /// \brief getSpieleinstellungen
+    /// \return
+    ///
     Spieleinstellungen* getSpieleinstellungen();
+
+    ///
+    /// \brief getSpielerListe
+    /// \return
+    ///
     QVector<Spieler>* getSpielerListe();
     void starteServerSocket();
     void openHostSpielEinstellungen();
