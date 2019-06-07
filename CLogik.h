@@ -109,6 +109,7 @@ signals:
     void initRoundEnd();
 
 private:
+    int currentRound = 0;
     void setupTimer();
     SpielerWarteRaum *warteRaum;
     QVector<Spieler> players;

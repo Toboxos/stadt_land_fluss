@@ -24,7 +24,6 @@ public:
     void setSpieler(Spieler spieler);
     Spieler getSpieler();
     void sendAnswers();
-    void done();
     void setAnswerVector(QVector<QString>);
 private:
     ClientSocket _clientSocket;
@@ -49,6 +48,7 @@ public slots:
     void receivedStartCountdown(StartCountdownPacket Packet);
     void receivedRoundStart(RoundStartPacket Packet);
     void receivedRoundEnd(EndRoundPacket Packet);
+    void playerFinished(PlayerFinishedPacket Packet);
 
 };
 

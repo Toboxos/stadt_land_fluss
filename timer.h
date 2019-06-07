@@ -2,6 +2,7 @@
 #define TIMER_H
 
 #include <QtCore>
+#include "Network/Packets/playerfinishedpacket.h"
 class timer : public QTimer
 {
 

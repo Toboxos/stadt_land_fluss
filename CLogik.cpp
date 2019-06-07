@@ -22,6 +22,8 @@ void CLogik::run() {
 
 void CLogik::starteServerSocket() {
     connect(&serverSocket, SIGNAL(playerJoined(PlayerJoinPacket, unsigned int)), this, SLOT(spieler_beitritt(PlayerJoinPacket, unsigned int)));
+    connect(&serverSocket, SIGNAL(playerFinished(PlayerFinishedPacket, unsigned int)), this, SLOT(bekommt_playerFinished(PlayerFinishedPacket, unsigned int)));
+    connect(&serverSocket, SIGNAL(answersSent(SendAnswersPacket, unsigned int)), this, SLOT(bekommt_antwort(SendAnswersPacket, unsigned int)));
     serverSocket.listen(PORT);
     emit serverBereit();
 }
@@ -35,6 +37,7 @@ void CLogik::bekommt_antwort(SendAnswersPacket packet, unsigned int id){
             serverSocket.send(players[i].getConnectionId(), packet);
         }
     }
+    qDebug() << "Ich hab die Antworten bekommen";
 }
 
 void CLogik::spieler_beitritt(PlayerJoinPacket packet, unsigned int id){
@@ -138,7 +141,7 @@ void CLogik::Punktevergabe(){
         serverSocket.send(player.getConnectionId(), packet);
     }
 
-
+    sendeRundenStart();
 }
 
 
@@ -303,10 +306,14 @@ void CLogik::openHostSpielEinstellungen()
      setupTimer();
  }
 
- void CLogik::sendeRundenStart(){
-    StartCountdownPacket packet;
-    sendToAll(packet);
-    roundTimer->startRound();
+void CLogik::sendeRundenStart(){
+    if(currentRound < getSpieleinstellungen()->getRundenanzahl()){    StartCountdownPacket packet;
+        sendToAll(packet);
+        roundTimer->startRound();
+        currentRound++;
+    }else{
+        qDebug() << "Spiel fertig";
+}
  }
  void CLogik::setupTimer(){
     QObject::connect(roundTimer, SIGNAL(signalStartInput()), this, SLOT(startInput()));
@@ -323,6 +330,7 @@ void CLogik::openHostSpielEinstellungen()
  void CLogik::playerFinished(){
     PlayerFinishedPacket packet;
     sendToAll(packet);
+
  }
 
  void CLogik::endInput(){
@@ -330,6 +338,6 @@ void CLogik::openHostSpielEinstellungen()
     sendToAll(packet);
  }
 
- void CLogik::bekommt_playerFinished(PlayerFinishedPacket packet,unsigned int id){
-    emit initRoundEnd();
+ void CLogik::bekommt_playerFinished(PlayerFinishedPacket Packet, unsigned int id){
+     emit initRoundEnd();
  }

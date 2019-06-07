@@ -90,11 +90,13 @@ void ClientSocket::read() {
                 StartCountdownPacket p;
                 p.readData(m_socket);
                 emit startCountdown(p);
+                break;
             }
             case END_ROUND_PACKET: {
                 EndRoundPacket p;
                 p.readData(m_socket);
                 emit endRound(p);
+                break;
             }
 
 
