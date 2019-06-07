@@ -30,6 +30,7 @@ void CLogik::starteServerSocket() {
 
 void CLogik::bekommt_antwort(SendAnswersPacket packet, unsigned int id){
     qDebug() << players.size() << "Spieler sind angemeldet";
+
     for(int i = 0; i < players.size(); i++){
 
         if(players[i].getConnectionId() == id)
@@ -37,11 +38,8 @@ void CLogik::bekommt_antwort(SendAnswersPacket packet, unsigned int id){
     }
     qDebug() << "Ich hab die Antworten bekommen";
 
-    Spieler test = players[0];
-    QString testantwort = test.getAnswer(1);
-    qDebug() << testantwort;
-
     answersReceived++;
+
     if(answersReceived == players.size())
         Punktevergabe();
 }
@@ -77,9 +75,6 @@ void CLogik::spieler_beitritt(PlayerJoinPacket packet, unsigned int id){
     warteRaum->showPlayer();
     qDebug() << "Spieler beigetreten";
 
-    for (unsigned int var = 0; var < players.size(); ++var) {
-        qDebug() << players[var].getName() << endl;
-    }
 
 }
 
