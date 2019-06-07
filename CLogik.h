@@ -7,7 +7,15 @@
 #include <QObject>
 #include <QString>
 
+// When unit testing, dont include original ServerSocket
+// indeed include MockServerSocket which simulate an ServerSocket
+#ifdef UNIT_TEST
+#include "UnitTests/mock_classes/mockserversocket.h"
+typedef MockServerSocket ServerSocket;
+#else
 #include "Network/serversocket.h"
+#endif
+
 #include "antworten.h"
 #include "spieler.h"
 #include "punkte.h"

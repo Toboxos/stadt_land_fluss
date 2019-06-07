@@ -24,7 +24,7 @@ DEFINES += PORT=1234
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-CONFIG += c++11
+CONFIG += c++11 SeverLogicTest
 
 SOURCES += \
     Network/serversocket.cpp \
@@ -103,7 +103,17 @@ PacketTests {
                 UnitTests/Tests/roundstartpackettest.cpp
     HEADERS +=  UnitTests/Tests/test.h \
                 UnitTests/Tests/gamesettingspackettest.h \
-                UnitTests/Tests/roundstartpackettest.h \
+                UnitTests/Tests/roundstartpackettest.h
+}
+
+SeverLogicTest {
+    TARGET = ServerLogicTest
+    QT += testlib
+    DEFINES +=  UNIT_TEST
+    SOURCES -=  main.cpp
+    SOURCES +=  UnitTests/serverlogictest.cpp \
+                UnitTests/mock_classes/mockserversocket.cpp
+    HEADERS +=  UnitTests/mock_classes/mockserversocket.h
 }
 
 # Default rules for deployment.
