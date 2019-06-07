@@ -68,6 +68,7 @@ void ClientLogic::receivedPlayerListSlot(PlayerListPacket Packet){
 
 void ClientLogic::receivedStartCountdown(StartCountdownPacket packet){
     qDebug() << "Runde startet in 3 Sekunden";
+    _hautpSpielFenster->startCountdown();
 }
 
 void ClientLogic::receivedRoundEnd(EndRoundPacket Packet){
@@ -129,6 +130,5 @@ PlayerFinishedPacket packet(getSpieler().getName());
 _clientSocket.send(packet);
 }
 void ClientLogic::receivedRoundStart(RoundStartPacket Packet){
-    Packet.getLetter();
-    //Starte die Runde
+    _hautpSpielFenster->enableUserinput(Packet.getLetter());
 }

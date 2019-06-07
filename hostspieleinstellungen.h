@@ -32,7 +32,7 @@ private:
 
     CLogik *_cLogik;
     bool checkBoxChecked= false;
-   CLogik *_serverLogic;
+    CLogik *_serverLogic;
     Ui::HostSpielEinstellungen *ui;
 };
 
