@@ -115,16 +115,20 @@ void ClientLogic::done(){
 }
 
 void ClientLogic::starteSpiel(GameSettingsPacket Packet){
-    this->_einstellung.setCountdown(Packet.getCountown());
-    this->_einstellung.setPlayName(Packet.getGameName());
-    this->_einstellung.setRoundNumber(Packet.getRoundNumbers());
-    this->_einstellung.setRoundTimeLimit(Packet.getRoundDuration());
-    this->_einstellung.setKategories(Packet.getCategories());
-    this->openHauptSpielFenster();
+    _einstellung.setCountdown(Packet.getCountown());
+    _einstellung.setPlayName(Packet.getGameName());
+    _einstellung.setRoundNumber(Packet.getRoundNumbers());
+    _einstellung.setRoundTimeLimit(Packet.getRoundDuration());
+    _einstellung.setKategories(Packet.getCategories());
+    openHauptSpielFenster();
     _hautpSpielFenster->setCategories(Packet.getCategories());
 }
 
 void ClientLogic::fensterFertig() {
 PlayerFinishedPacket packet(getSpieler().getName());
 _clientSocket.send(packet);
+}
+void ClientLogic::receivedRoundStart(RoundStartPacket Packet){
+    Packet.getLetter();
+    //Starte die Runde
 }

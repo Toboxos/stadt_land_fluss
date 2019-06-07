@@ -57,7 +57,15 @@ HauptSpielFenster::~HauptSpielFenster()
 {
     delete ui;
 }
+void HauptSpielFenster::startCountdown(){
 
+    //Zeige an, dass das Spiel in 3 Sekunden Startet
+
+}
+void HauptSpielFenster::enableUserinput(char letter){
+    setLetter(letter);
+    //erlaube benutzerinput also gebe die Runde frei
+}
 void HauptSpielFenster::on_buttonFertig_clicked()
 {
 

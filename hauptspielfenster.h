@@ -20,7 +20,8 @@ public:
 
     void newRow();
     QVector<QString> getAnserVector();
-
+    void startCountdown();
+    void enableUserinput(char letter);
 signals:
 
     void fertig();
@@ -31,6 +32,7 @@ private slots:
 
 
 private:
+    void setLetter(char letter);
      void fillAnswerVector();
     QVector<QString> answerVector ;
     Ui::HauptSpielFenster *ui;
