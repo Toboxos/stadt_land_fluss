@@ -42,13 +42,16 @@ void HauptSpielFenster::setPlayers(QVector<QString> players, QString clientName)
 void HauptSpielFenster::fillAnswerVector()
 {
 
-    for (int columCount = 0; columCount < ui->tableSpiel->columnCount(); ++columCount)
+    for (int columCount = 1; columCount < (ui->tableSpiel->columnCount()) -1; ++columCount)
     {
         if(ui->tableSpiel->item(currentRow,columCount) != nullptr)
             answerVector.push_back(ui->tableSpiel->item(currentRow,columCount)->text());
+
         else
             answerVector.push_back("");
+
     }
+
    ui->tableSpiel->setEnabled(true);
 }
 

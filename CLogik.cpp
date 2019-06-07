@@ -29,14 +29,18 @@ void CLogik::starteServerSocket() {
 }
 
 void CLogik::bekommt_antwort(SendAnswersPacket packet, unsigned int id){
-
+    qDebug() << players.size() << "Spieler sind angemeldet";
     for(int i = 0; i < players.size(); i++){
 
         if(players[i].getConnectionId() == id)
             players[i].setAnswers(packet.getAnswers());
-
     }
     qDebug() << "Ich hab die Antworten bekommen";
+
+    Spieler test = players[0];
+    QString testantwort = test.getAnswer(1);
+    qDebug() << testantwort;
+
     answersReceived++;
     if(answersReceived == players.size())
         Punktevergabe();
@@ -71,11 +75,11 @@ void CLogik::spieler_beitritt(PlayerJoinPacket packet, unsigned int id){
     qDebug() << spieler.getName() << " hat sich verbunden" << endl;
 
     warteRaum->showPlayer();
-    /*qDebug() << "Spieler beigetreten";
+    qDebug() << "Spieler beigetreten";
 
     for (unsigned int var = 0; var < players.size(); ++var) {
-        std::cout << players[var].getName() << std::endl;
-    }*/
+        qDebug() << players[var].getName() << endl;
+    }
 
 }
 
@@ -99,6 +103,7 @@ int CLogik::createPlayer(QString name) {
 }
 
 QVector<QString> CLogik::sortAnswers(unsigned int category) {
+    qDebug() << "ich bin in sort answers";
     unsigned int anzahl = players.size();
     QVector<QString> antwortenKategorie;
 
@@ -111,9 +116,10 @@ QVector<QString> CLogik::sortAnswers(unsigned int category) {
 
 void CLogik::Punktevergabe(){
     unsigned int categories = players[0].Categories();
-    qDebug() << "Heim? cool, schön wünsch ich dir viel Spaß";
+    qDebug() << "ich bin in der punktevergabe";
     for (unsigned int var = 0;var < categories; ++var) {
         answers[var]= sortAnswers(var);
+        qDebug() << "ich habe die Antworten sortiert";
     }
 
     for (unsigned int n = 0; n < categories; ++n){
