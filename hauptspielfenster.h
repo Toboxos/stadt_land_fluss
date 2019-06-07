@@ -2,6 +2,7 @@
 #define HAUPTSPIELFENSTER_H
 
 #include <QMainWindow>
+
 namespace Ui {
 class HauptSpielFenster;
 }
@@ -18,10 +19,10 @@ public:
     void setPlayers(QVector<QString> players, QString clientName);
 
     void newRow();
-
-    QVector<QString> getAnswers();
+    QVector<QString> getAnserVector();
 
 signals:
+
     void fertig();
 
 private slots:
@@ -30,6 +31,8 @@ private slots:
 
 
 private:
+     void fillAnswerVector();
+    QVector<QString> answerVector ;
     Ui::HauptSpielFenster *ui;
     void ready();
     int currentRow;

@@ -30,6 +30,8 @@ void Spieler::setConnectionId(unsigned int id){
 
 void Spieler::setAnswers(QVector<QString> antworten){
     answers = antworten;
+
+
 }
 
 unsigned int Spieler::getConnectionId(){

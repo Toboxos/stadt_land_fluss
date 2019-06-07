@@ -14,7 +14,10 @@ ClientLogic::~ClientLogic() {
     delete _clogik;
     delete _hautpSpielFenster;
 }
-
+void ClientLogic::setAnswerVector(QVector<QString> answerVector)
+{
+    _answerVector = answerVector;
+}
 void ClientLogic::connect(QString name, QString ip, quint16 port, ClientIpEingabe *window)
 {
 
@@ -92,7 +95,7 @@ void ClientLogic::openClientIpEingabe()
 }
 
 void ClientLogic::openHauptSpielFenster(){
-    _hautpSpielFenster = new HauptSpielFenster(nullptr);
+    _hautpSpielFenster = new HauptSpielFenster();
     QObject::connect(_hautpSpielFenster, SIGNAL(fertig()), this, SLOT(fensterFertig()));
 
     _hautpSpielFenster->show();

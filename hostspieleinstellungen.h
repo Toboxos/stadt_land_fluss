@@ -29,6 +29,7 @@ private slots:
     void on_inputGameName_textEdited(const QString &arg1);
 
 private:
+
     CLogik *_cLogik;
     bool checkBoxChecked= false;
    CLogik *_serverLogic;
