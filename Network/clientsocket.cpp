@@ -86,6 +86,17 @@ void ClientSocket::read() {
                 break;
             }
 
+            case START_COUNTDOWN_PACKET: {
+                StartCountdownPacket p;
+                p.readData(m_socket);
+                emit startCountdown(p);
+            }
+            case END_ROUND_PACKET: {
+                EndRoundPacket p;
+                p.readData(m_socket);
+                emit endRound(p);
+            }
+
 
             default: {
 

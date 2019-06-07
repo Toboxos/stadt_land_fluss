@@ -11,6 +11,8 @@
 #include "Packets/sendpointspacket.h"
 #include "Packets/endgamepacket.h"
 #include "Packets/playerfinishedpacket.h"
+#include "Packets/endroundpacket.h"
+#include "Packets/startcountdownpacket.h"
 
 /**
  * @brief Server for handling connections and sending/receiving packets
@@ -55,6 +57,10 @@ class ServerSocket : public QObject {
         void endGame(EndGamePacket packet, unsigned int id);
 
         void playerFinished(PlayerFinishedPacket packet, unsigned int id);
+
+        void startCountdown(StartCountdownPacket packet, unsigned int id);
+
+        void endRound(EndRoundPacket packet, unsigned int id);
 
     private slots:
 

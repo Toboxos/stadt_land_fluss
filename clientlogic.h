@@ -6,6 +6,10 @@
 #include "Network/Packets/sendanswerspacket.h"
 #include "CLogik.h"
 #include "hauptspielfenster.h"
+#include "Network/Packets/playerfinishedpacket.h"
+#include "Network/Packets/endroundpacket.h"
+#include "Network/Packets/startcountdownpacket.h"
+
 class ClientIpEingabe;
 class ClientLogic : public QObject
 {
@@ -21,6 +25,7 @@ public:
     Spieler getSpieler();
     void sendAnswers();
     void done();
+    void setAnswerVector(QVector<QString>);
 private:
     ClientSocket _clientSocket;
     CLogik* _clogik;
@@ -28,6 +33,8 @@ private:
     HauptSpielFenster* _hautpSpielFenster;
 
     QVector<Spieler> _spielerListe;
+    QVector<QString> _answerVector;
+
     Spieler clientSpieler;
     Spieleinstellungen  _einstellung ;
 public slots:
@@ -39,6 +46,10 @@ public slots:
     void starteSpiel(GameSettingsPacket Packet);
     void serverBereit();
     void fensterFertig();
+    void receivedStartCountdown(StartCountdownPacket Packet);
+    void receivedRoundStart(RoundStartPacket Packet);
+    void receivedRoundEnd(EndRoundPacket Packet);
+
 };
 
 

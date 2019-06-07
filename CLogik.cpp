@@ -7,10 +7,12 @@
 #include "kategorieeingabe.h"
 
 CLogik::CLogik() : warteRaum(nullptr) {
+    srand(time(NULL));
 }
 
 CLogik::~CLogik(){
     delete warteRaum;
+    delete roundTimer;
 }
 
 void CLogik::run() {
@@ -25,7 +27,7 @@ void CLogik::starteServerSocket() {
 }
 
 void CLogik::bekommt_antwort(SendAnswersPacket packet, unsigned int id){
-    for(unsigned int i = 0; i < players.size(); i++){
+    for(int i = 0; i < players.size(); i++){
 
         if(players[i].getConnectionId() == id){
             players[i].setAnswers(packet.getAnswers());
@@ -39,10 +41,10 @@ void CLogik::spieler_beitritt(PlayerJoinPacket packet, unsigned int id){
 
     // Jedem aktuell gespeichert Spieler mitteilen, dass ein neuer Spieler beigetreten ist:
     // Einmal den Spieler Vektor durchgehen
-    for( unsigned int i = 0; i < players.size(); ++i ) {
+    for(int i = 0; i < players.size(); ++i ) {
 
         // Client braucht ein PlayerJoinPacket mit dem Name des Spielers
-        // Das Paket, das der Server bekommt enthält den Namen des Spielers, wir können es direkt weiterleiten
+        // Das Paket, das der Server bekommt enth?lt den Namen des Spielers, wir k?nnen es direkt weiterleiten
         serverSocket.send(players[i].getConnectionId(), packet);
     }
 
@@ -147,17 +149,18 @@ QVector<int> CLogik::awardPoints(unsigned int category){
     int sum = 0;
 
     for (unsigned int var = 0; var < anzahl; ++var) {
-        if (antworten[var] == ""){
+        if (antworten[var] == "" || antworten[var][0] != m_letter){
             points[var] = 0;
         }
         else {
             points[var] = 10;
         }
         for (unsigned int n = 0; n < anzahl; ++n) {
-            if (n != var){
-                if (antworten[var] == antworten [n]){
+            if (n != var && antworten[var] == antworten [n]){
                     points[var] = 5;
                 }
+            else {
+                //do nothing - same player or different answers
             }
         }
     }
@@ -219,6 +222,9 @@ char CLogik::getLetter(){
             usedLetters[var] = 0x00;
         }
     }
+    else {
+        //do nothing
+    }
 
     char letter;
     bool success = false;
@@ -232,7 +238,13 @@ char CLogik::getLetter(){
         if (usedLetters[var] == letter){
             success = false;
         }
+        else if(usedLetters[var] == 0x00){
+            usedLetters[var] = letter;
+            break;
+        }
     }
+
+    m_letter = letter;
 
     }
 
@@ -265,9 +277,15 @@ void CLogik::openHostSpielEinstellungen()
      warteRaum->exec();
      }
 
+ void CLogik::sendToAll(Packet& p){
+     for(unsigned int i = 0; i < players.size(); i++){
+         serverSocket.send(players[i].getConnectionId(), p);
+     }
+ }
+
  void CLogik::sendeSpielStart(){
 
-     GameSettingsPacket Packet(this->getSpieleinstellungen()->getSpielname(), this->getSpieleinstellungen()->getRundenanzahl(), this->getSpieleinstellungen()->getRundendauer(), this->getSpieleinstellungen()->getCountdown(), this->getSpieleinstellungen()->getKategorienListe());
+     GameSettingsPacket packet(this->getSpieleinstellungen()->getSpielname(), this->getSpieleinstellungen()->getRundenanzahl(), this->getSpieleinstellungen()->getRundendauer(), this->getSpieleinstellungen()->getCountdown(), this->getSpieleinstellungen()->getKategorienListe());
      PlayerListPacket playerListPacket;
      QVector <QString> vorherigeSpieler(players.size());
 
@@ -278,18 +296,40 @@ void CLogik::openHostSpielEinstellungen()
 
      playerListPacket.setPlayers(vorherigeSpieler);
 
+    sendToAll(packet);
+    sendToAll(playerListPacket);
 
-     for(unsigned int i = 0; i < players.size(); i++){
-         serverSocket.send(players[i].getConnectionId(), Packet);
-         serverSocket.send(players[i].getConnectionId(), playerListPacket);
-     }
+     roundTimer = new timer(this->getSpieleinstellungen()->getRundendauer(), 3, this->getSpieleinstellungen()->getCountdown());
+     setupTimer();
  }
 
  void CLogik::sendeRundenStart(){
+    StartCountdownPacket packet;
+    sendToAll(packet);
+    roundTimer->startRound();
+ }
+ void CLogik::setupTimer(){
+    QObject::connect(roundTimer, SIGNAL(signalStartInput()), this, SLOT(startInput()));
+    QObject::connect(roundTimer, SIGNAL(signalPlayerFinished()), this, SLOT(playerFinished()));
+    QObject::connect(roundTimer, SIGNAL(signalRoundOver()), this, SLOT(endInput()));
+    QObject::connect(this, SIGNAL(initRoundEnd()), roundTimer, SLOT(receivedPlayerFinished()));
+ }
+
+ void CLogik::startInput(){
      RoundStartPacket packet(getLetter());
-     for(unsigned int i = 0; i < players.size(); i++){
+     sendToAll(packet);
+ }
 
-         serverSocket.send(players[i].getConnectionId(), packet);
+ void CLogik::playerFinished(){
+    PlayerFinishedPacket packet;
+    sendToAll(packet);
+ }
 
-     }
+ void CLogik::endInput(){
+    EndRoundPacket packet;
+    sendToAll(packet);
+ }
+
+ void CLogik::bekommt_playerFinished(PlayerFinishedPacket packet,unsigned int id){
+    emit initRoundEnd();
  }

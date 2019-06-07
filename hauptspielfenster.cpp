@@ -7,40 +7,21 @@
 #include <QString>
 
 
-
 HauptSpielFenster::HauptSpielFenster(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::HauptSpielFenster)
 {
-//...................................... todo Punkte und Buchstabenriehe enablen.....................................................................................................................................................
     ui->setupUi(this);
     ui->tableSpiel->resizeColumnsToContents();
     currentRow = 0;
-
-
     ui->tableSpiel->setRowCount(0);
-    //ui->tableSpiel->resizeColumnsToContents();
-    //ui->tableSpiel->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
-   /*
-    *  QVector<QString> kategorienVector=std::move( _clientLogic->getSpieleinstellungen()->getKategorienListe());
-    ui->tableSpiel->setColumnCount(1);
-    ui->tableSpiel->setHorizontalHeaderItem(0,new QTableWidgetItem("Buchstabe"));
-    for (QVector<QString>::iterator iter = kategorienVector.begin() ;iter!=kategorienVector.end();iter++,zeilenZaehler++)
-    {
-        ui->tableSpiel->setColumnCount(zeilenZaehler);
-        QTableWidgetItem* qtwi = new QTableWidgetItem(QString::fromStdString(*iter),QTableWidgetItem::Type);
-        ui->tableSpiel->setHorizontalHeaderItem(zeilenZaehler-1,qtwi);
-    }
-    ui->tableSpiel->setColumnCount(zeilenZaehler);
-    ui->tableSpiel->setHorizontalHeaderItem(zeilenZaehler-1,new QTableWidgetItem("Punkte"));
 
-    ui->tableSpiel->setRowCount(2);
-    */
 }
 
 void HauptSpielFenster::setCategories(QVector<QString> categories) {
     ui->tableSpiel->setColumnCount(categories.size());
     ui->tableSpiel->setHorizontalHeaderLabels(QStringList::fromVector(categories));
+    ui->tableSpiel->setRowCount(1);
 }
 
 void HauptSpielFenster::setPlayers(QVector<QString> players, QString clientName) {
@@ -58,25 +39,59 @@ void HauptSpielFenster::setPlayers(QVector<QString> players, QString clientName)
 /// \brief HauptSpielFenster::ready
 ///
 ///
-void HauptSpielFenster::ready()
+void HauptSpielFenster::fillAnswerVector()
 {
-   QVector<QString> answerVector ;
-    for (int columCount = 0; columCount < ui->tableSpiel->columnCount(); ++columCount) {
 
-        answerVector.push_back(ui->tableSpiel->item(0,columCount)->text());
-
+    for (int columCount = 0; columCount < ui->tableSpiel->columnCount(); ++columCount)
+    {
+        answerVector.push_back(ui->tableSpiel->item(currentRow,columCount)->text());
     }
+   ui->tableSpiel->setEnabled(true);
 }
+QVector<QString> HauptSpielFenster::getAnserVector()
+{
+    return answerVector;
+}
+
 HauptSpielFenster::~HauptSpielFenster()
 {
     delete ui;
+    delete item;
 }
+void HauptSpielFenster::startCountdown(){
+    box.setText("Die Runde startet in 3 Sekunden");
+    box.open();
+    //Zeige an, dass das Spiel in 3 Sekunden Startet
 
+}
+void HauptSpielFenster::enableUserinput(char letter){
+    box.close();
+    setLetter(letter);
+    qDebug() << "Box sollte zu sein";
+    //erlaube benutzerinput also gebe die Runde frei
+}
+void HauptSpielFenster::setLetter(char letter){
+    QString letterString(letter);
+    if(ui->tableSpiel->item(0,0)==nullptr){
+
+        item = new QTableWidgetItem(letterString, 0);
+        item->setText(letterString);
+        ui->tableSpiel->setItem(0,0,item);
+
+    }else{
+
+        ui->tableSpiel->item(0,0)->setText(letterString);
+
+    }
+    ui->tableSpiel->update();
+}
 void HauptSpielFenster::on_buttonFertig_clicked()
 {
-// todo an server soll gemeldet werden dass ferttig, dann countdown runterzählen. bei end of countdown table enable und die einträge in array speichern.
+
+// bei end of countdown table enable und die einträge in array speichern.
 // reihe disabel
-    emit fertig();
+   fillAnswerVector();
+   emit fertig();
 }
 
 void HauptSpielFenster::newRow() {

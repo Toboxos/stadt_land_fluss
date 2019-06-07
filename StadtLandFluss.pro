@@ -27,6 +27,8 @@ DEFINES += PORT=1234
 CONFIG += c++11 SeverLogicTest
 
 SOURCES += \
+    Network/Packets/endroundpacket.cpp \
+    Network/Packets/startcountdownpacket.cpp \
     Network/serversocket.cpp \
     Network/clientsocket.cpp \
     Network/Packets/packet.cpp \
@@ -57,6 +59,8 @@ SOURCES += \
 
 
 HEADERS += \
+    Network/Packets/endroundpacket.h \
+    Network/Packets/startcountdownpacket.h \
     Network/serversocket.h \
     Network/clientsocket.h \
     Network/Packets/packet.h \
