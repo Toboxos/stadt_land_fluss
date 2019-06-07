@@ -126,9 +126,9 @@ void CLogik::Punktevergabe(){
         qDebug() << "ich habe die Punkte vergeben";
     }
 
-    unsigned int anzahl = players.size();
+    int anzahl = players.size();
 
-    for (unsigned int m = 0; m < anzahl; ++m){
+    for (int m = 0; m < anzahl; ++m){
         Spieler player = players.at(m);
         SendPointsPacket packet;
 
@@ -157,11 +157,11 @@ void CLogik::Punktevergabe(){
 QVector<int> CLogik::awardPoints(unsigned int category){
     qDebug() << "ich bin in awardPoints";
     QVector<QString> antworten = answers[category].getAntworten();
-    unsigned int anzahl = antworten.size();
+    int anzahl = antworten.size();
     QVector<int> points;
     int sum = 0;
 
-    for (unsigned int var = 0; var < anzahl; ++var) {
+    for (int var = 0; var < anzahl; ++var) {
         if (antworten[var] == "" || antworten[var][0] != m_letter){
             points.push_back(0);
         }
@@ -169,15 +169,15 @@ QVector<int> CLogik::awardPoints(unsigned int category){
             points.push_back(10);
         }
 
-        for (unsigned int n = 0; n < anzahl; ++n) {
+        for (int n = 0; n < anzahl; ++n) {
             if (n != var && antworten[var] == antworten [n] && antworten[var][0] == m_letter)
 
                     points.replace(var, 5);
         }
     }
 
-    for (unsigned int v = 0; v < anzahl; ++v){
-        for (unsigned int z = 0; z < anzahl; ++z){
+    for (int v = 0; v < anzahl; ++v){
+        for (int z = 0; z < anzahl; ++z){
             sum = sum + points.at(z);
         }
         if (sum == points.at(v) && antworten[v][0] == m_letter){
@@ -191,11 +191,11 @@ QVector<int> CLogik::awardPoints(unsigned int category){
 
 
 QVector<QString> CLogik::getWinner() {
-    unsigned int anzahl = players.size();
+    int anzahl = players.size();
     QVector<QString> names;
     QVector<int> allPoints;
 
-    for (unsigned int var = 0; var < anzahl; ++var) {
+    for (int var = 0; var < anzahl; ++var) {
         allPoints[var] = players[var].getPunkte();
     }
 
@@ -204,7 +204,7 @@ QVector<QString> CLogik::getWinner() {
     while(!sorted){
         sorted = true;
 
-        for (unsigned int i = 0;i < anzahl; ++i) {
+        for (int i = 0;i < anzahl; ++i) {
 
             if (allPoints[i]<allPoints[i+1]){
                 int temp = allPoints[i];
@@ -216,9 +216,9 @@ QVector<QString> CLogik::getWinner() {
         }
     }
 
-    for (unsigned int n = 0; n < anzahl; ++n) {
-        for (unsigned int p = 0; p < anzahl; ++p){
-            if (allPoints[n] = players[p].getPunkte()){
+    for (int n = 0; n < anzahl; ++n) {
+        for (int p = 0; p < anzahl; ++p){
+            if (allPoints[n] == players[p].getPunkte()){
                 names[n] = players[p].getName();
             }
         }
@@ -290,7 +290,7 @@ void CLogik::openHostSpielEinstellungen()
      }
 
  void CLogik::sendToAll(Packet& p){
-     for(unsigned int i = 0; i < players.size(); i++){
+     for(int i = 0; i < players.size(); i++){
          serverSocket.send(players[i].getConnectionId(), p);
      }
  }
@@ -302,7 +302,7 @@ void CLogik::openHostSpielEinstellungen()
      QVector <QString> vorherigeSpieler(players.size());
 
      //evtl aktuelle Spielerliste an neuen Spieler leiten
-     for (unsigned int var = 0; var < players.size(); ++var) {
+     for (int var = 0; var < players.size(); ++var) {
         vorherigeSpieler[var] = players[var].getName();
      }
 
