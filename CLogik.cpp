@@ -7,6 +7,7 @@
 #include "kategorieeingabe.h"
 
 CLogik::CLogik() : warteRaum(nullptr) {
+    srand(time(NULL));
 }
 
 CLogik::~CLogik(){
