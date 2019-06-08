@@ -32,9 +32,18 @@ void ClientLogic::connect(QString name, QString ip, quint16 port, ClientIpEingab
    QObject::connect(&_clientSocket, SIGNAL(timeout()), this, SLOT(timeoutSlot()));
    QObject::connect(&_clientSocket, SIGNAL(connected()), this, SLOT(connectedSlot()));
    QObject::connect(&_clientSocket, SIGNAL(error()), this, SLOT(errorSlot()));
+   QObject::connect(&_clientSocket, SIGNAL(pointsSent(SendPointsPacket)), this, SLOT(receivedPoints(SendPointsPacket)));
    if( window != nullptr ) QObject::connect(&_clientSocket, SIGNAL(connected()), window, SLOT(connected()));
 }
 
+void ClientLogic::receivedPoints(SendPointsPacket Packet){
+    clientSpieler.setPunkte(Packet.getTotalPoints());
+
+    for (int var = 0;var < Packet.getPoints().size();++var) {
+        clientSpieler.credits.push_back(Packet.getPoints()[var]);    
+    }
+    qDebug() << clientSpieler.credits << "Punkte von Spieler" << clientSpieler.getName() << endl;
+}
 
 void ClientLogic::openCLogik() {
     _clogik  = new CLogik();

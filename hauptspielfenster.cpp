@@ -44,9 +44,8 @@ void HauptSpielFenster::fillAnswerVector()
 
     for (int columCount = 1; columCount < (ui->tableSpiel->columnCount()) -1; ++columCount)
     {
-        if(ui->tableSpiel->item(currentRow,columCount) != nullptr){
-            answerVector.push_back(ui->tableSpiel->item(currentRow,columCount)->text());
-            qDebug() << ui->tableSpiel->item(currentRow, columCount)->text() << "wurde in answerVector eingetragen";}
+        if(ui->tableSpiel->item(currentRow,columCount) != nullptr)
+            answerVector.push_back(ui->tableSpiel->item(currentRow,columCount)->text());           
         else
             answerVector.push_back("");
 
