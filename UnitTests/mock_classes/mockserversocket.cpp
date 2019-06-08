@@ -23,7 +23,8 @@ bool MockServerSocket::send(unsigned int id, Packet& packet) {
     }
 
     else {
-        return m_callbackSend(m_callbackSendObject, id, packet);
+        m_callbackSend(m_callbackSendObject, id, packet);
+        return true;
     }
 }
 
@@ -33,16 +34,17 @@ bool MockServerSocket::listen(quint16 port) {
     }
 
     else {
-        return m_callbackListen(m_callbackListenObject, port);
+        m_callbackListen(m_callbackListenObject, port);
+        return true;
     }
 }
 
-void MockServerSocket::setCallbackSend(bool (*callbackSend)(void*, unsigned int, Packet&), void* object) {
+void MockServerSocket::setCallbackSend(void (*callbackSend)(void*, unsigned int, Packet&), void* object) {
     m_callbackSend = callbackSend;
     m_callbackSendObject = object;
 }
 
-void MockServerSocket::setCallbackListen(bool (*callbackListen)(void*, quint16), void* object) {
+void MockServerSocket::setCallbackListen(void (*callbackListen)(void*, quint16), void* object) {
     m_callbackListen = callbackListen;
     m_callbackListenObject = object;
 }

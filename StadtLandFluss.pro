@@ -120,8 +120,10 @@ ServerLogicTest {
     HEADERS -=  Network/serversocket.h
 
     SOURCES +=  UnitTests/serverlogictest.cpp \
-                UnitTests/mock_classes/mockserversocket.cpp
-    HEADERS +=  UnitTests/mock_classes/mockserversocket.h
+                UnitTests/mock_classes/mockserversocket.cpp \
+                UnitTests/Tests/jointest.cpp
+    HEADERS +=  UnitTests/mock_classes/mockserversocket.h \
+                UnitTests/Tests/jointest.h
 }
 
 # Default rules for deployment.

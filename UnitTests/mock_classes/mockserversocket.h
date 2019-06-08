@@ -17,8 +17,8 @@ class MockServerSocket : public QObject {
         MockServerSocket();
         MockServerSocket(quint16 port);
 
-        void setCallbackListen(bool (*callbackListen)(void*, quint16), void* object = nullptr);
-        void setCallbackSend(bool (*callbackSend)(void*, unsigned int, Packet&), void* object = nullptr);
+        void setCallbackListen(void (*callbackListen)(void*, quint16), void* object = nullptr);
+        void setCallbackSend(void (*callbackSend)(void*, unsigned int, Packet&), void* object = nullptr);
 
         bool listen(quint16 port);
         bool send(unsigned int id, Packet& packet);
@@ -34,8 +34,8 @@ class MockServerSocket : public QObject {
         void playerFinished(PlayerFinishedPacket packet, unsigned int id);
 
     private:
-        bool (*m_callbackListen)(void* object, quint16 port);
-        bool (*m_callbackSend)(void* object, unsigned int id, Packet& packet);
+        void (*m_callbackListen)(void* object, quint16 port);
+        void (*m_callbackSend)(void* object, unsigned int id, Packet& packet);
 
         void* m_callbackListenObject;
         void* m_callbackSendObject;

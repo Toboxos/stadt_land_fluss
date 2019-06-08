@@ -6,48 +6,37 @@
 #include "CLogik.h"
 #undef private
 
+#include "Tests/jointest.h"
+
 class ServerLogicTest : public QObject {
     Q_OBJECT
 
     private slots:
-        void initTestCase();
-
         void init();
         void cleanup();
 
         void testJoins();
 
     private:
-        static bool send(void* object, unsigned int id, Packet& packet);
-        static bool listen(void* object, quint16 port);
-
         void setupDefaultParameters();
+
+        /* Methods for tests */
+        void send_joinTest(unsigned int id, Packet& packet);
+
+        enum TEST_CASE {
+            JOIN_TEST
+        } m_testCase;
 
         MockServerSocket m_serverSocket;
         CLogik* m_logic;
 };
 
-void ServerLogicTest::initTestCase() {
-    m_serverSocket.setCallbackSend(&ServerLogicTest::send, this);
-    m_serverSocket.setCallbackListen(&ServerLogicTest::listen, this);
-}
-
 void ServerLogicTest::init() {
     m_logic = new CLogik();
-    m_logic->serverSocket = m_serverSocket;
 }
 
 void ServerLogicTest::cleanup() {
     delete m_logic;
-}
-
-bool ServerLogicTest::send(void* object, unsigned int id, Packet& packet) {
-    qDebug() << "Send " << PACKET_TYPE_NAMES[packet.getType()] << " to " << id;
-    return true;
-}
-
-bool ServerLogicTest::listen(void* object, quint16 port) {
-    return true;
 }
 
 void ServerLogicTest::setupDefaultParameters() {
@@ -61,16 +50,19 @@ void ServerLogicTest::setupDefaultParameters() {
     m_logic->getSpieleinstellungen()->addKategorie("Punkte");
 }
 
+void ServerLogicTest::send_joinTest(unsigned int id, Packet& packet) {
+
+}
+
 void ServerLogicTest::testJoins() {
+    m_testCase = JOIN_TEST;
     setupDefaultParameters();
 
-    m_logic->starteServerSocket();
-    for( int i = 0; i < 3; ++i ) {
-        QString s = "Player " + QString::number(i);
-        PlayerJoinPacket p(s);
-        m_logic->spieler_beitritt(p, i);
-    }
-    m_logic->sendeSpielStart();
+
+    JoinTest test;
+    m_serverSocket.setCallbackSend(&JoinTest::send, &test);
+    m_logic->serverSocket = m_serverSocket;
+    test.run(m_logic);
 }
 
 QTEST_MAIN(ServerLogicTest);
