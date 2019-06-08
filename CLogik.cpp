@@ -65,7 +65,7 @@ void CLogik::spieler_beitritt(PlayerJoinPacket packet, unsigned int id){
     players.push_back(spieler);
     qDebug() << spieler.getName() << " hat sich verbunden" << endl;
 
-    warteRaum->showPlayer();
+    if( warteRaum != nullptr ) warteRaum->showPlayer();
     /*qDebug() << "Spieler beigetreten";
 
     for (unsigned int var = 0; var < players.size(); ++var) {

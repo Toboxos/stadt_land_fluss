@@ -23,6 +23,8 @@ class MockServerSocket : public QObject {
         bool listen(quint16 port);
         bool send(unsigned int id, Packet& packet);
 
+        MockServerSocket& operator=(MockServerSocket& other);
+
     signals:
         void connected(unsigned int id);
         void playerJoined(PlayerJoinPacket packet, unsigned int id);

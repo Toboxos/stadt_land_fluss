@@ -24,7 +24,7 @@ DEFINES += PORT=1234
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-CONFIG += c++11 SeverLogicTest
+CONFIG += c++11
 
 SOURCES += \
     Network/Packets/endroundpacket.cpp \
@@ -54,8 +54,7 @@ SOURCES += \
         spielerwarteraum.cpp \
         spielstart.cpp \
         CLogik.cpp \
-        timer.cpp \
-    Examples/networkexample.cpp
+        timer.cpp
 
 
 HEADERS += \
@@ -86,8 +85,7 @@ HEADERS += \
         spielerwarteraum.h \
         spielstart.h \
         CLogik.h \
-        timer.h \
-    Examples/networkexample.h
+        timer.h
 
 FORMS += \
         clientipeingabe.ui \
@@ -101,7 +99,9 @@ FORMS += \
 PacketTests {
     TARGET = PacketTest
     QT += testlib
+
     SOURCES -=  main.cpp
+
     SOURCES +=  UnitTests/packettests.cpp \
                 UnitTests/Tests/gamesettingspackettest.cpp \
                 UnitTests/Tests/roundstartpackettest.cpp
@@ -110,11 +110,15 @@ PacketTests {
                 UnitTests/Tests/roundstartpackettest.h
 }
 
-SeverLogicTest {
+ServerLogicTest {
     TARGET = ServerLogicTest
     QT += testlib
     DEFINES +=  UNIT_TEST
-    SOURCES -=  main.cpp
+
+    SOURCES -=  main.cpp \
+                Network/serversocket.cpp
+    HEADERS -=  Network/serversocket.h
+
     SOURCES +=  UnitTests/serverlogictest.cpp \
                 UnitTests/mock_classes/mockserversocket.cpp
     HEADERS +=  UnitTests/mock_classes/mockserversocket.h

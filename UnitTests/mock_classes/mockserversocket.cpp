@@ -7,6 +7,16 @@ MockServerSocket::MockServerSocket() :
 
 }
 
+MockServerSocket& MockServerSocket::operator=(MockServerSocket& other) {
+    m_callbackSend = other.m_callbackSend;
+    m_callbackSendObject = other.m_callbackSendObject;
+
+    m_callbackListen = other.m_callbackListen;
+    m_callbackListenObject = other.m_callbackListenObject;
+
+    return *this;
+}
+
 bool MockServerSocket::send(unsigned int id, Packet& packet) {
     if( m_callbackSend == nullptr ) {
         return false;

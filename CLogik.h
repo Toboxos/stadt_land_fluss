@@ -25,7 +25,6 @@ typedef MockServerSocket ServerSocket;
 #include "Network/Packets/playerlistpacket.h"
 #include "Network/Packets/endroundpacket.h"
 #include "Network/Packets/playerfinishedpacket.h"
-#include "Network/serversocket.h"
 #include "spieleinstellungen.h"
 #include "spielerwarteraum.h"
 #include "timer.h"
