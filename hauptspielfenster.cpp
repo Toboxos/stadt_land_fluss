@@ -94,7 +94,7 @@ void HauptSpielFenster::setLetter(char letter){
 void HauptSpielFenster::on_buttonFertig_clicked()
 {
 // bei end of countdown table enable und die einträge in vector speichern.
-   fillAnswerVector();
+   //fillAnswerVector();
    emit fertig();
    ui->tableSpiel->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
