@@ -41,67 +41,64 @@ void HauptSpielFenster::setPlayers(QVector<QString> players, QString clientName)
 ///
 void HauptSpielFenster::fillAnswerVector()
 {
-
     for (int columCount = 1; columCount < (ui->tableSpiel->columnCount()) -1; ++columCount)
     {
         if(ui->tableSpiel->item(currentRow,columCount) != nullptr)
             answerVector.push_back(ui->tableSpiel->item(currentRow,columCount)->text());           
         else
             answerVector.push_back("");
-
     }
-
    ui->tableSpiel->setEnabled(true);
 }
-
 QVector<QString> HauptSpielFenster::getAnserVector()
 {
     return answerVector;
 }
-
 HauptSpielFenster::~HauptSpielFenster()
 {
     delete ui;
-    delete item;
+    m_points.clear();
+    m_letters.clear();
 }
 void HauptSpielFenster::startCountdown(){
     box.setText("Die Runde startet in 3 Sekunden");
     box.open();
-    //Zeige an, dass das Spiel in 3 Sekunden Startet
-
-}
-void HauptSpielFenster::enableUserinput(char letter){
-    box.close();
-    setLetter(letter);
-    //erlaube benutzerinput also gebe die Runde frei
 }
 void HauptSpielFenster::setLetter(char letter){
+    box.close();
     QString letterString(letter);
     if(ui->tableSpiel->item(currentRow,0)==nullptr){
-        item = new QTableWidgetItem(letterString, 0);
-        item->setText(letterString);
-        ui->tableSpiel->setItem(currentRow,0,item);
+        m_letters.push_back(new QTableWidgetItem(0));
+        m_letters.last()->setText(letterString);
+        ui->tableSpiel->setItem(currentRow,0,m_letters.last());
 
     }else{
-
         ui->tableSpiel->item(currentRow,0)->setText(letterString);
 
     }
     ui->tableSpiel->update();
     ui->tableSpiel->setEditTriggers(QAbstractItemView::AllEditTriggers);
 }
+void HauptSpielFenster::setTotalPoints(int points){
+    m_points.push_back( new QTableWidgetItem(0));
+    m_points.last()->setText(QString::number(points));
+    ui->tableSpiel->setItem(currentRow-1, ui->tableSpiel->columnCount()-1, m_points.last());
+
+}
 void HauptSpielFenster::on_buttonFertig_clicked()
 {
-// bei end of countdown table enable und die einträge in vector speichern.
-   //fillAnswerVector();
    emit fertig();
    ui->tableSpiel->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
-
 void HauptSpielFenster::newRow() {
     ++currentRow;
-    ui->tableSpiel->setRowCount(currentRow);
+    qDebug() << "newRow: " <<currentRow;
+    //ui->tableSpiel->insertRow(currentRow);
+    ui->tableSpiel->setRowCount(currentRow+1);
+    ui->tableSpiel->update();
 
 }
-
+void HauptSpielFenster::clearAnswerVector(){
+    answerVector.clear();
+}
 

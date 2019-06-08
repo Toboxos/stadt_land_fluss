@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <QObject>
 #include <QString>
+#include <ctype.h>
 
 #include "Network/serversocket.h"
 #include "antworten.h"

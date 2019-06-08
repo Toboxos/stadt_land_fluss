@@ -37,12 +37,14 @@ void ClientLogic::connect(QString name, QString ip, quint16 port, ClientIpEingab
 }
 
 void ClientLogic::receivedPoints(SendPointsPacket Packet){
+    clientSpieler.credits.clear();
     clientSpieler.setPunkte(Packet.getTotalPoints());
 
     for (int var = 0;var < Packet.getPoints().size();++var) {
         clientSpieler.credits.push_back(Packet.getPoints()[var]);    
     }
     qDebug() << clientSpieler.credits << "Punkte von Spieler" << clientSpieler.getName() << endl;
+    _hautpSpielFenster->setTotalPoints(clientSpieler.getPunkte());
 }
 
 void ClientLogic::openCLogik() {
@@ -56,12 +58,13 @@ void ClientLogic::serverBereit() {
 }
 
 void ClientLogic::sendAnswers(){
-    this->_hautpSpielFenster->fillAnswerVector();
+    _hautpSpielFenster->fillAnswerVector();
     clientSpieler.setAnswers(_hautpSpielFenster->getAnserVector());
 
     SendAnswersPacket packet(clientSpieler.answers);
 
     _clientSocket.send(packet);
+    _hautpSpielFenster->clearAnswerVector();
 }
 
 void ClientLogic::playerJoinedSlot(PlayerJoinPacket Packet){
@@ -83,6 +86,8 @@ void ClientLogic::receivedPlayerListSlot(PlayerListPacket Packet){
 void ClientLogic::receivedStartCountdown(StartCountdownPacket packet){
     qDebug() << "Runde startet in 3 Sekunden";
     _hautpSpielFenster->startCountdown();
+    //_hautpSpielFenster->newRow();
+    //_hautpSpielFenster->update();
 
 }
 
@@ -90,7 +95,6 @@ void ClientLogic::receivedRoundEnd(EndRoundPacket Packet){
     sendAnswers();
     _hautpSpielFenster->newRow();
     qDebug() << "Runde ist beendet, receivedRoundEnd";
-    _hautpSpielFenster->update();
 }
 
 void ClientLogic::timeoutSlot(){
@@ -146,5 +150,5 @@ PlayerFinishedPacket packet(getSpieler().getName());
 _clientSocket.send(packet);
 }
 void ClientLogic::receivedRoundStart(RoundStartPacket Packet){
-    _hautpSpielFenster->enableUserinput(Packet.getLetter());
+    _hautpSpielFenster->setLetter(Packet.getLetter());
 }

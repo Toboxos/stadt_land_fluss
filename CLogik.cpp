@@ -41,8 +41,10 @@ void CLogik::bekommt_antwort(SendAnswersPacket packet, unsigned int id){
 
     answersReceived++;
 
-    if(answersReceived == players.size())
+    if(answersReceived == players.size()){
         Punktevergabe();
+        answersReceived = 0;
+    }
 }
 
 void CLogik::spieler_beitritt(PlayerJoinPacket packet, unsigned int id){
@@ -136,7 +138,7 @@ void CLogik::Punktevergabe(){
 
         for (int var = 0; var < categories; ++var) {
             player.credits.push_back(m_points[var].getEinenPunkt(m));
-            speicher = speicher + m_points[var].getEinenPunkt(m);
+            speicher = speicher +m_points[var].getEinenPunkt(m);
         }
 
         int jetzt = player.getPunkte();
@@ -152,6 +154,8 @@ void CLogik::Punktevergabe(){
         qDebug() << "SendPointsPacket geschickt an" << player.getName() << endl;
     }
     roundTimer->rundenPausenTimer();
+    m_points.clear();
+    m_answers.clear();
 }
 
 
@@ -163,7 +167,7 @@ QVector<int> CLogik::awardPoints(unsigned int category){
     int sum = 0;
 
     for (int var = 0; var < anzahl; ++var) {
-        if (antworten[var] == "" || antworten[var][0] != m_letter){
+        if (antworten[var] == "" || antworten[var][0] != m_letter || antworten[var][0] != toupper(m_letter)){
             points.push_back(0);
         }
         else {
@@ -171,7 +175,7 @@ QVector<int> CLogik::awardPoints(unsigned int category){
         }
 
         for (int n = 0; n < anzahl; ++n) {
-            if (n != var && antworten[var] == antworten [n] && antworten[var][0] == m_letter)
+            if (n != var && antworten[var] == antworten [n] &&( antworten[var][0] == m_letter || antworten[var][0] == toupper(m_letter)))
 
                     points.replace(var, 5);
         }
@@ -181,7 +185,7 @@ QVector<int> CLogik::awardPoints(unsigned int category){
         for (int z = 0; z < anzahl; ++z){
             sum = sum + points.at(z);
         }
-        if (sum == points.at(v) && antworten[v][0] == m_letter){
+        if (sum == points.at(v) && (antworten[v][0] == m_letter || antworten[v][0] == toupper(m_letter))){
             points.replace(v,20);
         }
     }
