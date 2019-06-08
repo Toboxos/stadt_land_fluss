@@ -14,5 +14,5 @@ QVector<int> punkte::getPunkte(){
 }
 
 void punkte::setPunkte(int i, int p){
-    points[i] = p;
+    points.replace(i,p);
 }

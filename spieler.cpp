@@ -55,7 +55,7 @@ QString Spieler::getAnswer(unsigned int i){
 }
 
 void Spieler::setAnswer(unsigned int i, QString a){
-    answers[i]=a;
+    answers.replace(i, a);
 }
 
 QVector<int> Spieler::getCredit(){
@@ -63,8 +63,8 @@ QVector<int> Spieler::getCredit(){
     return p;
 }
 
-void Spieler::setCredit(unsigned int i, int j){
-    credits[i]=j;
+void Spieler::setCredit(int j){
+    credits.push_back(j);
 }
 
 

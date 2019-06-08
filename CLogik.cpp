@@ -35,8 +35,9 @@ void CLogik::bekommt_antwort(SendAnswersPacket packet, unsigned int id){
 
         if(players[i].getConnectionId() == id)
             players[i].setAnswers(packet.getAnswers());
+        qDebug() << "so viele Antworten erhalten" << packet.getAnswers().size();
     }
-    qDebug() << "Ich hab die Antworten bekommen";
+    qDebug() << "Ich hab die Antworten bekommen" << endl;
 
     answersReceived++;
 
@@ -104,8 +105,8 @@ QVector<QString> CLogik::sortAnswers(unsigned int category) {
     QVector<QString> antwortenKategorie;
 
     for (unsigned int var = 0; var < anzahl; ++var) {
+        qDebug() << players[var].getAnswer(category) << "wird eingetragen";
         antwortenKategorie.push_back(players[var].getAnswer(category));
-        qDebug() << antwortenKategorie[var];
     }
 
    return antwortenKategorie;
@@ -118,28 +119,29 @@ void CLogik::Punktevergabe(){
     for (unsigned int var = 0;var < categories; ++var) {
         qDebug() << var << "Nummer zu ordnende Kategorie" << endl;
         answers.push_back(sortAnswers(var));
-        //qDebug() << "ich habe die Antworten sortiert";
     }
 
     for (unsigned int n = 0; n < categories; ++n){
         points.push_back(awardPoints(n));
-        qDebug() << "ich habe die Punkte vergeben";
+        qDebug() << "ich habe die Punkte vergeben" << endl;
     }
 
     int anzahl = players.size();
 
     for (int m = 0; m < anzahl; ++m){
         Spieler player = players.at(m);
+        qDebug() << "ich werde punkte schicken an player" << player.getName() << endl;
         SendPointsPacket packet;
 
         int speicher = 0;
 
-        //bis hier debugged
         for (unsigned int l = 0; l < categories; ++l){
             QVector<int> punkte = points[m].getPunkte();
-            qDebug() << punkte.at(l);
-            player.setCredit(l, punkte.at(l));
+            qDebug() << "an stelle " << l << "so viele Punkte" << punkte.at(l);
+            //bis hier debugged
+            player.setCredit(punkte.at(l));
             speicher = speicher + punkte.at(l);
+            qDebug() << speicher << "wurde zwischengespeichert" << endl;
         }
 
         int jetzt = player.getPunkte();
@@ -149,13 +151,14 @@ void CLogik::Punktevergabe(){
         packet.setTotalPoints(player.getPunkte());
 
         serverSocket.send(player.getConnectionId(), packet);
+        qDebug() << "SendPointsPacket geschickt an" << player.getName() << endl;
     }
     roundTimer->rundenPausenTimer();
 }
 
 
 QVector<int> CLogik::awardPoints(unsigned int category){
-    qDebug() << "ich bin in awardPoints";
+    qDebug() << "ich bin in awardPoints" << endl;
     QVector<QString> antworten = answers[category].getAntworten();
     int anzahl = antworten.size();
     QVector<int> points;
@@ -185,7 +188,6 @@ QVector<int> CLogik::awardPoints(unsigned int category){
         }
     }
 
-    qDebug() << points.at(0);
     return points;
 }
 

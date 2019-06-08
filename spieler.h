@@ -88,7 +88,7 @@ public:
     ///
     /// \brief sets the credit the player receives for the round
     ///
-    void setCredit(unsigned int,int);
+    void setCredit(int);
 
     static int _nextId;
     QVector<QString> answers;
