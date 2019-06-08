@@ -49,8 +49,8 @@ unsigned int Spieler::Categories(){
     return c;
 }
 
-QString Spieler::getAnswer(unsigned int i){
-    QString p = answers.at(i);
+QString Spieler::getAnswer(int i){
+    QString p = answers.value(i);
     return p;
 }
 
@@ -63,8 +63,8 @@ QVector<int> Spieler::getCredit(){
     return p;
 }
 
-void Spieler::setCredit(int j){
-    credits.push_back(j);
+void Spieler::setCredit(int s, int j){
+    credits.replace(s,j);
 }
 
 

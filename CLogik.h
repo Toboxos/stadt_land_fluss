@@ -116,8 +116,8 @@ private:
     void setupTimer();
     SpielerWarteRaum *warteRaum;
     QVector<Spieler> players;
-    QVector<antworten> answers;
-    QVector<punkte> points;
+    QVector<antworten> m_answers;
+    QVector<punkte> m_points;
     char letters[26] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
     char usedLetters[26];
     ServerSocket serverSocket;

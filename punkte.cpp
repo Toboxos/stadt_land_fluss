@@ -16,3 +16,7 @@ QVector<int> punkte::getPunkte(){
 void punkte::setPunkte(int i, int p){
     points.replace(i,p);
 }
+
+int punkte::getEinenPunkt(int s){
+    return points.at(s);
+}
