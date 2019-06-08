@@ -38,7 +38,7 @@ void ClientLogic::connect(QString name, QString ip, quint16 port, ClientIpEingab
 
 void ClientLogic::receivedPoints(SendPointsPacket Packet){
     clientSpieler.credits.clear();
-    clientSpieler.setPunkte(Packet.getTotalPoints());
+    clientSpieler.setPunkte(Packet.getTotalPoints()+clientSpieler.getPunkte());
 
     for (int var = 0;var < Packet.getPoints().size();++var) {
         clientSpieler.credits.push_back(Packet.getPoints()[var]);    
