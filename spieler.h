@@ -64,7 +64,7 @@ public:
     /// \param category number
     /// \return answer for category (category number)
     ///
-    QString getAnswer(unsigned int);
+    QString getAnswer(int);
 
     ///
     /// \brief sets the player's answer for one category in round
@@ -88,18 +88,18 @@ public:
     ///
     /// \brief sets the credit the player receives for the round
     ///
-    void setCredit(unsigned int,int);
+    void setCredit(int, int);
 
     static int _nextId;
     QVector<QString> answers;
-
+    QVector<int> credits;
 private:
     QString _name;
     int _punkte = 0;
     int _id=0;
     unsigned int connectionId;
 
-    QVector<int> credits;
+
 };
 
 

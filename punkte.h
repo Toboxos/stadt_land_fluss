@@ -28,6 +28,8 @@ public:
     ///
     void setPunkte(int i,int p);
 
+    int getEinenPunkt(int s);
+
     private:
     QVector<int> points;
 };

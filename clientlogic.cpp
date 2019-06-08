@@ -28,6 +28,7 @@ void ClientLogic::connect(QString name, QString ip, quint16 port, ClientIpEingab
    QObject::connect(&_clientSocket, SIGNAL(startCountdown(StartCountdownPacket)), this, SLOT(receivedStartCountdown(StartCountdownPacket)));
    QObject::connect(&_clientSocket, SIGNAL(roundStart(RoundStartPacket)), this, SLOT(receivedRoundStart(RoundStartPacket)));
    QObject::connect(&_clientSocket, SIGNAL(endRound(EndRoundPacket)), this, SLOT(receivedRoundEnd(EndRoundPacket)));
+   QObject::connect(&_clientSocket, SIGNAL(playerFinished(PlayerFinishedPacket)), this, SLOT(playerFinished(PlayerFinishedPacket)));
    QObject::connect(&_clientSocket, SIGNAL(timeout()), this, SLOT(timeoutSlot()));
    QObject::connect(&_clientSocket, SIGNAL(connected()), this, SLOT(connectedSlot()));
    QObject::connect(&_clientSocket, SIGNAL(error()), this, SLOT(errorSlot()));
@@ -46,7 +47,12 @@ void ClientLogic::serverBereit() {
 }
 
 void ClientLogic::sendAnswers(){
+
+
+    clientSpieler.setAnswers(_hautpSpielFenster->getAnserVector());
+
     SendAnswersPacket packet(clientSpieler.answers);
+
     _clientSocket.send(packet);
 }
 
@@ -69,10 +75,14 @@ void ClientLogic::receivedPlayerListSlot(PlayerListPacket Packet){
 void ClientLogic::receivedStartCountdown(StartCountdownPacket packet){
     qDebug() << "Runde startet in 3 Sekunden";
     _hautpSpielFenster->startCountdown();
+
 }
 
 void ClientLogic::receivedRoundEnd(EndRoundPacket Packet){
-    qDebug() << "Runde ist beendet";
+    sendAnswers();
+    _hautpSpielFenster->newRow();
+    qDebug() << "Runde ist beendet, receivedRoundEnd";
+    _hautpSpielFenster->update();
 }
 
 void ClientLogic::timeoutSlot(){
@@ -109,10 +119,8 @@ void ClientLogic::setSpieler(Spieler spieler){
     clientSpieler = spieler;
 }
 
-void ClientLogic::done(){
-    sendAnswers();
-    PlayerFinishedPacket packet;
-    _clientSocket.send(packet);
+void ClientLogic::playerFinished(PlayerFinishedPacket Packet){
+    qDebug() << "Nur noch zehn Sekunden, beeile dich!";
 }
 
 void ClientLogic::starteSpiel(GameSettingsPacket Packet){

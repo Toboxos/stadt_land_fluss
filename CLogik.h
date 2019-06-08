@@ -110,17 +110,21 @@ public slots:
 
     void bekommt_playerFinished(PlayerFinishedPacket packet, unsigned int id);
 
+    void nextRound();
+
 signals:
     void serverBereit();
 
     void initRoundEnd();
 
 private:
+    int answersReceived = 0;
+    int currentRound = 0;
     void setupTimer();
     SpielerWarteRaum *warteRaum;
     QVector<Spieler> players;
-    QVector<antworten> answers;
-    QVector<punkte> points;
+    QVector<antworten> m_answers;
+    QVector<punkte> m_points;
     char letters[26] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
     char usedLetters[26];
     ServerSocket serverSocket;
