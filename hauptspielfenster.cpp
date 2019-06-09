@@ -87,8 +87,43 @@ void HauptSpielFenster::setTotalPoints(int points){
 }
 void HauptSpielFenster::on_buttonFertig_clicked()
 {
-   emit fertig();
-   ui->tableSpiel->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    if (obSpielerwirklichFertigIst())
+    {
+        emit fertig();
+        ui->tableSpiel->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    }
+    else
+    {
+        //do nothing
+    }
+}
+
+bool HauptSpielFenster::obSpielerwirklichFertigIst()
+{
+    bool fertig = true;
+    for (int columCount = 1; columCount < (ui->tableSpiel->columnCount()) -1; ++columCount)
+    {
+        if(ui->tableSpiel->item(currentRow,columCount) == nullptr)
+        {
+            fertig = false;
+        }
+        else
+        {
+            //do nothing
+        }
+    }
+
+    if (fertig)
+    {
+    ui->buttonFertig->setEnabled(true);
+    }
+    else
+    {
+        box.setText("Du bist doch moch gar nicht Fertig.versuche es nocheinmal");
+        box.exec();
+    }
+    return fertig;
 }
 void HauptSpielFenster::newRow() {
     ++currentRow;

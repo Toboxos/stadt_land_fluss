@@ -36,7 +36,7 @@ private slots:
 
 private:
     QMessageBox box;
-
+    bool obSpielerwirklichFertigIst();
     QVector<QString> answerVector ;
     Ui::HauptSpielFenster *ui;
     void ready();
