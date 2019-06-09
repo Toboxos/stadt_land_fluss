@@ -27,3 +27,8 @@ Statistic::~Statistic()
 {
     delete ui;
 }
+
+void Statistic::on_buttonEnd_clicked()
+{
+    qApp->quit();
+}

@@ -49,6 +49,28 @@ font: 12pt &quot;Copperplate Gothic Light&quot;;</string>
     </property>
    </column>
   </widget>
+  <widget class="QPushButton" name="buttonEnd">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>260</y>
+     <width>311</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Copperplate Gothic Bold</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:  yellow;</string>
+   </property>
+   <property name="text">
+    <string>SPIEL BEENDEN</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

@@ -15,13 +15,5 @@ int main(int argc, char *argv[])
 
     ClientLogic clientLogic;
 
-    //Einwand r;
-    //r.exec();
-
-    //SpielStart w;
-
-
-    // w.exec();
-
     return a.exec();
 }

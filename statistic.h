@@ -15,6 +15,9 @@ public:
     explicit Statistic(QWidget *parent = nullptr,ClientLogic *clientLogic= nullptr,QVector<QString> *winner = nullptr);
     ~Statistic();
 
+private slots:
+    void on_buttonEnd_clicked();
+
 private:
     Ui::Statistic *ui;
     ClientLogic *_clientLogic;
