@@ -40,7 +40,6 @@ SOURCES += \
     Network/Packets/roundstartpacket.cpp \
     Network/Packets/sendanswerspacket.cpp \
     Network/Packets/sendpointspacket.cpp \
-    UnitTests/serverlogictests.cpp \
     antworten.cpp \
         clientipeingabe.cpp \
     clientlogic.cpp \
@@ -123,7 +122,7 @@ ServerLogicTests {
                 Network/serversocket.cpp
     HEADERS -=  Network/serversocket.h
 
-    SOURCES +=  \
+    SOURCES +=  UnitTests/serverlogictests.cpp \
                 UnitTests/mock_classes/mockserversocket.cpp \
                 UnitTests/Tests/jointest.cpp \
                 UnitTests/Tests/lettertest.cpp \
