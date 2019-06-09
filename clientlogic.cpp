@@ -58,7 +58,7 @@ void ClientLogic::sendAnswers(){
     _hautpSpielFenster->fillAnswerVector();
     clientSpieler.setAnswers(_hautpSpielFenster->getAnserVector());
 
-    SendAnswersPacket packet(clientSpieler.answers);
+    SendAnswersPacket packet(clientSpieler.m_answers);
 
     _clientSocket.send(packet);
     _hautpSpielFenster->clearAnswerVector();

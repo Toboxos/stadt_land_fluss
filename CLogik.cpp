@@ -121,7 +121,7 @@ void CLogik::punktevergabe(){
 
         //add up the points player received for this round
         for (int var = 0; var < categories; ++var) {
-            player.credits.push_back(m_points[var].getEinenPunkt(m));
+            player.m_credits.push_back(m_points[var].getEinenPunkt(m));
             speicher = speicher +m_points[var].getEinenPunkt(m);
         }
 
@@ -263,18 +263,18 @@ char CLogik::getLetter(){
          //chose is a random number between 0 and 25
         int choose = rand() % 26;
         success = true;
-        letter = letters[choose];
+        letter = m_letters[choose];
 
         // check if letter is already in m_usedLetters
         for (int var = 0; var < 26; ++var) {
 
             // when actual letter equals entry in usedLetters
-            if (usedLetters[var] == letter){
+            if (m_usedLetters[var] == letter){
                 success = false;
                 break;
             }
-            else if(usedLetters[var] == 0x00){
-                usedLetters[var] = letter;
+            else if(m_usedLetters[var] == 0x00){
+                m_usedLetters[var] = letter;
                 break;
             }
 
