@@ -63,6 +63,7 @@ HauptSpielFenster::~HauptSpielFenster()
 }
 void HauptSpielFenster::startCountdown(){
     ui->buttonFertig->setText("F\nE\nR\nT\nI\nG");
+    ui->buttonFertig->setStyleSheet("background-color: rgba(0, 204, 0, 0.8);");
     ui->buttonFertig->setEnabled(true);
     box.setText("Die Runde startet in 3 Sekunden");
     box.open();
@@ -123,7 +124,7 @@ bool HauptSpielFenster::obSpielerwirklichFertigIst()
     }
     else
     {
-        box.setText("Du bist doch moch gar nicht Fertig.versuche es nocheinmal");
+        box.setText("Du bist doch noch gar nicht Fertig.\n Versuche es nocheinmal");
         box.exec();
     }
     return fertig;
@@ -142,6 +143,7 @@ void HauptSpielFenster::clearAnswerVector(){
 
 void HauptSpielFenster::countdownSartet()
 {
-   ui->buttonFertig->setText("C\nO\nU\nN\nT\nD\nO\nW\nN\n!!");
+   ui->buttonFertig->setText("C\nO\nU\nN\nT\nD\nO\nW\nN");
+   ui->buttonFertig->setStyleSheet("background-color: rgba(225, 0, 0, 0.8);");
    ui->buttonFertig->setEnabled(false);
 }

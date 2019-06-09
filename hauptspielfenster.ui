@@ -80,7 +80,8 @@ font-size: 13px;
        <bool>false</bool>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 170, 255)</string>
+       <string notr="true">background-color: rgba(0, 204, 0, 0.4);
+</string>
       </property>
       <property name="text">
        <string>F
