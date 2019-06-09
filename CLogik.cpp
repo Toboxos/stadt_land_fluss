@@ -195,17 +195,20 @@ QVector<int> CLogik::awardPoints(unsigned int category){
 
 
 QVector<QString> CLogik::getWinner() {
+    qDebug() << "getWinner: " << endl;
     int anzahl = players.size();
     QVector<QString> names;
     QVector<int> allPoints;
 
     for (int var = 0; var < anzahl; ++var) {
-        allPoints[var] = players[var].getPunkte();
+        allPoints.push_back(players[var].getPunkte());
+        qDebug() << players[var].getPunkte() << endl;
     }
 
     bool sorted = false;
 
     while(!sorted){
+        qDebug() << "Feli ist in der While Schleife" << endl;
         sorted = true;
 
         for (int i = 0;i < anzahl; ++i) {
@@ -223,7 +226,7 @@ QVector<QString> CLogik::getWinner() {
     for (int n = 0; n < anzahl; ++n) {
         for (int p = 0; p < anzahl; ++p){
             if (allPoints[n] == players[p].getPunkte()){
-                names[n] = players[p].getName();
+                names.push_back(players[p].getName());
             }
         }
 
@@ -327,6 +330,7 @@ void CLogik::sendeRundenStart(){
         currentRound++;
     }else{
         EndGamePacket endPacket;
+        endPacket.setRanking(getWinner());
         sendToAll(endPacket);
         qDebug() << "Spiel fertig";
 }
