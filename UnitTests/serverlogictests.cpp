@@ -12,7 +12,7 @@
 #include "Tests/lettertest.h"
 #include "Tests/awardpointstest.h"
 
-class ServerLogicTest : public QObject {
+class ServerLogicTests : public QObject {
     Q_OBJECT
 
     private slots:
@@ -30,15 +30,15 @@ class ServerLogicTest : public QObject {
         CLogik* m_logic;
 };
 
-void ServerLogicTest::init() {
+void ServerLogicTests::init() {
     m_logic = new CLogik();
 }
 
-void ServerLogicTest::cleanup() {
+void ServerLogicTests::cleanup() {
     delete m_logic;
 }
 
-void ServerLogicTest::setupDefaultParameters() {
+void ServerLogicTests::setupDefaultParameters() {
     m_logic->getSpieleinstellungen()->setRoundNumber(7);
     m_logic->getSpieleinstellungen()->setRoundTimeLimit(2);
     m_logic->getSpieleinstellungen()->setCountdown(10);
@@ -49,7 +49,7 @@ void ServerLogicTest::setupDefaultParameters() {
     m_logic->getSpieleinstellungen()->addKategorie("Punkte");
 }
 
-void ServerLogicTest::testJoins() {
+void ServerLogicTests::testJoins() {
     setupDefaultParameters();
 
 
@@ -59,17 +59,17 @@ void ServerLogicTest::testJoins() {
     test.run(m_logic);
 }
 
-void ServerLogicTest::testLetters() {
+void ServerLogicTests::testLetters() {
     LetterTest test;
     test.run(m_logic);
 }
 
-void ServerLogicTest::testAwardPoints() {
+void ServerLogicTests::testAwardPoints() {
     setupDefaultParameters();
 
     AwardPointsTest test;
     test.run(m_logic);
 }
 
-QTEST_MAIN(ServerLogicTest);
-#include "serverlogictest.moc"
+QTEST_MAIN(ServerLogicTests);
+#include "ServerLogicTests.moc"

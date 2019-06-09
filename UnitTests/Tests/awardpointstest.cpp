@@ -15,7 +15,7 @@ void AwardPointsTest::run(CLogik *logic) {
             case 0: {
                 answers.push_back("augsburg");
                 answers.push_back("algerien");
-                answers.push_back("aland");
+                answers.push_back("");
                 break;
             }
 
@@ -29,7 +29,7 @@ void AwardPointsTest::run(CLogik *logic) {
             case 2: {
                 answers.push_back("");
                 answers.push_back("albanien");
-                answers.push_back("");
+                answers.push_back("aland");
                 break;
             }
         }
@@ -62,9 +62,9 @@ void AwardPointsTest::run(CLogik *logic) {
             }
 
             case 2: {
-                QCOMPARE(answers[0], "aland");
+                QCOMPARE(answers[0], "");
                 QCOMPARE(answers[1], "");
-                QCOMPARE(answers[2], "");
+                QCOMPARE(answers[2], "aland");
                 break;
             }
         }
@@ -72,9 +72,30 @@ void AwardPointsTest::run(CLogik *logic) {
         logic->m_answers.push_back(answers);
     }
 
-    QVector<int> points = logic->awardPoints(0);
+    // Test points for all categories
+    for( unsigned int i = 0 ; i < 3; ++i ) {
+        QVector<int> points = logic->awardPoints(i);
+        switch( i ) {
+            case 0: {
+                QCOMPARE(points[0], 10);
+                QCOMPARE(points[1], 10);
+                QCOMPARE(points[2], 0);
+                break;
+            }
 
-    for( int i = 0; i < 3; ++i ) {
-        qDebug() << "Points: " << points[i];
+            case 1: {
+                QCOMPARE(points[0], 10);
+                QCOMPARE(points[1], 5);
+                QCOMPARE(points[2], 5);
+                break;
+            }
+
+            case 2: {
+                QCOMPARE(points[0], 0);
+                QCOMPARE(points[1], 0);
+                QCOMPARE(points[2], 20);
+                break;
+            }
+        }
     }
 }

@@ -40,6 +40,7 @@ SOURCES += \
     Network/Packets/roundstartpacket.cpp \
     Network/Packets/sendanswerspacket.cpp \
     Network/Packets/sendpointspacket.cpp \
+    UnitTests/serverlogictests.cpp \
     antworten.cpp \
         clientipeingabe.cpp \
     clientlogic.cpp \
@@ -113,7 +114,7 @@ PacketTests {
                 UnitTests/Tests/roundstartpackettest.h
 }
 
-ServerLogicTest {
+ServerLogicTests {
     TARGET = ServerLogicTest
     QT += testlib
     DEFINES +=  UNIT_TEST
@@ -122,7 +123,7 @@ ServerLogicTest {
                 Network/serversocket.cpp
     HEADERS -=  Network/serversocket.h
 
-    SOURCES +=  UnitTests/serverlogictest.cpp \
+    SOURCES +=  \
                 UnitTests/mock_classes/mockserversocket.cpp \
                 UnitTests/Tests/jointest.cpp \
                 UnitTests/Tests/lettertest.cpp \
