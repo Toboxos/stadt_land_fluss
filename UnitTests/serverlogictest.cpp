@@ -7,6 +7,7 @@
 #undef private
 
 #include "Tests/jointest.h"
+#include "Tests/lettertest.h"
 
 class ServerLogicTest : public QObject {
     Q_OBJECT
@@ -16,16 +17,10 @@ class ServerLogicTest : public QObject {
         void cleanup();
 
         void testJoins();
+        void testLetters();
 
     private:
         void setupDefaultParameters();
-
-        /* Methods for tests */
-        void send_joinTest(unsigned int id, Packet& packet);
-
-        enum TEST_CASE {
-            JOIN_TEST
-        } m_testCase;
 
         MockServerSocket m_serverSocket;
         CLogik* m_logic;
@@ -50,18 +45,18 @@ void ServerLogicTest::setupDefaultParameters() {
     m_logic->getSpieleinstellungen()->addKategorie("Punkte");
 }
 
-void ServerLogicTest::send_joinTest(unsigned int id, Packet& packet) {
-
-}
-
 void ServerLogicTest::testJoins() {
-    m_testCase = JOIN_TEST;
     setupDefaultParameters();
 
 
     JoinTest test;
     m_serverSocket.setCallbackSend(&JoinTest::send, &test);
     m_logic->serverSocket = m_serverSocket;
+    test.run(m_logic);
+}
+
+void ServerLogicTest::testLetters() {
+    LetterTest test;
     test.run(m_logic);
 }
 
