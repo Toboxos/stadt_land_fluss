@@ -122,10 +122,12 @@ ServerLogicTest {
     SOURCES +=  UnitTests/serverlogictest.cpp \
                 UnitTests/mock_classes/mockserversocket.cpp \
                 UnitTests/Tests/jointest.cpp \
-                UnitTests/Tests/lettertest.cpp
+                UnitTests/Tests/lettertest.cpp \
+                UnitTests/Tests/awardpointstest.cpp
     HEADERS +=  UnitTests/mock_classes/mockserversocket.h \
                 UnitTests/Tests/jointest.h \
-                UnitTests/Tests/lettertest.h
+                UnitTests/Tests/lettertest.h \
+                UnitTests/Tests/awardpointstest.h
 }
 
 # Default rules for deployment.

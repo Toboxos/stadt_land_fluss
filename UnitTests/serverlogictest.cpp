@@ -3,11 +3,14 @@
 #include "mock_classes/mockserversocket.h"
 
 #define private public
+#define protected public
 #include "CLogik.h"
+#undef protected
 #undef private
 
 #include "Tests/jointest.h"
 #include "Tests/lettertest.h"
+#include "Tests/awardpointstest.h"
 
 class ServerLogicTest : public QObject {
     Q_OBJECT
@@ -18,6 +21,7 @@ class ServerLogicTest : public QObject {
 
         void testJoins();
         void testLetters();
+        void testAwardPoints();
 
     private:
         void setupDefaultParameters();
@@ -57,6 +61,13 @@ void ServerLogicTest::testJoins() {
 
 void ServerLogicTest::testLetters() {
     LetterTest test;
+    test.run(m_logic);
+}
+
+void ServerLogicTest::testAwardPoints() {
+    setupDefaultParameters();
+
+    AwardPointsTest test;
     test.run(m_logic);
 }
 
