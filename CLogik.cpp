@@ -213,7 +213,7 @@ EndGamePacket CLogik::getWinner() {
 
     for (int n = 0; n < anzahl; ++n) {
         for (int p = 0; p < anzahl; ++p){
-            if (allPoints[n] == players[p].getPunkte()){
+            if (allPoints[n] == players[p].getPunkte()){//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 names.push_back(players[p].getName());
                 qDebug() << "in se sekond if drinne " << n << endl;
             }
