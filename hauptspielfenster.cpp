@@ -83,9 +83,11 @@ void HauptSpielFenster::setLetter(char letter){
 
     }else{
         ui->tableSpiel->item(currentRow,0)->setText(letterString);
-
     }
+
     ui->tableSpiel->item(currentRow,0)->setFlags(Qt::ItemIsEnabled);
+
+
     ui->tableSpiel->update();
     ui->tableSpiel->setEditTriggers(QAbstractItemView::AllEditTriggers);
 }
@@ -93,6 +95,11 @@ void HauptSpielFenster::setTotalPoints(int points){
     m_points.push_back( new QTableWidgetItem(0));
     m_points.last()->setText(QString::number(points));
     ui->tableSpiel->setItem(currentRow-1, ui->tableSpiel->columnCount()-1, m_points.last());
+    //diable cells for writing
+    for (int columCount =0; columCount < ui->tableSpiel->columnCount(); columCount++)
+    {
+        ui->tableSpiel->item(currentRow-1,columCount)->setFlags(Qt::ItemIsEnabled);
+    }
 
 }
 void HauptSpielFenster::on_buttonFertig_clicked()
