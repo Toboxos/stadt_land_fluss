@@ -138,8 +138,6 @@ void HostSpielEinstellungen::on_buttonNext_clicked()
 
 void HostSpielEinstellungen::on_checkBoxUnendlich_stateChanged(int arg1)
 {
-
-    ui->label->setText(QString::number(arg1));
     ui->buttonNext->setFocus();
     ui->inputRoundNumber->clear();
     if(arg1 !=0)

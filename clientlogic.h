@@ -26,6 +26,7 @@ public:
     Spieler getSpieler();
     void sendAnswers();
     void setAnswerVector(QVector<QString>);
+
 private:
     ClientSocket _clientSocket;
     CLogik* _clogik;
@@ -46,11 +47,13 @@ public slots:
     void starteSpiel(GameSettingsPacket Packet);
     void serverBereit();
     void fensterFertig();
+    void receivedEndGame(EndGamePacket Packet);
     void receivedStartCountdown(StartCountdownPacket Packet);
     void receivedRoundStart(RoundStartPacket Packet);
     void receivedRoundEnd(EndRoundPacket Packet);
     void playerFinished(PlayerFinishedPacket Packet);
     void receivedPoints(SendPointsPacket Packet);
+
 
 };
 

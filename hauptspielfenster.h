@@ -25,6 +25,8 @@ public:
     void startCountdown();
     void fillAnswerVector();
     void clearAnswerVector();
+    void countdownSartet();
+    void increaseCurrentRow();
 signals:
 
     void fertig();
@@ -36,7 +38,7 @@ private slots:
 
 private:
     QMessageBox box;
-
+    bool obSpielerwirklichFertigIst();
     QVector<QString> answerVector ;
     Ui::HauptSpielFenster *ui;
     void ready();
