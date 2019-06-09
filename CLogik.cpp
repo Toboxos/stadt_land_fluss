@@ -254,22 +254,26 @@ char CLogik::getLetter(){
     char letter;
     bool success = false;
 
-    while(!success){
-    int choose = rand() % 26;
-    success = true;
-    letter = letters[choose];
+    while(!success) {
+        int choose = rand() % 26;
+        success = true;
+        letter = letters[choose];
 
-    for (int var = 0; var < 26; ++var) {
-        if (usedLetters[var] == letter){
-            success = false;
-        }
-        else if(usedLetters[var] == 0x00){
-            usedLetters[var] = letter;
-            break;
-        }
-    }
+        // Check every entry in usedLetters
+        for (int var = 0; var < 26; ++var) {
 
-    m_letter = letter;
+            // when actual letter equals entry in usedLetters
+            if (usedLetters[var] == letter){
+                success = false;
+                break;
+            }
+            else if(usedLetters[var] == 0x00){
+                usedLetters[var] = letter;
+                break;
+            }
+        }
+
+        m_letter = letter;
 
     }
 
