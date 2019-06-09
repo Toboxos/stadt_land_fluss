@@ -32,9 +32,20 @@ void ClientLogic::connect(QString name, QString ip, quint16 port, ClientIpEingab
    QObject::connect(&_clientSocket, SIGNAL(timeout()), this, SLOT(timeoutSlot()));
    QObject::connect(&_clientSocket, SIGNAL(connected()), this, SLOT(connectedSlot()));
    QObject::connect(&_clientSocket, SIGNAL(error()), this, SLOT(errorSlot()));
+   QObject::connect(&_clientSocket, SIGNAL(pointsSent(SendPointsPacket)), this, SLOT(receivedPoints(SendPointsPacket)));
    if( window != nullptr ) QObject::connect(&_clientSocket, SIGNAL(connected()), window, SLOT(connected()));
 }
 
+void ClientLogic::receivedPoints(SendPointsPacket Packet){
+    clientSpieler.credits.clear();
+    clientSpieler.setPunkte(Packet.getTotalPoints()+clientSpieler.getPunkte());
+
+    for (int var = 0;var < Packet.getPoints().size();++var) {
+        clientSpieler.credits.push_back(Packet.getPoints()[var]);    
+    }
+    qDebug() << clientSpieler.credits << "Punkte von Spieler" << clientSpieler.getName() << endl;
+    _hautpSpielFenster->setTotalPoints(clientSpieler.getPunkte());
+}
 
 void ClientLogic::openCLogik() {
     _clogik  = new CLogik();
@@ -47,13 +58,13 @@ void ClientLogic::serverBereit() {
 }
 
 void ClientLogic::sendAnswers(){
-
-
+    _hautpSpielFenster->fillAnswerVector();
     clientSpieler.setAnswers(_hautpSpielFenster->getAnserVector());
 
     SendAnswersPacket packet(clientSpieler.answers);
 
     _clientSocket.send(packet);
+    _hautpSpielFenster->clearAnswerVector();
 }
 
 void ClientLogic::playerJoinedSlot(PlayerJoinPacket Packet){
@@ -75,6 +86,8 @@ void ClientLogic::receivedPlayerListSlot(PlayerListPacket Packet){
 void ClientLogic::receivedStartCountdown(StartCountdownPacket packet){
     qDebug() << "Runde startet in 3 Sekunden";
     _hautpSpielFenster->startCountdown();
+    //_hautpSpielFenster->newRow();
+    //_hautpSpielFenster->update();
 
 }
 
@@ -82,7 +95,6 @@ void ClientLogic::receivedRoundEnd(EndRoundPacket Packet){
     sendAnswers();
     _hautpSpielFenster->newRow();
     qDebug() << "Runde ist beendet, receivedRoundEnd";
-    _hautpSpielFenster->update();
 }
 
 void ClientLogic::timeoutSlot(){
@@ -138,5 +150,5 @@ PlayerFinishedPacket packet(getSpieler().getName());
 _clientSocket.send(packet);
 }
 void ClientLogic::receivedRoundStart(RoundStartPacket Packet){
-    _hautpSpielFenster->enableUserinput(Packet.getLetter());
+    _hautpSpielFenster->setLetter(Packet.getLetter());
 }

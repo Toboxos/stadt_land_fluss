@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <QObject>
 #include <QString>
+#include <ctype.h>
 
 // When unit testing, dont include original ServerSocket
 // indeed include MockServerSocket which simulate an ServerSocket

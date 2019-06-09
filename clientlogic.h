@@ -9,6 +9,7 @@
 #include "Network/Packets/playerfinishedpacket.h"
 #include "Network/Packets/endroundpacket.h"
 #include "Network/Packets/startcountdownpacket.h"
+#include "Network/Packets/sendpointspacket.h"
 
 class ClientIpEingabe;
 class ClientLogic : public QObject
@@ -49,6 +50,7 @@ public slots:
     void receivedRoundStart(RoundStartPacket Packet);
     void receivedRoundEnd(EndRoundPacket Packet);
     void playerFinished(PlayerFinishedPacket Packet);
+    void receivedPoints(SendPointsPacket Packet);
 
 };
 

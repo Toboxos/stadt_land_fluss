@@ -35,6 +35,7 @@ void ClientSocket::read() {
                 PlayerJoinPacket p;
                 p.readData(m_socket);
                 emit playerJoined(p);
+                qDebug() << "Received Player Join Packet";
                 break;
             }
 
@@ -42,6 +43,7 @@ void ClientSocket::read() {
                 PlayerListPacket p;
                 p.readData(m_socket);
                 emit receivedPlayerList(p);
+                qDebug() << "Received Player List Packet";
                 break;
             }
 
@@ -49,6 +51,7 @@ void ClientSocket::read() {
                 GameSettingsPacket p;
                 p.readData(m_socket);
                 emit receivedGameSettings(p);
+                qDebug() << "Received Game Settings Packet";
                 break;
             }
 
@@ -56,6 +59,7 @@ void ClientSocket::read() {
                 RoundStartPacket p;
                 p.readData(m_socket);
                 emit roundStart(p);
+                qDebug() << "Received Round start packet";
                 break;
             }
 
@@ -63,6 +67,7 @@ void ClientSocket::read() {
                 SendAnswersPacket p;
                 p.readData(m_socket);
                 emit answersSent(p);
+                qDebug() << "Received Send answers packet";
                 break;
             }
 
@@ -70,6 +75,7 @@ void ClientSocket::read() {
                 SendPointsPacket p;
                 p.readData(m_socket);
                 emit pointsSent(p);
+                qDebug() << "Received Send Points Packet";
                 break;
             }
 
@@ -77,12 +83,14 @@ void ClientSocket::read() {
                  EndGamePacket p;
                  p.readData(m_socket);
                  emit endGame(p);
+                 qDebug() << "Received End Game Packet";
                  break;
             }
             case PLAYER_FINISHED_PACKET:{
                 PlayerFinishedPacket p;
                 p.readData(m_socket);
                 emit playerFinished(p);
+                qDebug() << "Received Player Finished Packet";
                 break;
             }
 
@@ -90,12 +98,14 @@ void ClientSocket::read() {
                 StartCountdownPacket p;
                 p.readData(m_socket);
                 emit startCountdown(p);
+                qDebug() << "Received Start Countdown Packet";
                 break;
             }
             case END_ROUND_PACKET: {
                 EndRoundPacket p;
                 p.readData(m_socket);
                 emit endRound(p);
+                qDebug() << "Received End Round Packet";
                 break;
             }
 

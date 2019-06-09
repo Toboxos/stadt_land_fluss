@@ -15,14 +15,16 @@ class HauptSpielFenster : public QMainWindow
 public:
     explicit HauptSpielFenster(QWidget *parent = nullptr);
     ~HauptSpielFenster();
-
+    void setTotalPoints(int points);
     void setCategories(QVector<QString> categories);
     void setPlayers(QVector<QString> players, QString clientName);
+    void setLetter(char letter);
 
     void newRow();
     QVector<QString> getAnserVector();
     void startCountdown();
-    void enableUserinput(char letter);
+    void fillAnswerVector();
+    void clearAnswerVector();
 signals:
 
     void fertig();
@@ -34,13 +36,13 @@ private slots:
 
 private:
     QMessageBox box;
-    void setLetter(char letter);
-     void fillAnswerVector();
+
     QVector<QString> answerVector ;
     Ui::HauptSpielFenster *ui;
     void ready();
     int currentRow;
-    QTableWidgetItem* item = nullptr;
+    QVector<QTableWidgetItem*> m_letters;
+    QVector<QTableWidgetItem*> m_points;
 };
 
 #endif // HAUPTSPIELFENSTER_H
