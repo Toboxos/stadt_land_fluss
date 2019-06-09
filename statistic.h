@@ -12,7 +12,7 @@ class Statistic : public QDialog
     Q_OBJECT
 
 public:
-    explicit Statistic(QWidget *parent = nullptr,ClientLogic *clientLogic= nullptr,QVector<QString> *winner = nullptr);
+    explicit Statistic(QWidget *parent = nullptr,ClientLogic *clientLogic= nullptr,QVector<QString> *winner = nullptr, QVector<int> *points = nullptr);
     ~Statistic();
 
 private slots:

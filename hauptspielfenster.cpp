@@ -48,12 +48,14 @@ void HauptSpielFenster::fillAnswerVector()
 {
     for (int columCount = 1; columCount < (ui->tableSpiel->columnCount()) -1; ++columCount)
     {
+        qDebug() << columCount << " Alex hat das so geschrieben";
         if(ui->tableSpiel->item(currentRow,columCount) != nullptr)
             answerVector.push_back(ui->tableSpiel->item(currentRow,columCount)->text());
         else
             answerVector.push_back("");
     }
    ui->tableSpiel->setEnabled(true);
+   qDebug() << "Hier stürz ich ab!" << endl;
 }
 QVector<QString> HauptSpielFenster::getAnserVector()
 {
@@ -94,12 +96,17 @@ void HauptSpielFenster::setLetter(char letter){
 void HauptSpielFenster::setTotalPoints(int points){
     m_points.push_back( new QTableWidgetItem(0));
     m_points.last()->setText(QString::number(points));
+    qDebug() << "Bin ich hier noch da?";
     ui->tableSpiel->setItem(currentRow-1, ui->tableSpiel->columnCount()-1, m_points.last());
     //diable cells for writing
     for (int columCount =0; columCount < ui->tableSpiel->columnCount(); columCount++)
     {
-        ui->tableSpiel->item(currentRow-1,columCount)->setFlags(Qt::ItemIsEnabled);
+        qDebug() << columCount << "oder hier vielleicht?";
+        if( ui->tableSpiel->item(currentRow-1,columCount) != nullptr)
+            ui->tableSpiel->item(currentRow-1,columCount)->setFlags(Qt::ItemIsEnabled);
+
     }
+    qDebug() << "Hier bin ich noch da";
 
 }
 void HauptSpielFenster::on_buttonFertig_clicked()

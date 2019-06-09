@@ -29,15 +29,12 @@ void CLogik::starteServerSocket() {
 }
 
 void CLogik::bekommt_antwort(SendAnswersPacket packet, unsigned int id){
-    qDebug() << players.size() << "Spieler sind angemeldet";
 
     for(int i = 0; i < players.size(); i++){
 
         if(players[i].getConnectionId() == id)
             players[i].setAnswers(packet.getAnswers());
-        qDebug() << "so viele Antworten erhalten" << packet.getAnswers().size();
     }
-    qDebug() << "Ich hab die Antworten bekommen" << endl;
 
     answersReceived++;
 
@@ -73,10 +70,7 @@ void CLogik::spieler_beitritt(PlayerJoinPacket packet, unsigned int id){
     serverSocket.send(id, playerListPacket);
     spieler.setConnectionId(id);
     players.push_back(spieler);
-    qDebug() << spieler.getName() << " hat sich verbunden" << endl;
-
     if( warteRaum != nullptr ) warteRaum->showPlayer();
-    qDebug() << "Spieler beigetreten";
 
 
 }
@@ -84,7 +78,7 @@ void CLogik::spieler_beitritt(PlayerJoinPacket packet, unsigned int id){
 void CLogik::endGame(){
    EndGamePacket packet;
 
-   packet.setRanking(getWinner());
+   packet = getWinner();
 
    for (unsigned int var = 0; var < players.size(); ++var) {
        serverSocket.send(players[var].getConnectionId(), packet);
@@ -101,12 +95,10 @@ int CLogik::createPlayer(QString name) {
 }
 
 QVector<QString> CLogik::sortAnswers(unsigned int category) {
-    qDebug() << "ich bin in sort answers";
     int anzahl = players.size();
     QVector<QString> antwortenKategorie;
 
     for (int var = 0; var < anzahl; ++var) {
-        //qDebug() << players[var].getAnswer(category) << "wird eingetragen";
         antwortenKategorie.push_back(players[var].getAnswer(category));
     }
 
@@ -115,25 +107,20 @@ QVector<QString> CLogik::sortAnswers(unsigned int category) {
 
 void CLogik::Punktevergabe(){
     unsigned int categories = players[0].Categories();
-    qDebug() << "ich bin in der punktevergabe";
 
     for (unsigned int var = 0;var < categories; ++var) {
-        qDebug() << var << "Nummer zu ordnende Kategorie" << endl;
         m_answers.push_back(sortAnswers(var));
     }
 
     for (unsigned int n = 0; n < categories; ++n){
         m_points.push_back(awardPoints(n));
-        qDebug() << "ich habe die Punkte vergeben" << m_points.last().getPunkte() << endl;
     }
 
     int anzahl = players.size();
 
     for (int m = 0; m < anzahl; ++m){
         Spieler player = players.at(m);
-        qDebug() << "ich werde punkte schicken an player" << player.getName() << endl;
         SendPointsPacket packet;
-
         int speicher = 0;
 
         for (int var = 0; var < categories; ++var) {
@@ -147,11 +134,9 @@ void CLogik::Punktevergabe(){
         packet.setPoints(player.getCredit());
         packet.setTotalPoints(player.getPunkte());
 
-        qDebug() << packet.getTotalPoints() << "totalpoints";
-        qDebug() << packet.getPoints() << "packet points" << endl;
 
         serverSocket.send(player.getConnectionId(), packet);
-        qDebug() << "SendPointsPacket geschickt an" << player.getName() << endl;
+        players.replace(m, player);
     }
     roundTimer->rundenPausenTimer();
     m_points.clear();
@@ -196,45 +181,50 @@ QVector<int> CLogik::awardPoints(unsigned int category){
 }
 
 
-QVector<QString> CLogik::getWinner() {
-    qDebug() << "getWinner: " << endl;
+EndGamePacket CLogik::getWinner() {
+    qDebug() << "getWinner: " << players.size() << endl;
     int anzahl = players.size();
+
     QVector<QString> names;
     QVector<int> allPoints;
 
     for (int var = 0; var < anzahl; ++var) {
         allPoints.push_back(players[var].getPunkte());
-        qDebug() << players[var].getPunkte() << endl;
     }
-
     bool sorted = false;
 
     while(!sorted){
-        qDebug() << "Feli ist in der While Schleife" << endl;
         sorted = true;
-
+        qDebug() << "Feli ist in der While Schleife" << endl;
         for (int i = 0;i < anzahl; ++i) {
-
-            if (allPoints[i]<allPoints[i+1]){
+        qDebug() << " in der for Schleife ist i " << i << endl;
+            if ((i+1<anzahl)&&(allPoints[i]<allPoints[i+1])){
                 int temp = allPoints[i];
                 allPoints[i] = allPoints[i+1];
                 allPoints[i+1] = temp;
+                qDebug() << "in se if drinne " << i << endl;
+                sorted = false;
             }
 
-            sorted = false;
         }
+
     }
+    qDebug() << "Zwischenstelle 0" << endl;
 
     for (int n = 0; n < anzahl; ++n) {
         for (int p = 0; p < anzahl; ++p){
             if (allPoints[n] == players[p].getPunkte()){
                 names.push_back(players[p].getName());
+                qDebug() << "in se sekond if drinne " << n << endl;
             }
         }
 
 
     }
-    return names;
+    qDebug() << names << endl;
+    qDebug() << allPoints << endl;
+    EndGamePacket packet(names, allPoints);
+    return packet;
 }
 
 char CLogik::getLetter(){
@@ -305,21 +295,15 @@ void CLogik::openHostSpielEinstellungen()
  }
 
  void CLogik::sendeSpielStart(){
-
-     GameSettingsPacket packet(this->getSpieleinstellungen()->getSpielname(), this->getSpieleinstellungen()->getRundenanzahl(), this->getSpieleinstellungen()->getRundendauer(), this->getSpieleinstellungen()->getCountdown(), this->getSpieleinstellungen()->getKategorienListe());
-     PlayerListPacket playerListPacket;
-     QVector <QString> vorherigeSpieler(players.size());
-
-     //evtl aktuelle Spielerliste an neuen Spieler leiten
-     for (int var = 0; var < players.size(); ++var) {
-        vorherigeSpieler[var] = players[var].getName();
+     PlayerListPacket listPacket;
+     QVector<QString> namen;
+     for(int i = 0; i < players.size(); i++){
+        namen.push_back(players[i].getName());
      }
-
-     playerListPacket.setPlayers(vorherigeSpieler);
-
-    sendToAll(packet);
-    sendToAll(playerListPacket);
-
+     listPacket.setPlayers(namen);
+     GameSettingsPacket packet(this->getSpieleinstellungen()->getSpielname(), this->getSpieleinstellungen()->getRundenanzahl(), this->getSpieleinstellungen()->getRundendauer(), this->getSpieleinstellungen()->getCountdown(), this->getSpieleinstellungen()->getKategorienListe());
+     sendToAll(packet);
+     sendToAll(listPacket);
      roundTimer = new timer(this->getSpieleinstellungen()->getRundendauer(), 3, this->getSpieleinstellungen()->getCountdown());
      setupTimer();
  }
@@ -329,10 +313,11 @@ void CLogik::sendeRundenStart(){
     {   StartCountdownPacket packet;
         sendToAll(packet);
         roundTimer->startRound();
+        qDebug() << "RundenStart :))";
         currentRound++;
     }else{
         EndGamePacket endPacket;
-        endPacket.setRanking(getWinner());
+        endPacket = getWinner();
         sendToAll(endPacket);
         qDebug() << "Spiel fertig";
 }

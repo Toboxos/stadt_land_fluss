@@ -63,10 +63,10 @@ public:
     void Punktevergabe();
 
     /**
-     * @brief sorts players by total credit
+     * @brief sorts players by total credit!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
      * @return players organized by rank
      */
-    QVector<QString> getWinner();
+    EndGamePacket getWinner();
 
     /**
      * @brief random letter for round, repeated letters only when every letter in the english alphabet has been used

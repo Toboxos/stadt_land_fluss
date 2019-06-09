@@ -39,13 +39,8 @@ void ClientLogic::connect(QString name, QString ip, quint16 port, ClientIpEingab
 }
 
 void ClientLogic::receivedPoints(SendPointsPacket Packet){
-    clientSpieler.credits.clear();
-    clientSpieler.setPunkte(Packet.getTotalPoints()+clientSpieler.getPunkte());
-
-    for (int var = 0;var < Packet.getPoints().size();++var) {
-        clientSpieler.credits.push_back(Packet.getPoints()[var]);    
-    }
-    qDebug() << clientSpieler.credits << "Punkte von Spieler" << clientSpieler.getName() << endl;
+    clientSpieler.setPunkte(Packet.getTotalPoints());
+    qDebug() << "Die feli mit ihren Debugs immer" << endl;
     _hautpSpielFenster->setTotalPoints(clientSpieler.getPunkte());
 }
 
@@ -162,6 +157,7 @@ void ClientLogic::receivedEndGame(EndGamePacket Packet)
 {
     qDebug() << "Aha in receivedEndGame";
     QVector<QString> winner = Packet.getRanking();
-    Statistic statistic(nullptr,this, &winner);
+    QVector<int> points = Packet.getPoints();
+    Statistic statistic(nullptr,this, &winner, &points);
     statistic.exec();
 }
