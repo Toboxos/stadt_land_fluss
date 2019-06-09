@@ -160,6 +160,7 @@ void ClientLogic::receivedRoundStart(RoundStartPacket Packet){
 }
 void ClientLogic::receivedEndGame(EndGamePacket Packet)
 {
+    qDebug() << "Aha in receivedEndGame";
     QVector<QString> winner = Packet.getRanking();
     Statistic statistic(nullptr,this, &winner);
     statistic.exec();
