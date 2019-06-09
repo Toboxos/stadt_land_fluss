@@ -188,17 +188,25 @@ EndGamePacket CLogik::getWinner() {
     QVector<QString> names;
     QVector<int> allPoints;
 
+    // Save points of all players in allPoints
     for (int var = 0; var < anzahl; ++var) {
         allPoints.push_back(players[var].getPunkte());
     }
     bool sorted = false;
 
     while(!sorted){
+
+        // when no swap needed in for loop, array is sorted
         sorted = true;
         qDebug() << "Feli ist in der While Schleife" << endl;
+
+        // For all players
         for (int i = 0;i < anzahl; ++i) {
-        qDebug() << " in der for Schleife ist i " << i << endl;
-            if ((i+1<anzahl)&&(allPoints[i]<allPoints[i+1])){
+            qDebug() << " in der for Schleife ist i " << i << endl;
+
+            // When not last element and current points less than next points
+            // -> swap current and next points (bubble sort like), set status to unsorted
+            if ( (i+1<anzahl) && (allPoints[i] < allPoints[i+1]) ){
                 int temp = allPoints[i];
                 allPoints[i] = allPoints[i+1];
                 allPoints[i+1] = temp;
@@ -211,8 +219,14 @@ EndGamePacket CLogik::getWinner() {
     }
     qDebug() << "Zwischenstelle 0" << endl;
 
+    // For each rank
     for (int n = 0; n < anzahl; ++n) {
+
+        // Check points for every player
         for (int p = 0; p < anzahl; ++p){
+
+            // When actual points to check equals points of player
+            // -> add player to list
             if (allPoints[n] == players[p].getPunkte()){//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 names.push_back(players[p].getName());
                 qDebug() << "in se sekond if drinne " << n << endl;
