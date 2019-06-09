@@ -8,10 +8,6 @@ ServerSocket::ServerSocket() {
 
 }
 
-ServerSocket::ServerSocket(quint16 port) {
-    listen(port);
-}
-
 bool ServerSocket::listen(quint16 port) {
     if( m_server.listen(QHostAddress::Any, port) ) {
         connect(&m_server, SIGNAL(newConnection()), this, SLOT(newConnection()));

@@ -40,6 +40,7 @@ SOURCES += \
     Network/Packets/roundstartpacket.cpp \
     Network/Packets/sendanswerspacket.cpp \
     Network/Packets/sendpointspacket.cpp \
+    UnitTests/serverlogictests.cpp \
     antworten.cpp \
         clientipeingabe.cpp \
     clientlogic.cpp \
@@ -55,8 +56,7 @@ SOURCES += \
         spielstart.cpp \
         CLogik.cpp \
     statistic.cpp \
-        timer.cpp \
-    Examples/networkexample.cpp
+        timer.cpp
 
 
 HEADERS += \
@@ -88,8 +88,7 @@ HEADERS += \
         spielstart.h \
         CLogik.h \
     statistic.h \
-        timer.h \
-    Examples/networkexample.h
+        timer.h
 
 FORMS += \
         clientipeingabe.ui \
@@ -104,13 +103,35 @@ FORMS += \
 PacketTests {
     TARGET = PacketTest
     QT += testlib
+
     SOURCES -=  main.cpp
+
     SOURCES +=  UnitTests/packettests.cpp \
                 UnitTests/Tests/gamesettingspackettest.cpp \
                 UnitTests/Tests/roundstartpackettest.cpp
     HEADERS +=  UnitTests/Tests/test.h \
                 UnitTests/Tests/gamesettingspackettest.h \
-                UnitTests/Tests/roundstartpackettest.h \
+                UnitTests/Tests/roundstartpackettest.h
+}
+
+ServerLogicTests {
+    TARGET = ServerLogicTest
+    QT += testlib
+    DEFINES +=  UNIT_TEST
+
+    SOURCES -=  main.cpp \
+                Network/serversocket.cpp
+    HEADERS -=  Network/serversocket.h
+
+    SOURCES +=  \
+                UnitTests/mock_classes/mockserversocket.cpp \
+                UnitTests/Tests/jointest.cpp \
+                UnitTests/Tests/lettertest.cpp \
+                UnitTests/Tests/awardpointstest.cpp
+    HEADERS +=  UnitTests/mock_classes/mockserversocket.h \
+                UnitTests/Tests/jointest.h \
+                UnitTests/Tests/lettertest.h \
+                UnitTests/Tests/awardpointstest.h
 }
 
 # Default rules for deployment.

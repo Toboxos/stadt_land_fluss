@@ -40,7 +40,7 @@ void SpielerWarteRaum::createTable()
         ui->tableSpieleruebersicht->setRowCount(reihenNummer);
         QTableWidgetItem tableItem;
         qDebug() << it->getName() << "test" << endl;
-        ui->tableSpieleruebersicht->setItem(reihenNummer-1,1,new QTableWidgetItem(it->getName()));
+        ui->tableSpieleruebersicht->setItem(reihenNummer-1,0,new QTableWidgetItem(it->getName()));
 
       //  ui->tableSpieleruebersicht->setItem(reihenNummer-1,0,new QTableWidgetItem(QString::number(it->getId())));
 

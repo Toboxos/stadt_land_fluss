@@ -4,7 +4,6 @@
 #include "clientlogic.h"
 #include "spielstart.h"
 
-#include "Examples/networkexample.h"
 #include "CLogik.h"
 
 

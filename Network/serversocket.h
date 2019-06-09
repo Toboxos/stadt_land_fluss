@@ -24,13 +24,6 @@ class ServerSocket : public QObject {
         ServerSocket();
 
         /**
-         * @brief Constructor with automatic listen
-         *
-         * @param port  Port which server listens to
-         */
-        ServerSocket(quint16 port);
-
-        /**
          * @brief Listen to specific port for connections
          *
          * @param port  Port to listen

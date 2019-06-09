@@ -8,7 +8,15 @@
 #include <QString>
 #include <ctype.h>
 
+// When unit testing, dont include original ServerSocket
+// indeed include MockServerSocket which simulate an ServerSocket
+#ifdef UNIT_TEST
+#include "UnitTests/mock_classes/mockserversocket.h"
+typedef MockServerSocket ServerSocket;
+#else
 #include "Network/serversocket.h"
+#endif
+
 #include "antworten.h"
 #include "spieler.h"
 #include "punkte.h"
@@ -18,7 +26,6 @@
 #include "Network/Packets/playerlistpacket.h"
 #include "Network/Packets/endroundpacket.h"
 #include "Network/Packets/playerfinishedpacket.h"
-#include "Network/serversocket.h"
 #include "spieleinstellungen.h"
 #include "spielerwarteraum.h"
 #include "timer.h"

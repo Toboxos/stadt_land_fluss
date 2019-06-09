@@ -75,7 +75,7 @@ void CLogik::spieler_beitritt(PlayerJoinPacket packet, unsigned int id){
     players.push_back(spieler);
     qDebug() << spieler.getName() << " hat sich verbunden" << endl;
 
-    warteRaum->showPlayer();
+    if( warteRaum != nullptr ) warteRaum->showPlayer();
     qDebug() << "Spieler beigetreten";
 
 
@@ -181,10 +181,12 @@ QVector<int> CLogik::awardPoints(unsigned int category){
         }
     }
 
+    // total points which are given for all players in this category
+    for (int z = 0; z < anzahl; ++z){
+        sum = sum + points.at(z);
+    }
+
     for (int v = 0; v < anzahl; ++v){
-        for (int z = 0; z < anzahl; ++z){
-            sum = sum + points.at(z);
-        }
         if (sum > 0 && sum == points.at(v) && (antworten[v][0] == m_letter || antworten[v][0] == toupper(m_letter))){
             points.replace(v,20);
         }
