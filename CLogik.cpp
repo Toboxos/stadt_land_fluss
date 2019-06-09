@@ -124,7 +124,7 @@ void CLogik::Punktevergabe(){
 
     for (unsigned int n = 0; n < categories; ++n){
         m_points.push_back(awardPoints(n));
-        qDebug() << "ich habe die Punkte vergeben" << endl;
+        qDebug() << "ich habe die Punkte vergeben" << m_points.last().getPunkte() << endl;
     }
 
     int anzahl = players.size();
@@ -167,7 +167,7 @@ QVector<int> CLogik::awardPoints(unsigned int category){
     int sum = 0;
 
     for (int var = 0; var < anzahl; ++var) {
-        if (antworten[var] == "" || antworten[var][0] != m_letter || antworten[var][0] != toupper(m_letter)){
+        if (antworten[var] == "" || (antworten[var][0] != m_letter && antworten[var][0] != toupper(m_letter))){
             points.push_back(0);
         }
         else {
@@ -185,7 +185,7 @@ QVector<int> CLogik::awardPoints(unsigned int category){
         for (int z = 0; z < anzahl; ++z){
             sum = sum + points.at(z);
         }
-        if (sum == points.at(v) && (antworten[v][0] == m_letter || antworten[v][0] == toupper(m_letter))){
+        if (sum > 0 && sum == points.at(v) && (antworten[v][0] == m_letter || antworten[v][0] == toupper(m_letter))){
             points.replace(v,20);
         }
     }
