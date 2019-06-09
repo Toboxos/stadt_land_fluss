@@ -133,6 +133,7 @@ void ClientLogic::setSpieler(Spieler spieler){
 
 void ClientLogic::playerFinished(PlayerFinishedPacket Packet){
     qDebug() << "Nur noch zehn Sekunden, beeile dich!";
+    _hautpSpielFenster->countdownSartet();
 }
 
 void ClientLogic::starteSpiel(GameSettingsPacket Packet){

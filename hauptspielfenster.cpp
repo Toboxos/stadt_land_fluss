@@ -12,6 +12,7 @@ HauptSpielFenster::HauptSpielFenster(QWidget *parent) :
     ui(new Ui::HauptSpielFenster)
 {
     ui->setupUi(this);
+
     ui->tableSpiel->resizeColumnsToContents();
     currentRow = 0;
     ui->tableSpiel->setRowCount(0);
@@ -61,6 +62,8 @@ HauptSpielFenster::~HauptSpielFenster()
     m_letters.clear();
 }
 void HauptSpielFenster::startCountdown(){
+    ui->buttonFertig->setText("F\nE\nR\nT\nI\nG");
+    ui->buttonFertig->setEnabled(true);
     box.setText("Die Runde startet in 3 Sekunden");
     box.open();
 }
@@ -116,7 +119,7 @@ bool HauptSpielFenster::obSpielerwirklichFertigIst()
 
     if (fertig)
     {
-    ui->buttonFertig->setEnabled(true);
+    ui->buttonFertig->setEnabled(false);
     }
     else
     {
@@ -137,3 +140,8 @@ void HauptSpielFenster::clearAnswerVector(){
     answerVector.clear();
 }
 
+void HauptSpielFenster::countdownSartet()
+{
+   ui->buttonFertig->setText("C\nO\nU\nN\nT\nD\nO\nW\nN\n!!");
+   ui->buttonFertig->setEnabled(false);
+}

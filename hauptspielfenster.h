@@ -25,6 +25,7 @@ public:
     void startCountdown();
     void fillAnswerVector();
     void clearAnswerVector();
+    void countdownSartet();
 signals:
 
     void fertig();

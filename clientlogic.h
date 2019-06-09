@@ -52,6 +52,7 @@ public slots:
     void playerFinished(PlayerFinishedPacket Packet);
     void receivedPoints(SendPointsPacket Packet);
 
+
 };
 
 
