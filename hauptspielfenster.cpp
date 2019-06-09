@@ -13,7 +13,7 @@ HauptSpielFenster::HauptSpielFenster(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->tableSpiel->resizeColumnsToContents();
+    ui->tableSpiel->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     currentRow = 0;
 
 
@@ -25,7 +25,8 @@ void HauptSpielFenster::increaseCurrentRow()
 void HauptSpielFenster::setCategories(QVector<QString> categories) {
     ui->tableSpiel->setColumnCount(categories.size());
     ui->tableSpiel->setHorizontalHeaderLabels(QStringList::fromVector(categories));
-    //ui->tableSpiel->setRowCount(1);
+
+
 }
 
 void HauptSpielFenster::setPlayers(QVector<QString> players, QString clientName) {
@@ -84,7 +85,7 @@ void HauptSpielFenster::setLetter(char letter){
         ui->tableSpiel->item(currentRow,0)->setText(letterString);
 
     }
-
+    ui->tableSpiel->item(currentRow,0)->setFlags(Qt::ItemIsEnabled);
     ui->tableSpiel->update();
     ui->tableSpiel->setEditTriggers(QAbstractItemView::AllEditTriggers);
 }
