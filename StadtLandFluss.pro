@@ -54,6 +54,7 @@ SOURCES += \
         spielerwarteraum.cpp \
         spielstart.cpp \
         CLogik.cpp \
+    statistic.cpp \
         timer.cpp \
     Examples/networkexample.cpp
 
@@ -86,6 +87,7 @@ HEADERS += \
         spielerwarteraum.h \
         spielstart.h \
         CLogik.h \
+    statistic.h \
         timer.h \
     Examples/networkexample.h
 
@@ -96,7 +98,8 @@ FORMS += \
         hostspieleinstellungen.ui \
         kategorieeingabe.ui \
         spielerwarteraum.ui \
-        spielstart.ui
+        spielstart.ui \
+        statistic.ui
 
 PacketTests {
     TARGET = PacketTest

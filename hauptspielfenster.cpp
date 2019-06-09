@@ -15,14 +15,17 @@ HauptSpielFenster::HauptSpielFenster(QWidget *parent) :
 
     ui->tableSpiel->resizeColumnsToContents();
     currentRow = 0;
-    ui->tableSpiel->setRowCount(0);
+
 
 }
-
+void HauptSpielFenster::increaseCurrentRow()
+{
+    currentRow++;
+}
 void HauptSpielFenster::setCategories(QVector<QString> categories) {
     ui->tableSpiel->setColumnCount(categories.size());
     ui->tableSpiel->setHorizontalHeaderLabels(QStringList::fromVector(categories));
-    ui->tableSpiel->setRowCount(1);
+    //ui->tableSpiel->setRowCount(1);
 }
 
 void HauptSpielFenster::setPlayers(QVector<QString> players, QString clientName) {
@@ -45,7 +48,7 @@ void HauptSpielFenster::fillAnswerVector()
     for (int columCount = 1; columCount < (ui->tableSpiel->columnCount()) -1; ++columCount)
     {
         if(ui->tableSpiel->item(currentRow,columCount) != nullptr)
-            answerVector.push_back(ui->tableSpiel->item(currentRow,columCount)->text());           
+            answerVector.push_back(ui->tableSpiel->item(currentRow,columCount)->text());
         else
             answerVector.push_back("");
     }
@@ -71,6 +74,7 @@ void HauptSpielFenster::startCountdown(){
 void HauptSpielFenster::setLetter(char letter){
     box.close();
     QString letterString(letter);
+    qDebug() << "Row" << currentRow;
     if(ui->tableSpiel->item(currentRow,0)==nullptr){
         m_letters.push_back(new QTableWidgetItem(0));
         m_letters.last()->setText(letterString);
@@ -80,6 +84,7 @@ void HauptSpielFenster::setLetter(char letter){
         ui->tableSpiel->item(currentRow,0)->setText(letterString);
 
     }
+
     ui->tableSpiel->update();
     ui->tableSpiel->setEditTriggers(QAbstractItemView::AllEditTriggers);
 }
@@ -95,6 +100,7 @@ void HauptSpielFenster::on_buttonFertig_clicked()
     if (obSpielerwirklichFertigIst())
     {
         emit fertig();
+
         ui->tableSpiel->setEditTriggers(QAbstractItemView::NoEditTriggers);
     }
     else
@@ -130,10 +136,11 @@ bool HauptSpielFenster::obSpielerwirklichFertigIst()
     return fertig;
 }
 void HauptSpielFenster::newRow() {
-    ++currentRow;
+
     qDebug() << "newRow: " <<currentRow;
-    //ui->tableSpiel->insertRow(currentRow);
+   // ui->tableSpiel->insertRow(currentRow);
     ui->tableSpiel->setRowCount(currentRow+1);
+
     ui->tableSpiel->update();
 
 }

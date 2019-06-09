@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>925</width>
-    <height>494</height>
+    <width>1005</width>
+    <height>536</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,37 +15,6 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="2">
-     <widget class="QTableWidget" name="tableSpiel">
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>421</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <family>Copperplate Gothic Light</family>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">
-QHeaderView::section {
-	font-family: 'Copperplate Gothic Light';
-font-size: 13px;
-    border: 1px solid #fffff8;
-
-}</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::Box</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Plain</enum>
-      </property>
-     </widget>
-    </item>
     <item row="0" column="0">
      <widget class="QListWidget" name="listSpieler">
       <property name="sizePolicy">
@@ -70,6 +39,12 @@ font-size: 13px;
     </item>
     <item row="0" column="4">
      <widget class="QPushButton" name="buttonFertig">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="font">
        <font>
         <family>Copperplate Gothic Bold</family>
@@ -103,6 +78,37 @@ G
       </property>
      </widget>
     </item>
+    <item row="0" column="2" colspan="2">
+     <widget class="QTableWidget" name="tableSpiel">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <family>Copperplate Gothic Light</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">
+QHeaderView::section {
+	font-family: 'Copperplate Gothic Light';
+font-size: 13px;
+    border: 1px solid #fffff8;
+
+}</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -110,7 +116,7 @@ G
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>925</width>
+     <width>1005</width>
      <height>21</height>
     </rect>
    </property>

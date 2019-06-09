@@ -3,6 +3,7 @@
 #include "CLogik.h"
 #include "clientipeingabe.h"
 #include "hauptspielfenster.h"
+#include "statistic.h"
 #include <QDebug>
 ClientLogic::ClientLogic() : _clogik(nullptr), _hautpSpielFenster(nullptr)
 {
@@ -27,6 +28,7 @@ void ClientLogic::connect(QString name, QString ip, quint16 port, ClientIpEingab
    QObject::connect(&_clientSocket, SIGNAL(receivedPlayerList(PlayerListPacket)), this, SLOT(receivedPlayerListSlot(PlayerListPacket)));
    QObject::connect(&_clientSocket, SIGNAL(startCountdown(StartCountdownPacket)), this, SLOT(receivedStartCountdown(StartCountdownPacket)));
    QObject::connect(&_clientSocket, SIGNAL(roundStart(RoundStartPacket)), this, SLOT(receivedRoundStart(RoundStartPacket)));
+   QObject::connect(&_clientSocket, SIGNAL(endGame(EndGamePacket)), this, SLOT(receivedEndGame(EndGamePacket)));
    QObject::connect(&_clientSocket, SIGNAL(endRound(EndRoundPacket)), this, SLOT(receivedRoundEnd(EndRoundPacket)));
    QObject::connect(&_clientSocket, SIGNAL(playerFinished(PlayerFinishedPacket)), this, SLOT(playerFinished(PlayerFinishedPacket)));
    QObject::connect(&_clientSocket, SIGNAL(timeout()), this, SLOT(timeoutSlot()));
@@ -85,6 +87,7 @@ void ClientLogic::receivedPlayerListSlot(PlayerListPacket Packet){
 
 void ClientLogic::receivedStartCountdown(StartCountdownPacket packet){
     qDebug() << "Runde startet in 3 Sekunden";
+    _hautpSpielFenster->newRow();
     _hautpSpielFenster->startCountdown();
     //_hautpSpielFenster->newRow();
     //_hautpSpielFenster->update();
@@ -93,7 +96,9 @@ void ClientLogic::receivedStartCountdown(StartCountdownPacket packet){
 
 void ClientLogic::receivedRoundEnd(EndRoundPacket Packet){
     sendAnswers();
-    _hautpSpielFenster->newRow();
+    _hautpSpielFenster->increaseCurrentRow();
+
+
     qDebug() << "Runde ist beendet, receivedRoundEnd";
 }
 
@@ -152,4 +157,10 @@ _clientSocket.send(packet);
 }
 void ClientLogic::receivedRoundStart(RoundStartPacket Packet){
     _hautpSpielFenster->setLetter(Packet.getLetter());
+}
+void ClientLogic::receivedEndGame(EndGamePacket Packet)
+{
+    QVector<QString> winner = Packet.getRanking();
+    Statistic statistic(nullptr,this, &winner);
+    statistic.exec();
 }

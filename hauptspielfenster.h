@@ -26,6 +26,7 @@ public:
     void fillAnswerVector();
     void clearAnswerVector();
     void countdownSartet();
+    void increaseCurrentRow();
 signals:
 
     void fertig();

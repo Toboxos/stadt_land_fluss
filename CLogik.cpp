@@ -320,11 +320,14 @@ void CLogik::openHostSpielEinstellungen()
  }
 
 void CLogik::sendeRundenStart(){
-    if(currentRound < getSpieleinstellungen()->getRundenanzahl()){    StartCountdownPacket packet;
+    if(currentRound < getSpieleinstellungen()->getRundenanzahl())
+    {   StartCountdownPacket packet;
         sendToAll(packet);
         roundTimer->startRound();
         currentRound++;
     }else{
+        EndGamePacket endPacket;
+        sendToAll(endPacket);
         qDebug() << "Spiel fertig";
 }
  }
