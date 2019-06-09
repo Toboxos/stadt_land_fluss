@@ -9,7 +9,7 @@
 #include <ctype.h>
 
 // When unit testing, dont include original ServerSocket
-// indeed include MockServerSocket which simulate an ServerSocket
+// indeed include MockServerSocket which simulates a ServerSocket
 #ifdef UNIT_TEST
 #include "UnitTests/mock_classes/mockserversocket.h"
 typedef MockServerSocket ServerSocket;
@@ -40,9 +40,6 @@ public:
 
     void run();
 
-    int createPlayer(QString);
-
-
     /**
      * @brief sorts answers by category
      * @param number of category
@@ -60,11 +57,11 @@ public:
     /**
      * @brief organizes the awarding of points, returning the points to the players, saving the total credits
      */
-    void Punktevergabe();
+    void punktevergabe();
 
     /**
-     * @brief sorts players by total credit!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-     * @return players organized by rank
+     * @brief sorts players by total credit, packs ranking by names and credit in EndGamePacket
+     * @return EndGamePacket
      */
     EndGamePacket getWinner();
 
@@ -85,32 +82,87 @@ public:
     /// \return
     ///
     QVector<Spieler>* getSpielerListe();
+
+    ///
+    /// \brief starts server socket
+    ///
     void starteServerSocket();
+
+    ///
+    /// \brief opens the game settings window
+    ///
     void openHostSpielEinstellungen();
+
+    ///
+    /// \brief opens window to set categories
+    ///
     void openKategorieEingabe();
+
+    ///
+    /// \brief opens player waiting room
+    ///
     void openSpielerWarteRaum();
+
+    ///
+    /// \brief sends a GameSettingsPacket and PlayerListPacket to every client
+    ///
     void sendeSpielStart();
+
+    ///
+    /// \brief sends a StartCountdownPacket to every client, sends EndGamePacket should the maximum number of rounds be achieved
+    ///
     void sendeRundenStart();
-    void endGame();    
+
+    ///
+    /// \brief endGame
+    ///
+    void endGame();
+
+    ///
+    /// \brief sends a packet to every client
+    /// \param packet that is to be sent
+    ///
     void sendToAll(Packet& p);
 public slots:
     /**
-     * @brief nimmt Signal mit Packet entgegen, erstellt neues Spielerobjekt und speichert die VerbindungsID ab
-     * @param packet
-     * @param id
+     * @brief triggered by signal playerJoined, creates new player object and saves connection id
+     * @param PlayerJoinPacket
+     * @param connection id client
      */
     void spieler_beitritt(PlayerJoinPacket packet, unsigned int id);
 	
+    ///
+    /// \brief saves the received answers from every player, triggers awarding of points
+    /// \param SendAnswersPacket
+    /// \param connection id
+    ///
     void bekommt_antwort(SendAnswersPacket packet, unsigned int id);
 
+    ///
+    /// \brief sends a RoundStartPacket with the round's letter to every player
+    ///
     void startInput();
 
+    ///
+    /// \brief sends a PlayerFinishedPacket to every client
+    ///
     void playerFinished();
 
+    ///
+    /// \brief sends an EndRoundPacket to every client
+    ///
     void endInput();
 
+    ///
+    /// \brief emit signal initRoundEnd
+    /// \param PlayerFinishedPacket
+    /// \param connection id
+    ///
     void bekommt_playerFinished(PlayerFinishedPacket packet, unsigned int id);
 
+    ///
+    /// \brief triggers sendeRundenStart
+    ///
     void nextRound();
 
 signals:
@@ -119,17 +171,22 @@ signals:
     void initRoundEnd();
 
 private:
-    int answersReceived = 0;
-    int currentRound = 0;
+    int m_answersReceived = 0;
+    int m_currentRound = 0;
+
+    ///
+    /// \brief setupTimer
+    ///
     void setupTimer();
+
     SpielerWarteRaum *warteRaum;
-    QVector<Spieler> players;
+    QVector<Spieler> m_players;
     QVector<antworten> m_answers;
     QVector<punkte> m_points;
-    char letters[26] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
-    char usedLetters[26];
+    char m_letters[26] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+    char m_usedLetters[26];
     ServerSocket serverSocket;
-    Spieleinstellungen  _einstellung ;
+    Spieleinstellungen  m_einstellung ;
     char m_letter;
     timer *roundTimer = nullptr;
 };

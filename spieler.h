@@ -90,15 +90,20 @@ public:
     ///
     void setCredit(int, int);
 
-    static int _nextId;
-    QVector<QString> answers;
-    QVector<int> credits;
-private:
-    QString _name;
-    int _punkte = 0;
-    int _id=0;
-    unsigned int connectionId;
+    static int m_nextId;
 
+    QVector<QString> m_answers;
+
+    QVector<int> m_credits;
+
+private:
+    QString m_name;
+
+    int m_punkte = 0;
+
+    int m_id=0;
+
+    unsigned int m_connectionId;
 
 };
 
