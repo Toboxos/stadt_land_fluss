@@ -187,6 +187,7 @@ EndGamePacket CLogik::getWinner() {
 
     QVector<QString> names;
     QVector<int> allPoints;
+    QVector<unsigned int> ids;
 
     // Save points of all players in allPoints
     for (int var = 0; var < anzahl; ++var) {
@@ -228,10 +229,14 @@ EndGamePacket CLogik::getWinner() {
             // When actual points to check equals points of player
             // -> add player to list
             if (allPoints[n] == players[p].getPunkte()){//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                names.push_back(players[p].getName());
+                ids.push_back(players[p].getConnectionId());
                 qDebug() << "in se sekond if drinne " << n << endl;
             }
+
+            if(ids[n] == players[p].getConnectionId())
+                names.push_back(players[p].getName());
         }
+
 
 
     }
