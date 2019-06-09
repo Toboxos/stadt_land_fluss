@@ -107,10 +107,22 @@ PacketTests {
 
     SOURCES +=  UnitTests/packettests.cpp \
                 UnitTests/Tests/gamesettingspackettest.cpp \
-                UnitTests/Tests/roundstartpackettest.cpp
+                UnitTests/Tests/roundstartpackettest.cpp \
+                UnitTests/Tests/playerjoinpackettest.cpp \
+                UnitTests/Tests/playerlistpackettest.cpp \
+                UnitTests/Tests/endgamepackettest.cpp \
+                UnitTests/Tests/playerfinishedpackettest.cpp \
+                UnitTests/Tests/sendanswerspackettest.cpp \
+                UnitTests/Tests/sendpointspackettest.cpp
     HEADERS +=  UnitTests/Tests/test.h \
                 UnitTests/Tests/gamesettingspackettest.h \
-                UnitTests/Tests/roundstartpackettest.h
+                UnitTests/Tests/roundstartpackettest.h \
+                UnitTests/Tests/playerjoinpackettest.h \
+                UnitTests/Tests/playerlistpackettest.h \
+                UnitTests/Tests/endgamepackettest.h \
+                UnitTests/Tests/playerfinishedpackettest.h \
+                UnitTests/Tests/sendanswerspackettest.h \
+                UnitTests/Tests/sendpointspackettest.h
 }
 
 ServerLogicTests {
