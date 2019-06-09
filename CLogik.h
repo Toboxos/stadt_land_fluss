@@ -40,9 +40,6 @@ public:
 
     void run();
 
-    int createPlayer(QString);
-
-
     /**
      * @brief sorts answers by category
      * @param number of category
@@ -60,7 +57,7 @@ public:
     /**
      * @brief organizes the awarding of points, returning the points to the players, saving the total credits
      */
-    void Punktevergabe();
+    void punktevergabe();
 
     /**
      * @brief sorts players by total credit, packs ranking by names and credit in EndGamePacket
@@ -147,14 +144,25 @@ public slots:
     void startInput();
 
     ///
-    /// \brief playerFinished
+    /// \brief sends a PlayerFinishedPacket to every client
     ///
     void playerFinished();
 
+    ///
+    /// \brief sends an EndRoundPacket to every client
+    ///
     void endInput();
 
+    ///
+    /// \brief emit signal initRoundEnd
+    /// \param PlayerFinishedPacket
+    /// \param connection id
+    ///
     void bekommt_playerFinished(PlayerFinishedPacket packet, unsigned int id);
 
+    ///
+    /// \brief triggers sendeRundenStart
+    ///
     void nextRound();
 
 signals:
@@ -163,17 +171,22 @@ signals:
     void initRoundEnd();
 
 private:
-    int answersReceived = 0;
-    int currentRound = 0;
+    int m_answersReceived = 0;
+    int m_currentRound = 0;
+
+    ///
+    /// \brief setupTimer
+    ///
     void setupTimer();
+
     SpielerWarteRaum *warteRaum;
-    QVector<Spieler> players;
+    QVector<Spieler> m_players;
     QVector<antworten> m_answers;
     QVector<punkte> m_points;
-    char letters[26] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
-    char usedLetters[26];
+    char m_letters[26] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+    char m_usedLetters[26];
     ServerSocket serverSocket;
-    Spieleinstellungen  _einstellung ;
+    Spieleinstellungen  m_einstellung ;
     char m_letter;
     timer *roundTimer = nullptr;
 };

@@ -6,65 +6,65 @@ Spieler::Spieler() {
 
 Spieler::Spieler(QString name)
 {
-   _name = name;
+   m_name = name;
    static int _nextId;
-   _id = _nextId;
+   m_id = _nextId;
    _nextId ++;
 }
 
 QString Spieler::getName()
 {
-    return _name;
+    return m_name;
 }
 
 int Spieler::getId()
 {
-    return _id;
+    return m_id;
 }
 
 void Spieler::setConnectionId(unsigned int id){
-    connectionId = id;
+    m_connectionId = id;
 }
 
 void Spieler::setAnswers(QVector<QString> antworten){
-    answers = antworten;
+    m_answers = antworten;
 }
 
 unsigned int Spieler::getConnectionId(){
-    return connectionId;
+    return m_connectionId;
 }
 
 int Spieler::getPunkte()
 {
-    return _punkte;
+    return m_punkte;
 }
 
 void Spieler::setPunkte(int punkte)
 {
-    _punkte = punkte;
+    m_punkte = punkte;
 }
 
 unsigned int Spieler::Categories(){
-    unsigned int c = answers.size();
+    unsigned int c = m_answers.size();
     return c;
 }
 
 QString Spieler::getAnswer(int i){
-    QString p = answers.value(i);
+    QString p = m_answers.value(i);
     return p;
 }
 
 void Spieler::setAnswer(unsigned int i, QString a){
-    answers.replace(i, a);
+    m_answers.replace(i, a);
 }
 
 QVector<int> Spieler::getCredit(){
-    QVector<int> p = credits;
+    QVector<int> p = m_credits;
     return p;
 }
 
 void Spieler::setCredit(int s, int j){
-    credits.replace(s,j);
+    m_credits.replace(s,j);
 }
 
 
