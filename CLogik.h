@@ -38,6 +38,9 @@ public:
     CLogik();
     ~CLogik();
 
+    ///
+    /// \brief create object HostSpielEinstellungen and execute
+    ///
     void run();
 
     /**

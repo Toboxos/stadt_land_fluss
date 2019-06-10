@@ -15,10 +15,12 @@ ClientLogic::~ClientLogic() {
     delete _clogik;
     delete _hautpSpielFenster;
 }
+
 void ClientLogic::setAnswerVector(QVector<QString> answerVector)
 {
     _answerVector = answerVector;
 }
+
 void ClientLogic::connect(QString name, QString ip, quint16 port, ClientIpEingabe *window)
 {
 
@@ -102,15 +104,18 @@ void ClientLogic::timeoutSlot(){
     qDebug() << "Timeout :((" << endl;
 
 }
+
 void ClientLogic::connectedSlot(){
     PlayerJoinPacket playerJoinPacket(this->getSpieler().getName());
     _clientSocket.send(playerJoinPacket);
     qDebug() << "connected :))" << endl;
 }
+
 void ClientLogic::errorSlot(){
     //error
     qDebug() << "Error :(((" << endl;
 }
+
 void ClientLogic::openClientIpEingabe()
 {
     ClientIpEingabe ClientStart(nullptr,this);
@@ -127,6 +132,7 @@ void ClientLogic::openHauptSpielFenster(){
 Spieler ClientLogic::getSpieler(){
     return clientSpieler;
 }
+
 void ClientLogic::setSpieler(Spieler spieler){
     clientSpieler = spieler;
 }
