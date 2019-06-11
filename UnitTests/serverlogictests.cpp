@@ -13,10 +13,16 @@
 #include "Tests/awardpointstest.h"
 #include "Tests/winnertest.h"
 
+
+/**
+ * @brief Unittest for testing different parts of server logic
+ */
 class ServerLogicTests : public QObject {
     Q_OBJECT
 
     private slots:
+        // init() and cleanup() called before each test
+        // creates and destroys new instance of serverlogic for each test
         void init();
         void cleanup();
 
@@ -26,10 +32,13 @@ class ServerLogicTests : public QObject {
         void testWinner();
 
     private:
+        /**
+         * @brief Setup default game settings for testing server logic
+         */
         void setupDefaultParameters();
 
-        MockServerSocket m_serverSocket;
-        CLogik* m_logic;
+        MockServerSocket m_serverSocket;    /**< Mock serversocket for intercepting packets */
+        CLogik* m_logic;                    /**< Instance of server logic for tests */
 };
 
 void ServerLogicTests::init() {

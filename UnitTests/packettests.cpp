@@ -8,6 +8,9 @@
 #include "UnitTests/Tests/sendanswerspackettest.h"
 #include "UnitTests/Tests/sendpointspackettest.h"
 
+/**
+ * @brief Unittest for testing that packet data is transfered successfully
+ */
 class PacketTests : public QObject {
     Q_OBJECT
 
