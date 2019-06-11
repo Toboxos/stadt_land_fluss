@@ -16,16 +16,56 @@ class ClientLogic : public QObject
 {
     Q_OBJECT
 public:
+
     ClientLogic();
     ~ClientLogic();
+
+    ///
+    /// \brief connects signals to slots, connects to server
+    /// \param name
+    /// \param ip
+    /// \param port
+    /// \param window
+    ///
     void connect(QString name, QString ip, quint16 port, ClientIpEingabe *window);
+
+    ///
+    /// \brief create object of CLogic, connect serverBereit, trigger cLogik.run
+    ///
     void openCLogik();
+
+    ///
+    /// \brief create object of ClientIpEingabe and execute
+    ///
     void openClientIpEingabe();
+
+    ///
+    /// \brief create object of HauptSpielFenster and open, connect to fensterFertig
+    ///
     void openHauptSpielFenster();
+
+    ///
+    /// \brief create new object of type player and save as clientSpieler
+    /// \param player object
+    ///
     void setSpieler(Spieler spieler);
+
+    ///
+    /// \brief returns the client's player object
+    /// \return clientSpieler
+    ///
     Spieler getSpieler();
+
+    ///
+    /// \brief gets the player's answer in the game's main window and sends them to the server
+    ///
     void sendAnswers();
-    void setAnswerVector(QVector<QString>);
+
+    ///
+    /// \brief sets _answerVector
+    /// \param answerVector
+    ///
+    void setAnswerVector(QVector<QString> answerVector);
 
 private:
     ClientSocket _clientSocket;
