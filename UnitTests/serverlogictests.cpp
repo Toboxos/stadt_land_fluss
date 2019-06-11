@@ -72,4 +72,4 @@ void ServerLogicTests::testAwardPoints() {
 }
 
 QTEST_MAIN(ServerLogicTests);
-#include "ServerLogicTests.moc"
+#include "serverlogictests.moc"
