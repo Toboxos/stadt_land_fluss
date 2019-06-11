@@ -35,7 +35,7 @@ void AwardPointsTest::run(CLogik *logic) {
         }
 
         player.setAnswers(answers);
-        logic->players.push_back(player);
+        logic->m_players.push_back(player);
     }
 
     // Test is made for letter a

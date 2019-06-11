@@ -11,6 +11,7 @@
 #include "Tests/jointest.h"
 #include "Tests/lettertest.h"
 #include "Tests/awardpointstest.h"
+#include "Tests/winnertest.h"
 
 class ServerLogicTests : public QObject {
     Q_OBJECT
@@ -22,6 +23,7 @@ class ServerLogicTests : public QObject {
         void testJoins();
         void testLetters();
         void testAwardPoints();
+        void testWinner();
 
     private:
         void setupDefaultParameters();
@@ -69,6 +71,13 @@ void ServerLogicTests::testAwardPoints() {
 
     AwardPointsTest test;
     test.run(m_logic);
+}
+
+void ServerLogicTests::testWinner() {
+   setupDefaultParameters();
+
+   WinnerTest test;
+   test.run(m_logic);
 }
 
 QTEST_MAIN(ServerLogicTests);
