@@ -278,13 +278,12 @@ char CLogik::getLetter(){
                 break;
             }
 
-        //update private m_letter
-        m_letter = letter;
-
         }
 
-    return letter;
+        //update private m_letter
+        m_letter = letter;
     }
+    return letter;
 }
 
 Spieleinstellungen* CLogik::getSpieleinstellungen()
