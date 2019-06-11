@@ -3,6 +3,9 @@
 
 #include "packet.h"
 
+/**
+ * @brief Holds leaderboard and signals end of game
+ */
 class EndGamePacket : public Packet
 {
 public:
@@ -18,8 +21,8 @@ public:
     void readData(QTcpSocket& socket);
 
 private:
-    QVector<int> m_points;
-    QVector<QString> m_ranking;
+    QVector<int> m_points;      /**< Points in order of leaderboard */
+    QVector<QString> m_ranking; /**< Player names in order of leaderboard */
 };
 
 #endif // ENDGAMEPACKET_H

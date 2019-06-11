@@ -2,6 +2,9 @@
 #define SENDPOINTSPACKET_H
 #include "packet.h"
 
+/**
+ * @brief Packet for telling client scored points of round
+ */
 class SendPointsPacket : public Packet
 {
 public:
@@ -18,8 +21,8 @@ public:
     void readData(QTcpSocket& socket);
 
 private:
-    QVector<int> m_points;
-    int m_totalpoints;
+    QVector<int> m_points;  /** Points in order of categories */
+    int m_totalpoints;      /** Total of earned points of all rounds */
 };
 
 #endif // SENDPOINTSPACKET_H

@@ -3,6 +3,9 @@
 
 #include "packet.h"
 
+/**
+ * @brief Packet holds game settings from server
+ */
 class GameSettingsPacket : public Packet {
     public:
         GameSettingsPacket();
@@ -30,11 +33,11 @@ class GameSettingsPacket : public Packet {
         void writeData(QTcpSocket& socket);
 
     private:
-        QString m_gameName;
-        int m_roundNumbers;
-        int m_roundDuration;
-        int m_countdown;
-        QVector<QString> m_categories;
+        QString m_gameName;             /**< Name of the game */
+        int m_roundNumbers;             /**< Number of round which get played */
+        int m_roundDuration;            /**< Duration of one round */
+        int m_countdown;                /**< Countdown after player finished */
+        QVector<QString> m_categories;  /**< Names of Categories */
 
 };
 
