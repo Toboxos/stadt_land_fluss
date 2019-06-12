@@ -3,6 +3,9 @@
 
 #include "packet.h"
 
+/**
+ * @brief Packet for sending list of all connected players
+ */
 class PlayerListPacket : public Packet {
 
     public:
@@ -22,7 +25,7 @@ class PlayerListPacket : public Packet {
         void writeData(QTcpSocket& socket);
 
     private:
-        QVector<QString> m_players;
+        QVector<QString> m_players; /**< List of connected players */
 };
 
 #endif // PLAYERLISTPACKET_H

@@ -53,7 +53,7 @@ SOURCES += \
         spieler.cpp \
         spielerwarteraum.cpp \
         spielstart.cpp \
-        CLogik.cpp \
+        serverlogic.cpp \
     statistic.cpp \
         timer.cpp
 
@@ -85,7 +85,7 @@ HEADERS += \
         spielerliste.h \
         spielerwarteraum.h \
         spielstart.h \
-        CLogik.h \
+        serverlogic.h \
     statistic.h \
         timer.h
 
@@ -138,11 +138,13 @@ ServerLogicTests {
                 UnitTests/mock_classes/mockserversocket.cpp \
                 UnitTests/Tests/jointest.cpp \
                 UnitTests/Tests/lettertest.cpp \
-                UnitTests/Tests/awardpointstest.cpp
+                UnitTests/Tests/awardpointstest.cpp \
+                UnitTests/Tests/winnertest.cpp
     HEADERS +=  UnitTests/mock_classes/mockserversocket.h \
                 UnitTests/Tests/jointest.h \
                 UnitTests/Tests/lettertest.h \
-                UnitTests/Tests/awardpointstest.h
+                UnitTests/Tests/awardpointstest.h \
+                UnitTests/Tests/winnertest.h
 }
 
 # Default rules for deployment.

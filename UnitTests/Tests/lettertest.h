@@ -2,12 +2,12 @@
 #define LETTERTEST_H
 
 #include <QtTest/QTest>
-#include "CLogik.h"
+#include "ServerLogic.h"
 
 class LetterTest {
     public:
         LetterTest();
-        void run(CLogik* logic);
+        void run(ServerLogic* logic);
 };
 
 #endif // LETTERTEST_H

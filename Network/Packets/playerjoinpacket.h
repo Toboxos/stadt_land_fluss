@@ -4,7 +4,7 @@
 #include "packet.h"
 
 /**
- * @brief This packet will be send when a player joins the game
+ * @brief Packet for signal a join
  */
 class PlayerJoinPacket : public Packet {
 

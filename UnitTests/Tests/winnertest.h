@@ -1,19 +1,18 @@
-#ifndef AWARDPOINTSTEST_H
-#define AWARDPOINTSTEST_H
+#ifndef WINNERTEST_H
+#define WINNERTEST_H
 
 #include <QtTest/QTest>
-#include <random>
 
 #define private public
 #define protected public
 #include "ServerLogic.h"
-#undef protected
 #undef private
+#undef protected
 
-class AwardPointsTest {
+class WinnerTest {
     public:
-        AwardPointsTest();
+        WinnerTest();
         void run(ServerLogic* logic);
 };
 
-#endif // AWARDPOINTSTEST_H
+#endif // WINNERTEST_H

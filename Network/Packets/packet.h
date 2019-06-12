@@ -4,7 +4,7 @@
 #include <QtNetwork/QTcpSocket>
 
 /**
- * @brief Enum for diffrent types of packets
+ * @brief Enum for different types of packets
  */
 enum PACKET_TYPE {
     BASE_PACKET,

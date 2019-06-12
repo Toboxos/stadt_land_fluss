@@ -4,7 +4,7 @@ JoinTest::JoinTest() {
 
 }
 
-void JoinTest::run(CLogik* logic) {
+void JoinTest::run(ServerLogic* logic) {
     m_testStep = 0;
     for( unsigned int id = 0; id < m_playerCount; ++id ) {
         QString s = "Player " + QString::number(id);

@@ -4,7 +4,7 @@ LetterTest::LetterTest() {
 
 }
 
-void LetterTest::run(CLogik *logic) {
+void LetterTest::run(ServerLogic *logic) {
 
     // Used letters are indicated with true at letter index position
     // letter index is orrucent in alphabet
