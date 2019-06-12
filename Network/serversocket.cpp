@@ -55,20 +55,6 @@ void ServerSocket::read() {
                 break;
             }
 
-            case SEND_POINTS_PACKET: {
-                SendPointsPacket p;
-                p.readData(*socket);
-                emit pointsSent(p, id);
-                break;
-            }
-
-            case END_GAME_PACKET: {
-                EndGamePacket p;
-                p.readData(*socket);
-                emit endGame(p, id);
-                break;
-            }
-
             case PLAYER_FINISHED_PACKET: {
                 PlayerFinishedPacket p;
                 p.readData(*socket);
@@ -76,17 +62,7 @@ void ServerSocket::read() {
                 break;
             }
 
-            case START_COUNTDOWN_PACKET: {
-                StartCountdownPacket p;
-                p.readData(*socket);
-                emit startCountdown(p, id);
-            }
-            case END_ROUND_PACKET: {
-                EndRoundPacket p;
-                p.readData(*socket);
-                emit endRound(p,id);
-        }
-                default: {
+            default: {
 
             }
         }
