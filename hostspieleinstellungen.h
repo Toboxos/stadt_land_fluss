@@ -1,7 +1,6 @@
 #ifndef HOSTSPIELEINSTELLUNGEN_H
 #define HOSTSPIELEINSTELLUNGEN_H
 
-#include "spielerliste.h"
 #include "spieler.h"
 #include <QDialog>
 #include "serverlogic.h"
