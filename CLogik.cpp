@@ -224,24 +224,22 @@ EndGamePacket CLogik::getWinner() {
 
     }
 
+
+
     // For each rank
     for (int n = 0; n < anzahl; ++n) {
 
         // Check points for every player
         for (int p = 0; p < anzahl; ++p){
 
-            //If allPoints equal the player's total points
-            // add player's connection id to list
-            if (allPoints[n] == m_players[p].getPunkte())
-                ids.push_back(m_players[p].getConnectionId());
-
-            //if connection ids match
-            //fill name vector with the player's name
-            if(ids[n] == m_players[p].getConnectionId())
+            //If allPoints equal the player's total points and player is not yet in list
+            // add player's name to list
+            if (allPoints[n] == m_players[p].getPunkte() && !names.contains(m_players[p].getName()))
                 names.push_back(m_players[p].getName());
         }
 
     }
+
 
     //fill EndGamePacket with the sorted vectors
     EndGamePacket packet(names, allPoints);

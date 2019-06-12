@@ -4,7 +4,7 @@
 #include "packet.h"
 
 /**
- * @brief Packet for sending the answers from client to server */
+ * @brief Packet for sending the answers from client to server
  */
 class SendAnswersPacket : public Packet
 {
