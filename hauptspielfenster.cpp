@@ -3,7 +3,6 @@
 #include "spielstart.h"
 #include "stadtlandfluss.h"
 #include "spieleinstellungen.h"
-#include <spielerliste.h>
 #include <QString>
 
 
@@ -56,7 +55,7 @@ void HauptSpielFenster::fillAnswerVector()
    ui->tableSpiel->setEnabled(false);
    qDebug() << "Hier stürz ich ab!" << endl;
 }
-QVector<QString> HauptSpielFenster::getAnserVector()
+QVector<QString> HauptSpielFenster::getAnserVector() {
 
     return answerVector;
 }

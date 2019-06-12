@@ -1,5 +1,4 @@
 #include "spielstart.h"
-#include "spielerliste.h"
 
 #include "clientipeingabe.h"
 

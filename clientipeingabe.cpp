@@ -1,7 +1,6 @@
 #include "clientipeingabe.h"
 #include "ui_clientipeingabe.h"
 #include "spielstart.h"
-#include "spielerliste.h"
 #include "hauptspielfenster.h"
 #include "Network/clientsocket.h"
 #include "Network/Packets/playerjoinpacket.h"

@@ -5,7 +5,6 @@
 #include "spieler.h"
 #include <QTableWidgetItem>
 #include "stdio.h"
-#include "spielerliste.h"
 #include "spieleinstellungen.h"
 
 SpielerWarteRaum::SpielerWarteRaum(QWidget *parent, ServerLogic *serverLogic) :
