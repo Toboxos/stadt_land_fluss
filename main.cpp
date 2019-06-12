@@ -4,7 +4,7 @@
 #include "clientlogic.h"
 #include "spielstart.h"
 
-#include "ServerLogic.h"
+#include "serverlogic.h"
 
 
 

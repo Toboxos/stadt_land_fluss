@@ -1,6 +1,5 @@
 #include "clientlogic.h"
 #include "spielstart.h"
-#include "ServerLogic.h"
 #include "clientipeingabe.h"
 #include "hauptspielfenster.h"
 #include "statistic.h"

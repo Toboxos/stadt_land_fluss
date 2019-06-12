@@ -3,7 +3,6 @@
 #include "kategorieeingabe.h"
 #include "spielstart.h"
 #include "spieleinstellungen.h"
-#include "ServerLogic.h"
 #include <QMessageBox>
 
 /*###################################################################################

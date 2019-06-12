@@ -1,4 +1,4 @@
-#include "ServerLogic.h"
+#include "serverlogic.h"
 #include "spieler.h"
 #include "antworten.h"
 #include "punkte.h"

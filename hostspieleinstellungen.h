@@ -3,9 +3,8 @@
 
 #include "spielerliste.h"
 #include "spieler.h"
-#include "ServerLogic.h"
 #include <QDialog>
-#include"ServerLogic.h"
+#include "serverlogic.h"
 
 namespace Ui {
 class HostSpielEinstellungen;

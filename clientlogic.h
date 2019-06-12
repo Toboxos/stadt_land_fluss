@@ -4,7 +4,7 @@
 #include "spieleinstellungen.h"
 #include "spieler.h"
 #include "Network/Packets/sendanswerspacket.h"
-#include "ServerLogic.h"
+#include "serverlogic.h"
 #include "hauptspielfenster.h"
 #include "Network/Packets/playerfinishedpacket.h"
 #include "Network/Packets/endroundpacket.h"

@@ -1,7 +1,7 @@
 #ifndef KATEGORIEEINGABE_H
 #define KATEGORIEEINGABE_H
 
-#include "ServerLogic.h"
+#include "serverlogic.h"
 
 #include <QDialog>
 
