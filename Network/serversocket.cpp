@@ -8,16 +8,6 @@ ServerSocket::ServerSocket() {
 
 }
 
-ServerSocket::~ServerSocket() {
-
-    // Add sockets to delete event queue
-    auto end = m_sockets.end();
-    for( auto it = m_sockets.begin(); it != end; ++it ) {
-        QTcpSocket* socket = *it;
-        socket->deleteLater();
-    }
-}
-
 bool ServerSocket::listen(quint16 port) {
     if( m_server.listen(QHostAddress::Any, port) ) {
         connect(&m_server, SIGNAL(newConnection()), this, SLOT(newConnection()));
@@ -65,6 +55,20 @@ void ServerSocket::read() {
                 break;
             }
 
+            case SEND_POINTS_PACKET: {
+                SendPointsPacket p;
+                p.readData(*socket);
+                emit pointsSent(p, id);
+                break;
+            }
+
+            case END_GAME_PACKET: {
+                EndGamePacket p;
+                p.readData(*socket);
+                emit endGame(p, id);
+                break;
+            }
+
             case PLAYER_FINISHED_PACKET: {
                 PlayerFinishedPacket p;
                 p.readData(*socket);
@@ -72,7 +76,17 @@ void ServerSocket::read() {
                 break;
             }
 
-            default: {
+            case START_COUNTDOWN_PACKET: {
+                StartCountdownPacket p;
+                p.readData(*socket);
+                emit startCountdown(p, id);
+            }
+            case END_ROUND_PACKET: {
+                EndRoundPacket p;
+                p.readData(*socket);
+                emit endRound(p,id);
+        }
+                default: {
 
             }
         }

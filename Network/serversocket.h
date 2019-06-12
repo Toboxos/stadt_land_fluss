@@ -22,7 +22,6 @@ class ServerSocket : public QObject {
 
     public:
         ServerSocket();
-        ~ServerSocket();
 
         /**
          * @brief Listen to specific port for connections
@@ -49,30 +48,19 @@ class ServerSocket : public QObject {
          */
         void connected(unsigned int id);
 
-        /**
-         * @brief Emits when client send a PlayerJoinPacket with player name
-         *
-         * @param packet    Packet with player name
-         * @param id        Identifier for connection
-         */
         void playerJoined(PlayerJoinPacket packet, unsigned int id);
 
-
-        /**
-         * @brief Emits when client sent the answers
-         *
-         * @param packet    Packet with Answers
-         * @param id        Identifier for connection
-         */
         void answersSent(SendAnswersPacket packet, unsigned int id);
 
-        /**
-         * @brief Emits when client set all answers and finished
-         *
-         * @param packet    Packet with player name
-         * @param id        Identifier for connection
-         */
+        void pointsSent(SendPointsPacket packet, unsigned int id);
+
+        void endGame(EndGamePacket packet, unsigned int id);
+
         void playerFinished(PlayerFinishedPacket packet, unsigned int id);
+
+        void startCountdown(StartCountdownPacket packet, unsigned int id);
+
+        void endRound(EndRoundPacket packet, unsigned int id);
 
     private slots:
 
@@ -91,7 +79,7 @@ class ServerSocket : public QObject {
         QTcpServer m_server;                        /**< QT server instance */
         QMap<unsigned int, QTcpSocket*> m_sockets;  /**< Sockets assigned to IDs */
 
-        static unsigned int idCounter;              /**< Incrementing number used for give identifiers to connections */
+        static unsigned int idCounter;
 };
 
 #endif // SERVERSOCKET_H

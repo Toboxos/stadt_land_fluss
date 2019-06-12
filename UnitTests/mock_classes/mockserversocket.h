@@ -10,13 +10,6 @@
 #include "Network/Packets/endgamepacket.h"
 #include "Network/Packets/playerfinishedpacket.h"
 
-/**
- * @brief Mock the seversocket for the server logic
- *
- * @details Server logic is communicating with client via the server socket. For testing
- *          we need to know which information server would send. This class mocks
- *          the original server socket and provides callbacks for reading out sent packets
- */
 class MockServerSocket : public QObject {
     Q_OBJECT
 
@@ -24,10 +17,6 @@ class MockServerSocket : public QObject {
         MockServerSocket();
         MockServerSocket(quint16 port);
 
-        /**
-         * @brief setCallbackListen
-         * @param object
-         */
         void setCallbackListen(void (*callbackListen)(void*, quint16), void* object = nullptr);
         void setCallbackSend(void (*callbackSend)(void*, unsigned int, Packet&), void* object = nullptr);
 
@@ -39,6 +28,7 @@ class MockServerSocket : public QObject {
     signals:
         void connected(unsigned int id);
         void playerJoined(PlayerJoinPacket packet, unsigned int id);
+        void answersSent(SendAnswersPacket packet, unsigned int id);
         void pointsSent(SendPointsPacket packet, unsigned int id);
         void endGame(EndGamePacket packet, unsigned int id);
         void playerFinished(PlayerFinishedPacket packet, unsigned int id);

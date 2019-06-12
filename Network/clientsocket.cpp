@@ -3,6 +3,10 @@
 ClientSocket::ClientSocket() {
 }
 
+ClientSocket::ClientSocket(QString host, quint16 port) {
+    connectTo(host, port);
+}
+
 void ClientSocket::connectTo(QString host, quint16 port, int timeout) {
     m_socket.connectToHost(host, port);
 
@@ -56,6 +60,14 @@ void ClientSocket::read() {
                 p.readData(m_socket);
                 emit roundStart(p);
                 qDebug() << "Received Round start packet";
+                break;
+            }
+
+            case SEND_ANSWERS_PACKET: {
+                SendAnswersPacket p;
+                p.readData(m_socket);
+                emit answersSent(p);
+                qDebug() << "Received Send answers packet";
                 break;
             }
 

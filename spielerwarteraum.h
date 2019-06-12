@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include "spieler.h"
-class ServerLogic;
+class CLogik;
 namespace Ui {
 class SpielerWarteRaum;
 }
@@ -13,7 +13,7 @@ class SpielerWarteRaum : public QDialog
     Q_OBJECT
 
 public:
-   explicit SpielerWarteRaum(QWidget *parent = nullptr, ServerLogic *serverLogic= nullptr);
+   explicit SpielerWarteRaum(QWidget *parent = nullptr, CLogik *serverLogic= nullptr);
     ~SpielerWarteRaum();
     void showPlayer();
 
@@ -22,7 +22,7 @@ private slots:
 
 private:
     Ui::SpielerWarteRaum *ui;
-    ServerLogic *_serverLogic;
+    CLogik *_serverLogic;
     void createTable();
 };
 

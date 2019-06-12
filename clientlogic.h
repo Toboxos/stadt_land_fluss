@@ -4,7 +4,7 @@
 #include "spieleinstellungen.h"
 #include "spieler.h"
 #include "Network/Packets/sendanswerspacket.h"
-#include "serverlogic.h"
+#include "CLogik.h"
 #include "hauptspielfenster.h"
 #include "Network/Packets/playerfinishedpacket.h"
 #include "Network/Packets/endroundpacket.h"
@@ -30,9 +30,9 @@ public:
     void connect(QString name, QString ip, quint16 port, ClientIpEingabe *window);
 
     ///
-    /// \brief create object of CLogic, connect serverBereit, trigger ServerLogic.run
+    /// \brief create object of CLogic, connect serverBereit, trigger cLogik.run
     ///
-    void openServerLogic();
+    void openCLogik();
 
     ///
     /// \brief create object of ClientIpEingabe and execute
@@ -69,7 +69,7 @@ public:
 
 private:
     ClientSocket _clientSocket;
-    ServerLogic* _ServerLogic;
+    CLogik* _clogik;
 
     HauptSpielFenster* _hautpSpielFenster;
 

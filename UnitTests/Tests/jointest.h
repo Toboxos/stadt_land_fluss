@@ -4,13 +4,13 @@
 #include <QtTest/QTest>
 
 #include "test.h"
-#include "ServerLogic.h"
+#include "CLogik.h"
 
 class JoinTest {
 
     public:
         JoinTest();
-        void run(ServerLogic* logic);
+        void run(CLogik* logic);
 
         static void send(void* object, unsigned int id, Packet& packet);
 

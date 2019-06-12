@@ -2,9 +2,6 @@
 #define ENDROUNDPACKET_H
 #include "packet.h"
 
-/**
- * @brief Packet used for signal end of round
- */
 class EndRoundPacket : public Packet
 {
 public:

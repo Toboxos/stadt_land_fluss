@@ -3,9 +3,6 @@
 
 #include "packet.h"
 
-/**
- * @brief Packet signals start of round with letter for the round
- */
 class RoundStartPacket : public Packet {
         public:
             RoundStartPacket();
@@ -17,7 +14,7 @@ class RoundStartPacket : public Packet {
             void writeData(QTcpSocket& socket);
             void readData(QTcpSocket& socket);
         private:
-            char m_letter;  /**< Letter used for round */
+            char m_letter;
 };
 
 #endif // ROUNDSTARTPACKET_H

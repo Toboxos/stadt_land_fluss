@@ -3,7 +3,7 @@
 #include "packet.h"
 
 /**
- * @brief Packet for signal which player has finished
+ * @brief Informing, that a player has sent his answers and is finished.
  */
 class PlayerFinishedPacket : public Packet {
     public:
