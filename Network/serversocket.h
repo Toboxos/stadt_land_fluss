@@ -22,6 +22,7 @@ class ServerSocket : public QObject {
 
     public:
         ServerSocket();
+        ~ServerSocket();
 
         /**
          * @brief Listen to specific port for connections

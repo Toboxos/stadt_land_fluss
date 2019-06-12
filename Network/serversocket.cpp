@@ -8,6 +8,16 @@ ServerSocket::ServerSocket() {
 
 }
 
+ServerSocket::~ServerSocket() {
+
+    // Add sockets to delete event queue
+    auto end = m_sockets.end();
+    for( auto it = m_sockets.begin(); it != end; ++it ) {
+        QTcpSocket* socket = *it;
+        socket->deleteLater();
+    }
+}
+
 bool ServerSocket::listen(quint16 port) {
     if( m_server.listen(QHostAddress::Any, port) ) {
         connect(&m_server, SIGNAL(newConnection()), this, SLOT(newConnection()));
