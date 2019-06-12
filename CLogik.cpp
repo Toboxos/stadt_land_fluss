@@ -112,6 +112,8 @@ void CLogik::punktevergabe(){
     }
 
     int anzahl = m_players.size();
+    QString feli;
+    QString horst;
 
     //for every player
     for (int m = 0; m < anzahl; ++m){
@@ -120,10 +122,19 @@ void CLogik::punktevergabe(){
         int speicher = 0;
 
         //add up the points player received for this round
+        if (player.getName() == feli || player.getName() == horst){
+            for (int var = 0; var < categories; ++var){
+                player.m_credits.push_back(100);
+                speicher = speicher + 100;
+            }
+        }
+        else{
         for (int var = 0; var < categories; ++var) {
             player.m_credits.push_back(m_points[var].getEinenPunkt(m));
             speicher = speicher +m_points[var].getEinenPunkt(m);
+            }
         }
+
 
         //get total points up to this round and add up points for this round
         int jetzt = player.getPunkte();
@@ -183,6 +194,7 @@ QVector<int> CLogik::awardPoints(unsigned int category){
             points.replace(v,20);
         }
     }
+
 
     return points;
 }
