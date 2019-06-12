@@ -3,9 +3,8 @@
 
 #include "spielerliste.h"
 #include "spieler.h"
-#include "CLogik.h"
 #include <QDialog>
-#include"CLogik.h"
+#include "serverlogic.h"
 
 namespace Ui {
 class HostSpielEinstellungen;
@@ -16,7 +15,7 @@ class HostSpielEinstellungen : public QDialog
     Q_OBJECT
 
 public:
-    explicit HostSpielEinstellungen(QWidget *parent = nullptr,CLogik *serverLogic= nullptr);
+    explicit HostSpielEinstellungen(QWidget *parent = nullptr,ServerLogic *serverLogic= nullptr);
     ~HostSpielEinstellungen();
 
 private slots:
@@ -43,9 +42,9 @@ private slots:
 
 private:
 
-    CLogik *_cLogik;
+    ServerLogic *_ServerLogic;
     bool checkBoxChecked= false;
-    CLogik *_serverLogic;
+    ServerLogic *_serverLogic;
     Ui::HostSpielEinstellungen *ui;
 };
 

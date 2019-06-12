@@ -4,34 +4,45 @@
 
 #define private public
 #define protected public
-#include "CLogik.h"
+#include "ServerLogic.h"
 #undef protected
 #undef private
 
 #include "Tests/jointest.h"
 #include "Tests/lettertest.h"
 #include "Tests/awardpointstest.h"
+#include "Tests/winnertest.h"
 
+
+/**
+ * @brief Unittest for testing different parts of server logic
+ */
 class ServerLogicTests : public QObject {
     Q_OBJECT
 
     private slots:
+        // init() and cleanup() called before each test
+        // creates and destroys new instance of serverlogic for each test
         void init();
         void cleanup();
 
         void testJoins();
         void testLetters();
         void testAwardPoints();
+        void testWinner();
 
     private:
+        /**
+         * @brief Setup default game settings for testing server logic
+         */
         void setupDefaultParameters();
 
-        MockServerSocket m_serverSocket;
-        CLogik* m_logic;
+        MockServerSocket m_serverSocket;    /**< Mock serversocket for intercepting packets */
+        ServerLogic* m_logic;                    /**< Instance of server logic for tests */
 };
 
 void ServerLogicTests::init() {
-    m_logic = new CLogik();
+    m_logic = new ServerLogic();
 }
 
 void ServerLogicTests::cleanup() {
@@ -71,5 +82,12 @@ void ServerLogicTests::testAwardPoints() {
     test.run(m_logic);
 }
 
+void ServerLogicTests::testWinner() {
+   setupDefaultParameters();
+
+   WinnerTest test;
+   test.run(m_logic);
+}
+
 QTEST_MAIN(ServerLogicTests);
-#include "ServerLogicTests.moc"
+#include "serverlogictests.moc"

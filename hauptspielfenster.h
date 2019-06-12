@@ -23,8 +23,8 @@ public:
     void setCategories(QVector<QString> categories);
     void setPlayers(QVector<QString> players, QString clientName);
     ///
-    /// \brief setLetter der Buchste der zu spielenden runde wird angezeigt.
-    /// Die letzen eingaben kann man nicht mehr verändern.
+    /// \brief setLetter display the letter of the current round. Ensure that the player can not access read olny boxes
+    /// and input boxes of previous rounds.
     /// \param letter
     ///
     void setLetter(char letter);
@@ -34,29 +34,31 @@ public:
     void newRow();
     QVector<QString> getAnserVector();
     ///
-    /// \brief startCountdown Button wird wieder auf Fertig gesetzt. Textbox erscheint.
+    /// \brief startCountdown change button to default setting. Display text box to announce next round.
     ///
     void startCountdown();
     ///
-    /// \brief fillAnswerVector Die Zellen mit den Antworden der jeweiligen Runde werden in einen vector geschrieben.
+    /// \brief fillAnswerVector store the answers of each table cell in answerVector.
     ///
     void fillAnswerVector();
     void clearAnswerVector();
     ///
-    /// \brief countdownSartet Button wird auf "COUNTDOWN" gestellt und disabled.
+    /// \brief countdownSartet disable ready button and change button text to "countdown" and display time left.
     ///
-    void countdownSartet();
+   void countdownSartet(int countdown);
     ///
-    /// \brief increaseCurrentRow Die Zeile der tableSpiel wird hochgezählt.
+    /// \brief increaseCurrentRow increase variable of currentRow of tableSpiel by one.
     ///
     void increaseCurrentRow();
+
+    void startRound(int time);
 signals:
 
     void fertig();
 
 private slots:
     ///
-    /// \brief on_buttonFertig_clicked Wenn alle Zellen gefüllt sind wird weiter gegeben dass ein SPieler fertig ist.
+    /// \brief on_buttonFertig_clicked if all cells of the current round are filled out distribute this information.
     ///
     void on_buttonFertig_clicked();
 
@@ -65,8 +67,9 @@ private slots:
 private:
     QMessageBox box;
     ///
-    /// \brief obSpielerwirklichFertigIst Überprüfung ob alle zu füllenden Zellen gefüllt sind.
-    /// \return true wennn alle Zellen gefüllt sind, false wenn nicht.
+    /// \brief obSpielerwirklichFertigIst check whether all necessary cells are filled out.
+    /// \return true when all cells are filled out,
+    /// \return false if not.
     ///
     bool obSpielerwirklichFertigIst();
     QVector<QString> answerVector ;

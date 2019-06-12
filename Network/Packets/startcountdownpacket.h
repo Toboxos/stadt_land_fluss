@@ -2,6 +2,9 @@
 #define STARTCOUNTDOWNPACKET_H
 #include "packet.h"
 
+/**
+ * @brief Packet for singla start of round countdown
+ */
 class StartCountdownPacket : public Packet
 {
 public:

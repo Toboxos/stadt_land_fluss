@@ -8,7 +8,7 @@
 #include "spielerliste.h"
 #include "spieleinstellungen.h"
 
-SpielerWarteRaum::SpielerWarteRaum(QWidget *parent, CLogik *serverLogic) :
+SpielerWarteRaum::SpielerWarteRaum(QWidget *parent, ServerLogic *serverLogic) :
     QDialog(parent),
     ui(new Ui::SpielerWarteRaum)
 {

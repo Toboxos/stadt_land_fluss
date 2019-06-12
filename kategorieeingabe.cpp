@@ -10,7 +10,7 @@
 #include <QMessageBox>
 
 
-Kategorieeingabe::Kategorieeingabe(QWidget *parent,CLogik *serverLogic) :
+Kategorieeingabe::Kategorieeingabe(QWidget *parent,ServerLogic *serverLogic) :
 
     QDialog(parent),
     ui(new Ui::Kategorieeingabe)
@@ -54,6 +54,7 @@ void Kategorieeingabe::on_buttonHinzufuegen_clicked()
 
     ui->tableKategorie->setColumnCount(kategorieZaehler);
 
+    // pointer will deletet by table, no deletion needed from user
     QTableWidgetItem* qtwi = new QTableWidgetItem(QString(kategorie),QTableWidgetItem::Type);
     ui->tableKategorie->setHorizontalHeaderItem(kategorieZaehler-1,qtwi);
     ui->tableKategorie->setColumnCount(kategorieZaehler+1);

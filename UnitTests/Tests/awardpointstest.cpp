@@ -5,7 +5,7 @@ AwardPointsTest::AwardPointsTest() {
     srand(time(nullptr));
 }
 
-void AwardPointsTest::run(CLogik *logic) {
+void AwardPointsTest::run(ServerLogic *logic) {
     // Spieler erzeugen
     for( unsigned int i = 0; i < 3; ++i ) {
         Spieler player("Player " + QString::number(i));
@@ -35,7 +35,7 @@ void AwardPointsTest::run(CLogik *logic) {
         }
 
         player.setAnswers(answers);
-        logic->players.push_back(player);
+        logic->m_players.push_back(player);
     }
 
     // Test is made for letter a

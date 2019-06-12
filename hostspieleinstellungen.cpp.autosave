@@ -5,16 +5,9 @@
 #include "spieleinstellungen.h"
 #include <QMessageBox>
 
-<<<<<<< HEAD
-HostSpielEinstellungen::HostSpielEinstellungen(QWidget *parent,CLogik *serverLogic) :
-=======
-/*###################################################################################
-    Methode                 :
-    Funktion der Methode    :
-    Ersteller               : Alexandra Eberle
- ###################################################################################*/
+
 HostSpielEinstellungen::HostSpielEinstellungen(QWidget *parent,ServerLogic *serverLogic) :
->>>>>>> 1d303a4861a03ab2bc8af83274d39af8ba568e9e
+
     QDialog(parent),
     ui(new Ui::HostSpielEinstellungen)
 {
