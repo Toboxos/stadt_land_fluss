@@ -2,6 +2,7 @@
 #define HAUPTSPIELFENSTER_H
 
 #include <QMainWindow>
+#include <QTimer>
 #include "QMessageBox"
 #include "QTableWidgetItem"
 namespace Ui {
@@ -25,7 +26,8 @@ public:
     void startCountdown();
     void fillAnswerVector();
     void clearAnswerVector();
-    void countdownSartet();
+    void countdownSartet(int countdown);
+    void startRound(int time);
     void increaseCurrentRow();
 signals:
 
@@ -33,7 +35,7 @@ signals:
 
 private slots:
     void on_buttonFertig_clicked();
-
+    void timerEvent();
 
 
 private:
@@ -45,6 +47,9 @@ private:
     int currentRow;
     QVector<QTableWidgetItem*> m_letters;
     QVector<QTableWidgetItem*> m_points;
+
+    QTimer m_timer;
+    int m_timeRemaining;
 };
 
 #endif // HAUPTSPIELFENSTER_H

@@ -15,6 +15,8 @@ HauptSpielFenster::HauptSpielFenster(QWidget *parent) :
 
     ui->tableSpiel->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     currentRow = 0;
+    connect(&m_timer, SIGNAL(timeout()), this, SLOT(timerEvent()));
+    m_timer.setInterval(1000);
 
 
 }
@@ -163,9 +165,27 @@ void HauptSpielFenster::clearAnswerVector(){
     answerVector.clear();
 }
 
-void HauptSpielFenster::countdownSartet()
+void HauptSpielFenster::countdownSartet(int countdown)
 {
    ui->buttonFertig->setText("C\nO\nU\nN\nT\nD\nO\nW\nN");
    ui->buttonFertig->setStyleSheet("background-color: rgba(225, 0, 0, 0.8);");
    ui->buttonFertig->setEnabled(false);
+
+   m_timeRemaining = countdown;
+   ui->lblStatus->setText("Zeit verbleibend: " + QString::number(m_timeRemaining) + "s");
+   m_timer.start();
+}
+
+void HauptSpielFenster::startRound(int time) {
+    m_timeRemaining = time * 60;
+    ui->lblStatus->setText("Zeit verbleibend: " + QString::number(m_timeRemaining) + "s");
+    m_timer.start();
+}
+
+void HauptSpielFenster::timerEvent() {
+    ui->lblStatus->setText("Zeit verbleibend: " + QString::number(--m_timeRemaining) + "s");
+
+    if( m_timeRemaining == 0 ) {
+        m_timer.stop();
+    }
 }

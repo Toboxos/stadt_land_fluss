@@ -139,7 +139,7 @@ void ClientLogic::setSpieler(Spieler spieler){
 
 void ClientLogic::playerFinished(PlayerFinishedPacket Packet){
     qDebug() << "Nur noch zehn Sekunden, beeile dich!";
-    _hautpSpielFenster->countdownSartet();
+    _hautpSpielFenster->countdownSartet(_einstellung.getCountdown());
 }
 
 void ClientLogic::starteSpiel(GameSettingsPacket Packet){
@@ -158,6 +158,7 @@ _clientSocket.send(packet);
 }
 void ClientLogic::receivedRoundStart(RoundStartPacket Packet){
     _hautpSpielFenster->setLetter(Packet.getLetter());
+    _hautpSpielFenster->startRound(_einstellung.getRundendauer());
 }
 void ClientLogic::receivedEndGame(EndGamePacket Packet)
 {
