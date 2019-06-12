@@ -4,7 +4,7 @@ WinnerTest::WinnerTest() {
 
 }
 
-void WinnerTest::run(CLogik* logic) {
+void WinnerTest::run(ServerLogic* logic) {
 
     // Create a vector with players
     // Each player has different points for testing the leaderboard order

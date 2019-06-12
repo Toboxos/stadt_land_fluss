@@ -1,18 +1,18 @@
 #include "clientlogic.h"
 #include "spielstart.h"
-#include "CLogik.h"
+#include "ServerLogic.h"
 #include "clientipeingabe.h"
 #include "hauptspielfenster.h"
 #include "statistic.h"
 #include <QDebug>
-ClientLogic::ClientLogic() : _clogik(nullptr), _hautpSpielFenster(nullptr)
+ClientLogic::ClientLogic() : _ServerLogic(nullptr), _hautpSpielFenster(nullptr)
 {
     SpielStart spielstart(nullptr, this);
      spielstart.exec();
 }
 
 ClientLogic::~ClientLogic() {
-    delete _clogik;
+    delete _ServerLogic;
     delete _hautpSpielFenster;
 }
 
@@ -46,10 +46,10 @@ void ClientLogic::receivedPoints(SendPointsPacket Packet){
     _hautpSpielFenster->setTotalPoints(clientSpieler.getPunkte());
 }
 
-void ClientLogic::openCLogik() {
-    _clogik  = new CLogik();
-    QObject::connect(_clogik, SIGNAL(serverBereit()), this, SLOT(serverBereit()));
-    _clogik->run();
+void ClientLogic::openServerLogic() {
+    _ServerLogic  = new ServerLogic();
+    QObject::connect(_ServerLogic, SIGNAL(serverBereit()), this, SLOT(serverBereit()));
+    _ServerLogic->run();
 }
 
 void ClientLogic::serverBereit() {

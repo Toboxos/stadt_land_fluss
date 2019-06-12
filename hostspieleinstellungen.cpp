@@ -3,7 +3,7 @@
 #include "kategorieeingabe.h"
 #include "spielstart.h"
 #include "spieleinstellungen.h"
-#include "CLogik.h"
+#include "ServerLogic.h"
 #include <QMessageBox>
 
 /*###################################################################################
@@ -11,7 +11,7 @@
     Funktion der Methode    :
     Ersteller               : Alexandra Eberle
  ###################################################################################*/
-HostSpielEinstellungen::HostSpielEinstellungen(QWidget *parent,CLogik *serverLogic) :
+HostSpielEinstellungen::HostSpielEinstellungen(QWidget *parent,ServerLogic *serverLogic) :
     QDialog(parent),
     ui(new Ui::HostSpielEinstellungen)
 {

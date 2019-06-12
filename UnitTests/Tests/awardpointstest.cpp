@@ -5,7 +5,7 @@ AwardPointsTest::AwardPointsTest() {
     srand(time(nullptr));
 }
 
-void AwardPointsTest::run(CLogik *logic) {
+void AwardPointsTest::run(ServerLogic *logic) {
     // Spieler erzeugen
     for( unsigned int i = 0; i < 3; ++i ) {
         Spieler player("Player " + QString::number(i));

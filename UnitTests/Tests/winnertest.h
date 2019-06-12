@@ -5,14 +5,14 @@
 
 #define private public
 #define protected public
-#include "CLogik.h"
+#include "ServerLogic.h"
 #undef private
 #undef protected
 
 class WinnerTest {
     public:
         WinnerTest();
-        void run(CLogik* logic);
+        void run(ServerLogic* logic);
 };
 
 #endif // WINNERTEST_H

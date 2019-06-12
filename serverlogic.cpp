@@ -1,4 +1,4 @@
-#include "CLogik.h"
+#include "ServerLogic.h"
 #include "spieler.h"
 #include "antworten.h"
 #include "punkte.h"
@@ -6,21 +6,21 @@
 #include "spielerwarteraum.h"
 #include "kategorieeingabe.h"
 
-CLogik::CLogik() : warteRaum(nullptr) {
+ServerLogic::ServerLogic() : warteRaum(nullptr) {
     srand(time(NULL));
 }
 
-CLogik::~CLogik(){
+ServerLogic::~ServerLogic(){
     delete warteRaum;
     delete roundTimer;
 }
 
-void CLogik::run() {
+void ServerLogic::run() {
     HostSpielEinstellungen einstellungen(nullptr, this);
     einstellungen.exec();
 }
 
-void CLogik::starteServerSocket() {
+void ServerLogic::starteServerSocket() {
     connect(&serverSocket, SIGNAL(playerJoined(PlayerJoinPacket, unsigned int)), this, SLOT(spieler_beitritt(PlayerJoinPacket, unsigned int)));
     connect(&serverSocket, SIGNAL(playerFinished(PlayerFinishedPacket, unsigned int)), this, SLOT(bekommt_playerFinished(PlayerFinishedPacket, unsigned int)));
     connect(&serverSocket, SIGNAL(answersSent(SendAnswersPacket, unsigned int)), this, SLOT(bekommt_antwort(SendAnswersPacket, unsigned int)));
@@ -28,7 +28,7 @@ void CLogik::starteServerSocket() {
     emit serverBereit();
 }
 
-void CLogik::bekommt_antwort(SendAnswersPacket packet, unsigned int id){
+void ServerLogic::bekommt_antwort(SendAnswersPacket packet, unsigned int id){
 
     for(int i = 0; i < m_players.size(); i++){
 
@@ -44,7 +44,7 @@ void CLogik::bekommt_antwort(SendAnswersPacket packet, unsigned int id){
     }
 }
 
-void CLogik::spieler_beitritt(PlayerJoinPacket packet, unsigned int id){
+void ServerLogic::spieler_beitritt(PlayerJoinPacket packet, unsigned int id){
 
     //tell every player another player has joined
     for(int i = 0; i < m_players.size(); ++i ) {
@@ -73,7 +73,7 @@ void CLogik::spieler_beitritt(PlayerJoinPacket packet, unsigned int id){
     if( warteRaum != nullptr ) warteRaum->showPlayer();
 }
 
-void CLogik::endGame(){
+void ServerLogic::endGame(){
    EndGamePacket packet;
 
    //pack ranking vectors (both names and points) in EndGamePacket
@@ -82,7 +82,7 @@ void CLogik::endGame(){
    sendToAll(packet);
 }
 
-QVector<QString> CLogik::sortAnswers(unsigned int category) {
+QVector<QString> ServerLogic::sortAnswers(unsigned int category) {
     int anzahl = m_players.size();
     QVector<QString> antwortenKategorie;
 
@@ -94,7 +94,7 @@ QVector<QString> CLogik::sortAnswers(unsigned int category) {
    return antwortenKategorie;
 }
 
-void CLogik::punktevergabe(){
+void ServerLogic::punktevergabe(){
     unsigned int categories = m_players[0].Categories();
 
     //for every category
@@ -158,7 +158,7 @@ void CLogik::punktevergabe(){
 }
 
 
-QVector<int> CLogik::awardPoints(unsigned int category){
+QVector<int> ServerLogic::awardPoints(unsigned int category){
     //get answers for this category
     QVector<QString> antworten = m_answers[category].getAntworten();
     int anzahl = m_players.size();
@@ -200,7 +200,7 @@ QVector<int> CLogik::awardPoints(unsigned int category){
 }
 
 
-EndGamePacket CLogik::getWinner() {
+EndGamePacket ServerLogic::getWinner() {
     int anzahl = m_players.size();
 
     QVector<QString> names;
@@ -258,7 +258,7 @@ EndGamePacket CLogik::getWinner() {
     return packet;
 }
 
-char CLogik::getLetter(){
+char ServerLogic::getLetter(){
     //if the last position in the m_usedLetters array is occupied clear array
     if (m_usedLetters[25] != 0x00){
         for (int var = 0; var < 26; ++var) {
@@ -296,40 +296,40 @@ char CLogik::getLetter(){
     return letter;
 }
 
-Spieleinstellungen* CLogik::getSpieleinstellungen()
+Spieleinstellungen* ServerLogic::getSpieleinstellungen()
 {
     return &m_einstellung;
 }
 
-QVector<Spieler>* CLogik::getSpielerListe()
+QVector<Spieler>* ServerLogic::getSpielerListe()
 {
     return &m_players;
 }
 
-void CLogik::openHostSpielEinstellungen()
+void ServerLogic::openHostSpielEinstellungen()
 {
     HostSpielEinstellungen einstellungen(nullptr, this);
     einstellungen.exec();
 }
- void CLogik::openKategorieEingabe()
+ void ServerLogic::openKategorieEingabe()
  {
      Kategorieeingabe eingabe(nullptr, this);
      eingabe.exec();
  }
- void CLogik::openSpielerWarteRaum()
+ void ServerLogic::openSpielerWarteRaum()
  {
     starteServerSocket();
      warteRaum = new SpielerWarteRaum(nullptr,this);
      warteRaum->exec();
  }
 
- void CLogik::sendToAll(Packet& p){
+ void ServerLogic::sendToAll(Packet& p){
      for(int i = 0; i < m_players.size(); i++){
          serverSocket.send(m_players[i].getConnectionId(), p);
      }
  }
 
- void CLogik::sendeSpielStart(){
+ void ServerLogic::sendeSpielStart(){
      PlayerListPacket listPacket;
      QVector<QString> namen;
 
@@ -346,7 +346,7 @@ void CLogik::openHostSpielEinstellungen()
      setupTimer();
  }
 
-void CLogik::sendeRundenStart(){
+void ServerLogic::sendeRundenStart(){
     //if the maximum number of rounds has not been reached
     if(m_currentRound < getSpieleinstellungen()->getRundenanzahl())
     {   StartCountdownPacket packet;
@@ -365,11 +365,11 @@ void CLogik::sendeRundenStart(){
     }
 }
 
-void CLogik::nextRound(){
+void ServerLogic::nextRound(){
     sendeRundenStart();
 }
 
- void CLogik::setupTimer(){
+ void ServerLogic::setupTimer(){
     QObject::connect(roundTimer, SIGNAL(signalStartInput()), this, SLOT(startInput()));
     QObject::connect(roundTimer, SIGNAL(signalPlayerFinished()), this, SLOT(playerFinished()));
     QObject::connect(roundTimer, SIGNAL(signalRoundOver()), this, SLOT(endInput()));
@@ -377,23 +377,23 @@ void CLogik::nextRound(){
     QObject::connect(roundTimer, SIGNAL(pausenTimer()), this, SLOT(nextRound()));
  }
 
- void CLogik::startInput(){
+ void ServerLogic::startInput(){
      //get random letter and initialise round start
      RoundStartPacket packet(getLetter());
      sendToAll(packet);
  }
 
- void CLogik::playerFinished(){
+ void ServerLogic::playerFinished(){
     PlayerFinishedPacket packet;
     sendToAll(packet);
 
  }
 
- void CLogik::endInput(){
+ void ServerLogic::endInput(){
     EndRoundPacket packet;
     sendToAll(packet);
  }
 
- void CLogik::bekommt_playerFinished(PlayerFinishedPacket Packet, unsigned int id){
+ void ServerLogic::bekommt_playerFinished(PlayerFinishedPacket Packet, unsigned int id){
      emit initRoundEnd();
  }

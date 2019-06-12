@@ -1,5 +1,5 @@
-#ifndef CLOGIK_H
-#define CLOGIK_H
+#ifndef ServerLogic_H
+#define ServerLogic_H
 #include <stdint.h>
 #include <iostream>
 #include <QVector>
@@ -31,12 +31,12 @@ typedef MockServerSocket ServerSocket;
 #include "timer.h"
 
 using namespace std;
-class CLogik : public QObject {
+class ServerLogic : public QObject {
     Q_OBJECT
 public:
 
-    CLogik();
-    ~CLogik();
+    ServerLogic();
+    ~ServerLogic();
 
     ///
     /// \brief create object HostSpielEinstellungen and execute

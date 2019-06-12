@@ -6,14 +6,14 @@
 
 #define private public
 #define protected public
-#include "CLogik.h"
+#include "ServerLogic.h"
 #undef protected
 #undef private
 
 class AwardPointsTest {
     public:
         AwardPointsTest();
-        void run(CLogik* logic);
+        void run(ServerLogic* logic);
 };
 
 #endif // AWARDPOINTSTEST_H

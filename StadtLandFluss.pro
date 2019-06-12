@@ -53,7 +53,7 @@ SOURCES += \
         spieler.cpp \
         spielerwarteraum.cpp \
         spielstart.cpp \
-        CLogik.cpp \
+        ServerLogic.cpp \
     statistic.cpp \
         timer.cpp
 
@@ -85,7 +85,7 @@ HEADERS += \
         spielerliste.h \
         spielerwarteraum.h \
         spielstart.h \
-        CLogik.h \
+        ServerLogic.h \
     statistic.h \
         timer.h
 

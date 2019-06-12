@@ -4,7 +4,7 @@
 
 #define private public
 #define protected public
-#include "CLogik.h"
+#include "ServerLogic.h"
 #undef protected
 #undef private
 
@@ -38,11 +38,11 @@ class ServerLogicTests : public QObject {
         void setupDefaultParameters();
 
         MockServerSocket m_serverSocket;    /**< Mock serversocket for intercepting packets */
-        CLogik* m_logic;                    /**< Instance of server logic for tests */
+        ServerLogic* m_logic;                    /**< Instance of server logic for tests */
 };
 
 void ServerLogicTests::init() {
-    m_logic = new CLogik();
+    m_logic = new ServerLogic();
 }
 
 void ServerLogicTests::cleanup() {

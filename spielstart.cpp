@@ -28,7 +28,7 @@ void SpielStart::on_buttonHost_clicked()
 
     close();
    _clientLogic->setSpieler(hostSpieler);
-   _clientLogic->openCLogik();
+   _clientLogic->openServerLogic();
 
 
 }
