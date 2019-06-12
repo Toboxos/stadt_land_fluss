@@ -6,11 +6,6 @@
 #include "CLogik.h"
 #include <QMessageBox>
 
-/*###################################################################################
-    Methode                 :
-    Funktion der Methode    :
-    Ersteller               : Alexandra Eberle
- ###################################################################################*/
 HostSpielEinstellungen::HostSpielEinstellungen(QWidget *parent,CLogik *serverLogic) :
     QDialog(parent),
     ui(new Ui::HostSpielEinstellungen)
@@ -28,14 +23,7 @@ HostSpielEinstellungen::~HostSpielEinstellungen()
 {
     delete ui;
 }
-/*###################################################################################
-    Methode                 : on_buttonWeiter_clicked()
-    Funktion der Methode    :   Sobald auf den ButtonWeiter geklickt wird, werden die
-                            Werte übernommen und in Vaiablen geschrieben.
-                            Außerdem wird überprüft, dass keine Buchstaben und Werte
-                            kleiner als Null eingegeben wurden.
-    Ersteller               : Alexandra Eberle
- ###################################################################################*/
+
 void HostSpielEinstellungen::on_buttonNext_clicked()
 {
     bool correctUserEntry = true;
@@ -127,13 +115,6 @@ void HostSpielEinstellungen::on_buttonNext_clicked()
         //do nothing
     }
 }
-/*###################################################################################
-    Methode                 : on_buttonZurueck_click
-    Funktion der Methode    : Die Variablen werden wieder resetet. Und auf das Fenster
-                              "Spielstart" gewechslet.
-    Ersteller               : Alexandra Eberle
- ###################################################################################*/
-
 
 
 void HostSpielEinstellungen::on_checkBoxUnendlich_stateChanged(int arg1)

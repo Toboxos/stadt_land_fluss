@@ -23,11 +23,12 @@ private slots:
     void on_buttonWeiter_clicked();
     void on_buttonZurueck_clicked();
     ///
-    /// \brief on_buttonHinzufuegen_clicked Die hinzugefügte Kategorie wird in der Tabelle angezeigt. Die kategorien werden in den Spieleinstellungen gespeichert.
+    /// \brief on_buttonHinzufuegen_clicked display the added categories and store them in game settings. 
     ///
     void on_buttonHinzufuegen_clicked();
     ///
-    /// \brief on_einlesenKategorie_textEdited erst wenn eine Kategorie geschrieben wurde, wird der button Hinzufügen enabled
+    /// \brief on_einlesenKategorie_textEdited only if a categorie is entered the button add is enabled.
+    /// 
     /// \param arg1
     ///
     void on_einlesenKategorie_textEdited(const QString &arg1);
