@@ -40,7 +40,10 @@ void HauptSpielFenster::setPlayers(QVector<QString> players, QString clientName)
     }
 }
 
-
+///
+/// \brief HauptSpielFenster::ready
+///
+///
 void HauptSpielFenster::fillAnswerVector()
 {
     for (int columCount = 1; columCount < (ui->tableSpiel->columnCount()) -1; ++columCount)
@@ -51,11 +54,11 @@ void HauptSpielFenster::fillAnswerVector()
         else
             answerVector.push_back("");
     }
-   ui->tableSpiel->setEnabled(false);
+   ui->tableSpiel->setEnabled(true);
    qDebug() << "Hier stürz ich ab!" << endl;
 }
 QVector<QString> HauptSpielFenster::getAnserVector()
-
+{
     return answerVector;
 }
 HauptSpielFenster::~HauptSpielFenster()

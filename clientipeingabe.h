@@ -22,7 +22,6 @@ public:
     ~ClientIpEingabe();
 
 private slots:
-
     void on_eingabeIp_textEdited(const QString &arg1);
     void connected();
     void on_buttonWeiter_clicked();

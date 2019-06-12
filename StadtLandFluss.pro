@@ -82,6 +82,7 @@ HEADERS += \
     punkte.h \
         spieleinstellungen.h \
         spieler.h \
+        spielerliste.h \
         spielerwarteraum.h \
         spielstart.h \
         CLogik.h \
