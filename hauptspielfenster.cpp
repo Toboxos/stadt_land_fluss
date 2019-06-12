@@ -66,8 +66,14 @@ QVector<QString> HauptSpielFenster::getAnserVector()
 HauptSpielFenster::~HauptSpielFenster()
 {
     delete ui;
-    m_points.clear();
-    m_letters.clear();
+
+    for( int i = 0; i < m_points.size(); ++i ) {
+        delete m_points[i];
+    }
+
+    for(int i = 0; i < m_letters.size(); ++i ) {
+        delete m_letters[i];
+    }
 }
 void HauptSpielFenster::startCountdown(){
     ui->buttonFertig->setText("F\nE\nR\nT\nI\nG");
