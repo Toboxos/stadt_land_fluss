@@ -19,7 +19,6 @@ timer::~timer()
 ///<summary>is called when the round is supposed to start </summary>
 ///<parameters> </parameters>
 void timer::startRound(){
-    qDebug() << "StartRoundTimer wurde gestartet :)))";
     singleShot(countdowntime*1000, this, SLOT(startInput()));
 }
 

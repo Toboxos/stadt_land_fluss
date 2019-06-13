@@ -5,11 +5,6 @@
 #include "spieleinstellungen.h"
 #include <QMessageBox>
 
-/*###################################################################################
-    Methode                 :
-    Funktion der Methode    :
-    Ersteller               : Alexandra Eberle
- ###################################################################################*/
 HostSpielEinstellungen::HostSpielEinstellungen(QWidget *parent,ServerLogic *serverLogic) :
     QDialog(parent),
     ui(new Ui::HostSpielEinstellungen)
@@ -32,7 +27,7 @@ void HostSpielEinstellungen::on_buttonNext_clicked()
 {
     bool correctUserEntry = true;
     QMessageBox box;
-     // Abfrage dass bei den Runden kein Bullshit eingegeben wurde.
+    // Abfrage dass bei den Runden kein Bullshit eingegeben wurde.
     if(ui->inputRoundNumber->text().toInt() == 0)
     {
         box.setText("Bitte keine Buchstaben eingeben");

@@ -29,7 +29,7 @@ void SpielerWarteRaum::createTable()
 {
 
     ui->labelSpielname->setText(_serverLogic->getSpieleinstellungen()->getSpielname());
-    qDebug() << "jemand da" << endl;
+
     int reihenNummer=1;
     QVector<Spieler> spieler = *_serverLogic->getSpielerListe();
     qDebug() << spieler.size() << endl;
