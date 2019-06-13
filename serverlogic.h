@@ -183,7 +183,7 @@ private:
     /// \brief setupTimer
     ///
     void setupTimer();
-
+    QEventLoop server;
     SpielerWarteRaum *warteRaum;
     QVector<Spieler> m_players;
     QVector<antworten> m_answers;

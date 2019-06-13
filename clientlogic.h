@@ -78,7 +78,8 @@ private:
     QVector<QString> _answerVector;
 
     Spieler clientSpieler;
-    Spieleinstellungen  _einstellung ;
+    Spieleinstellungen  _einstellung;
+    QEventLoop waitForStart;
 public slots:
     void playerJoinedSlot(PlayerJoinPacket Packet);
     void receivedPlayerListSlot(PlayerListPacket Packet);

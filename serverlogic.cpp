@@ -344,6 +344,8 @@ void ServerLogic::openHostSpielEinstellungen()
      sendToAll(listPacket);
      roundTimer = new timer(this->getSpieleinstellungen()->getRundendauer(), 3, this->getSpieleinstellungen()->getCountdown());
      setupTimer();
+     qDebug() << "Spielstart fertig";
+     server.exec();
  }
 
 void ServerLogic::sendeRundenStart(){
@@ -361,6 +363,7 @@ void ServerLogic::sendeRundenStart(){
         EndGamePacket endPacket;
         endPacket = getWinner();
         sendToAll(endPacket);
+        server.quit();
         qDebug() << "Spiel fertig";
     }
 }

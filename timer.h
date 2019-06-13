@@ -9,6 +9,10 @@ class timer : public QTimer
     Q_OBJECT
 
 public:
+    /// \brief creates new Timer
+    /// \param Rundendauer
+    /// \param Countdowndauer
+    /// \param zeitNachFinished
     timer(unsigned int Rundendauer, unsigned int Countdowndauer, unsigned int zeitNachFinished);
     ~timer();
     void startRound();

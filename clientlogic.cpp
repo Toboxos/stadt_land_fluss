@@ -39,6 +39,8 @@ void ClientLogic::connect(QString name, QString ip, quint16 port, ClientIpEingab
    QObject::connect(&_clientSocket, SIGNAL(error()), this, SLOT(errorSlot()));
    QObject::connect(&_clientSocket, SIGNAL(pointsSent(SendPointsPacket)), this, SLOT(receivedPoints(SendPointsPacket)));
    if( window != nullptr ) QObject::connect(&_clientSocket, SIGNAL(connected()), window, SLOT(connected()));
+   waitForStart.exec();
+
 }
 
 void ClientLogic::receivedPoints(SendPointsPacket Packet){
@@ -124,8 +126,8 @@ void ClientLogic::openClientIpEingabe()
 void ClientLogic::openHauptSpielFenster(){
     _hautpSpielFenster = new HauptSpielFenster();
     QObject::connect(_hautpSpielFenster, SIGNAL(fertig()), this, SLOT(fensterFertig()));
-
     _hautpSpielFenster->show();
+    qDebug() << "Du passierst nie oder?";
 }
 
 Spieler ClientLogic::getSpieler(){
@@ -142,6 +144,7 @@ void ClientLogic::playerFinished(PlayerFinishedPacket Packet){
 }
 
 void ClientLogic::starteSpiel(GameSettingsPacket Packet){
+    waitForStart.quit();
     _einstellung.setCountdown(Packet.getCountown());
     _einstellung.setPlayName(Packet.getGameName());
     _einstellung.setRoundNumber(Packet.getRoundNumbers());

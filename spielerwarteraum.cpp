@@ -48,9 +48,8 @@ void SpielerWarteRaum::createTable()
 void SpielerWarteRaum::on_buttonWeiter_clicked()
 {
 
-    close();
     _serverLogic->sendeSpielStart();
     _serverLogic->sendeRundenStart();
-
+    close();
 }
 
