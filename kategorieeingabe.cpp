@@ -34,6 +34,7 @@ void Kategorieeingabe::on_buttonWeiter_clicked()
     _serverLogic->getSpieleinstellungen()->addKategorie("Punkte");
     close();
     _serverLogic->openSpielerWarteRaum();
+
 }
 
 void Kategorieeingabe::on_buttonZurueck_clicked()

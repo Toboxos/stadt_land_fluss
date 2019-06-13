@@ -53,7 +53,7 @@ void HauptSpielFenster::fillAnswerVector()
             answerVector.push_back("");
     }
    ui->tableSpiel->setEnabled(false);
-   qDebug() << "Hier stürz ich ab!" << endl;
+   qDebug() << "CurrentRow " << currentRow;
 }
 QVector<QString> HauptSpielFenster::getAnserVector() {
 
@@ -75,8 +75,10 @@ void HauptSpielFenster::startCountdown(){
     ui->buttonFertig->setText("F\nE\nR\nT\nI\nG");
     ui->buttonFertig->setStyleSheet("background-color: rgba(0, 204, 0, 0.8);");
     ui->buttonFertig->setEnabled(true);
+    ui->tableSpiel->setEnabled(true);
     box.setText("Die Runde startet in 3 Sekunden");
     box.open();
+
 }
 void HauptSpielFenster::setLetter(char letter){
     box.close();
@@ -108,7 +110,7 @@ void HauptSpielFenster::setTotalPoints(int points){
         qDebug() << columCount << "oder hier vielleicht?";
         if( ui->tableSpiel->item(currentRow-1,columCount) != nullptr)
             ui->tableSpiel->item(currentRow-1,columCount)->setFlags(Qt::ItemIsEnabled);
-
+        qDebug() << "Hier die current Row " << currentRow;
     }
     qDebug() << "Hier bin ich noch da";
 

@@ -6,15 +6,13 @@
 #include <QDebug>
 ClientLogic::ClientLogic() : _ServerLogic(nullptr), _hautpSpielFenster(nullptr)
 {
-    _spielstart = new SpielStart(nullptr, this);
-    _spielstart->open();
-    _spielstart->show();
+    SpielStart spielstart(nullptr, this);
+    spielstart.exec();
 }
 
 ClientLogic::~ClientLogic() {
     delete _ServerLogic;
     delete _hautpSpielFenster;
-    delete _spielstart;
 }
 
 void ClientLogic::setAnswerVector(QVector<QString> answerVector)
@@ -39,7 +37,6 @@ void ClientLogic::connect(QString name, QString ip, quint16 port, ClientIpEingab
    QObject::connect(&_clientSocket, SIGNAL(error()), this, SLOT(errorSlot()));
    QObject::connect(&_clientSocket, SIGNAL(pointsSent(SendPointsPacket)), this, SLOT(receivedPoints(SendPointsPacket)));
    if( window != nullptr ) QObject::connect(&_clientSocket, SIGNAL(connected()), window, SLOT(connected()));
-   waitForStart.exec();
 
 }
 
@@ -127,7 +124,6 @@ void ClientLogic::openHauptSpielFenster(){
     _hautpSpielFenster = new HauptSpielFenster();
     QObject::connect(_hautpSpielFenster, SIGNAL(fertig()), this, SLOT(fensterFertig()));
     _hautpSpielFenster->show();
-    qDebug() << "Du passierst nie oder?";
 }
 
 Spieler ClientLogic::getSpieler(){
@@ -144,7 +140,6 @@ void ClientLogic::playerFinished(PlayerFinishedPacket Packet){
 }
 
 void ClientLogic::starteSpiel(GameSettingsPacket Packet){
-    waitForStart.quit();
     _einstellung.setCountdown(Packet.getCountown());
     _einstellung.setPlayName(Packet.getGameName());
     _einstellung.setRoundNumber(Packet.getRoundNumbers());

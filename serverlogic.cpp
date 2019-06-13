@@ -321,7 +321,9 @@ void ServerLogic::openHostSpielEinstellungen()
     starteServerSocket();
      warteRaum = new SpielerWarteRaum(nullptr,this);
      warteRaum->exec();
+     qDebug() << "klappt das";
  }
+
 
  void ServerLogic::sendToAll(Packet& p){
      for(int i = 0; i < m_players.size(); i++){
@@ -345,7 +347,6 @@ void ServerLogic::openHostSpielEinstellungen()
      roundTimer = new timer(this->getSpieleinstellungen()->getRundendauer(), 3, this->getSpieleinstellungen()->getCountdown());
      setupTimer();
      qDebug() << "Spielstart fertig";
-     server.exec();
  }
 
 void ServerLogic::sendeRundenStart(){
@@ -363,10 +364,10 @@ void ServerLogic::sendeRundenStart(){
         EndGamePacket endPacket;
         endPacket = getWinner();
         sendToAll(endPacket);
-        server.quit();
         qDebug() << "Spiel fertig";
     }
 }
+
 
 void ServerLogic::nextRound(){
     sendeRundenStart();

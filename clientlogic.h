@@ -71,7 +71,6 @@ private:
     ClientSocket _clientSocket;
     ServerLogic* _ServerLogic;
     SpielStart* _spielstart;
-
     HauptSpielFenster* _hautpSpielFenster;
 
     QVector<Spieler> _spielerListe;
@@ -79,7 +78,6 @@ private:
 
     Spieler clientSpieler;
     Spieleinstellungen  _einstellung;
-    QEventLoop waitForStart;
 public slots:
     void playerJoinedSlot(PlayerJoinPacket Packet);
     void receivedPlayerListSlot(PlayerListPacket Packet);

@@ -31,7 +31,7 @@ void timer::startInput()
     singleShot((roundduration*60-timeafterfinished)*1000, this, SLOT(receivedPlayerFinished()));
 }
 void timer::rundenPausenTimer(){
-    singleShot(10*1000, this, SIGNAL(pausenTimer()));
+    singleShot(5*1000, this, SIGNAL(pausenTimer()));
 }
 ///<summary> slot that executes when Player completed his caregories or time runs out</summary>
 /// <parameters> </parameters>
