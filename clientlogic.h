@@ -20,7 +20,8 @@ public:
     ClientLogic();
     ~ClientLogic();
 
-    ///
+
+
     /// \brief connects signals to slots, connects to server
     /// \param name
     /// \param ip
@@ -79,6 +80,7 @@ private:
     Spieler clientSpieler;
     Spieleinstellungen  _einstellung;
 public slots:
+    void closeGame();
     void playerJoinedSlot(PlayerJoinPacket Packet);
     void receivedPlayerListSlot(PlayerListPacket Packet);
     void timeoutSlot();

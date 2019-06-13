@@ -52,7 +52,9 @@ void SpielStart::on_buttonBeitreten_clicked()
     _clientLogic->openClientIpEingabe();
 }
 
+
 void SpielStart::on_buttonBeenden_clicked()
 {
+    QTimer::singleShot(1, _clientLogic, SLOT(closeGame()));
     close();
 }

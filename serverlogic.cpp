@@ -18,6 +18,7 @@ ServerLogic::~ServerLogic(){
 void ServerLogic::run() {
     HostSpielEinstellungen einstellungen(nullptr, this);
     einstellungen.exec();
+    qDebug() << "Aha";
 }
 
 void ServerLogic::starteServerSocket() {

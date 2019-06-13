@@ -6,6 +6,7 @@
 #include <QDebug>
 ClientLogic::ClientLogic() : _ServerLogic(nullptr), _hautpSpielFenster(nullptr)
 {
+
     SpielStart spielstart(nullptr, this);
     spielstart.exec();
 }
@@ -13,6 +14,10 @@ ClientLogic::ClientLogic() : _ServerLogic(nullptr), _hautpSpielFenster(nullptr)
 ClientLogic::~ClientLogic() {
     delete _ServerLogic;
     delete _hautpSpielFenster;
+}
+
+void ClientLogic::closeGame(){
+    qApp->exit();
 }
 
 void ClientLogic::setAnswerVector(QVector<QString> answerVector)
