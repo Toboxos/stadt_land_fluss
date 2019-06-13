@@ -6,13 +6,15 @@
 #include <QDebug>
 ClientLogic::ClientLogic() : _ServerLogic(nullptr), _hautpSpielFenster(nullptr)
 {
-    SpielStart spielstart(nullptr, this);
-     spielstart.exec();
+    _spielstart = new SpielStart(nullptr, this);
+    _spielstart->open();
+    _spielstart->show();
 }
 
 ClientLogic::~ClientLogic() {
     delete _ServerLogic;
     delete _hautpSpielFenster;
+    delete _spielstart;
 }
 
 void ClientLogic::setAnswerVector(QVector<QString> answerVector)
@@ -41,7 +43,6 @@ void ClientLogic::connect(QString name, QString ip, quint16 port, ClientIpEingab
 
 void ClientLogic::receivedPoints(SendPointsPacket Packet){
     clientSpieler.setPunkte(Packet.getTotalPoints());
-    qDebug() << "Die feli mit ihren Debugs immer" << endl;
     _hautpSpielFenster->setTotalPoints(clientSpieler.getPunkte());
 }
 
@@ -82,7 +83,6 @@ void ClientLogic::receivedPlayerListSlot(PlayerListPacket Packet){
 }
 
 void ClientLogic::receivedStartCountdown(StartCountdownPacket packet){
-    qDebug() << "Runde startet in 3 Sekunden";
     _hautpSpielFenster->newRow();
     _hautpSpielFenster->startCountdown();
     //_hautpSpielFenster->newRow();

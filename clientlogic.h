@@ -10,7 +10,7 @@
 #include "Network/Packets/endroundpacket.h"
 #include "Network/Packets/startcountdownpacket.h"
 #include "Network/Packets/sendpointspacket.h"
-
+class SpielStart;
 class ClientIpEingabe;
 class ClientLogic : public QObject
 {
@@ -70,6 +70,7 @@ public:
 private:
     ClientSocket _clientSocket;
     ServerLogic* _ServerLogic;
+    SpielStart* _spielstart;
 
     HauptSpielFenster* _hautpSpielFenster;
 

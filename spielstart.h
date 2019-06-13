@@ -29,6 +29,8 @@ private slots:
 
     void on_buttonBeitreten_clicked();
 
+    void on_buttonBeenden_clicked();
+
 private:
     Ui::SpielStart *ui;
     ClientLogic *_clientLogic;

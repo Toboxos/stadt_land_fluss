@@ -51,3 +51,8 @@ void SpielStart::on_buttonBeitreten_clicked()
     close();
     _clientLogic->openClientIpEingabe();
 }
+
+void SpielStart::on_buttonBeenden_clicked()
+{
+    close();
+}
