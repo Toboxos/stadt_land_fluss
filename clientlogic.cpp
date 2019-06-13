@@ -164,7 +164,7 @@ void ClientLogic::receivedRoundStart(RoundStartPacket Packet){
 }
 void ClientLogic::receivedEndGame(EndGamePacket Packet)
 {
-    qDebug() << "Aha in receivedEndGame";
+
     QVector<QString> winner = Packet.getRanking();
     QVector<int> points = Packet.getPoints();
     Statistic statistic(nullptr,this, &winner, &points);

@@ -9,6 +9,9 @@
 #undef private
 #undef protected
 
+/**
+ * @brief Tests the determination of the leaderboard from ServerLogic
+ */
 class WinnerTest {
     public:
         WinnerTest();

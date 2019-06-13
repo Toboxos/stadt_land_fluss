@@ -15,7 +15,6 @@ timer::~timer()
 }
 
 void timer::startRound(){
-    qDebug() << "StartRoundTimer wurde gestartet :)))";
     singleShot(countdowntime*1000, this, SLOT(startInput()));
 }
 

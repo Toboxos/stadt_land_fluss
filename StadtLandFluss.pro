@@ -43,7 +43,6 @@ SOURCES += \
     antworten.cpp \
         clientipeingabe.cpp \
     clientlogic.cpp \
-    einwand.cpp \
         hauptspielfenster.cpp \
         hostspieleinstellungen.cpp \
         kategorieeingabe.cpp \
@@ -75,7 +74,6 @@ HEADERS += \
     antworten.h \
         clientipeingabe.h \
     clientlogic.h \
-    einwand.h \
         hauptspielfenster.h \
         hostspieleinstellungen.h \
         kategorieeingabe.h \
@@ -90,7 +88,6 @@ HEADERS += \
 
 FORMS += \
         clientipeingabe.ui \
-        einwand.ui \
         hauptspielfenster.ui \
         hostspieleinstellungen.ui \
         kategorieeingabe.ui \
@@ -99,7 +96,7 @@ FORMS += \
         statistic.ui
 
 PacketTests {
-    TARGET = PacketTest
+    TARGET = PacketTests
     QT += testlib
 
     SOURCES -=  main.cpp
@@ -113,7 +110,8 @@ PacketTests {
                 UnitTests/Tests/playerfinishedpackettest.cpp \
                 UnitTests/Tests/sendanswerspackettest.cpp \
                 UnitTests/Tests/sendpointspackettest.cpp
-    HEADERS +=  UnitTests/Tests/test.h \
+    HEADERS +=  UnitTests/packettests.h \
+                UnitTests/Tests/test.h \
                 UnitTests/Tests/gamesettingspackettest.h \
                 UnitTests/Tests/roundstartpackettest.h \
                 UnitTests/Tests/playerjoinpackettest.h \
@@ -125,7 +123,7 @@ PacketTests {
 }
 
 ServerLogicTests {
-    TARGET = ServerLogicTest
+    TARGET = ServerLogicTests
     QT += testlib
     DEFINES +=  UNIT_TEST
 
@@ -139,7 +137,8 @@ ServerLogicTests {
                 UnitTests/Tests/lettertest.cpp \
                 UnitTests/Tests/awardpointstest.cpp \
                 UnitTests/Tests/winnertest.cpp
-    HEADERS +=  UnitTests/mock_classes/mockserversocket.h \
+    HEADERS +=  UnitTests/serverlogictests.h \
+                UnitTests/mock_classes/mockserversocket.h \
                 UnitTests/Tests/jointest.h \
                 UnitTests/Tests/lettertest.h \
                 UnitTests/Tests/awardpointstest.h \
