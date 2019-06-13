@@ -41,6 +41,5 @@ um zu gewährleisten, dass alles richtig erstellt wird:
 ![QT Projekt neu konfigurieren](images/qt_reconfigure.png)
 
 ## Dokumentation
-Im Ordner html finden sich die generierten Doxygen Dateien. Dazu einfach die index.html aufrufen.
-Eine Doxygen-Datei ist im Projekt enthalten, sodass durch den Aufruf von ```doxygen``` auch alle Dateien neu generierten
-werden können
+Im Hauptordner befindet sich eine die eine Doxygen Konfigurations Datei. Mit dem Aufruf von ```doxygen``` werrden 
+automatisch die HTML-Dateien generiert und im Ordner 'html' abgelegt
