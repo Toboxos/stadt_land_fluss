@@ -3,6 +3,9 @@
 
 #include <QtTest/QTest>
 
+/**
+ * @brief Base class for asynchronous packet tests
+ */
 class Test : public QObject {
     Q_OBJECT
 
@@ -10,8 +13,17 @@ class Test : public QObject {
         virtual void run() = 0;
 
     signals:
+        /**
+         * @brief Called when all test cases finshed
+         */
         void finished();
-        void failed(QString Message);
+
+        /**
+         * @brief Callend when test case failed
+         *
+         * @param message   Description what failed
+         */
+        void failed(QString message);
 };
 
 #endif // TEST_H

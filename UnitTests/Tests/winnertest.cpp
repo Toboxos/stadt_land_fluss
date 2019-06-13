@@ -48,6 +48,7 @@ void WinnerTest::run(ServerLogic* logic) {
     QCOMPARE(points.size(), 5);
     QCOMPARE(ranking.size(), 5);
 
+    // Compare leaderboard
     for( int i = 0 ; i < 5; ++i ) {
         switch( i ) {
 
