@@ -287,6 +287,9 @@ char ServerLogic::getLetter(){
                 m_usedLetters[var] = letter;
                 break;
             }
+            else {
+
+            }
 
         }
 
