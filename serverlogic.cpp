@@ -18,7 +18,6 @@ ServerLogic::~ServerLogic(){
 void ServerLogic::run() {
     HostSpielEinstellungen einstellungen(nullptr, this);
     einstellungen.exec();
-    qDebug() << "Aha";
 }
 
 void ServerLogic::starteServerSocket() {
@@ -30,7 +29,8 @@ void ServerLogic::starteServerSocket() {
 }
 
 void ServerLogic::bekommt_antwort(SendAnswersPacket packet, unsigned int id){
-
+    //if the connection id matches
+    //save answers in matching player object
     for(int i = 0; i < m_players.size(); i++){
 
         if(m_players[i].getConnectionId() == id)
@@ -39,6 +39,8 @@ void ServerLogic::bekommt_antwort(SendAnswersPacket packet, unsigned int id){
 
     m_answersReceived++;
 
+    //if all answers have been received
+    //start awarding points
     if(m_answersReceived == m_players.size()){
         punktevergabe();
         m_answersReceived = 0;
@@ -206,7 +208,6 @@ EndGamePacket ServerLogic::getWinner() {
 
     QVector<QString> names;
     QVector<int> allPoints;
-    QVector<unsigned int> ids;
 
     // Save points of all players in allPoints
     for (int var = 0; var < anzahl; ++var) {
@@ -360,7 +361,7 @@ void ServerLogic::openHostSpielEinstellungen()
  }
 
 void ServerLogic::sendeRundenStart(){
-    //if the maximum number of rounds has not been reached
+    //if the maximum number of rounds has not yet been reached
     if(m_currentRound < getSpieleinstellungen()->getRundenanzahl())
     {   StartCountdownPacket packet;
         sendToAll(packet);
