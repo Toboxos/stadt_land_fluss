@@ -37,10 +37,10 @@ class MockServerSocket : public QObject {
         MockServerSocket& operator=(MockServerSocket& other);
 
     signals:
+        // Signals are same as at serversocket
         void connected(unsigned int id);
         void playerJoined(PlayerJoinPacket packet, unsigned int id);
-        void pointsSent(SendPointsPacket packet, unsigned int id);
-        void endGame(EndGamePacket packet, unsigned int id);
+        void answersSent(SendAnswersPacket packet, unsigned int id);
         void playerFinished(PlayerFinishedPacket packet, unsigned int id);
 
     private:
