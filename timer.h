@@ -15,7 +15,9 @@ public:
     /// \param zeitNachFinished
     timer(unsigned int Rundendauer, unsigned int Countdowndauer, unsigned int zeitNachFinished);
     ~timer();
+    /// \brief starts timer for a new Round
     void startRound();
+    /// \brief starts timer for a break between two rounds
     void rundenPausenTimer();
 private:
     QTimer *InternalTimer;
@@ -28,30 +30,13 @@ signals:
     void signalRoundOver();
     void pausenTimer();
 public slots:
+    /// \brief starts when round is opened for input
     void startInput();
+    /// \brief starts when round is closing in 10 seconds
     void receivedPlayerFinished();
+    ///\brief starts, when round is closed
     void endRound();
 };
 
 #endif // TIMER_H
-/*
-From: Prof Hoff
-To: all
-666 hail satan 666
-ich bin eine böse hexe
-    /\
-___/__\___
-\
- \
-  \
-   \  |
-    \ |
-     \|
 
-Alle blöden Programmierer sind gegen die Hexenverschwörung
-ermordet sie
-brennt sie ab
-landet nicht selber in den Flammen Schwestern der Hölle!
-wir werden siegriech sein
-hail samhain
-*/

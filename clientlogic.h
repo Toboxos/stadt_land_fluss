@@ -20,7 +20,8 @@ public:
     ClientLogic();
     ~ClientLogic();
 
-    ///
+
+
     /// \brief connects signals to slots, connects to server
     /// \param name
     /// \param ip
@@ -77,8 +78,10 @@ private:
     QVector<QString> _answerVector;
 
     Spieler clientSpieler;
-    Spieleinstellungen  _einstellung;
+    Spieleinstellungen  _einstellung ;
+
 public slots:
+    void closeGame();
     void playerJoinedSlot(PlayerJoinPacket Packet);
     void receivedPlayerListSlot(PlayerListPacket Packet);
     void timeoutSlot();

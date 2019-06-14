@@ -4,6 +4,9 @@
 #include <QtTest/QTest>
 #include "ServerLogic.h"
 
+/**
+ * @brief Tests the generation of individual letters from the ServerLogic
+ */
 class LetterTest {
     public:
         LetterTest();

@@ -25,6 +25,9 @@ SpielerWarteRaum::~SpielerWarteRaum()
 void SpielerWarteRaum::showPlayer(){
     createTable();
 }
+void SpielerWarteRaum::closeEvent(QCloseEvent *event){
+    QTimer::singleShot(10, this->_serverLogic, SLOT(closeGame()));
+}
 void SpielerWarteRaum::createTable()
 {
 
