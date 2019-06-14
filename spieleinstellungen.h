@@ -64,7 +64,10 @@ public:
     ///
     void setKategories(QVector<QString> Kategorien);
 
-
+    ///
+    /// \brief clearAnserVector set anserVector to NULL
+    ///
+    void clearAnserVector();
 
 private:
     QString _spielname="";

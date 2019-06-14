@@ -31,7 +31,7 @@ void ClientIpEingabe::on_eingabeIp_textEdited(const QString &arg1)
 void ClientIpEingabe::on_buttonWeiter_clicked()
 {
 
-    _clientLogic->connect(_clientLogic->getSpieler().getName(),ui->eingabeIp->text(),PORT, this);
+    _clientLogic->connect(ui->eingabeIp->text(),PORT, this);
 
 
 

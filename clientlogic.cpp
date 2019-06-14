@@ -25,7 +25,7 @@ void ClientLogic::setAnswerVector(QVector<QString> answerVector)
     _answerVector = answerVector;
 }
 
-void ClientLogic::connect(QString name, QString ip, quint16 port, ClientIpEingabe *window)
+void ClientLogic::connect(QString ip, quint16 port, ClientIpEingabe *window)
 {
 
     _clientSocket.connectTo(ip,port);
@@ -60,7 +60,7 @@ void ClientLogic::openServerLogic() {
 }
 
 void ClientLogic::serverBereit() {
-    connect(clientSpieler.getName(), "localhost", PORT, nullptr);
+    connect("localhost", PORT, nullptr);
 }
 
 void ClientLogic::sendAnswers(){

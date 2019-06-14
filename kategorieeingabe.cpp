@@ -40,6 +40,7 @@ void Kategorieeingabe::on_buttonWeiter_clicked()
 void Kategorieeingabe::on_buttonZurueck_clicked()
 {
     close();
+    _serverLogic->getSpieleinstellungen()->clearAnserVector();
     _serverLogic->openHostSpielEinstellungen();
 
 }
