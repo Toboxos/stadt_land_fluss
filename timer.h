@@ -9,9 +9,15 @@ class timer : public QTimer
     Q_OBJECT
 
 public:
+    /// \brief creates new Timer
+    /// \param Rundendauer
+    /// \param Countdowndauer
+    /// \param zeitNachFinished
     timer(unsigned int Rundendauer, unsigned int Countdowndauer, unsigned int zeitNachFinished);
     ~timer();
+    /// \brief starts timer for a new Round
     void startRound();
+    /// \brief starts timer for a break between two rounds
     void rundenPausenTimer();
 private:
     QTimer *InternalTimer;
@@ -24,8 +30,11 @@ signals:
     void signalRoundOver();
     void pausenTimer();
 public slots:
+    /// \brief starts when round is opened for input
     void startInput();
+    /// \brief starts when round is closing in 10 seconds
     void receivedPlayerFinished();
+    ///\brief starts, when round is closed
     void endRound();
 };
 

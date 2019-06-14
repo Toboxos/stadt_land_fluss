@@ -24,13 +24,18 @@ void EndGamePacketTest::client_error() {
 }
 
 void EndGamePacketTest::server_connected(unsigned int id) {
-    QVector<QString> vec;
+    QVector<QString> players;
     for( int i = 0; i < 5; ++i ) {
         QString s = "Player " + QString::number(i);
-        vec.push_back(s);
+        players.push_back(s);
     }
 
-    EndGamePacket packet(vec);
+    QVector<int> points;
+    for( int i = 0; i < 5; ++i ) {
+        points.push_back(i);
+    }
+
+    EndGamePacket packet(players, points);
     m_server.send(id, packet);
 }
 
@@ -39,6 +44,11 @@ void EndGamePacketTest::client_endGame(EndGamePacket packet) {
     for( int i = 0; i < 5; ++i ) {
         QString s = "Player " + QString::number(i);
         QCOMPARE(players[i], s);
+    }
+
+    QVector<int> points = packet.getPoints();
+    for( int i = 0; i < 5; ++i ) {
+        QCOMPARE(points[i], i);
     }
 
     emit finished();

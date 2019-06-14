@@ -40,6 +40,8 @@ public:
     ServerLogic();
     ~ServerLogic();
 
+
+
     ///
     /// \brief create object HostSpielEinstellungen and execute
     ///
@@ -183,7 +185,6 @@ private:
     /// \brief setupTimer
     ///
     void setupTimer();
-
     SpielerWarteRaum *warteRaum;
     QVector<Spieler> m_players;
     QVector<antworten> m_answers;

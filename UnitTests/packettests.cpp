@@ -1,4 +1,7 @@
-#include <QtTest/QtTest>
+#include "packettests.h"
+
+#include <QSignalSpy>
+
 #include "UnitTests/Tests/gamesettingspackettest.h"
 #include "UnitTests/Tests/roundstartpackettest.h"
 #include "UnitTests/Tests/playerjoinpackettest.h"
@@ -7,24 +10,6 @@
 #include "UnitTests/Tests/playerfinishedpackettest.h"
 #include "UnitTests/Tests/sendanswerspackettest.h"
 #include "UnitTests/Tests/sendpointspackettest.h"
-
-/**
- * @brief Unittest for testing that packet data is transfered successfully
- */
-class PacketTests : public QObject {
-    Q_OBJECT
-
-    private slots:
-        void testGameSettingsPacket();
-        void testRoundStartPacket();
-        void testPlayerJoinPacket();
-        void testPlayerListPacket();
-        void testEndGamePacket();
-        void testPlayerFinishedPacket();
-        void testSendAnswersPacket();
-        void testSendPointsPacket();
-
-};
 
 void PacketTests::testGameSettingsPacket() {
     // Create actual test object
@@ -227,4 +212,3 @@ void PacketTests::testSendPointsPacket() {
 }
 
 QTEST_MAIN(PacketTests);
-#include "packettests.moc"

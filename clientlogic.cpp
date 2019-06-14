@@ -6,13 +6,18 @@
 #include <QDebug>
 ClientLogic::ClientLogic() : _ServerLogic(nullptr), _hautpSpielFenster(nullptr)
 {
+
     SpielStart spielstart(nullptr, this);
-     spielstart.exec();
+    spielstart.exec();
 }
 
 ClientLogic::~ClientLogic() {
     delete _ServerLogic;
     delete _hautpSpielFenster;
+}
+
+void ClientLogic::closeGame(){
+    qApp->exit();
 }
 
 void ClientLogic::setAnswerVector(QVector<QString> answerVector)
@@ -37,6 +42,7 @@ void ClientLogic::connect(QString name, QString ip, quint16 port, ClientIpEingab
    QObject::connect(&_clientSocket, SIGNAL(error()), this, SLOT(errorSlot()));
    QObject::connect(&_clientSocket, SIGNAL(pointsSent(SendPointsPacket)), this, SLOT(receivedPoints(SendPointsPacket)));
    if( window != nullptr ) QObject::connect(&_clientSocket, SIGNAL(connected()), window, SLOT(connected()));
+
 }
 
 void ClientLogic::receivedPoints(SendPointsPacket Packet){
@@ -132,7 +138,6 @@ void ClientLogic::openHauptSpielFenster(){
     //creates main game window
     _hautpSpielFenster = new HauptSpielFenster();
     QObject::connect(_hautpSpielFenster, SIGNAL(fertig()), this, SLOT(fensterFertig()));
-
     _hautpSpielFenster->show();
 }
 

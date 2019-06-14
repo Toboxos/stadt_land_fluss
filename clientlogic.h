@@ -10,7 +10,7 @@
 #include "Network/Packets/endroundpacket.h"
 #include "Network/Packets/startcountdownpacket.h"
 #include "Network/Packets/sendpointspacket.h"
-
+class SpielStart;
 class ClientIpEingabe;
 class ClientLogic : public QObject
 {
@@ -20,7 +20,8 @@ public:
     ClientLogic();
     ~ClientLogic();
 
-    ///
+
+
     /// \brief connects signals to slots, connects to server
     /// \param name
     /// \param ip
@@ -70,7 +71,7 @@ public:
 private:
     ClientSocket _clientSocket;
     ServerLogic* _ServerLogic;
-
+    SpielStart* _spielstart;
     HauptSpielFenster* _hautpSpielFenster;
 
     QVector<Spieler> _spielerListe;
@@ -80,6 +81,7 @@ private:
     Spieleinstellungen  _einstellung ;
 
 public slots:
+    void closeGame();
     void playerJoinedSlot(PlayerJoinPacket Packet);
     void receivedPlayerListSlot(PlayerListPacket Packet);
     void timeoutSlot();

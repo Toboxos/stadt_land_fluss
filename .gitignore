@@ -3,3 +3,4 @@ debug/
 Makefile*
 .qmake*
 *.pro.user
+html/

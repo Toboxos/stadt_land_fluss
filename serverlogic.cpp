@@ -18,6 +18,7 @@ ServerLogic::~ServerLogic(){
 void ServerLogic::run() {
     HostSpielEinstellungen einstellungen(nullptr, this);
     einstellungen.exec();
+    qDebug() << "Aha";
 }
 
 void ServerLogic::starteServerSocket() {
@@ -287,6 +288,9 @@ char ServerLogic::getLetter(){
                 m_usedLetters[var] = letter;
                 break;
             }
+            else {
+
+            }
 
         }
 
@@ -324,6 +328,7 @@ void ServerLogic::openHostSpielEinstellungen()
     //creates window for player waiting room
      warteRaum = new SpielerWarteRaum(nullptr,this);
      warteRaum->exec();
+
  }
 
  //sends a packet to all connected clients
@@ -351,6 +356,7 @@ void ServerLogic::openHostSpielEinstellungen()
      //starts new round timer
      roundTimer = new timer(this->getSpieleinstellungen()->getRundendauer(), 3, this->getSpieleinstellungen()->getCountdown());
      setupTimer();
+
  }
 
 void ServerLogic::sendeRundenStart(){
@@ -368,9 +374,10 @@ void ServerLogic::sendeRundenStart(){
         EndGamePacket endPacket;
         endPacket = getWinner();
         sendToAll(endPacket);
-        qDebug() << "Spiel fertig";
+
     }
 }
+
 
 void ServerLogic::nextRound(){
     sendeRundenStart();

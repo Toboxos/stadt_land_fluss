@@ -22,12 +22,17 @@ public:
 private slots:
     void on_buttonHost_clicked();
 
-
     void on_NameEingabe_textEdited(const QString &arg1);
 
     void on_NameEingabe_returnPressed();
 
     void on_buttonBeitreten_clicked();
+
+    void on_buttonBeenden_clicked();
+
+    void on_SpielStart_finished(int result);
+
+    void on_SpielStart_objectNameChanged(const QString &objectName);
 
 private:
     Ui::SpielStart *ui;

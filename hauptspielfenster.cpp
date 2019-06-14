@@ -46,14 +46,12 @@ void HauptSpielFenster::fillAnswerVector()
 {
     for (int columCount = 1; columCount < (ui->tableSpiel->columnCount()) -1; ++columCount)
     {
-        qDebug() << columCount << " Alex hat das so geschrieben";
         if(ui->tableSpiel->item(currentRow,columCount) != nullptr)
             answerVector.push_back(ui->tableSpiel->item(currentRow,columCount)->text());
         else
             answerVector.push_back("");
     }
    ui->tableSpiel->setEnabled(false);
-   qDebug() << "Hier stürz ich ab!" << endl;
 }
 QVector<QString> HauptSpielFenster::getAnserVector() {
 
@@ -75,8 +73,10 @@ void HauptSpielFenster::startCountdown(){
     ui->buttonFertig->setText("F\nE\nR\nT\nI\nG");
     ui->buttonFertig->setStyleSheet("background-color: rgba(0, 204, 0, 0.8);");
     ui->buttonFertig->setEnabled(true);
+    ui->tableSpiel->setEnabled(true);
     box.setText("Die Runde startet in 3 Sekunden");
     box.open();
+
 }
 void HauptSpielFenster::setLetter(char letter){
     box.close();
@@ -92,25 +92,23 @@ void HauptSpielFenster::setLetter(char letter){
     }
 
     ui->tableSpiel->item(currentRow,0)->setFlags(Qt::ItemIsEnabled);
-
-
     ui->tableSpiel->update();
     ui->tableSpiel->setEditTriggers(QAbstractItemView::AllEditTriggers);
 }
 void HauptSpielFenster::setTotalPoints(int points){
     m_points.push_back( new QTableWidgetItem(0));
     m_points.last()->setText(QString::number(points));
-    qDebug() << "Bin ich hier noch da?";
+
     ui->tableSpiel->setItem(currentRow-1, ui->tableSpiel->columnCount()-1, m_points.last());
     //diable cells for writing
     for (int columCount =0; columCount < ui->tableSpiel->columnCount(); columCount++)
     {
-        qDebug() << columCount << "oder hier vielleicht?";
+
         if( ui->tableSpiel->item(currentRow-1,columCount) != nullptr)
             ui->tableSpiel->item(currentRow-1,columCount)->setFlags(Qt::ItemIsEnabled);
 
     }
-    qDebug() << "Hier bin ich noch da";
+
 
 }
 void HauptSpielFenster::on_buttonFertig_clicked()
@@ -119,7 +117,6 @@ void HauptSpielFenster::on_buttonFertig_clicked()
     if (obSpielerwirklichFertigIst())
     {
         emit fertig();
-
         ui->tableSpiel->setEditTriggers(QAbstractItemView::NoEditTriggers);
     }
     else
@@ -145,7 +142,7 @@ bool HauptSpielFenster::obSpielerwirklichFertigIst()
 
     if (fertig)
     {
-    ui->buttonFertig->setEnabled(false);
+        ui->buttonFertig->setEnabled(false);
     }
     else
     {
@@ -155,11 +152,7 @@ bool HauptSpielFenster::obSpielerwirklichFertigIst()
     return fertig;
 }
 void HauptSpielFenster::newRow() {
-
-    qDebug() << "newRow: " <<currentRow;
-   // ui->tableSpiel->insertRow(currentRow);
     ui->tableSpiel->setRowCount(currentRow+1);
-
     ui->tableSpiel->update();
 
 }
@@ -172,7 +165,6 @@ void HauptSpielFenster::countdownSartet(int countdown)
    ui->buttonFertig->setText("C\nO\nU\nN\nT\nD\nO\nW\nN");
    ui->buttonFertig->setStyleSheet("background-color: rgba(225, 0, 0, 0.8);");
    ui->buttonFertig->setEnabled(false);
-
    m_timeRemaining = countdown;
    ui->lblStatus->setText("Zeit verbleibend: " + QString::number(m_timeRemaining) + "s");
    m_timer.start();
@@ -187,7 +179,8 @@ void HauptSpielFenster::startRound(int time) {
 void HauptSpielFenster::timerEvent() {
     ui->lblStatus->setText("Zeit verbleibend: " + QString::number(--m_timeRemaining) + "s");
 
-    if( m_timeRemaining == 0 ) {
+    if( m_timeRemaining == 0 )
+    {
         m_timer.stop();
     }
 }

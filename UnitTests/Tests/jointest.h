@@ -6,6 +6,9 @@
 #include "test.h"
 #include "ServerLogic.h"
 
+/**
+ * @brief Test the join management and broadcast from ServerLogic
+ */
 class JoinTest {
 
     public:

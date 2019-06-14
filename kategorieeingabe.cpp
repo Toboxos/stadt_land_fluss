@@ -34,6 +34,7 @@ void Kategorieeingabe::on_buttonWeiter_clicked()
     _serverLogic->getSpieleinstellungen()->addKategorie("Punkte");
     close();
     _serverLogic->openSpielerWarteRaum();
+
 }
 
 void Kategorieeingabe::on_buttonZurueck_clicked()
@@ -43,31 +44,33 @@ void Kategorieeingabe::on_buttonZurueck_clicked()
 
 }
 
+
 void Kategorieeingabe::on_buttonHinzufuegen_clicked()
 {
     QString kategorie = ui->einlesenKategorie->text();
 
 
-    if(_serverLogic->getSpieleinstellungen()->addKategorie(kategorie)){
+    if(_serverLogic->getSpieleinstellungen()->addKategorie(kategorie))
+    {
 
+        ui->tableKategorie->setColumnCount(kategorieZaehler);
 
+        // pointer will deletet by table, no deletion needed from user
+        QTableWidgetItem* qtwi = new QTableWidgetItem(QString(kategorie),QTableWidgetItem::Type);
+        ui->tableKategorie->setHorizontalHeaderItem(kategorieZaehler-1,qtwi);
+        ui->tableKategorie->setColumnCount(kategorieZaehler+1);
+        ui->tableKategorie->setHorizontalHeaderItem(kategorieZaehler,new QTableWidgetItem("Punkte"));
 
-    ui->tableKategorie->setColumnCount(kategorieZaehler);
-
-    // pointer will deletet by table, no deletion needed from user
-    QTableWidgetItem* qtwi = new QTableWidgetItem(QString(kategorie),QTableWidgetItem::Type);
-    ui->tableKategorie->setHorizontalHeaderItem(kategorieZaehler-1,qtwi);
-    ui->tableKategorie->setColumnCount(kategorieZaehler+1);
-    ui->tableKategorie->setHorizontalHeaderItem(kategorieZaehler,new QTableWidgetItem("Punkte"));
-
-    ui->buttonWeiter->setEnabled(true);
-    ui->einlesenKategorie->clear();
-    kategorieZaehler++;
-    }else {
-    QMessageBox box;
-    box.setText("Diese Kategorie hast du bereits eingegeben");
-    box.exec();
-}
+        ui->buttonWeiter->setEnabled(true);
+        ui->einlesenKategorie->clear();
+        kategorieZaehler++;
+    }
+    else
+    {
+        QMessageBox box;
+        box.setText("Diese Kategorie hast du bereits eingegeben");
+        box.exec();
+    }
 }
 
 void Kategorieeingabe::on_einlesenKategorie_textEdited(const QString &arg1)

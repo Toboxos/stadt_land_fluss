@@ -11,9 +11,9 @@
 #include "Network/Packets/playerfinishedpacket.h"
 
 /**
- * @brief Mock the seversocket for the server logic
+ * @brief Mock the seversocket for the ServerLogic
  *
- * @details Server logic is communicating with client via the server socket. For testing
+ * @details ServerLogic is communicating with client via the server socket. For testing
  *          we need to know which information server would send. This class mocks
  *          the original server socket and provides callbacks for reading out sent packets
  */

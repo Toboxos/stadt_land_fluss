@@ -25,11 +25,14 @@ SpielerWarteRaum::~SpielerWarteRaum()
 void SpielerWarteRaum::showPlayer(){
     createTable();
 }
+void SpielerWarteRaum::closeEvent(QCloseEvent *event){
+    QTimer::singleShot(10, this->_serverLogic, SLOT(closeGame()));
+}
 void SpielerWarteRaum::createTable()
 {
 
     ui->labelSpielname->setText(_serverLogic->getSpieleinstellungen()->getSpielname());
-    qDebug() << "jemand da" << endl;
+
     int reihenNummer=1;
     QVector<Spieler> spieler = *_serverLogic->getSpielerListe();
     qDebug() << spieler.size() << endl;
@@ -48,9 +51,8 @@ void SpielerWarteRaum::createTable()
 void SpielerWarteRaum::on_buttonWeiter_clicked()
 {
 
-    close();
     _serverLogic->sendeSpielStart();
     _serverLogic->sendeRundenStart();
-
+    close();
 }
 
