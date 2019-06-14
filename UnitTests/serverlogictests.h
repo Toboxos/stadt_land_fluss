@@ -4,11 +4,7 @@
 #include <QtTest/QTest>
 #include "mock_classes/mockserversocket.h"
 
-#define private public
-#define protected public
 #include "serverlogic.h"
-#undef protected
-#undef private
 
 /**
  * @brief Unittest for testing different parts of server logic

@@ -3,11 +3,7 @@
 
 #include <QtTest/QTest>
 
-#define private public
-#define protected public
 #include "ServerLogic.h"
-#undef private
-#undef protected
 
 /**
  * @brief Tests the determination of the leaderboard from ServerLogic

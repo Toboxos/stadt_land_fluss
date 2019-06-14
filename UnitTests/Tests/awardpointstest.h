@@ -4,11 +4,7 @@
 #include <QtTest/QTest>
 #include <random>
 
-#define private public
-#define protected public
 #include "ServerLogic.h"
-#undef protected
-#undef private
 
 /**
  * @brief Tests the awarding of points from ServerLogic

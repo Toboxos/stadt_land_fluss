@@ -7,16 +7,6 @@
 #include <QObject>
 #include <QString>
 #include <ctype.h>
-
-// When unit testing, dont include original ServerSocket
-// indeed include MockServerSocket which simulates a ServerSocket
-#ifdef UNIT_TEST
-#include "UnitTests/mock_classes/mockserversocket.h"
-typedef MockServerSocket ServerSocket;
-#else
-#include "Network/serversocket.h"
-#endif
-
 #include "antworten.h"
 #include "spieler.h"
 #include "punkte.h"
@@ -31,6 +21,17 @@ typedef MockServerSocket ServerSocket;
 #include "spieleinstellungen.h"
 #include "spielerwarteraum.h"
 #include "timer.h"
+
+// When unit testing, dont include original ServerSocket
+// indeed include MockServerSocket which simulates a ServerSocket
+#ifdef UNIT_TEST
+#include "UnitTests/mock_classes/mockserversocket.h"
+typedef MockServerSocket ServerSocket;
+#define private public
+#define protected public
+#else
+#include "Network/serversocket.h"
+#endif
 
 using namespace std;
 class ServerLogic : public QObject {
@@ -196,4 +197,8 @@ private:
     char m_letter;
     timer *roundTimer = nullptr;
 };
+
+#undef private
+#undef protected
+
 #endif

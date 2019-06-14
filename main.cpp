@@ -1,6 +1,5 @@
 #include <QApplication>
 #include "spielstart.h"
-#include "einwand.h"
 #include "clientlogic.h"
 #include "spielstart.h"
 
