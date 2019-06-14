@@ -19,7 +19,6 @@ public:
 
 private slots:
     void on_buttonWeiter_clicked();
-    void closeEvent(QCloseEvent *event);
 private:
     Ui::SpielerWarteRaum *ui;
     ServerLogic *_serverLogic;

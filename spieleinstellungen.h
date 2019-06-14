@@ -63,10 +63,18 @@ public:
     /// \param Kategorien
     ///
     void setKategories(QVector<QString> Kategorien);
+<<<<<<< HEAD
+=======
+
+>>>>>>> c19aa5c0b249cd4892410085551e4bee1530e72a
     ///
     /// \brief clearAnserVector set anserVector to NULL
     ///
     void clearAnserVector();
+<<<<<<< HEAD
+=======
+
+>>>>>>> c19aa5c0b249cd4892410085551e4bee1530e72a
 private:
     QString _spielname="";
     int _rundenanzahl =0;

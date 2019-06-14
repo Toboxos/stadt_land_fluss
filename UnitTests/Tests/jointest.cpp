@@ -74,6 +74,6 @@ void JoinTest::send(void* object, unsigned int id, Packet& packet) {
     }
 
     else {
-        QFAIL("Send packet to connection which does not exist")
+        QFAIL("Send packet to connection which does not exist");
     }
 }
