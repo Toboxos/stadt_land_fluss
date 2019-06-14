@@ -26,8 +26,6 @@ void HauptSpielFenster::increaseCurrentRow()
 void HauptSpielFenster::setCategories(QVector<QString> categories) {
     ui->tableSpiel->setColumnCount(categories.size());
     ui->tableSpiel->setHorizontalHeaderLabels(QStringList::fromVector(categories));
-
-
 }
 
 void HauptSpielFenster::setPlayers(QVector<QString> players, QString clientName) {
@@ -53,6 +51,7 @@ void HauptSpielFenster::fillAnswerVector()
     }
    ui->tableSpiel->setEnabled(false);
 }
+
 QVector<QString> HauptSpielFenster::getAnserVector() {
 
     return answerVector;

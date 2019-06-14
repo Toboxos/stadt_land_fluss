@@ -29,5 +29,8 @@ bool Spieleinstellungen::addKategorie(QString newKategorie)
     KategorienListe.push_back(newKategorie);
     return true;
 }
-
+void Spieleinstellungen::clearAnserVector()
+{
+    KategorienListe.clear();
+}
 
