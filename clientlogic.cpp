@@ -60,7 +60,7 @@ void ClientLogic::openServerLogic() {
 }
 
 void ClientLogic::serverBereit() {
-    connect(clientSpieler.getName(), "localhost", PORT, nullptr);
+    connect("localhost", PORT, nullptr);
 }
 
 void ClientLogic::sendAnswers(){
