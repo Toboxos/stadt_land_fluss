@@ -28,6 +28,11 @@ public:
     ///
     void setPunkte(int i,int p);
 
+    ///
+    /// \brief gets the points for category s
+    /// \param category number
+    /// \return
+    ///
     int getEinenPunkt(int s);
 
     private:

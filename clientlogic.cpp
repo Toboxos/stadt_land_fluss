@@ -40,12 +40,14 @@ void ClientLogic::connect(QString name, QString ip, quint16 port, ClientIpEingab
 }
 
 void ClientLogic::receivedPoints(SendPointsPacket Packet){
+    //update the player's points
+    //shows the current total points in the game table
     clientSpieler.setPunkte(Packet.getTotalPoints());
-    qDebug() << "Die feli mit ihren Debugs immer" << endl;
     _hautpSpielFenster->setTotalPoints(clientSpieler.getPunkte());
 }
 
 void ClientLogic::openServerLogic() {
+    //creates an object of ServerLogic
     _ServerLogic  = new ServerLogic();
     QObject::connect(_ServerLogic, SIGNAL(serverBereit()), this, SLOT(serverBereit()));
     _ServerLogic->run();
@@ -56,6 +58,8 @@ void ClientLogic::serverBereit() {
 }
 
 void ClientLogic::sendAnswers(){
+    //gets the player's answer for the round
+    //saves answers and sends them to the server
     _hautpSpielFenster->fillAnswerVector();
     clientSpieler.setAnswers(_hautpSpielFenster->getAnserVector());
 
@@ -67,7 +71,7 @@ void ClientLogic::sendAnswers(){
 
 void ClientLogic::playerJoinedSlot(PlayerJoinPacket Packet){
     this->_spielerListe.push_back(Packet.getName());
-    //Anzeige!
+    //Anzeige?
 }
 
 void ClientLogic::receivedPlayerListSlot(PlayerListPacket Packet){
@@ -83,14 +87,15 @@ void ClientLogic::receivedPlayerListSlot(PlayerListPacket Packet){
 
 void ClientLogic::receivedStartCountdown(StartCountdownPacket packet){
     qDebug() << "Runde startet in 3 Sekunden";
-    _hautpSpielFenster->newRow();
-    _hautpSpielFenster->startCountdown();
-    //_hautpSpielFenster->newRow();
-    //_hautpSpielFenster->update();
 
+    //updates the game table
+    _hautpSpielFenster->newRow();
+    //starts countdown to new round
+    _hautpSpielFenster->startCountdown();
 }
 
 void ClientLogic::receivedRoundEnd(EndRoundPacket Packet){
+    //sends answers and updates game table
     sendAnswers();
     _hautpSpielFenster->increaseCurrentRow();
 
@@ -105,6 +110,7 @@ void ClientLogic::timeoutSlot(){
 }
 
 void ClientLogic::connectedSlot(){
+    //connects client's player with server
     PlayerJoinPacket playerJoinPacket(this->getSpieler().getName());
     _clientSocket.send(playerJoinPacket);
     qDebug() << "connected :))" << endl;
@@ -117,11 +123,13 @@ void ClientLogic::errorSlot(){
 
 void ClientLogic::openClientIpEingabe()
 {
+    //creates window for server ip address input
     ClientIpEingabe ClientStart(nullptr,this);
     ClientStart.exec();
 }
 
 void ClientLogic::openHauptSpielFenster(){
+    //creates main game window
     _hautpSpielFenster = new HauptSpielFenster();
     QObject::connect(_hautpSpielFenster, SIGNAL(fertig()), this, SLOT(fensterFertig()));
 
@@ -138,10 +146,15 @@ void ClientLogic::setSpieler(Spieler spieler){
 
 void ClientLogic::playerFinished(PlayerFinishedPacket Packet){
     qDebug() << "Nur noch zehn Sekunden, beeile dich!";
+    //upon receiving that one player is finished
+    //triggers 10s countdown until the round ends
     _hautpSpielFenster->countdownSartet(_einstellung.getCountdown());
 }
 
 void ClientLogic::starteSpiel(GameSettingsPacket Packet){
+    //adopt game settings
+    //open main game window
+
     _einstellung.setCountdown(Packet.getCountown());
     _einstellung.setPlayName(Packet.getGameName());
     _einstellung.setRoundNumber(Packet.getRoundNumbers());
@@ -152,16 +165,22 @@ void ClientLogic::starteSpiel(GameSettingsPacket Packet){
 }
 
 void ClientLogic::fensterFertig() {
-PlayerFinishedPacket packet(getSpieler().getName());
-_clientSocket.send(packet);
+    //inform server that player has finished round
+
+    PlayerFinishedPacket packet(getSpieler().getName());
+    _clientSocket.send(packet);
 }
 void ClientLogic::receivedRoundStart(RoundStartPacket Packet){
+    //pass on the letter's round and duration to the main game window
+
     _hautpSpielFenster->setLetter(Packet.getLetter());
     _hautpSpielFenster->startRound(_einstellung.getRundendauer());
 }
-void ClientLogic::receivedEndGame(EndGamePacket Packet)
-{
-    qDebug() << "Aha in receivedEndGame";
+
+void ClientLogic::receivedEndGame(EndGamePacket Packet){
+    //get ranking from EndGamePacket
+    //open statistic window
+
     QVector<QString> winner = Packet.getRanking();
     QVector<int> points = Packet.getPoints();
     Statistic statistic(nullptr,this, &winner, &points);

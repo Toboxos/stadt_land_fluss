@@ -7,7 +7,6 @@ antworten::antworten(){
 
 antworten::antworten(QVector<QString> a){
     answers = a;
-qDebug() << "es wurde ein objekt antworten erstellt";
    }
 
 

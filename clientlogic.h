@@ -78,6 +78,7 @@ private:
 
     Spieler clientSpieler;
     Spieleinstellungen  _einstellung ;
+
 public slots:
     void playerJoinedSlot(PlayerJoinPacket Packet);
     void receivedPlayerListSlot(PlayerListPacket Packet);

@@ -59,7 +59,7 @@ signals:
 
 private slots:
     ///
-    /// \brief on_buttonFertig_clicked Wenn alle Zellen gefüllt sind wird weiter gegeben dass ein SPieler fertig ist.
+    /// \brief on_buttonFertig_clicked Wenn alle Zellen gefüllt sind wird weiter gegeben dass ein Spieler fertig ist.
     ///
     void on_buttonFertig_clicked();
 

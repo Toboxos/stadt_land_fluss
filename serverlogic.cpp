@@ -308,21 +308,25 @@ QVector<Spieler>* ServerLogic::getSpielerListe()
 
 void ServerLogic::openHostSpielEinstellungen()
 {
+    //creates window for game settings
     HostSpielEinstellungen einstellungen(nullptr, this);
     einstellungen.exec();
 }
  void ServerLogic::openKategorieEingabe()
  {
+     //creates window for setting the categories
      Kategorieeingabe eingabe(nullptr, this);
      eingabe.exec();
  }
  void ServerLogic::openSpielerWarteRaum()
  {
     starteServerSocket();
+    //creates window for player waiting room
      warteRaum = new SpielerWarteRaum(nullptr,this);
      warteRaum->exec();
  }
 
+ //sends a packet to all connected clients
  void ServerLogic::sendToAll(Packet& p){
      for(int i = 0; i < m_players.size(); i++){
          serverSocket.send(m_players[i].getConnectionId(), p);
@@ -338,10 +342,13 @@ void ServerLogic::openHostSpielEinstellungen()
         namen.push_back(m_players[i].getName());
      }
 
+     //sends GameListPacket and PlayerListPacket to every connected player
      listPacket.setPlayers(namen);
      GameSettingsPacket packet(this->getSpieleinstellungen()->getSpielname(), this->getSpieleinstellungen()->getRundenanzahl(), this->getSpieleinstellungen()->getRundendauer(), this->getSpieleinstellungen()->getCountdown(), this->getSpieleinstellungen()->getKategorienListe());
      sendToAll(packet);
      sendToAll(listPacket);
+
+     //starts new round timer
      roundTimer = new timer(this->getSpieleinstellungen()->getRundendauer(), 3, this->getSpieleinstellungen()->getCountdown());
      setupTimer();
  }
@@ -384,12 +391,14 @@ void ServerLogic::nextRound(){
  }
 
  void ServerLogic::playerFinished(){
+    //informs every player that one player is finished with the round
     PlayerFinishedPacket packet;
     sendToAll(packet);
 
  }
 
  void ServerLogic::endInput(){
+    //ends the round
     EndRoundPacket packet;
     sendToAll(packet);
  }
