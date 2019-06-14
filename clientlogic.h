@@ -28,7 +28,7 @@ public:
     /// \param port
     /// \param window
     ///
-    void connect(QString name, QString ip, quint16 port, ClientIpEingabe *window);
+    void connect(QString ip, quint16 port, ClientIpEingabe *window);
 
     ///
     /// \brief create object of CLogic, connect serverBereit, trigger ServerLogic.run
