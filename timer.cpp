@@ -15,16 +15,19 @@ timer::~timer()
 }
 
 void timer::startRound(){
+    stop();
     singleShot(countdowntime*1000, this, SLOT(startInput()));
 }
 
 
 void timer::startInput()
 {
+    stop();
     emit signalStartInput();
     singleShot((roundduration*60-timeafterfinished)*1000, this, SLOT(receivedPlayerFinished()));
 }
 void timer::rundenPausenTimer(){
+    stop();
     singleShot(5*1000, this, SIGNAL(pausenTimer()));
 }
 

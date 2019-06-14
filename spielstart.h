@@ -30,9 +30,9 @@ private slots:
 
     void on_buttonBeenden_clicked();
 
-    void on_SpielStart_finished(int result);
+   // void on_SpielStart_finished(int result);
 
-    void on_SpielStart_objectNameChanged(const QString &objectName);
+   // void on_SpielStart_objectNameChanged(const QString &objectName);
 
 private:
     Ui::SpielStart *ui;
